@@ -1,0 +1,230 @@
+<style id='theme-inline-css' type='text/css'>
+    body, .site, .mask::after, .mask::before { background-color: #ffffff;background-image: url(https://sarozambia.com/vs/zamra/wp-content/uploads/2017/12/bg-site.png);background-position: top right;background-repeat: no-repeat;background-size: 575px auto;background-attachment: scroll; }
+    .site-header, .site-header .site-header-inner::after { background-color: rgba(255, 255, 255, 0.656); }
+    .site-topbar { background-color: #266c55;color: #ffffff;font-size: 13px; }
+    .site-header-sticky, .site-header-sticky .widget.widget_search { background-color: #ffffff; }
+    .content-header { background-color: #ffffff;background-image: url(https://sarozambia.com/vs/zamra/wp-content/uploads/2023/03/bg_title_zamra.png);background-position: top center;background-repeat: no-repeat;background-size: cover;background-attachment: scroll;border-top: 0px none #000000;border-right: 0px none #000000;border-bottom: 1px solid rgba(2, 6, 32, 0.1);border-left: 0px none #000000;margin-top: 0px;margin-right: 0px;margin-bottom: 50px;margin-left: 0px;padding-top: 160px;padding-right: 0px;padding-bottom: 0px;padding-left: 0px; }
+    body { font-family: Rubik;font-style: normal;color: #565872;font-size: 15px;line-height: 1.625em; }
+    h1 { font-family: Poppins;font-weight: 800;color: #1c8a66;text-transform: uppercase;font-size: 3rem;line-height: 1.2em; }
+    h2 { font-family: Poppins;font-weight: 800;color: #266c55;text-transform: none;font-size: 2.25rem;line-height: 1.2em; }
+    h3 { font-family: Poppins;font-weight: 800;color: #266c55;text-transform: none;font-size: 1.5rem;line-height: 1.15em; }
+    h4 { font-family: Poppins;font-weight: 700;color: #266c55;text-transform: none;font-size: 1.25rem;line-height: 1.25em; }
+    h5 { font-family: Poppins;font-weight: 800;color: #266c55;text-transform: none;font-size: 1rem;line-height: 1.15em; }
+    h6 { font-family: Poppins;font-weight: 700;color: #266c55;text-transform: uppercase;font-size: 0.875rem;line-height: 1.1em; }
+    blockquote { font-family: Rubik;font-weight: 300;text-transform: none;font-size: 1.25rem;line-height: 1.6em; }
+    .site-header .navigator > .menu > li a { font-family: Rubik;font-weight: 500;color: #8d8ea3;text-transform: uppercase;font-size: 14px;line-height: 1.4em;letter-spacing: 0.5px; }
+    .site-header-sticky .navigator > .menu > li a { font-family: Rubik;font-weight: 500;text-transform: uppercase;font-size: 12px;line-height: 1.3em;letter-spacing: 0.5px; }
+    .content-header .page-title-inner { font-family: Poppins;font-weight: 800;color: #1c6722;text-transform: none;font-size: 2rem;line-height: 1.15em; }
+    .content-header .breadcrumbs, .content-header .down-arrow a, .page-title .subtitle { font-family: Rubik;font-style: normal;color: #27725d;text-transform: none;font-size: 14px; }
+    .widget > .widget-title { font-family: Poppins;font-weight: 800;text-transform: uppercase;font-size: 20px;letter-spacing: 1px;padding-top: 0px;padding-right: 0px;padding-bottom: 0px;padding-left: 0px;margin-top: 0px;margin-right: 0px;margin-bottom: 20px;margin-left: 0px; }
+    .widget { font-family: Rubik;font-style: normal;font-size: 14px;padding-top: 0px;padding-right: 0px;padding-bottom: 0px;padding-left: 0px;margin-top: 0px;margin-right: 0px;margin-bottom: 30px;margin-left: 0px; }
+    .off-canvas-left .off-canvas-wrap .widget { font-size: 14px; }
+    .sliding-menu { font-size: 1.5rem;background-color: #273272;background-image: url(https://sarozambia.com/vs/zamra/wp-content/uploads/2017/12/bg-main.svg);background-position: top left;background-repeat: no-repeat;background-size: cover;background-attachment: scroll; }
+    .content-bottom-widgets { padding-top: 0px;padding-right: 0px;padding-bottom: 40px;padding-left: 0px; }
+    .content-bottom-widgets .widget-title { font-family: Poppins;font-weight: 800;font-size: 1.125rem; }
+    .site-footer { border-top: 0px none rgba(2, 6, 32, 0.05);border-right: 0px none #000000;border-bottom: 0px none #000000;border-left: 0px none #000000;background-color: #328d33;background-image: url(https://sarozambia.com/vs/zamra/wp-content/uploads/2023/03/footer_bg-2.jpg);background-position: center center;background-repeat: no-repeat;background-size: cover;background-attachment: scroll;padding-top: 0px;padding-right: 0px;padding-bottom: 0px;padding-left: 0px; }
+    .footer-copyright { font-size: 13px;line-height: 1.4em; }
+    .footer-widgets { color: rgba(255, 255, 255, 0.5);text-transform: none;padding-top: 20px;padding-right: 0px;padding-bottom: 50px;padding-left: 0px; }
+    .footer-widgets .widget-title { font-family: Poppins;font-style: normal;color: #ffffff;text-transform: none;letter-spacing: 0px; }
+    a { color: #00a914; }
+    a:hover { color: #8d8ea3; }
+    .site-topbar a:active, .site-topbar .current-menu-item > a, .site-topbar .current_page_item > a, .site-topbar .current-menu-ancestor > a, .site-topbar .current-menu-parent > a { color: #ffffff; }
+    .site-topbar a:hover { color: #ffffff; }
+    .site-topbar a { color: #c6d3e3; }
+    .site-header .off-canvas-toggle, .site-header .navigator .menu > li  a, .site-header .social-icons a { color: #266c55; }
+    .site-header .off-canvas-toggle:hover, .site-header .navigator .menu > li:hover > a, .site-header .social-icons a:hover { color: #1f1b19; }
+    .site-header .navigator .menu > li.current-menu-item > a, .site-header .navigator .menu > li.current_page_item > a, .site-header .navigator .menu > li.current-menu-ancestor > a, .site-header .navigator .menu > li.current-menu-parent > a, .site-header .navigator .menu.menu-extras > li > a, .site-header .navigator .menu.menu-extras .search-field, .site-header .off-canvas-toggle, .site-header .off-canvas-toggle:hover { color: #630e11; }
+    .site-header-sticky .off-canvas-toggle, .site-header-sticky .navigator .menu > li  a, .site-header-sticky .social-icons a { color: #266c55; }
+    .site-header-sticky .off-canvas-toggle:hover, .site-header-sticky .navigator .menu > li:hover > a, .site-header-sticky .social-icons a:hover { color: #ba2527; }
+    .site-header-sticky .navigator .menu > li.current-menu-item > a, .site-header-sticky .navigator .menu > li.current_page_item > a, .site-header-sticky .navigator .menu > li.current-menu-ancestor > a, .site-header-sticky .navigator .menu > li.current-menu-parent > a, .site-header-sticky .navigator .menu.menu-extras > li > a, .site-header-sticky .navigator .menu.menu-extras .search-field, .site-header-sticky .off-canvas-toggle, .site-header-sticky .off-canvas-toggle:hover { color: #266c55; }
+    .breadcrumbs a { color: #8d8ea3; }
+    .breadcrumbs a:hover { color: #1c6722; }
+    .main-sidebar a { color: #273272; }
+    .main-sidebar a:hover { color: #8d8ea3; }
+    .off-canvas-left a { color: #273272; }
+    .off-canvas-left a:hover { color: #8d8ea3; }
+    .sliding-menu a:hover { color: #ffffff; }
+    .sliding-menu a { color: #c6d3e3; }
+    .site-footer .footer-widgets a { color: #c6d3e3; }
+    .site-footer .footer-widgets a:hover { color: #ffffff; }
+    .wrap { width: 1170px;max-width: 92%; }
+    .content-body-inner { padding-top: 0px;padding-right: 0px;padding-bottom: 120px;padding-left: 0px; }
+    .site-header .header-brand { margin-top: 20px;margin-right: 0px;margin-bottom: 20px;margin-left: 0px; }
+    .site-header .off-canvas-toggle, .site-header .navigator .menu > li > a, .site-header .social-icons a { padding-top: 25px;padding-right: 0px;padding-bottom: 25px;padding-left: 0px; }
+    .site-header-sticky .header-brand { margin-top: 10px;margin-right: 0px;margin-bottom: 0px;margin-left: 0px; }
+    .site-header-sticky .site-header-inner { height: 80px; }
+    .site-header-sticky .off-canvas-toggle, .site-header-sticky .navigator .menu, .site-header-sticky .social-icons { margin-top: 9px;margin-right: 0px;margin-bottom: 10px;margin-left: 0px; }
+    .site-header-sticky .off-canvas-toggle, .site-header-sticky .navigator .menu > li > a, .site-header-sticky .social-icons a { padding-top: 20px;padding-right: 0px;padding-bottom: 20px;padding-left: 0px; }
+    .logo.logoDefault { width: 390;height: 130; }
+    .logo.logoDark { width: 400;height: 50px; }
+    .off-canvas-left .off-canvas-wrap { background-color: #e9eaee;padding-top: 35px;padding-right: 35px;padding-bottom: 35px;padding-left: 35px; }
+    .sliding-menu .off-canvas-wrap { padding-top: 80px;padding-right: 50px;padding-bottom: 50px;padding-left: 50px; }
+    .button, input[type="button"], input[type="submit"], button { background: #266c55;height: 50px;font-family: Rubik;font-style: normal;color: #1b1818;text-transform: uppercase;font-size: 15px;line-height: 50px;letter-spacing: 1px;padding-top: 0px;padding-right: 60px;padding-bottom: 0px;padding-left: 60px;border-top: 0px none #000000;border-right: 0px none #000000;border-bottom: 0px none #000000;border-left: 0px none #000000;border-radius: 50px; }
+    input, textarea, select { background: rgba(255, 255, 255, 0.07);font-family: Rubik;font-style: normal;color: #7a7a7a;text-transform: uppercase;font-size: 12px;line-height: 48px;letter-spacing: 2px;padding-top: 0px;padding-right: 15px;padding-bottom: 0px;padding-left: 15px;border: 1px solid rgba(213, 214, 221, 0.6);border-radius: 0px; }
+    input, select { height: 50px; }
+    .content-bottom-widgets .widget { margin-top: -70px;margin-right: 0px;margin-bottom: 100px;margin-left: 0px; }
+    .footer-widgets .widget { margin-top: 0px;margin-right: 0px;margin-bottom: 30px;margin-left: 0px; }
+    .site-footer .footer-copyright { border-top: 0px none rgba(2, 6, 32, 0.1);border-right: 0px none #000000;border-bottom: 0px none #000000;border-left: 0px none #000000;background-color: #ffffff;padding-top: 30px;padding-right: 0px;padding-bottom: 30px;padding-left: 0px; }
+    .content-inner[data-grid] .post, .content-inner[data-grid-normal] .post { padding-left: 15.000000px;padding-right: 15.000000px;margin-bottom: 30px; }
+    .content-inner[data-grid], .content-inner[data-grid-normal] { margin-left: -15px;margin-right: -15px; }
+    .navigation.pager-numeric .page-numbers.current,
+    .woocommerce-pagination li .page-numbers.current,
+    .single-post .post-tags a:hover,
+    #site .blog-shortcode .blog-entries .entries-wrapper:not(.blog-grid) .post .post-image a:hover .post-title,
+    #site .owl-buttons .owl-prev:hover, #site .owl-buttons .owl-next:hover,
+    .projects-filter ul li.active a,
+    .single-nproject .project-tags a:hover,
+    #site .iconlist.iconlist-icon-small li:hover .iconlist-item-icon i,
+    #site .iconlist.iconlist-icon-large li .iconlist-item-icon i,
+    #site .iconlist.iconlist-icon-medium li .iconlist-item-icon i,
+    .single-post .post-inner .post-header .meta-header li a:hover, 
+    .single-attachment .post-inner .post-header .meta-header li a:hover,
+    .widget.widget_archive ul li a::before, 
+    .widget.widget_categories ul li a::before, 
+    .widget.widget_pages ul li a::before, 
+    .widget.widget_meta ul li a::before, 
+    .widget.widget_nav_menu ul li a::before,
+    .widget.widget_product_categories ul li a::before,
+    .single-post .post-inner .post-header .meta-header li i, 
+    .single-attachment .post-inner .post-header .meta-header li i,
+    .single-nproject .project-header .meta-header li i,
+    .rev_slider_wrapper .slider-caption-1 .slider-title strong,
+    rs-mask-wrap .slider-caption-1 .slider-title strong,
+    .single-nproject .project-header .meta-header li a:hover,
+    #site .blog-shortcode.post-date-cover .blog-entries .blog-grid .post .post-title,
+    #site .blog-shortcode.post-thumbnail-cover .blog-entries .entries-wrapper:not(.blog-grid) .post .post-image .post-categories a,
+    .widget:hover .info-box i,
+    #site .vc_tta-tabs .vc_tta-tabs-container ul.vc_tta-tabs-list li.vc_tta-tab.vc_active a,
+    #site .vc_tta-tabs.vc_tta-style-modern .vc_tta-tabs-container ul.vc_tta-tabs-list li.vc_tta-tab a:hover,
+    .woocommerce .products li .button,
+    .woocommerce .product .woocommerce-tabs .tabs li.active a,
+    .site-header.site-header-classic.header-brand-left .header-widget .widget .info-box a {
+        color: #266c55;
+    }
+    
+    .button::after,
+    .button.primary,
+    .site-header.site-header-classic .navigator .menu li .sub-menu li:hover > a, 
+    .site-header.site-header-classic .navigator .menu li .sub-menu li.current-menu-item > a, 
+    .site-header.site-header-classic .navigator .menu li .sub-menu li.current_page_item > a, 
+    .site-header.site-header-classic .navigator .menu li .sub-menu li.current-menu-ancestor > a, 
+    .site-header.site-header-classic .navigator .menu li .sub-menu li.current-menu-parent > a,
+    .site-header.site-header-classic .navigator .menu li .sub-menu li.current-page-ancestor > a, 
+    .site-header-sticky .navigator .menu li .sub-menu li:hover > a, 
+    .site-header-sticky .navigator .menu li .sub-menu li.current-menu-item > a, 
+    .site-header-sticky .navigator .menu li .sub-menu li.current_page_item > a, 
+    .site-header-sticky .navigator .menu li .sub-menu li.current-menu-ancestor > a, 
+    .site-header-sticky .navigator .menu li .sub-menu li.current-menu-parent > a,
+    .blog-grid .post.has-post-thumbnail .post-image .post-categories a:hover,
+    .blog-masonry .post.has-post-thumbnail .post-image .post-categories a:hover,
+    .blog-large .post.has-post-thumbnail .post-image .post-categories a:hover,
+    .blog-medium .post.has-post-thumbnail .post-image .post-categories a:hover,
+    #site .iconbox,
+    button:hover,input[type="submit"]:hover,
+    .social-icons a:hover i,
+    .big-date .post-day,
+    .social-share a:hover,
+    .testimonial.has-image,
+    .widget.widget_tag_cloud .tagcloud a:hover,
+    .widget.widget_product_tag_cloud .tagcloud a:hover,
+    .projects-masonry .project .project-info .project-meta a:hover,
+    .widget.style2,
+    .widget.style4,
+    #site .posts-carousel .post .post-inner .post-header .post-categories a:hover,
+    #site .posts-carousel::after,
+    #site .blog-shortcode.post-thumbnail-cover .blog-entries .entries-wrapper:not(.blog-grid) .post .post-image .post-categories a:hover,
+    .site-header.site-header-classic .navigator .menu-primary > li > a::before,
+    .site-header-sticky .navigator .menu-primary > li > a::before,
+    .site-header.site-header-classic.header-brand-left .menu-extras .search-box::after,
+    .site-content .breadcrumbs-inner > span > a::after,
+    #site .iconlist.iconlist-icon-large li:hover .iconlist-item-icon i + span.shapes,
+    #site .iconlist.iconlist-icon-medium li:hover .iconlist-item-icon i + span.shapes,
+    #site .vc_tta-tabs .vc_tta-tabs-container ul.vc_tta-tabs-list li.vc_tta-tab a,
+    #site .vc_tta-tabs.vc_tta-style-modern .vc_tta-tabs-container ul.vc_tta-tabs-list li.vc_tta-tab a::after,
+    .woocommerce .product .woocommerce-tabs .tabs li a::after,
+    .woocommerce .woocommerce-message,
+    .widget ul li .children li a::before, .widget ul li .sub-menu li a::before,
+    #site .scrollslider .swiper-container .swiper-pagination .swiper-pagination-bullet::after,
+    #site .vc_tta-tabs.vc_tta-tabs-position-left .vc_tta-tabs-container ul.vc_tta-tabs-list {
+        background-color: #266c55;
+    }
+    
+    .search-results,
+    #site .imagebox:hover,
+    .projects-masonry .project .project-info .project-meta a:hover,
+    .projects-grid .project .project-info .project-meta a:hover,
+    #site .iconlist.iconlist-icon-large li:hover .iconlist-item-icon i + span.shapes::after,
+    #site .iconlist.iconlist-icon-large li:hover .iconlist-item-icon i + span.shapes::before,
+    #site .iconlist.iconlist-icon-medium li:hover .iconlist-item-icon i + span.shapes::after,
+    #site .iconlist.iconlist-icon-medium li:hover .iconlist-item-icon i + span.shapes::before,
+    .woocommerce .products li .button:hover {
+        border-color: #266c55;
+    }
+    
+    #site .owl-buttons .owl-prev, #site .owl-buttons .owl-next,
+    .blog-large .post .post-header .post-meta .post-date,
+    .blog-grid .post .post-content .post-comments a::before, 
+    .blog-masonry .post .post-content .post-comments a::before,
+    .widget.widget_tag_cloud .tagcloud a:hover,
+    .widget.widget_product_tag_cloud .tagcloud a:hover,
+    #site .testimonial .testimonial-meta::before,
+    #site .iconlist.iconlist-icon-small li .iconlist-item-icon i,
+    #site .iconlist.iconlist-icon-xlarge li .iconlist-item-icon i,
+    #site .counter .counter-image i,
+    .info-box i,
+    #site .iconlist.iconlist-icon-large li:hover .iconlist-item-icon i,
+    #site .iconlist.iconlist-icon-medium li:hover .iconlist-item-icon i {
+        color: #bbcac5;
+    }
+    
+    .button.primary::after,
+    .widget.widget_calendar caption,
+    .site-content .content-header.content-header-left .page-title-wrap::after,
+    .highlight,
+    .navigator .menu-flyout .dw-sub-menu li:hover > a, 
+    .navigator .menu-flyout .dw-sub-menu li.current-menu-item > a, 
+    .navigator .menu-flyout .dw-sub-menu li.current_page_item > a, 
+    .navigator .menu-flyout .dw-sub-menu li.current-menu-ancestor > a, 
+    .navigator .menu-flyout .dw-sub-menu li.current-menu-parent > a,
+    #site .blog-shortcode.post-thumbnail-cover .blog-entries .entries-wrapper:not(.blog-grid) .post .post-image .post-categories a,
+    .navigator .dw-mega-menu-tabs,
+    .site-header.site-header-classic .social-icons a::after,
+    .site-header-sticky .navigator .social-icons a::after,
+    #site .iconlist.iconlist-icon-large li .iconlist-item-icon i + span.shapes,
+    #site .iconlist.iconlist-icon-medium li .iconlist-item-icon i + span.shapes,
+    .off-canvas-toggle[data-target="off-canvas-right"] {
+        background-color: #bbcac5;
+    }
+    
+    #site .imagebox,
+    blockquote,
+    .main-sidebar .widget,
+    .comments-area .comment-list > li:last-child,
+    #site .posts-carousel .post .post-inner::after,
+    #site .posts-carousel .post .post-inner,
+    .navigator .dw-sub-menu,
+    .site-footer .content-bottom-widgets aside .widget,
+    .blog-masonry .post.sticky .post-inner,
+    #site .iconlist.iconlist-icon-large li .iconlist-item-icon i + span.shapes::after,
+    #site .iconlist.iconlist-icon-large li .iconlist-item-icon i + span.shapes::before,
+    #site .iconlist.iconlist-icon-medium li .iconlist-item-icon i + span.shapes::after,
+    #site .iconlist.iconlist-icon-medium li .iconlist-item-icon i + span.shapes::before,
+    #site .wpb_single_image .vc_figure .vc_figure-caption {
+        border-color: #bbcac5;
+    }
+    
+    ::selection {
+        background: #bbcac5;
+    }
+    ::-moz-selection {
+        background: #bbcac5;
+    }
+    
+    .has-post-thumbnail .featured-image {
+        background-image: -webkit-linear-gradient(left, #266c55 , #bbcac5);
+        background-image:      -o-linear-gradient(right, #266c55, #bbcac5);
+        background-image:    -moz-linear-gradient(right, #266c55, #bbcac5);
+        background-image:         linear-gradient(to right, #266c55 , #bbcac5);
+    }
+    </style>
+    
