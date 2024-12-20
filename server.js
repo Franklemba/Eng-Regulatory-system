@@ -12,6 +12,7 @@ const passport = require('passport')
 // Route definitions
 const homeRouter = require('./routes/home');
 const mediaRouter = require('./routes/media');
+const authRouter = require('./routes/auth')
 
 ////////////database connection////////////
 
@@ -61,5 +62,6 @@ app.use(passport.session());
 // Routes
 app.use('/',homeRouter);
 app.use('/media',mediaRouter);
+app.use('/auth', authRouter);
 
 app.listen(process.env.PORT || 3336, () => console.log('Server is Running on port: 3336'))
