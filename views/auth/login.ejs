@@ -1,4 +1,5 @@
-<div class="page-content">
+<!-- <div class="page-content">
+
     <div class="form-v10-content">
         <% if (locals.incorrectCredentials) { %>
                     <p class="errorDiv" style="color: red; font-size: small;"><i><%= errorMessage %> </i></p>
@@ -34,5 +35,49 @@
                             </div>
                         </div>
                     </div>
+    </div>
+</div> -->
+
+
+<div class="page-content">
+    <div class="form-v10-content">
+        <form class="form-detail" action="" method="POST" onsubmit="return validateForm();" id="myform">
+            <div class="form-left">
+                <h2>Login</h2>
+                
+                <div class="form-group">
+                    <div class="form-row form-row-1">
+                        <input type="text" name="Username" id="first_name" class="input-text" placeholder="Username" required>
+                    </div>
+                    <div class="form-row form-row-2">
+                        <input type="pasword" name="password" id="last_name" class="input-text" placeholder="password" required>
+                    </div>
+                </div>
+               
+               
+            </div>
+
+           
+            
+            <div class="form-right">
+                <!-- <h2>Contact Details</h2> -->
+               
+                <div class="col-sm-12 form-group">
+                    <div class="d-flex flex-wrap justify-content-between">
+                        <div>
+                            <a href="/auth/register">Don't have any Account ?</a>
+                        </div>
+                        <div>
+                            <a href="/auth/forgot-password" class="text--base">Forgot Password ?</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Submit Button -->
+               
+                <div class="form-row-last">
+                    <input type="submit" name="register" class="register" value="Login ">
+                </div>
+            </div>
+        </form>
     </div>
 </div>
