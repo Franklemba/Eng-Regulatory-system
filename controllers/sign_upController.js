@@ -1,7 +1,7 @@
 const User = require("../models/userSchema");
 const bcrypt = require("bcrypt");
-const {registerMerchant}=require('../utilities/registerUser');
-const {sendOTPemail}=require('../utilities/gmail');
+const {registerUser}=require('../utilities/registerUser');
+const {sendOTPemail} = require('../utilities/gmail');
 
 function generateOTP() {
     return Math.floor(100000 + Math.random() * 900000).toString();
@@ -9,22 +9,28 @@ function generateOTP() {
   
   exports.getSignUp =  (req,res) => {
 
+    const layout = "layouts/non_headerLayout"
+
     res.render("auth/register",{
+      layout
     })
 
 };
   
   // Modified sign-up route
   exports.postSignUp =  async (req, res) => {
-    const { businessName, firstName, lastName, email, phone, password, streetAddress, city, province, country } = req.body;
+
+    const { title,password, email, tradeName, telephone, mobileNo, contactPerson, street, additional, zip, place, country } = req.body;
   
     try {
-      const newUser = await registerMerchant({ businessName, firstName, lastName, email, phone, password, streetAddress, city, province, country });
-  
+
+      const newUser = await registerUser({ title, password, email, tradeName, telephone, mobileNo, contactPerson, street, additional, zip, place, country });
+      const layout = "layouts/non_headerLayout"
       if (!newUser) {
         return res.render("auth/login", {
           incorrectCredentials: true,
           errorMessage: 'Account already exists, login instead',
+          layout
         });
       }
   
@@ -57,7 +63,9 @@ function generateOTP() {
   };
   
   // New route for OTP verification
+
   exports.verifyOTP = async (req, res) => {
+
     const { userId } = req.params;
     const { otp } = req.body;
   
@@ -129,7 +137,7 @@ function generateOTP() {
       const otpExpiration = new Date(Date.now() + 15 * 60 * 1000); // 15 minutes from now
   
       
-      sendOTPemail(`${firstName} ${lastName}`, user.email, otp)
+      sendOTPemail(`${tradeName}`, user.email, otp)
       // Save new OTP to user document
       user.verificationOTP = await bcrypt.hash(otp, 10); 
       user.otpExpiration = otpExpiration;
@@ -150,4 +158,5 @@ function generateOTP() {
       console.error(`Error resending OTP: ${error.message}`);
       res.status(500).send('An error occurred while resending OTP');
     }
+
   };

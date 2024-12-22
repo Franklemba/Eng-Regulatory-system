@@ -8,10 +8,13 @@ const authControllerSignUP = require('../controllers/sign_upController');
 
 
 router.get("/", (req, res) => {
+
+   const layout = "layouts/non_headerLayout"
   
     res.render("auth/login", {
       incorrectCredentials : true,
-      errorMessage: ''
+      errorMessage: '',
+      layout
     });
   
   });
@@ -30,7 +33,7 @@ router.get("/incorrect_credentials", (req, res)=>{
 
 router.post("/login", (req, res, next) => {
     passport.authenticate("local", {
-      successRedirect: "/merchant",
+      successRedirect: "/",
       failureRedirect: "/auth/incorrect_credentials",
       failureFlash: true,
     })(req, res, next);

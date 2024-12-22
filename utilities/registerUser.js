@@ -6,14 +6,7 @@ const bcrypt = require("bcrypt");
 // });
 async function registerUser(
     {
-      businessName,
-      firstName,
-      lastName,
-      email,
-      country,
-      phone,
-      streetAddress, city, province,
-      password
+      title,password, email, tradeName, telephone, mobileNo, contactPerson, street, additional, zip, place, country
     }
   ) {
     try {
@@ -30,14 +23,7 @@ async function registerUser(
   
       // Create a new user document with the hashed password
       const user = new User({
-        businessName,
-        firstName,
-        lastName,
-        phone,
-        email,
-        password:hashedPassword,
-        streetAddress, 
-        city, province, country 
+        title,password: hashedPassword, email, tradeName, telephone, mobileNo, contactPerson, street, additional, zip, place, country
       });
      
   
