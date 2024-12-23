@@ -1,3 +1,4 @@
+
 require("dotenv").config()
 const express = require('express')
 const app = express();
@@ -66,3 +67,5 @@ app.use('/media',mediaRouter);
 app.use('/auth', authRouter);
 
 app.listen(process.env.PORT || 3336, () => console.log('Server is Running on port: 3336'))
+
+

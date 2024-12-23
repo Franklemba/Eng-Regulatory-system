@@ -14,7 +14,7 @@ router.get("/", (req, res) => {
     res.render("auth/login", {
       incorrectCredentials : true,
       errorMessage: '',
-      layout
+      // layout
     });
   
   });

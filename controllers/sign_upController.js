@@ -70,8 +70,9 @@ function generateOTP() {
     const { otp } = req.body;
   
     try {
+      res.redirect('/merchant');
       const user = await User.findById(userId);
-  
+  return
       if (!user) {
         return res.status(400).send('User not found');
       }

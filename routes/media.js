@@ -4,7 +4,6 @@ const fs = require('fs');
 
 
 
-
 router.get("/careers", async (req,res) => {
 
   res.render("newsCenterPages/careers",{

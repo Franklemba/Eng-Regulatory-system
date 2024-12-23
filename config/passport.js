@@ -9,6 +9,7 @@ module.exports = function(passport) {
         // Find user by email
         const user = await User.findOne({ email });
 
+        
         if (!user) {
           return done(null, false, { message: 'The email you entered is not registered' });
         }
