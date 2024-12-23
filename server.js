@@ -45,7 +45,7 @@ app.set('trust proxy', 1);
 
  // Session configuration
 const sessionStore = MongoStore.create({ 
-  mongoUrl: liveDB,
+mongoUrl: liveDB,
   ttl: 14 * 24 * 60 * 60 // 14 days
 });
 
