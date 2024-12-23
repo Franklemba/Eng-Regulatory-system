@@ -53,7 +53,8 @@ function generateOTP() {
         buttonText: "Verify OTP",
         user: req.user,
         incorrectCredentials: false,
-        errorMessage: ''
+        errorMessage: '',
+        layout
       });
   
     } catch (error) {
@@ -125,7 +126,8 @@ function generateOTP() {
   // New route for resending OTP
   exports.resendOTP =  async (req, res) => {
     const { userId } = req.params;
-  
+    const layout = "layouts/non_headerLayout"
+
     try {
       const user = await User.findById(userId);
   
@@ -152,7 +154,8 @@ function generateOTP() {
         buttonText: "Verify OTP",
         user: req.user,
         incorrectCredentials: false,
-        errorMessage: ''
+        errorMessage: '',
+        layout
       });
   
     } catch (error) {

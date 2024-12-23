@@ -14,7 +14,7 @@ router.get("/", (req, res) => {
     res.render("auth/login", {
       incorrectCredentials : true,
       errorMessage: '',
-      // layout
+      layout
     });
   
   });
@@ -25,9 +25,12 @@ router.get("/login", (req,res) => {
 })
 
 router.get("/incorrect_credentials", (req, res)=>{
+  const layout = "layouts/non_headerLayout"
+
     res.render("auth/login", {
       incorrectCredentials: true,
       errorMessage: req.flash("error")[0],
+      layout
     });
   });
 

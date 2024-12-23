@@ -3,7 +3,7 @@ const User = require("../models/userSchema");
 const bcrypt = require("bcrypt");
 
 exports.profileSetting = (req, res) => {
-    const layout = "layouts/merchant_layout";
+  const layout = "layouts/non_headerLayout"
     res.render("auth/profile_setting", {
         layout,
         pageTitle: 'profile-setting',
@@ -12,7 +12,7 @@ exports.profileSetting = (req, res) => {
 };
 
 exports.changePassword = (req, res) => {
-    const layout = "layouts/merchant_layout";
+  const layout = "layouts/non_headerLayout"
     res.render("auth/change_password", {
         layout,
         pageTitle: 'change-password',
@@ -52,7 +52,7 @@ exports.postChangePassword = async (req, res) => {
 }
 
 exports.twoStep = (req, res) => {
-    const layout = "layouts/merchant_layout";
+  const layout = "layouts/non_headerLayout"
     res.render("auth/two_step", {
         layout,
         pageTitle: 'two-step',
