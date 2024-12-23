@@ -20,11 +20,11 @@ function generateOTP() {
   // Modified sign-up route
   exports.postSignUp =  async (req, res) => {
 
-    const { title,password, email, tradeName, telephone, mobileNo, contactPerson, street, additional, zip, place, country } = req.body;
+    const { nameOfEntity, typeOfEntity, businessRegistrationNumber, email,password, phoneNumber , address, city, country  } = req.body;
   
     try {
 
-      const newUser = await registerUser({ title, password, email, tradeName, telephone, mobileNo, contactPerson, street, additional, zip, place, country });
+      const newUser = await registerUser({ nameOfEntity, typeOfEntity, businessRegistrationNumber, email,password, phoneNumber , address, city, country });
       const layout = "layouts/non_headerLayout"
       if (!newUser) {
         return res.render("auth/login", {

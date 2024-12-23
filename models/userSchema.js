@@ -6,11 +6,15 @@ if (mongoose.connection.models['client']) {
 }
 
 const userSchema = new mongoose.Schema({
-  title: {
+  nameOfEntity: {
     type: String,
     required: true,
   },
-  password: {
+  typeOfEntity: {
+    type: String,
+    required: true,
+  },
+  businessRegistrationNumber: {
     type: String,
     required: true,
   },
@@ -18,36 +22,19 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  tradeName: {
-    type: String,
-    required: true,
-  },
-  telephone: {
+  password: {
     type: String,
     required: false,
-    default: null
   },
-  mobileNo: {
+  phoneNumber: {
     type: String,
     required: true,
   },
-  contactPerson: {
+  address: {
     type: String,
-    required: null,
+    required: true,
   },
-  street: {
-    type: String,
-    required: true
-  },
-  additional: {
-    type: String,
-    required: true
-  },
-  zip: {
-    type: String,
-    required: true
-  },
-  place: {
+  city: {
     type: String,
     required: true
   },
