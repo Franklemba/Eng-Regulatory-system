@@ -14,14 +14,7 @@ router.get("/", async (req,res) => {
 })
 
 
-router.get("/merchant", async (req,res) => {
 
-  res.render("home/dashboard",{
-   layout:"layouts/dashboardHeader.ejs",
-   user:req.user
-  })
-    
-})
 
 
 router.get("/legislation", async (req,res) => {
