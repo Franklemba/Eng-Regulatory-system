@@ -36,7 +36,7 @@ router.get("/incorrect_credentials", (req, res)=>{
 
 router.post("/login", (req, res, next) => {
     passport.authenticate("local", {
-      successRedirect: "/",
+      successRedirect: "/merchant",
       failureRedirect: "/auth/incorrect_credentials",
       failureFlash: true,
     })(req, res, next);

@@ -10,10 +10,13 @@ const MongoStore = require('connect-mongo');
 const mongoose = require('mongoose')
 const passport = require('passport')
 
+const { ensureAuthenticated} = require('./config/auth'); 
+
 // Route definitions
 const homeRouter = require('./routes/home');
 const mediaRouter = require('./routes/media');
 const authRouter = require('./routes/auth')
+const merchantRouter = require('./routes/dashboard')
 
 ////////////database connection////////////
 
@@ -65,6 +68,7 @@ app.use(passport.session());
 app.use('/',homeRouter);
 app.use('/media',mediaRouter);
 app.use('/auth', authRouter);
+app.use('/merchant', ensureAuthenticated ,merchantRouter);
 
 app.listen(process.env.PORT || 3336, () => console.log('Server is Running on port: 3336'))
 

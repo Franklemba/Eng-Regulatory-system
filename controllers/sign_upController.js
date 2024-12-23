@@ -44,18 +44,19 @@ function generateOTP() {
       newUser.otpExpiration = otpExpiration;
       await newUser.save();
   
+      res.redirect('/merchant');
 
     //  sendOTPemail(`${firstName} ${lastName}`, email, otp)
   
-      res.render("auth/email_verification", {
-        message: `We have sent a verification OTP to ${email}. Please enter the OTP to verify your email. Expires in 15 minutes`,
-        url: `/auth/verify-otp/${newUser._id}`,
-        buttonText: "Verify OTP",
-        user: req.user,
-        incorrectCredentials: false,
-        errorMessage: '',
-        layout
-      });
+      // res.render("auth/email_verification", {
+      //   message: `We have sent a verification OTP to ${email}. Please enter the OTP to verify your email. Expires in 15 minutes`,
+      //   url: `/auth/verify-otp/${newUser._id}`,
+      //   buttonText: "Verify OTP",
+      //   user: req.user,
+      //   incorrectCredentials: false,
+      //   errorMessage: '',
+      //   layout
+      // });
   
     } catch (error) {
       console.error(`Error registering user: ${error.message}`);
