@@ -1,0 +1,157 @@
+<div class="page-wrapper">
+    <div class="content">
+        <div class="page-header">
+            <div class="page-title">
+                <h4>Statutory Compliance Progress</h4>
+                <h6>Track and manage the progress of statutory compliance submissions</h6>
+            </div>
+        </div>
+
+        <!-- Filters Section -->
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="mb-3">Filter Submissions</h5>
+                <form id="filter-form">
+                    <div class="row">
+                        <div class="col-lg-4 col-sm-6 col-12">
+                            <div class="form-group">
+                                <label>Compliance Type</label>
+                                <select class="form-control select">
+                                    <option>All Types</option>
+                                    <option>Tax Compliance</option>
+                                    <option>Environmental Compliance</option>
+                                    <option>Labor Compliance</option>
+                                    <option>Other</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-sm-6 col-12">
+                            <div class="form-group">
+                                <label>Status</label>
+                                <select class="form-control select">
+                                    <option>All Statuses</option>
+                                    <option>Pending</option>
+                                    <option>Approved</option>
+                                    <option>Rejected</option>
+                                    <option>In Progress</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-sm-6 col-12">
+                            <div class="form-group">
+                                <label>Date Range</label>
+                                <input type="date" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-lg-12 text-end">
+                            <button type="submit" class="btn btn-primary">Apply Filters</button>
+                            <button type="reset" class="btn btn-secondary">Reset</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Submissions List -->
+        <div class="card">
+            <div class="card-body">
+                <h5 class="mb-3">Submission Progress</h5>
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Submission ID</th>
+                                <th>Type</th>
+                                <th>Applicant</th>
+                                <th>Status</th>
+                                <th>Progress</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Example Row -->
+                            <tr>
+                                <td>#98765</td>
+                                <td>Tax Compliance</td>
+                                <td>Alex Johnson</td>
+                                <td><span class="badge bg-warning">Pending</span></td>
+                                <td>
+                                    <div class="progress" style="height: 8px;">
+                                        <div class="progress-bar bg-success" style="width: 30%;"></div>
+                                    </div>
+                                    <small>30% Complete</small>
+                                </td>
+                                <td>
+                                    <div class="dropdown">
+                                        <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            Actions
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" href="#">View Details</a></li>
+                                            <li><a class="dropdown-item" href="#">Send Reminder</a></li>
+                                            <li><a class="dropdown-item" href="#">Approve</a></li>
+                                            <li><a class="dropdown-item" href="#">Reject</a></li>
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>#98766</td>
+                                <td>Environmental Compliance</td>
+                                <td>Mary Jane</td>
+                                <td><span class="badge bg-success">Approved</span></td>
+                                <td>
+                                    <div class="progress" style="height: 8px;">
+                                        <div class="progress-bar bg-success" style="width: 100%;"></div>
+                                    </div>
+                                    <small>100% Complete</small>
+                                </td>
+                                <td>
+                                    <div class="dropdown">
+                                        <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            Actions
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" href="#">View Details</a></li>
+                                            <li><a class="dropdown-item" href="#">Archive</a></li>
+                                            <li><a class="dropdown-item" href="#">Delete</a></li>
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Detailed Submission View (Expandable Section) -->
+        <div class="card mt-4">
+            <div class="card-body">
+                <h5 class="mb-3">Detailed View</h5>
+                <div class="accordion" id="submission-details">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingOne">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                Submission #98765 - Tax Compliance
+                            </button>
+                        </h2>
+                        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#submission-details">
+                            <div class="accordion-body">
+                                <p><strong>Applicant:</strong> Alex Johnson</p>
+                                <p><strong>Type:</strong> Tax Compliance</p>
+                                <p><strong>Status:</strong> Pending</p>
+                                <p><strong>Progress:</strong> 30%</p>
+                                <p><strong>Details:</strong> Submission under review by the tax department. Pending additional financial documents.</p>
+                                <button class="btn btn-success mt-2">Approve</button>
+                                <button class="btn btn-danger mt-2">Reject</button>
+                                <button class="btn btn-warning mt-2">Request Additional Information</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Additional submissions can be added here -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

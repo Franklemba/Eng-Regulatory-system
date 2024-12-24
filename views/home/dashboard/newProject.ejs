@@ -1,0 +1,159 @@
+<div class="page-wrapper">
+    <div class="content">
+        <div class="page-header">
+            <div class="page-title">
+                <h4>Projects Listing</h4>
+                <h6>Manage and add large-scale projects</h6>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-body">
+                <form id="project-form">
+                    <h5 class="mb-4">Project Details</h5>
+                    <div class="row">
+                        <!-- Project Title -->
+                        <div class="col-lg-6 col-sm-12">
+                            <div class="form-group">
+                                <label>Project Title</label>
+                                <input type="text" class="form-control" placeholder="Enter project title" required>
+                            </div>
+                        </div>
+
+                        <!-- Project Type -->
+                        <div class="col-lg-6 col-sm-12">
+                            <div class="form-group">
+                                <label>Project Type</label>
+                                <select class="form-control select" required>
+                                    <option>Infrastructure</option>
+                                    <option>Energy</option>
+                                    <option>Transportation</option>
+                                    <option>Water and Sanitation</option>
+                                    <option>Other</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Project Budget -->
+                        <div class="col-lg-4 col-sm-12">
+                            <div class="form-group">
+                                <label>Budget (USD)</label>
+                                <input type="number" class="form-control" placeholder="Enter budget" required>
+                            </div>
+                        </div>
+
+                        <!-- Project Duration -->
+                        <div class="col-lg-4 col-sm-12">
+                            <div class="form-group">
+                                <label>Duration (Months)</label>
+                                <input type="number" class="form-control" placeholder="Enter duration" required>
+                            </div>
+                        </div>
+
+                        <!-- Status -->
+                        <div class="col-lg-4 col-sm-12">
+                            <div class="form-group">
+                                <label>Status</label>
+                                <select class="form-control select">
+                                    <option>Planned</option>
+                                    <option>In Progress</option>
+                                    <option>Completed</option>
+                                    <option>On Hold</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Project Objectives -->
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <label>Objectives</label>
+                                <textarea class="form-control" rows="3" placeholder="Describe the objectives of the project" required></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr>
+                    <h5 class="mb-4">Project Locations</h5>
+                    <div id="locations-section">
+                        <!-- Location Entry Template -->
+                        <div class="row location-entry mb-4">
+                            <div class="col-lg-6 col-sm-12">
+                                <div class="form-group">
+                                    <label>Location Name</label>
+                                    <input type="text" class="form-control" placeholder="Enter location name" required>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-sm-12">
+                                <div class="form-group">
+                                    <label>Latitude</label>
+                                    <input type="text" class="form-control" placeholder="Enter latitude" required>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-sm-12">
+                                <div class="form-group">
+                                    <label>Longitude</label>
+                                    <input type="text" class="form-control" placeholder="Enter longitude" required>
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label>Location Description</label>
+                                    <textarea class="form-control" rows="2" placeholder="Describe this location" required></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-end">
+                        <button type="button" class="btn btn-secondary" id="add-location-btn">Add Another Location</button>
+                    </div>
+
+                    <hr>
+                    <h5 class="mb-4">Supporting Documents</h5>
+                    <div class="form-group">
+                        <label>Upload Documents</label>
+                        <div class="image-upload">
+                            <input type="file" multiple>
+                            <div class="image-uploads">
+                                <img src="/assets/img/icons/upload.svg" alt="img">
+                                <h4>Drag and drop files to upload</h4>
+                            </div>
+                        </div>
+                        <small class="text-muted">You can upload technical drawings, reports, or additional project documents.</small>
+                    </div>
+
+                    <hr>
+                    <h5 class="mb-4">Team and Associations</h5>
+                    <div class="row">
+                        <!-- Team Members -->
+                        <div class="col-lg-6 col-sm-12">
+                            <div class="form-group">
+                                <label>Team Members</label>
+                                <input type="text" class="form-control" placeholder="Enter team members (comma separated)">
+                            </div>
+                        </div>
+
+                        <!-- Associated Permits -->
+                        <div class="col-lg-6 col-sm-12">
+                            <div class="form-group">
+                                <label>Associated Permits or Licenses</label>
+                                <input type="text" class="form-control" placeholder="Enter related permits/licenses">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="text-end mt-4">
+                        <button type="submit" class="btn btn-primary">Submit Project</button>
+                        <button type="reset" class="btn btn-secondary">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.getElementById('add-location-btn').addEventListener('click', function () {
+        const locationEntry = document.querySelector('.location-entry').cloneNode(true);
+        document.getElementById('locations-section').appendChild(locationEntry);
+    });
+</script>

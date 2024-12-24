@@ -1,0 +1,112 @@
+<div class="page-wrapper">
+    <div class="content">
+        <div class="page-header">
+            <div class="page-title">
+                <h4>Order for Supply</h4>
+                <h6>Create, track, and manage supply orders</h6>
+            </div>
+        </div>
+
+        <!-- Order Creation Form -->
+        <div class="card">
+            <div class="card-body">
+                <h5>Create a New Order</h5>
+                <form>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label for="order-id">Order ID</label>
+                                <input type="text" id="order-id" class="form-control" placeholder="Auto-generated ID" disabled>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label for="supplier-name">Supplier Name</label>
+                                <input type="text" id="supplier-name" class="form-control" placeholder="Enter Supplier Name">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label for="contact-person">Contact Person</label>
+                                <input type="text" id="contact-person" class="form-control" placeholder="Enter Contact Name">
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label for="contact-number">Contact Number</label>
+                                <input type="text" id="contact-number" class="form-control" placeholder="Enter Phone Number">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label for="supply-date">Expected Delivery Date</label>
+                                <input type="date" id="supply-date" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label for="priority">Priority Level</label>
+                                <select id="priority" class="form-control">
+                                    <option value="low">Low</option>
+                                    <option value="medium">Medium</option>
+                                    <option value="high">High</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="order-details">Order Details</label>
+                        <textarea id="order-details" class="form-control" rows="5" placeholder="List items, quantity, and any specific requirements"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="attachments">Upload Supporting Documents</label>
+                        <input type="file" id="attachments" class="form-control" multiple>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Submit Order</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Existing Orders Section -->
+        <div class="card">
+            <div class="card-body">
+                <h5>Track Existing Orders</h5>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Order ID</th>
+                            <th>Supplier Name</th>
+                            <th>Date</th>
+                            <th>Priority</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Sample Order Row -->
+                        <tr>
+                            <td>ORD12345</td>
+                            <td>Global Supplies Co.</td>
+                            <td>2024-12-15</td>
+                            <td>High</td>
+                            <td><span class="badge badge-warning">Pending</span></td>
+                            <td>
+                                <button class="btn btn-info btn-sm">View</button>
+                                <button class="btn btn-danger btn-sm">Cancel</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

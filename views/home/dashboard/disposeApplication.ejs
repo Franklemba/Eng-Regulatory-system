@@ -1,0 +1,80 @@
+<div class="page-wrapper">
+    <div class="content">
+        <div class="page-header">
+            <div class="page-title">
+                <h4>Disposal Applications</h4>
+                <h6>Submit, track, and manage disposal requests</h6>
+            </div>
+        </div>
+
+        <!-- Disposal Application Form -->
+        <div class="card">
+            <div class="card-body">
+                <h5>Create a New Disposal Application</h5>
+                <form>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label for="disposal-id">Disposal ID</label>
+                                <input type="text" id="disposal-id" class="form-control" placeholder="Auto-generated ID" disabled>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label for="disposal-type">Disposal Type</label>
+                                <select id="disposal-type" class="form-control">
+                                    <option value="hazardous">Hazardous Materials</option>
+                                    <option value="non-hazardous">Non-Hazardous Materials</option>
+                                    <option value="electronics">Electronics</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="disposal-details">Details</label>
+                        <textarea id="disposal-details" class="form-control" rows="5" placeholder="Provide detailed information about the items to be disposed"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="disposal-docs">Upload Supporting Documents</label>
+                        <input type="file" id="disposal-docs" class="form-control" multiple>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Submit Disposal Request</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Disposal Applications List -->
+        <div class="card">
+            <div class="card-body">
+                <h5>Track Disposal Applications</h5>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Disposal ID</th>
+                            <th>Type</th>
+                            <th>Date Submitted</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Sample Disposal Application Row -->
+                        <tr>
+                            <td>DISP12345</td>
+                            <td>Hazardous</td>
+                            <td>2024-12-05</td>
+                            <td><span class="badge badge-info">Under Review</span></td>
+                            <td>
+                                <button class="btn btn-info btn-sm">View</button>
+                                <button class="btn btn-danger btn-sm">Cancel</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

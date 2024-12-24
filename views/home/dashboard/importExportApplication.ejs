@@ -1,0 +1,176 @@
+<div class="page-wrapper">
+    <div class="content">
+        <div class="page-header">
+            <div class="page-title">
+                <h4>Import/Export Application</h4>
+                <h6>Submit your application for import/export authorization</h6>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-body">
+                <form id="import-export-form">
+                    <!-- Applicant Information -->
+                    <h5 class="mb-4">Applicant Information</h5>
+                    <div class="row">
+                        <!-- Company Name -->
+                        <div class="col-lg-6 col-sm-12">
+                            <div class="form-group">
+                                <label>Company Name</label>
+                                <input type="text" class="form-control" placeholder="Enter company name" required>
+                            </div>
+                        </div>
+
+                        <!-- Contact Person -->
+                        <div class="col-lg-6 col-sm-12">
+                            <div class="form-group">
+                                <label>Contact Person</label>
+                                <input type="text" class="form-control" placeholder="Enter contact person's name" required>
+                            </div>
+                        </div>
+
+                        <!-- Email -->
+                        <div class="col-lg-6 col-sm-12">
+                            <div class="form-group">
+                                <label>Email Address</label>
+                                <input type="email" class="form-control" placeholder="Enter email address" required>
+                            </div>
+                        </div>
+
+                        <!-- Phone Number -->
+                        <div class="col-lg-6 col-sm-12">
+                            <div class="form-group">
+                                <label>Phone Number</label>
+                                <input type="text" class="form-control" placeholder="Enter phone number" required>
+                            </div>
+                        </div>
+
+                        <!-- Country of Operation -->
+                        <div class="col-lg-6 col-sm-12">
+                            <div class="form-group">
+                                <label>Country of Operation</label>
+                                <select class="form-control">
+                                    <option>Select Country</option>
+                                    <option>Zambia</option>
+                                    <option>India</option>
+                                    <option>USA</option>
+                                    <option>Other</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr>
+                    <!-- Goods Information -->
+                    <h5 class="mb-4">Goods Information</h5>
+                    <div class="row">
+                        <!-- Type of Application -->
+                        <div class="col-lg-6 col-sm-12">
+                            <div class="form-group">
+                                <label>Type of Application</label>
+                                <select class="form-control" required>
+                                    <option>Select Type</option>
+                                    <option>Import</option>
+                                    <option>Export</option>
+                                    <option>Both</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Type of Goods -->
+                        <div class="col-lg-6 col-sm-12">
+                            <div class="form-group">
+                                <label>Type of Goods</label>
+                                <input type="text" class="form-control" placeholder="Enter type of goods" required>
+                            </div>
+                        </div>
+
+                        <!-- Country of Origin/Destination -->
+                        <div class="col-lg-6 col-sm-12">
+                            <div class="form-group">
+                                <label>Country of Origin/Destination</label>
+                                <select class="form-control">
+                                    <option>Select Country</option>
+                                    <option>Zambia</option>
+                                    <option>India</option>
+                                    <option>USA</option>
+                                    <option>Other</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Estimated Value -->
+                        <div class="col-lg-6 col-sm-12">
+                            <div class="form-group">
+                                <label>Estimated Value (USD)</label>
+                                <input type="number" class="form-control" placeholder="Enter estimated value" required>
+                            </div>
+                        </div>
+
+                        <!-- Expected Quantity -->
+                        <div class="col-lg-6 col-sm-12">
+                            <div class="form-group">
+                                <label>Expected Quantity</label>
+                                <input type="number" class="form-control" placeholder="Enter expected quantity" required>
+                            </div>
+                        </div>
+
+                        <!-- Transportation Method -->
+                        <div class="col-lg-6 col-sm-12">
+                            <div class="form-group">
+                                <label>Mode of Transportation</label>
+                                <select class="form-control">
+                                    <option>Select Mode</option>
+                                    <option>Air</option>
+                                    <option>Sea</option>
+                                    <option>Land</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr>
+                    <!-- Compliance and Declarations -->
+                    <h5 class="mb-4">Compliance and Declarations</h5>
+                    <div class="row">
+                        <!-- Compliance with Regulations -->
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <label>Compliance Details</label>
+                                <textarea class="form-control" rows="4" placeholder="Describe compliance with applicable regulations" required></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-check mb-4">
+                        <input type="checkbox" class="form-check-input" id="compliance-agreement" required>
+                        <label class="form-check-label" for="compliance-agreement">
+                            I confirm that the details provided are accurate and comply with all relevant regulations.
+                        </label>
+                    </div>
+
+                    <hr>
+                    <!-- Supporting Documents -->
+                    <h5 class="mb-4">Supporting Documents</h5>
+                    <div class="form-group">
+                        <label>Upload Supporting Documents</label>
+                        <div class="image-upload">
+                            <input type="file" multiple>
+                            <div class="image-uploads">
+                                <img src="/assets/img/icons/upload.svg" alt="img">
+                                <h4>Drag and drop files to upload</h4>
+                            </div>
+                        </div>
+                        <small class="text-muted">
+                            Upload documents such as invoices, shipping manifests, certificates of origin, or any other relevant files.
+                        </small>
+                    </div>
+
+                    <div class="text-end mt-4">
+                        <button type="submit" class="btn btn-primary">Submit Application</button>
+                        <button type="reset" class="btn btn-secondary">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
