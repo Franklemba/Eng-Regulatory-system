@@ -68,7 +68,7 @@ app.use(passport.session());
 app.use('/',homeRouter);
 app.use('/media',mediaRouter);
 app.use('/auth', authRouter);
-app.use('/dashboard', dashboardRouter);
+app.use('/dashboard',ensureAuthenticated, dashboardRouter);
 app.use('/merchant', ensureAuthenticated ,merchantRouter);
 
 app.listen(process.env.PORT || 3336, () => console.log('Server is Running on port: 3336'))
