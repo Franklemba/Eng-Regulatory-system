@@ -1,7 +1,11 @@
 const EngineeringLicense = require("../models/licenceSchema");
 
 // Controller function for handling form submission
+<<<<<<< HEAD
 const submitApplication = async (req, res) => {
+=======
+exports.submitApplication = async (req, res) => {
+>>>>>>> 025091a4a07d799551cb1e8761ce7e37abc83b18
   try {
     const {
       applicantName,
@@ -49,6 +53,7 @@ const submitApplication = async (req, res) => {
     res.status(500).send("An error occurred while processing your application.");
   }
 };
+<<<<<<< HEAD
 
 
 const submitProject = async (req, res) => {
@@ -89,3 +94,5 @@ const submitPremiseLeasing = async (req, res) => {
     console.log(req.body);	
    }
 module.exports = {submitApplication,submitProject,submitPremiseLeasing,submitAnnualDeclaration,submitExportImportApplication,submitBusinessClosure,submitStructuralEnvironmentalLicence,submitOrderForSupply,submitAwarenessAdvert, submitAssessment};	
+=======
+>>>>>>> 025091a4a07d799551cb1e8761ce7e37abc83b18
