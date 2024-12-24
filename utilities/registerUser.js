@@ -6,14 +6,13 @@ const bcrypt = require("bcrypt");
 // });
 async function registerUser(
     {
-      title, password, email, tradeName, telephone, mobileNo, contactPerson, street, additional, zip, place, country
+      nameOfEntity, typeOfEntity, businessRegistrationNumber, email,password, phoneNumber , address, city, country
     }
   ) {
     try {
       // Generate a salt to use for hashing the password
       const salt = await bcrypt.genSalt(10);
       const hashedPassword = await bcrypt.hash(password, salt);
-      console.log(password)
      
       const existingUser = await User.findOne({ email });
       if (existingUser) {
@@ -24,7 +23,7 @@ async function registerUser(
   
       // Create a new user document with the hashed password
       const user = new User({
-        title, password: hashedPassword, email, tradeName, telephone, mobileNo, contactPerson, street, additional, zip, place, country
+        nameOfEntity, typeOfEntity, businessRegistrationNumber, email,password:hashedPassword , phoneNumber , address, city, country
       });
      
   

@@ -1,111 +1,188 @@
-<div class="page-content">
-    <div class="form-v10-content">
-        <form class="form-detail" action="" method="POST" onsubmit="return validateForm();" id="myform">
-            <div class="form-left">
-                <h2>General Infomation</h2>
-                <div class="form-row">
-                    <select name="title">
-                        <option class="option" value="title">Account Type</option>
-                        <option class="option" value="businessman">Individual</option>
-                        <option class="option" value="secretary">Company</option>
-                    </select>
-                    
-                    <span class="select-btn">
-                          <i class="zmdi zmdi-chevron-down"></i>
-                    </span>
-                </div>
-                <div class="form-group">
-                    <div class="form-row form-row-1">
-                        <input type="email" name="email" id="first_name" class="input-text" placeholder="Email Address" required>
-                    </div>
-                    <div class="form-row form-row-2">
-                        <input type="text" name="tradeName" id="last_name" class="input-text" placeholder="Trader Name" required>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="form-row form-row-1">
-                        <input type="text" name="telephone" id="first_name" class="input-text" placeholder="telephone No" required>
-                    </div>
-                    <div class="form-row form-row-2">
-                        <input type="text" name="mobileNo" id="last_name" class="input-text" placeholder="Mobile No" required>
-                    </div>
-                </div>
-               
-                <div class="form-row">
-                    <input type="text" name="contactPerson" class="contactPerson" id="company" placeholder="Contact Person" required>
-                </div>
-                 
-                <div class="form-row">
-                    <input type="password" name="password" class="password" id="company" placeholder="Password" required>
-                </div>
-            </div>
-            <div class="form-right">
-                <h2>Contact Details</h2>
-                <div class="form-row">
-                    <input type="text" name="street" class="street" id="street" placeholder="Street + Nr" required>
-                </div>
-                <div class="form-row">
-                    <input type="text" name="additional" class="additional" id="additional" placeholder="Additional Information" required>
-                </div>
-                <div class="form-group">
-                    <div class="form-row form-row-1">
-                        <input type="text" name="zip" class="zip" id="zip" placeholder="Zip Code" required>
-                    </div>
-                    <div class="form-row form-row-2">
-                        <select name="place">
-                            <option value="place">Place</option>
-                            <option value="Street">Street</option>
-                            <option value="District">District</option>
-                            <option value="City">City</option>
-                        </select>
-                        <span class="select-btn">
-                              <i class="zmdi zmdi-chevron-down"></i>
-                        </span>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <select name="country">
-                        <option value="country">Country</option>
-                        <option value="Zambia">Zambia</option>
-                        <option value="Malaysia">Malaysia</option>
-                        <option value="India">India</option>
-                    </select>
-                    <span class="select-btn">
-                          <i class="zmdi zmdi-chevron-down"></i>
-                    </span>
-                </div>
-                <div class="form-group">
-                    <div class="form-row form-row-1">
-                        <input type="text" name="code" class="code" id="code" placeholder="Code +" required>
-                    </div>
-                    <div class="form-row form-row-2">
-                        <input type="text" name="phone" class="phone" id="phone" placeholder="Phone Number" required>
-                    </div>
-                </div>
-                <!-- <div class="form-row">
-                    <input type="text" name="your_email" id="your_email" class="input-text" required pattern="[^@]+@[^@]+.[a-zA-Z]{2,6}" placeholder="Your Email">
-                </div> -->
-                <div class="form-checkbox">
-                    <label class="container"><p>I do accept the <a href="#" class="text">Terms and Conditions</a> of your site.</p>
-                          <input type="checkbox" name="checkbox">
-                          <span class="checkmark"></span>
-                    </label>
-                </div>
-                
-                <div class="col-xl-12 form-group">
-                    <div class="d-flex flex-wrap justify-content-between">
-                        <div>
-                            <a href="/auth/login">Already have an Account ?</a>
-                        </div>
-                    </div>
-                </div>
 
-                <!-- Submit Button -->
-               
-                <div class="form-row-last">
-                    <input type="submit" name="register" class="register" value="Register ">
-                </div>
-            </div>
-        </form>
+
+
+<style>
+    /* Import Google font - Poppins */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
+
+.container {
+  position: relative;
+  max-width: 700px;
+  width: 100%;
+  background: #fff;
+  padding: 25px;
+  border-radius: 8px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+.container header {
+  font-size: 1.5rem;
+  color: #333;
+  font-weight: 500;
+  text-align: center;
+}
+.container .form {
+  margin-top: 30px;
+}
+.form .input-box {
+  width: 100%;
+  margin-top: 20px;
+}
+.input-box label {
+  color: #333;
+}
+.form :where(.input-box input, .select-box) {
+  position: relative;
+  height: 50px;
+  width: 100%;
+  outline: none;
+  font-size: 1rem;
+  color: #707070;
+  margin-top: 8px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 0 15px;
+}
+.input-box input:focus {
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+}
+.form .column {
+  display: flex;
+  column-gap: 15px;
+}
+.form .gender-box {
+  margin-top: 20px;
+}
+.gender-box h3 {
+  color: #333;
+  font-size: 1rem;
+  font-weight: 400;
+  margin-bottom: 8px;
+}
+.form :where(.gender-option, .gender) {
+  display: flex;
+  align-items: center;
+  column-gap: 50px;
+  flex-wrap: wrap;
+}
+.form .gender {
+  column-gap: 5px;
+}
+.gender input {
+  accent-color: rgb(130, 106, 251);
+}
+.form :where(.gender input, .gender label) {
+  cursor: pointer;
+}
+.gender label {
+  color: #707070;
+}
+.address :where(input, .select-box) {
+  margin-top: 15px;
+}
+.select-box select {
+  height: 100%;
+  width: 100%;
+  outline: none;
+  border: none;
+  color: #707070;
+  font-size: 1rem;
+}
+.form button {
+  height: 55px;
+  width: 100%;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 400;
+  margin-top: 30px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: rgb(130, 106, 251);
+}
+.form button:hover {
+  background: rgb(88, 56, 250);
+}
+/*Responsive*/
+@media screen and (max-width: 500px) {
+  .form .column {
+    flex-wrap: wrap;
+  }
+  .form :where(.gender-option, .gender) {
+    row-gap: 15px;
+  }
+}
+</style>
+
+<section class="container signup">
+  <header>Registration Form</header>
+  <form method="post" action="/auth/register" class="form">
+    <div class="input-box">
+      <!-- <label>Full Name</label> -->
+      <input type="text" name="nameOfEntity" placeholder="Name of Entity" required />
     </div>
+    <div class="column">
+        <div class="select-box">
+          <select name="typeOfEntity">
+            <option hidden>Select Entity Type</option>
+            <option>Individual Resident</option>
+            <option>Individual non-Resident</option>
+            <option>Government Institution</option>
+            <option>Registered Company</option>
+          </select>
+        </div>
+        <!-- <input type="text" placeholder="Enter your city" required /> -->
+      </div>
+      
+      <div class="input-box">
+        <!-- <div class="input-box"> -->
+          <!-- <label>Phone Number</label> -->
+          <input type="text" name="businessRegistrationNumber" placeholder="Enter your Business Registration Number" required />
+        <!-- </div> -->
+        
+    </div>
+    <div class="input-box">
+        <!-- <label>Email Address</label> -->
+        <input type="email" name="email" placeholder="Enter email address" required />
+      </div>
+  
+    
+    <div class="input-box address">
+        <!-- <label>Address</label> -->
+        <input type="number" name="phoneNumber" placeholder="Enter phone number" required />
+        <input type="text"  name="address" placeholder="Enter street address " required />
+
+
+        <div class="column">
+            
+          <div class="select-box">
+            <select name="country">
+              <option hidden>Country</option>
+              <option>America</option>
+              <option>Japan</option>
+              <option>India</option>
+              <option>Nepal</option>
+            </select>
+          </div>
+          <input type="text" name="city" placeholder="Enter your city" required />
+        </div>
+        <div class="column">
+          <input type="password" name="password" placeholder="Password" required />
+          <input type="password" placeholder="Confirm Password" required />
+        </div>
+      </div>
+
+  
+   
+    <div class="form-group">
+        <input type="checkbox" name="agree-term" id="agree-term" class="agree-term" />
+        <label for="agree-term" class="label-agree-term"><span><span></span></span>I agree all statements in  <a href="#" class="term-service">Terms of service</a></label>
+    </div>
+    <div class="form-group form-button">
+        <input type="submit" name="signup" id="signup" class="form-submit" value="Register"/>
+    </div>
+</form>
+<div class="signup-image">
+    <a href="/"><figure><img src="/img/ZEPRA LOGO.png" alt="sing up image"></figure></a>
+    <a href="/auth/login" class="signup-image-link">I am already member</a>
 </div>
+</section>
