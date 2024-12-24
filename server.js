@@ -17,7 +17,7 @@ const homeRouter = require('./routes/home');
 const mediaRouter = require('./routes/media');
 const authRouter = require('./routes/auth')
 const merchantRouter = require('./routes/dashboard')
-
+const dashboardRouter = require('./routes/dashboard')
 ////////////database connection////////////
 
 const localDB = "mongodb://127.0.0.1:27017/EngRegulatoryBoard"
@@ -68,6 +68,7 @@ app.use(passport.session());
 app.use('/',homeRouter);
 app.use('/media',mediaRouter);
 app.use('/auth', authRouter);
+app.use('/dashboard', dashboardRouter);
 app.use('/merchant', ensureAuthenticated ,merchantRouter);
 
 app.listen(process.env.PORT || 3336, () => console.log('Server is Running on port: 3336'))

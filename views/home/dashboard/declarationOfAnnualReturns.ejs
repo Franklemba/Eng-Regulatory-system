@@ -1,0 +1,144 @@
+<div class="page-wrapper">
+    <div class="content">
+        <div class="page-header">
+            <div class="page-title">
+                <h4>Declaration of Annual Returns</h4>
+                <h6>Submit your annual return details</h6>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-body">
+                <form id="annual-returns-form">
+                    <!-- General Information -->
+                    <h5 class="mb-4">General Information</h5>
+                    <div class="row">
+                        <!-- Organization Name -->
+                        <div class="col-lg-6 col-sm-12">
+                            <div class="form-group">
+                                <label>Organization Name</label>
+                                <input type="text" class="form-control" placeholder="Enter organization name" required>
+                            </div>
+                        </div>
+
+                        <!-- Registration Number -->
+                        <div class="col-lg-6 col-sm-12">
+                            <div class="form-group">
+                                <label>Registration Number</label>
+                                <input type="text" class="form-control" placeholder="Enter registration number" required>
+                            </div>
+                        </div>
+
+                        <!-- Financial Year -->
+                        <div class="col-lg-6 col-sm-12">
+                            <div class="form-group">
+                                <label>Financial Year</label>
+                                <input type="text" class="form-control" placeholder="e.g., 2023-2024" required>
+                            </div>
+                        </div>
+
+                        <!-- Contact Email -->
+                        <div class="col-lg-6 col-sm-12">
+                            <div class="form-group">
+                                <label>Contact Email</label>
+                                <input type="email" class="form-control" placeholder="Enter email address" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr>
+                    <!-- Financial Details -->
+                    <h5 class="mb-4">Financial Details</h5>
+                    <div class="row">
+                        <!-- Total Revenue -->
+                        <div class="col-lg-4 col-sm-12">
+                            <div class="form-group">
+                                <label>Total Revenue (USD)</label>
+                                <input type="number" class="form-control" placeholder="Enter total revenue" required>
+                            </div>
+                        </div>
+
+                        <!-- Net Profit -->
+                        <div class="col-lg-4 col-sm-12">
+                            <div class="form-group">
+                                <label>Net Profit (USD)</label>
+                                <input type="number" class="form-control" placeholder="Enter net profit" required>
+                            </div>
+                        </div>
+
+                        <!-- Tax Paid -->
+                        <div class="col-lg-4 col-sm-12">
+                            <div class="form-group">
+                                <label>Tax Paid (USD)</label>
+                                <input type="number" class="form-control" placeholder="Enter total tax paid" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr>
+                    <!-- Operational Metrics -->
+                    <h5 class="mb-4">Operational Metrics</h5>
+                    <div class="row">
+                        <!-- Number of Employees -->
+                        <div class="col-lg-4 col-sm-12">
+                            <div class="form-group">
+                                <label>Number of Employees</label>
+                                <input type="number" class="form-control" placeholder="Enter number of employees" required>
+                            </div>
+                        </div>
+
+                        <!-- Branches or Locations -->
+                        <div class="col-lg-4 col-sm-12">
+                            <div class="form-group">
+                                <label>Number of Branches/Locations</label>
+                                <input type="number" class="form-control" placeholder="Enter number of branches/locations" required>
+                            </div>
+                        </div>
+
+                        <!-- Assets Value -->
+                        <div class="col-lg-4 col-sm-12">
+                            <div class="form-group">
+                                <label>Total Assets Value (USD)</label>
+                                <input type="number" class="form-control" placeholder="Enter total assets value" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr>
+                    <!-- Supporting Documents -->
+                    <h5 class="mb-4">Supporting Documents</h5>
+                    <div class="form-group">
+                        <label>Upload Documents</label>
+                        <div class="image-upload">
+                            <input type="file" multiple>
+                            <div class="image-uploads">
+                                <img src="/assets/img/icons/upload.svg" alt="img">
+                                <h4>Drag and drop files to upload</h4>
+                            </div>
+                        </div>
+                        <small class="text-muted">Upload audited financial statements, tax clearance certificates, and other relevant documents.</small>
+                    </div>
+
+                    <hr>
+                    <!-- Declaration -->
+                    <h5 class="mb-4">Declaration</h5>
+                    <div class="form-group">
+                        <label>Declaration Statement</label>
+                        <textarea class="form-control" rows="4" placeholder="Enter your declaration statement" required></textarea>
+                    </div>
+                    <div class="form-check mb-4">
+                        <input type="checkbox" class="form-check-input" id="declaration-agreement" required>
+                        <label class="form-check-label" for="declaration-agreement">
+                            I hereby declare that the information provided is accurate to the best of my knowledge.
+                        </label>
+                    </div>
+
+                    <div class="text-end mt-4">
+                        <button type="submit" class="btn btn-primary">Submit Returns</button>
+                        <button type="reset" class="btn btn-secondary">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

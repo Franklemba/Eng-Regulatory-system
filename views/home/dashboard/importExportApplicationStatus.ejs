@@ -1,0 +1,131 @@
+<div class="page-wrapper">
+    <div class="content">
+        <div class="page-header">
+            <div class="page-title">
+                <h4>Import/Export Application Status</h4>
+                <h6>View and manage your submitted applications</h6>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-body">
+                <!-- Filter and Search Section -->
+                <div class="row mb-4">
+                    <div class="col-lg-4 col-sm-6">
+                        <div class="form-group">
+                            <label>Application ID</label>
+                            <input type="text" class="form-control" placeholder="Search by application ID">
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-sm-6">
+                        <div class="form-group">
+                            <label>Status</label>
+                            <select class="form-control">
+                                <option>All Statuses</option>
+                                <option>Pending</option>
+                                <option>Under Review</option>
+                                <option>Approved</option>
+                                <option>Rejected</option>
+                                <option>Completed</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-sm-12">
+                        <div class="form-group">
+                            <label>Date Range</label>
+                            <input type="date" class="form-control mb-2" placeholder="Start date">
+                            <input type="date" class="form-control" placeholder="End date">
+                        </div>
+                    </div>
+                </div>
+                <div class="text-end mb-4">
+                    <button class="btn btn-primary">Filter</button>
+                    <button class="btn btn-secondary">Clear Filters</button>
+                </div>
+
+                <!-- Application Status Table -->
+                <div class="table-responsive">
+                    <table class="table table-striped custom-table">
+                        <thead>
+                            <tr>
+                                <th>Application ID</th>
+                                <th>Company Name</th>
+                                <th>Contact Person</th>
+                                <th>Type</th>
+                                <th>Status</th>
+                                <th>Date Submitted</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Sample Row 1 -->
+                            <tr>
+                                <td>IMP-2024-001</td>
+                                <td>Global Tech Solutions</td>
+                                <td>John Doe</td>
+                                <td>Import</td>
+                                <td><span class="badge bg-warning">Pending</span></td>
+                                <td>2024-12-01</td>
+                                <td>
+                                    <div class="dropdown action-label">
+                                        <button class="btn btn-outline-primary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                                            Actions
+                                        </button>
+                                        <ul class="dropdown-menu dropdown-menu-end">
+                                            <li><a class="dropdown-item" href="#">View Details</a></li>
+                                            <li><a class="dropdown-item" href="#">Edit Application</a></li>
+                                            <li><a class="dropdown-item" href="#">Submit Additional Documents</a></li>
+                                            <li><a class="dropdown-item" href="#">Request Update</a></li>
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <!-- Sample Row 2 -->
+                            <tr>
+                                <td>EXP-2024-002</td>
+                                <td>TradeConnect Ltd.</td>
+                                <td>Jane Smith</td>
+                                <td>Export</td>
+                                <td><span class="badge bg-success">Approved</span></td>
+                                <td>2024-11-25</td>
+                                <td>
+                                    <div class="dropdown action-label">
+                                        <button class="btn btn-outline-primary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                                            Actions
+                                        </button>
+                                        <ul class="dropdown-menu dropdown-menu-end">
+                                            <li><a class="dropdown-item" href="#">View Details</a></li>
+                                            <li><a class="dropdown-item" href="#">Edit Application</a></li>
+                                            <li><a class="dropdown-item" href="#">Download Certificate</a></li>
+                                            <li><a class="dropdown-item" href="#">Appeal Decision</a></li>
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <!-- Additional rows will be generated dynamically or added here -->
+                            <!-- Empty state message -->
+                            <tr>
+                                <td colspan="7" class="text-center">No applications found. Please adjust your filters or submit a new application.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Pagination Section -->
+                <div class="pagination-section text-center mt-4">
+                    <nav>
+                        <ul class="pagination">
+                            <li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
+                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

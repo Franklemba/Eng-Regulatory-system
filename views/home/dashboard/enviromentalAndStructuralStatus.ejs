@@ -1,0 +1,157 @@
+<div class="page-wrapper">
+    <div class="content">
+        <div class="page-header">
+            <div class="page-title">
+                <h4>Environmental and Structural Safety Applications Status</h4>
+                <h6>View and manage the status of multiple Environmental and Structural Safety applications</h6>
+            </div>
+        </div>
+
+        <!-- Search & Filter Section -->
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <!-- Search by Application ID -->
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label for="application-id">Search Application by ID</label>
+                            <input type="text" id="application-id" class="form-control" placeholder="Enter Application ID" />
+                        </div>
+                    </div>
+
+                    <!-- Filter by Status -->
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label for="status-filter">Filter by Status</label>
+                            <select id="status-filter" class="form-control">
+                                <option value="">Select Status</option>
+                                <option value="pending">Pending</option>
+                                <option value="approved">Approved</option>
+                                <option value="rejected">Rejected</option>
+                                <option value="requested-more-info">Requested More Info</option>
+                                <option value="escalated">Escalated</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Search Button -->
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <button class="btn btn-primary" id="search-application">Search</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Application List Table -->
+        <div class="card">
+            <div class="card-body">
+                <h5>Applications List</h5>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Application ID</th>
+                            <th>Project/Business Name</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="application-list">
+                        <!-- Dynamic Rows for Multiple Applications -->
+                        <!-- Example Row -->
+                        <tr>
+                            <td>1</td>
+                            <td>AP123456</td>
+                            <td>ABC Engineering Ltd</td>
+                            <td><span class="badge badge-warning">Pending</span></td>
+                            <td>
+                                <button class="btn btn-info view-details" data-application-id="AP123456">View Details</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>AP123457</td>
+                            <td>XYZ Construction Co</td>
+                            <td><span class="badge badge-success">Approved</span></td>
+                            <td>
+                                <button class="btn btn-info view-details" data-application-id="AP123457">View Details</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Application Details Modal (For Viewing Details) -->
+        <div class="modal" id="application-details-modal" tabindex="-1" role="dialog" aria-labelledby="applicationDetailsLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="applicationDetailsLabel">Application Details</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <!-- Application Detail Fields -->
+                        <h5>Application Information</h5>
+                        <table class="table table-bordered">
+                            <tbody>
+                                <tr>
+                                    <td><strong>Application ID</strong></td>
+                                    <td id="modal-application-id">N/A</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Project Name</strong></td>
+                                    <td id="modal-project-name">N/A</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Environmental Impact Status</strong></td>
+                                    <td id="modal-eia-status">N/A</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Structural Safety Status</strong></td>
+                                    <td id="modal-structural-safety-status">N/A</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Risk Assessment Status</strong></td>
+                                    <td id="modal-risk-assessment-status">N/A</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Emergency Response Plan Status</strong></td>
+                                    <td id="modal-erp-status">N/A</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Supporting Documents</strong></td>
+                                    <td id="modal-documents-status">N/A</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <!-- Actions Section -->
+                        <div class="form-group">
+                            <label for="action-select">Select Action</label>
+                            <select id="action-select" class="form-control">
+                                <option>Select Action</option>
+                                <option value="approve">Approve</option>
+                                <option value="reject">Reject</option>
+                                <option value="request-more-info">Request More Info</option>
+                                <option value="escalate">Escalate</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="comments">Leave Comments/Feedback</label>
+                            <textarea id="comments" class="form-control" rows="4" placeholder="Provide feedback or comments on this application"></textarea>
+                        </div>
+
+                        <button class="btn btn-primary" id="apply-action">Apply Action</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

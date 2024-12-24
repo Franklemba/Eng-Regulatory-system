@@ -1,0 +1,82 @@
+<div class="page-wrapper">
+    <div class="content">
+        <div class="page-header">
+            <div class="page-title">
+                <h4>Premises Leasing</h4>
+                <h6>Manage and lease premises</h6>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-body">
+                <form id="premises-leasing-form">
+                    <h5 class="mb-4">Leasing Details</h5>
+                    <div class="row">
+                        <!-- Premise Name -->
+                        <div class="col-lg-6 col-sm-12">
+                            <div class="form-group">
+                                <label>Premise Name</label>
+                                <select class="form-control select">
+                                    <option>Premise 1</option>
+                                    <option>Premise 2</option>
+                                    <option>Premise 3</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Lessee Name -->
+                        <div class="col-lg-6 col-sm-12">
+                            <div class="form-group">
+                                <label>Lessee Name</label>
+                                <input type="text" class="form-control" placeholder="Enter lessee's name" required>
+                            </div>
+                        </div>
+
+                        <!-- Lease Duration -->
+                        <div class="col-lg-4 col-sm-12">
+                            <div class="form-group">
+                                <label>Lease Duration (Months)</label>
+                                <input type="number" class="form-control" placeholder="Enter lease duration" required>
+                            </div>
+                        </div>
+
+                        <!-- Monthly Rent -->
+                        <div class="col-lg-4 col-sm-12">
+                            <div class="form-group">
+                                <label>Monthly Rent (USD)</label>
+                                <input type="number" class="form-control" placeholder="Enter monthly rent" required>
+                            </div>
+                        </div>
+
+                        <!-- Security Deposit -->
+                        <div class="col-lg-4 col-sm-12">
+                            <div class="form-group">
+                                <label>Security Deposit (USD)</label>
+                                <input type="number" class="form-control" placeholder="Enter security deposit amount" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr>
+                    <h5 class="mb-4">Lease Agreement</h5>
+                    <div class="form-group">
+                        <label>Upload Lease Agreement</label>
+                        <div class="image-upload">
+                            <input type="file" required>
+                            <div class="image-uploads">
+                                <img src="/assets/img/icons/upload.svg" alt="img">
+                                <h4>Drag and drop files to upload</h4>
+                            </div>
+                        </div>
+                        <small class="text-muted">Upload a signed lease agreement.</small>
+                    </div>
+
+                    <div class="text-end mt-4">
+                        <button type="submit" class="btn btn-primary">Lease Premise</button>
+                        <button type="reset" class="btn btn-secondary">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

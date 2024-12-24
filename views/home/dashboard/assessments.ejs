@@ -1,0 +1,80 @@
+<div class="page-wrapper">
+    <div class="content">
+        <div class="page-header">
+            <div class="page-title">
+                <h4>Assessments</h4>
+                <h6>Submit detailed reports and track their status</h6>
+            </div>
+        </div>
+
+        <!-- Assessment Submission Form -->
+        <div class="card">
+            <div class="card-body">
+                <h5>Submit a New Assessment</h5>
+                <form>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label for="assessment-id">Assessment ID</label>
+                                <input type="text" id="assessment-id" class="form-control" placeholder="Auto-generated ID" disabled>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label for="assessment-type">Assessment Type</label>
+                                <select id="assessment-type" class="form-control">
+                                    <option value="safety">Safety</option>
+                                    <option value="structural">Structural</option>
+                                    <option value="environmental">Environmental</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="assessment-details">Assessment Details</label>
+                        <textarea id="assessment-details" class="form-control" rows="6" placeholder="Provide a detailed explanation of the assessment"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="supporting-docs">Upload Supporting Documents</label>
+                        <input type="file" id="supporting-docs" class="form-control" multiple>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Submit Assessment</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Existing Assessments Section -->
+        <div class="card">
+            <div class="card-body">
+                <h5>Track Submitted Assessments</h5>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Assessment ID</th>
+                            <th>Type</th>
+                            <th>Date Submitted</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Sample Assessment Row -->
+                        <tr>
+                            <td>ASM12345</td>
+                            <td>Safety</td>
+                            <td>2024-12-10</td>
+                            <td><span class="badge badge-success">Approved</span></td>
+                            <td>
+                                <button class="btn btn-info btn-sm">View</button>
+                                <button class="btn btn-danger btn-sm">Delete</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

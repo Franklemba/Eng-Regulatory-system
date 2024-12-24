@@ -1,0 +1,66 @@
+<div class="page-wrapper">
+    <div class="content">
+        <div class="page-header">
+            <div class="page-title">
+                <h4>Archived Applications</h4>
+                <h6>View and manage all archived applications</h6>
+            </div>
+        </div>
+
+        <!-- Search Archived Applications -->
+        <div class="card">
+            <div class="card-body">
+                <h5>Search Archived Applications</h5>
+                <form>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label for="search-id">Application ID</label>
+                                <input type="text" id="search-id" class="form-control" placeholder="Enter Application ID">
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label for="search-name">Applicant Name</label>
+                                <input type="text" id="search-name" class="form-control" placeholder="Enter Applicant Name">
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Search</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Archived Applications List -->
+        <div class="card">
+            <div class="card-body">
+                <h5>Archived Applications List</h5>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Application ID</th>
+                            <th>Name</th>
+                            <th>Type</th>
+                            <th>Date Archived</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Sample Archived Application Row -->
+                        <tr>
+                            <td>APP12345</td>
+                            <td>John Doe</td>
+                            <td>Business License</td>
+                            <td>2023-11-15</td>
+                            <td>
+                                <button class="btn btn-info btn-sm">Restore</button>
+                                <button class="btn btn-danger btn-sm">Delete</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

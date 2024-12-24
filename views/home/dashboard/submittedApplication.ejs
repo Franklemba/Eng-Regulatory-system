@@ -1,0 +1,134 @@
+<div class="page-wrapper">
+    <div class="content">
+        <div class="page-header">
+            <div class="page-title">
+                <h4>Application Statuses</h4>
+                <h6>View and track the status of submitted applications</h6>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-body">
+                <!-- Filter Section -->
+                <div class="row">
+                    <div class="col-lg-3 col-sm-6 col-12">
+                        <div class="form-group">
+                            <label for="filter-name">Applicant Name</label>
+                            <input type="text" id="filter-name" class="form-control" placeholder="Search by name">
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-6 col-12">
+                        <div class="form-group">
+                            <label for="filter-status">Application Status</label>
+                            <select id="filter-status" class="form-control select">
+                                <option value="">All</option>
+                                <option value="Pending">Pending</option>
+                                <option value="Approved">Approved</option>
+                                <option value="Rejected">Rejected</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-6 col-12">
+                        <div class="form-group">
+                            <label for="filter-license-type">License Type</label>
+                            <select id="filter-license-type" class="form-control select">
+                                <option value="">All</option>
+                                <option value="Professional">Professional</option>
+                                <option value="Industrial">Industrial</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-6 col-12">
+                        <div class="form-group">
+                            <label>&nbsp;</label>
+                            <button id="filter-btn" class="btn btn-primary btn-block">Filter</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Applications Table -->
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Application ID</th>
+                                <th>Applicant Name</th>
+                                <th>Email</th>
+                                <th>License Type</th>
+                                <th>Submission Date</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="applications-table-body">
+                            <!-- Dynamic rows will be injected here via JavaScript -->
+                            <tr>
+                                <td>12345</td>
+                                <td>John Doe</td>
+                                <td>john.doe@example.com</td>
+                                <td>Professional</td>
+                                <td>2024-12-20</td>
+                                <td><span class="badge bg-warning text-dark">Pending</span></td>
+                                <td>
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                            Action
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" href="#">View Details</a></li>
+                                            <li><a class="dropdown-item" href="#">Mark as Approved</a></li>
+                                            <li><a class="dropdown-item" href="#">Mark as Rejected</a></li>
+                                        </ul>
+                                    </div>
+                                    <button class="btn btn-sm btn-danger">Delete</button>
+                                    <button class="btn btn-sm btn-warning text-white">Cancel</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>67890</td>
+                                <td>Jane Smith</td>
+                                <td>jane.smith@example.com</td>
+                                <td>Industrial</td>
+                                <td>2024-12-18</td>
+                                <td><span class="badge bg-success">Approved</span></td>
+                                <td>
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                            Action
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" href="#">View Details</a></li>
+                                            <li><a class="dropdown-item" href="#">Mark as Pending</a></li>
+                                            <li><a class="dropdown-item" href="#">Request More Information</a></li>
+                                        </ul>
+                                    </div>
+                                    <button class="btn btn-sm btn-danger">Delete</button>
+                                    <button class="btn btn-sm btn-warning text-white">Cancel</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Pagination -->
+                <div class="row">
+                    <div class="col-12">
+                        <nav>
+                            <ul class="pagination justify-content-center">
+                                <li class="page-item disabled">
+                                    <a class="page-link" href="#" tabindex="-1">Previous</a>
+                                </li>
+                                <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                <li class="page-item">
+                                    <a class="page-link" href="#">Next</a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
