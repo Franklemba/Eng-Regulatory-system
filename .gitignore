@@ -1,4 +1,8 @@
 node_modules
 home.html
 package-lock.json
+<<<<<<< HEAD
+.env
+=======
 
+>>>>>>> 025091a4a07d799551cb1e8761ce7e37abc83b18

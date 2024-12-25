@@ -2,7 +2,7 @@
 // const multer = require('multer');
 // const multerS3 = require('multer-s3');
 // const path = require('path');
-
+// require('dotenv').config();	
 // // Configure AWS SDK
 // aws.config.update({
 //     accessKeyId: process.env.AWS_ACCESS_KEY_ID, // Replace with your access key ID
