@@ -44,7 +44,7 @@ function generateOTP() {
       newUser.otpExpiration = otpExpiration;
       await newUser.save();
   
-      res.redirect('/merchant');
+      res.redirect('/dashboard');
 
     //  sendOTPemail(`${firstName} ${lastName}`, email, otp)
   
