@@ -26,7 +26,7 @@ const localDB = "mongodb://127.0.0.1:27017/EngRegulatoryBoard"
 const liveDB = "mongodb+srv://Engineering:96EceAsGquKn3aLt@cluster0.cq29s.mongodb.net/?retryWrites=true&w=majority&appName=Cluster096EceAsGquKn3aLt"
 mongoose.set('strictQuery', true);
 
-mongoose.connect(liveDB,{useNewUrlParser: true}).then(() => {
+mongoose.connect(localDB,{useNewUrlParser: true}).then(() => {
   console.log('database is connected')
 }).catch((err) => console.log('error connecting to database ', err))
   
@@ -47,7 +47,7 @@ app.set('trust proxy', 1);
 
  // Session configuration
 const sessionStore = MongoStore.create({ 
-mongoUrl: liveDB,
+mongoUrl: localDB,
   ttl: 14 * 24 * 60 * 60 // 14 days
 });
 
@@ -72,6 +72,19 @@ app.use('/media',mediaRouter);
 app.use('/auth', authRouter);
 app.use('/dashboard',ensureAuthenticated, dashboardPostRouter);
 app.use('/dashboard',ensureAuthenticated, dashboardGetRouter);
+app.use('/null', (req,res)=>{
+  const layout = "layouts/non_headerLayout"
+  
+  res.render("home/errorPage", {
+    layout
+  });
+
+});
+
+app.use('*', (req, res) => {
+  res.status(404).redirect('/null'); // You can replace '/' with the URL of your 404 page
+});
+
 
 
 app.listen(process.env.PORT || 3336, () => console.log('Server is Running on port: 3336'))
