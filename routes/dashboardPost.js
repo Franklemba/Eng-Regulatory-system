@@ -31,8 +31,8 @@ const upload = multer({ storage: storage });
   
 
 
-// router.post("/newApplication", upload.array("documents"), dashboardPostController.submitApplication);
-router.post("/newApplication",dashboardPostController.submitApplication);
+router.post("/newApplication", upload.fields([{ name: 'supportingDocument', maxCount: 1 }, { name: 'documents', maxCount: 1 }]), dashboardPostController.submitApplication);
+// router.post("/newApplication",dashboardPostController.submitApplication);
 router.post("/newProject", dashboardPostController.submitProject);
 router.post("/newPremiseLeasing", dashboardPostController.submitPremiseLeasing);
 router.post("/newAnnualDeclaration", dashboardPostController.submitAnnualDeclaration);

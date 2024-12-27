@@ -9,7 +9,7 @@ const flash = require('connect-flash');
 const MongoStore = require('connect-mongo');
 const mongoose = require('mongoose')
 const passport = require('passport')
-
+const path = require('path')
 const { ensureAuthenticated} = require('./config/auth'); 
 
 // Route definitions
@@ -26,6 +26,7 @@ const localDB = "mongodb://127.0.0.1:27017/EngRegulatoryBoard"
 const liveDB = "mongodb+srv://Engineering:96EceAsGquKn3aLt@cluster0.cq29s.mongodb.net/?retryWrites=true&w=majority&appName=Cluster096EceAsGquKn3aLt"
 mongoose.set('strictQuery', true);
 
+
 mongoose.connect(liveDB,{useNewUrlParser: true}).then(() => {
   console.log('database is connected')
 }).catch((err) => console.log('error connecting to database ', err))
@@ -40,8 +41,9 @@ app.set('layout', 'layouts/layout')
 app.use(expressLayouts)
 app.use(express.static(__dirname + '/public'))
 app.use(bodyParser.urlencoded({ limit: '10mb', extended: true }))
-app.use(express.urlencoded({ extended: false }))
+app.use(express.urlencoded({ extended: true }))
 app.use(express.json());
+
 
 app.set('trust proxy', 1);
 
@@ -50,6 +52,7 @@ const sessionStore = MongoStore.create({
 mongoUrl: liveDB,
   ttl: 14 * 24 * 60 * 60 // 14 days
 });
+
 
 // app.use(limiter);
 
@@ -60,11 +63,13 @@ app.use(session({
   store: sessionStore,
   cookie: { secure: process.env.NODE_ENV === 'production' }
 }));
+app.use('/uploads', express.static(path.join(__dirname, 'public/uploads')));
 
 app.use(flash());
 require('./config/passport')(passport);
 app.use(passport.initialize());
 app.use(passport.session());
+
 
 // Routes
 app.use('/',homeRouter);

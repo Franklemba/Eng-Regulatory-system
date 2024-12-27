@@ -2,11 +2,11 @@
 
 
 
-const EngineeringLicense = require("../models/licenceSchema");
+const EngineeringLicense = require("../models/licenseSchema");
 const EngineeringProject = require("../models/projectSchema");
 const ImportExportSchema = require("../models/importExportSchema");
 const AnnualDeclaration = require("../models/annualDeclarationSchema");
-const PremiseLeasing = require("../models/licenceSchema");
+const PremiseLeasing = require("../models/premiseSchema");
 const BusinessClosure = require("../models/businessClosureSchema");
 const OrderForSupply = require("../models/orderForSupplySchema");
 const AwarenessAdvert = require("../models/awarenessAdvertSchema");
@@ -35,8 +35,8 @@ const submitApplication = async (req, res) => {
       licenseType,
       description,
     } = req.body;
-
-    const documents = req.files?.map(file => file.path) || [];
+    const documents = req.files.documents?.map(file => file.path) || [];
+    console.log(documents)
 
     const newLicense = new EngineeringLicense({
       applicantName,
@@ -54,26 +54,70 @@ const submitApplication = async (req, res) => {
     });
 
     await newLicense.save();
-    res.redirect("/dashboard/newApplication");
+    res.redirect("/dashboard/submittedApplication");
   } catch (error) {
     console.error("Error saving engineering license application:", error);
     res.status(500).send("An error occurred while processing your application.");
   }
 };
 
-const submitProject = async (req, res) => {console.log(req.body)
+const submitProject = async (req, res) => {
+  try {
+    const {
+      title,
+      type,
+      budget,
+      duration,
+      status,
+      objectives,
+      teamMembers,
+      permits,
+      locations
+    } = req.body;
+console.log(req.body)
+    // Create a new project instance with the data from the request
+    const newProject = new EngineeringProject({
+      title:'',
+      type:'',
+      budget:'',
+      duration:'',
+      status:'',	
+      objectives:'',
+      teamMembers:'',
+      permits:'',	
+      locations, // Assuming locations are sent as a stringified array
+    });
+
+    // Handle file uploads if there are any
+    const documents = req.files?.map(file => file.path) || [];
+    newProject.files = documents;
+
+    // Save the new project to the database
+    await newProject.save();
+
+    // Redirect to a new page after the project is saved
+    res.redirect("/dashboard/newApplication");
+  } catch (error) {
+    console.error("Error saving project application:", error);
+    res.status(500).send("An error occurred while processing your application.");
+  }
+};
+
+
+
+const submitPremiseLeasing = async (req, res) => {
 
   try {
     const {
 
     } = req.body;
 
-    const newProject = new EngineeringProject({
+    const newPremiseLeasing = new PremiseLeasing({
 
     });
 
     const documents = req.files?.map(file => file.path) || [];
-    await newProject.save();
+    await newPremiseLeasing.save();
     res.redirect("/dashboard/newApplication");
   }
   catch (error) {
@@ -82,9 +126,51 @@ const submitProject = async (req, res) => {console.log(req.body)
   }
 
 };
-const submitPremiseLeasing = async (req, res) => console.log(req.body);
-const submitAnnualDeclaration = async (req, res) => console.log(req.body);
-const submitExportImportApplication = async (req, res) => console.log(req.body);
+
+const submitAnnualDeclaration= async (req, res) => {
+
+  try {
+    const {
+
+    } = req.body;
+
+    const newAnnualDeclaration = new AnnualDeclaration({
+
+    });
+
+    const documents = req.files?.map(file => file.path) || [];
+    await newAnnualDeclaration.save();
+    res.redirect("/dashboard/newApplication");
+  }
+  catch (error) {
+    console.error("Error annual declaration application:", error);
+    res.status(500).send("An error occurred while processing your application.");
+  }
+
+};
+
+const submitExportImportApplication = async (req, res) => {
+
+  try {
+    const {
+
+    } = req.body;
+
+    const newExportImportApplication = new ImportExportSchema({
+
+    });
+
+    const documents = req.files?.map(file => file.path) || [];
+    await newExportImportApplication.save();
+    res.redirect("/dashboard/newApplication");
+  }
+  catch (error) {
+    console.error("Error saving import export application:", error);
+    res.status(500).send("An error occurred while processing your application.");
+  }
+
+};
+
 
 //Franks routes
   // ### Submit business closure route
@@ -123,7 +209,7 @@ const submitBusinessClosure =  async (req, res, next) => {
 };
 
 // ## strauctural environment licence over here
-const submitStructuralEnvironmentalLicence = async (req, res) => {
+const submitStructuralEnvironmentalLicense = async (req, res) => {
   const {
     projectName,
     projectID,
@@ -148,7 +234,7 @@ const supportingDocument = req.files.supportingDocument?.[0]?.path.replace(/.*pu
 
 try{
   
-  const structuralEnvironmentalLicence = new StructuralEnvironmentalLicence({
+  const structuralEnvironmentalLicence = new StructuralEnvironmentalLicense({
     projectName,
     projectID,
     isEIArequired,
@@ -303,7 +389,7 @@ module.exports = {
 
 
   submitBusinessClosure,
-  submitStructuralEnvironmentalLicence,
+  submitStructuralEnvironmentalLicense,
   submitOrderForSupply,
   submitAwarenessAdvert,
   statutoryCompliance,
