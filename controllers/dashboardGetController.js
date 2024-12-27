@@ -141,7 +141,6 @@ const getDashboard = async (req, res) => {
     const statutoryComplianceDocs = await StatutoryCompliance.findOne().sort({ _id: -1 })
 
     
-    
     res.render("home/dashboard/statutoryComplianceStatus", {
       layout: "layouts/dashboardHeader.ejs",
       // message: message !=  undefined
