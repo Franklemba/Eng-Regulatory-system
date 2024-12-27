@@ -26,7 +26,7 @@ const localDB = "mongodb://127.0.0.1:27017/EngRegulatoryBoard"
 const liveDB = "mongodb+srv://Engineering:96EceAsGquKn3aLt@cluster0.cq29s.mongodb.net/?retryWrites=true&w=majority&appName=Cluster096EceAsGquKn3aLt"
 mongoose.set('strictQuery', true);
 
-mongoose.connect(localDB,{useNewUrlParser: true}).then(() => {
+mongoose.connect(liveDB,{useNewUrlParser: true}).then(() => {
   console.log('database is connected')
 }).catch((err) => console.log('error connecting to database ', err))
   
@@ -47,7 +47,7 @@ app.set('trust proxy', 1);
 
  // Session configuration
 const sessionStore = MongoStore.create({ 
-mongoUrl: localDB,
+mongoUrl: liveDB,
   ttl: 14 * 24 * 60 * 60 // 14 days
 });
 
