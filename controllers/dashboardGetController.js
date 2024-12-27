@@ -1,4 +1,10 @@
 // dashboardGetController.js
+const OrderForSupply = require("../models/orderForSupplySchema");
+const AwarenessAdvert = require("../models/awarenessAdvertSchema");
+const base64Decode = (data) => {
+  return Buffer.from(data, 'base64').toString('utf-8');
+};
+
 
 const getDashboard = async (req, res) => {
     res.render("home/dashboard/dashboard", {
@@ -50,31 +56,69 @@ const getDashboard = async (req, res) => {
   };
   
   const getBusinessClosurePage = async (req, res) => {
+
+    const message = req.query.message;
+
     res.render("home/dashboard/businessClosure", {
       layout: "layouts/dashboardHeader.ejs",
+      message: message !=  undefined
+          ? `${base64Decode(message)}`
+          : null ,
       user: req.user,
     });
   };
   
   const getStructuralEnvironmentalLicencePage = async (req, res) => {
-    res.render("home/dashboard/structuralEnvironmentalLicence", {
+     const message = req.query.message;
+     
+    res.render("home/dashboard/enviromentalAndStructural", {
       layout: "layouts/dashboardHeader.ejs",
-      user: req.user,
+      message: message !=  undefined
+            ? `${base64Decode(message)}`
+            : null ,
+        user: req.user,
     });
   };
   
   const getOrderForSupplyPage = async (req, res) => {
-    res.render("home/dashboard/orderForSupply", {
-      layout: "layouts/dashboardHeader.ejs",
-      user: req.user,
-    });
+    const message = req.query.message;
+
+    try{
+
+      const orderSupplies = await OrderForSupply.find({}).sort({ _id: -1 });
+      res.render("home/dashboard/orderForSupply", {
+        layout: "layouts/dashboardHeader.ejs",
+        message: message !=  undefined
+            ? `${base64Decode(message)}`
+            : null ,
+        user: req.user,
+        orderSupplies 
+      });
+      
+      
+    }catch(error){
+         res.send(error.message)
+    }
+    
   };
   
   const getAwarenessAdvertPage = async (req, res) => {
-    res.render("home/dashboard/awarenessAdvert", {
-      layout: "layouts/dashboardHeader.ejs",
-      user: req.user,
-    });
+    const message = req.query.message;
+    const awarenessAdvert = await AwarenessAdvert.find({}).sort({ _id: -1 });
+    try{
+      res.render("home/dashboard/awarenessAdvert", {
+        layout: "layouts/dashboardHeader.ejs",
+        message: message !=  undefined
+            ? `${base64Decode(message)}`
+            : null ,
+        user: req.user,
+        awarenessAdvert
+      });
+      
+    }catch(error){
+      res.send(error.message)
+    }
+ 
   };
   
   const getAssessmentPage = async (req, res) => {

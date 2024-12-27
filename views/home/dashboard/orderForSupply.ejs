@@ -7,11 +7,14 @@
             </div>
         </div>
 
+        
+        <%- include(`../../partials/notification`) %>
+
         <!-- Order Creation Form -->
         <div class="card">
             <div class="card-body">
                 <h5>Create a New Order</h5>
-                <form>
+                <form method="post" action="/dashboard/orderForSupply" enctype="multipart/form-data">
                     <div class="row">
                         <div class="col-lg-6">
                             <div class="form-group">
@@ -22,7 +25,7 @@
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <label for="supplier-name">Supplier Name</label>
-                                <input type="text" id="supplier-name" class="form-control" placeholder="Enter Supplier Name">
+                                <input type="text" id="supplier-name" name="supplierName" class="form-control" placeholder="Enter Supplier Name" required>
                             </div>
                         </div>
                     </div>
@@ -31,13 +34,13 @@
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <label for="contact-person">Contact Person</label>
-                                <input type="text" id="contact-person" class="form-control" placeholder="Enter Contact Name">
+                                <input type="text" id="contact-person" name="contactPerson" class="form-control" placeholder="Enter Contact Name" required >
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <label for="contact-number">Contact Number</label>
-                                <input type="text" id="contact-number" class="form-control" placeholder="Enter Phone Number">
+                                <input type="text" id="contact-number" name="contactNumber" class="form-control" placeholder="Enter Phone Number" required >
                             </div>
                         </div>
                     </div>
@@ -46,13 +49,13 @@
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <label for="supply-date">Expected Delivery Date</label>
-                                <input type="date" id="supply-date" class="form-control">
+                                <input type="date" id="supply-date" name="expectedDeliveryDate" class="form-control" required >
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <label for="priority">Priority Level</label>
-                                <select id="priority" class="form-control">
+                                <select id="priority" name="priotyLevel" class="form-control" required >
                                     <option value="low">Low</option>
                                     <option value="medium">Medium</option>
                                     <option value="high">High</option>
@@ -63,12 +66,12 @@
 
                     <div class="form-group">
                         <label for="order-details">Order Details</label>
-                        <textarea id="order-details" class="form-control" rows="5" placeholder="List items, quantity, and any specific requirements"></textarea>
+                        <textarea id="order-details" class="form-control" name="orderDetails" rows="5"   placeholder="List items, quantity, and any specific requirements" required></textarea>
                     </div>
 
                     <div class="form-group">
                         <label for="attachments">Upload Supporting Documents</label>
-                        <input type="file" id="attachments" class="form-control" multiple>
+                        <input type="file" id="attachments" name="supportingDocument" class="form-control" multiple required >
                     </div>
 
                     <button type="submit" class="btn btn-primary">Submit Order</button>
@@ -93,17 +96,20 @@
                     </thead>
                     <tbody>
                         <!-- Sample Order Row -->
-                        <tr>
-                            <td>ORD12345</td>
-                            <td>Global Supplies Co.</td>
-                            <td>2024-12-15</td>
-                            <td>High</td>
-                            <td><span class="badge badge-warning">Pending</span></td>
-                            <td>
-                                <button class="btn btn-info btn-sm">View</button>
-                                <button class="btn btn-danger btn-sm">Cancel</button>
-                            </td>
-                        </tr>
+                         <% orderSupplies.forEach(element => { %>
+                            <tr>
+                                <td><%=element._id %></td>
+                                <td><%=element.supplierName %></td>
+                                <td><%=element.expectedDeliveryDate.toLocaleDateString('en-GB') %></td>
+                                <td><%=element.priotyLevel %></td>
+                                <td><span class="badge badge-warning"><%=element.status %></span></td>
+                                <td>
+                                    <button class="btn btn-info btn-sm">View</button>
+                                    <button class="btn btn-danger btn-sm">Cancel</button>
+                                </td>
+                            </tr>
+                          
+                         <% }) %>
                     </tbody>
                 </table>
             </div>

@@ -6,22 +6,22 @@
                 <h6>Submit an assessment for environmental and structural safety compliance</h6>
             </div>
         </div>
-
+        <%- include(`../../partials/notification`) %>
         <div class="card">
             <div class="card-body">
-                <form>
+                <form method="post" action="/dashboard/newEnvironmentAndStructuralLicence"  enctype="multipart/form-data">
                     <div class="row">
                         <!-- Project/Business Information -->
                         <div class="col-lg-6 col-sm-6 col-12">
                             <div class="form-group">
                                 <label>Project/Business Name</label>
-                                <input type="text" class="form-control" placeholder="Enter Project/Business Name">
+                                <input type="text" class="form-control" name="projectName" placeholder="Enter Project/Business Name">
                             </div>
                         </div>
                         <div class="col-lg-6 col-sm-6 col-12">
                             <div class="form-group">
                                 <label>Project ID</label>
-                                <input type="text" class="form-control" placeholder="Enter Project ID">
+                                <input type="text" name="projectID" class="form-control" placeholder="Enter Project ID">
                             </div>
                         </div>
 
@@ -29,7 +29,7 @@
                         <div class="col-lg-6 col-sm-6 col-12">
                             <div class="form-group">
                                 <label>Environmental Impact Assessment (EIA) Required?</label>
-                                <select class="form-control">
+                                <select name="isEIArequired" class="form-control">
                                     <option>Choose an option</option>
                                     <option>Yes</option>
                                     <option>No</option>
@@ -39,7 +39,7 @@
                         <div class="col-lg-6 col-sm-6 col-12">
                             <div class="form-group">
                                 <label>Impact on Local Ecosystem</label>
-                                <textarea class="form-control" placeholder="Describe the expected environmental impact"></textarea>
+                                <textarea name="localEcosystemImpactDescription" class="form-control" placeholder="Describe the expected environmental impact"></textarea>
                             </div>
                         </div>
 
@@ -47,7 +47,7 @@
                         <div class="col-lg-6 col-sm-6 col-12">
                             <div class="form-group">
                                 <label>Structural Safety Standards Followed</label>
-                                <select class="form-control">
+                                <select name="structuralSafetyStandards" class="form-control">
                                     <option>Choose a standard</option>
                                     <option>ISO 9001</option>
                                     <option>BS 8110</option>
@@ -59,7 +59,7 @@
                         <div class="col-lg-6 col-sm-6 col-12">
                             <div class="form-group">
                                 <label>Type of Structure</label>
-                                <select class="form-control">
+                                <select name="structureType" class="form-control">
                                     <option>Choose a structure type</option>
                                     <option>Building</option>
                                     <option>Bridge</option>
@@ -74,13 +74,13 @@
                         <div class="col-lg-6 col-sm-6 col-12">
                             <div class="form-group">
                                 <label>Structural Integrity Evaluation Report</label>
-                                <input type="file" class="form-control">
+                                <input name="structuralIntegrityEvaluationReport" type="file" class="form-control">
                             </div>
                         </div>
                         <div class="col-lg-6 col-sm-6 col-12">
                             <div class="form-group">
                                 <label>Environmental Impact Mitigation Plan</label>
-                                <input type="file" class="form-control">
+                                <input name="environmentImpactMitigationPlan" type="file" class="form-control">
                             </div>
                         </div>
 
@@ -88,7 +88,7 @@
                         <div class="col-lg-12 col-12">
                             <div class="form-group">
                                 <label>Risk Assessment for Environmental Safety</label>
-                                <textarea class="form-control" placeholder="Provide a detailed risk assessment of the environmental impact"></textarea>
+                                <textarea name="environmentalAssessDetails" class="form-control" placeholder="Provide a detailed risk assessment of the environmental impact"></textarea>
                             </div>
                         </div>
 
@@ -96,7 +96,7 @@
                         <div class="col-lg-12 col-12">
                             <div class="form-group">
                                 <label>Risk Assessment for Structural Safety</label>
-                                <textarea class="form-control" placeholder="Provide a detailed risk assessment of structural safety"></textarea>
+                                <textarea name="structuralSafetyDetails" class="form-control" placeholder="Provide a detailed risk assessment of structural safety"></textarea>
                             </div>
                         </div>
 
@@ -104,7 +104,7 @@
                         <div class="col-lg-12 col-12">
                             <div class="form-group">
                                 <label>Emergency Response Plan</label>
-                                <textarea class="form-control" placeholder="Provide the emergency response plan for the project"></textarea>
+                                <textarea name="emergencyResponsePlan" class="form-control" placeholder="Provide the emergency response plan for the project"></textarea>
                             </div>
                         </div>
 
@@ -113,7 +113,7 @@
                             <div class="form-group">
                                 <label>Upload Supporting Documents</label>
                                 <div class="image-upload">
-                                    <input type="file" multiple>
+                                    <input name="supportingDocument" type="file" multiple>
                                     <div class="image-uploads">
                                         <img src="/assets/img/icons/upload.svg" alt="img">
                                         <h4>Drag and drop files to upload</h4>

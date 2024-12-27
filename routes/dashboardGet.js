@@ -9,6 +9,8 @@ router.get("/reviewProgress", dashboardGetController.getReviewProgressPage);
 router.get("/premiseLeasing", dashboardGetController.getPremiseLeasingPage);
 router.get("/annualDeclaration", dashboardGetController.getAnnualDeclarationPage);
 router.get("/importExportApplication", dashboardGetController.getExportImportApplicationPage);
+
+// Lembalemba onwards
 router.get("/businessClosure", dashboardGetController.getBusinessClosurePage);
 router.get("/structuralEnvironmentalLicence", dashboardGetController.getStructuralEnvironmentalLicencePage);
 router.get("/orderForSupply", dashboardGetController.getOrderForSupplyPage);

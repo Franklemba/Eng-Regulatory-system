@@ -1,10 +1,22 @@
 // dashboardPostController.js
 
+
+
 const EngineeringLicense = require("../models/licenceSchema");
 const EngineeringProject = require("../models/projectSchema");
 const ImportExportSchema = require("../models/importExportSchema");
 const AnnualDeclaration = require("../models/annualDeclarationSchema");
-const PremiseLeasing = require("../models/licenceSchema/premiseSchema");
+const PremiseLeasing = require("../models/licenceSchema");
+const BusinessClosure = require("../models/businessClosureSchema");
+const OrderForSupply = require("../models/orderForSupplySchema");
+const AwarenessAdvert = require("../models/awarenessAdvertSchema");
+const StructuralEnvironmentalLicence = require("../models/structuralEnvironmentalLicenceSchema");
+
+
+const base64Encode = (data) => {
+  return Buffer.from(data).toString('base64');
+};
+
 
 // Charles's routes
 const submitApplication = async (req, res) => {
@@ -74,11 +86,168 @@ const submitAnnualDeclaration = async (req, res) => console.log(req.body);
 const submitExportImportApplication = async (req, res) => console.log(req.body);
 
 //Franks routes
+  // ### Submit business closure route
+const submitBusinessClosure =  async (req, res, next) => {
 
-const submitBusinessClosure = async (req, res) => console.log(req.body);
-const submitStructuralEnvironmentalLicence = async (req, res) => console.log(req.body);
-const submitOrderForSupply = async (req, res) => console.log(req.body);
-const submitAwarenessAdvert = async (req, res) => console.log(req.body);
+  const {
+      businessName,
+      licenseID,
+      reasonForClosure,
+      closureDate
+    } = req.body;
+
+  const uploadedDoc = req.file.path;
+
+  try{
+    
+    const businessClosure = new BusinessClosure({
+      businessName,
+      licenseID,
+      reasonForClosure,
+      closureDate,
+      finalFinancialStatement : uploadedDoc
+    })
+
+    await businessClosure.save();
+    successMessage = ` ${businessName} business closure uploaded successfully`;
+
+    res.redirect(`/dashboard/businessClosure?message=${encodeURIComponent(base64Encode(successMessage))}`);
+
+  }catch (error) {
+    console.error(`Error uploading business closure : ${error.message}`);
+    res.send("Error uploading business closure");
+  }
+
+ 
+};
+
+// ## strauctural environment licence over here
+const submitStructuralEnvironmentalLicence = async (req, res) => {
+  const {
+    projectName,
+    projectID,
+    isEIArequired,
+    localEcosystemImpactDescription,
+    structuralSafetyStandards,
+    structureType,
+    environmentalAssessDetails,
+    structuralSafetyDetails,
+    emergencyResponsePlan
+  } = req.body;
+
+  if(!req.files){
+    return res.status(404).send('no files uploaded');
+  }
+
+// const uploadedDoc = req.file.path;
+console.log(req.files);
+const structuralIntegrityEvaluationReport = req.files.structuralIntegrityEvaluationReport[0].path;
+const environmentImpactMitigationPlan = req.files.environmentImpactMitigationPlan[0].path;
+const supportingDocument = req.files.supportingDocument[0].path;
+
+try{
+  
+  const structuralEnvironmentalLicence = new StructuralEnvironmentalLicence({
+    projectName,
+    projectID,
+    isEIArequired,
+    localEcosystemImpactDescription,
+    structuralSafetyStandards,
+    structureType,
+    structuralIntegrityEvaluationReport: structuralIntegrityEvaluationReport,
+    environmentImpactMitigationPlan: environmentImpactMitigationPlan,
+    environmentalAssessDetails,
+    structuralSafetyDetails,
+    emergencyResponsePlan,
+    supportingDocument: supportingDocument 
+  })
+
+  await structuralEnvironmentalLicence.save();
+  console.log(structuralEnvironmentalLicence)
+  successMessage = ` ${projectName} uploaded successfully`;
+
+  res.redirect(`/dashboard/structuralEnvironmentalLicence?message=${encodeURIComponent(base64Encode(successMessage))}`);
+
+}catch (error) {
+  console.error(`Error uploading environment structural what what error : ${error.message}`);
+  res.send("Error uploading environment structural what what error");
+}
+};
+
+// ##Order supply over here
+const submitOrderForSupply = async (req, res) => {
+    
+  const {
+    supplierName,
+  contactPerson,
+  contactNumber,
+  expectedDeliveryDate,
+  priotyLevel,
+  orderDetails
+  } = req.body;
+
+const uploadedDoc = req.file.path;
+
+try{
+  
+  const onwardsrderForSupply = new OrderForSupply({
+    supplierName,
+  contactPerson,
+  contactNumber,
+  expectedDeliveryDate,
+  priotyLevel,
+  orderDetails,
+  supportingDocument:uploadedDoc
+  })
+
+  await onwardsrderForSupply.save();
+  console.log(onwardsrderForSupply)
+  successMessage = `Order supply named ${supplierName} uploaded successfully`;
+
+  res.redirect(`/dashboard/orderForSupply?message=${encodeURIComponent(base64Encode(successMessage))}`);
+
+}catch (error) {
+  console.error(`Error uploading order supply : ${error.message}`);
+  res.send("Error uploading order supply");
+}
+
+
+};
+const submitAwarenessAdvert = async (req, res) => {
+        
+    const {
+      advertTitle,
+      description,
+      startDate,
+      endDate,
+        targetAudience,
+    } = req.body;
+
+  const uploadedDoc = req.file.path;
+
+  try{
+    
+    const awarenessAdvert = new AwarenessAdvert({
+      advertTitle,
+      description,
+      startDate,
+      endDate,
+        targetAudience,
+      advertMedia:uploadedDoc
+    })
+
+    await awarenessAdvert.save();
+    console.log(awarenessAdvert)
+    successMessage = `Awareness advert with title ${advertTitle} uploaded successfully`;
+
+    res.redirect(`/dashboard/awarenessAdvert?message=${encodeURIComponent(base64Encode(successMessage))}`);
+
+  }catch (error) {
+    console.error(`Error uploading awareness advert media : ${error.message}`);
+    res.send("Error uploading awareness advert media");
+  }
+
+};
 const submitAssessment = async (req, res) => console.log(req.body);
 
 
