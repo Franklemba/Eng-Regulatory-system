@@ -16,5 +16,7 @@ router.get("/structuralEnvironmentalLicence", dashboardGetController.getStructur
 router.get("/orderForSupply", dashboardGetController.getOrderForSupplyPage);
 router.get("/awarenessAdvert", dashboardGetController.getAwarenessAdvertPage);
 router.get("/assessment", dashboardGetController.getAssessmentPage);
+router.get("/newCompliance", dashboardGetController.getStatutoryCompliance);
+router.get("/reviewCompliance", dashboardGetController.getStatutoryComplianceStatus);
 
 module.exports = router;

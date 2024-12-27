@@ -1,6 +1,7 @@
 // dashboardGetController.js
 const OrderForSupply = require("../models/orderForSupplySchema");
 const AwarenessAdvert = require("../models/awarenessAdvertSchema");
+const StatutoryCompliance = require("../models/statutoryComplianceSchema");
 const base64Decode = (data) => {
   return Buffer.from(data, 'base64').toString('utf-8');
 };
@@ -120,6 +121,36 @@ const getDashboard = async (req, res) => {
     }
  
   };
+
+  const getStatutoryCompliance =  async (req, res) => {
+    const message = req.query.message;
+    
+    res.render("home/dashboard/statutoryCompliance", {
+      layout: "layouts/dashboardHeader.ejs",
+      message: message !=  undefined
+            ? `${base64Decode(message)}`
+            : null ,
+      user: req.user,
+    });
+  };
+
+
+  const getStatutoryComplianceStatus =  async (req, res) => {
+    // const message = req.query.message;
+
+    const statutoryComplianceDocs = await StatutoryCompliance.findOne().sort({ _id: -1 })
+
+    
+    
+    res.render("home/dashboard/statutoryComplianceStatus", {
+      layout: "layouts/dashboardHeader.ejs",
+      // message: message !=  undefined
+      //       ? `${base64Decode(message)}`
+      //       : null ,
+      user: req.user,
+      statutoryComplianceDocs
+    });
+  };
   
   const getAssessmentPage = async (req, res) => {
     res.render("home/dashboard/assessment", {
@@ -140,6 +171,9 @@ const getDashboard = async (req, res) => {
     getStructuralEnvironmentalLicencePage,
     getOrderForSupplyPage,
     getAwarenessAdvertPage,
+    getStatutoryCompliance,
+    getStatutoryComplianceStatus,
     getAssessmentPage,
+
   };
   

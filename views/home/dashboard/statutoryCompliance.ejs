@@ -1,0 +1,67 @@
+<div class="page-wrapper">
+    <div class="content">
+        <div class="page-header">
+            <div class="page-title">
+                <h4>Statutory Compliance</h4>
+                <h6>Submit statutory compliance documents</h6>
+            </div>
+        </div>
+
+
+        <%- include(`../../partials/notification`) %>
+        <div class="card">
+            <div class="card-body">
+                <form method="post" action="/dashboard/statutoryCompliance"  enctype="multipart/form-data">
+                    <div class="row">
+                    
+                        <!-- Safety Evaluation -->
+                        <div class="col-lg-6 col-sm-6 col-12">
+                            <div class="form-group">
+                                <label>ZPPA license document</label>
+                                <input name="zppaDoc" type="file" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-sm-6 col-12">
+                            <div class="form-group">
+                                <label>PACRA license document</label>
+                                <input name="pacraDoc" type="file" class="form-control" required>
+                            </div>
+                        </div>
+
+                        <hr>
+
+                        <div class="col-lg-6 col-sm-6 col-12">
+                            <div class="form-group">
+                                <label>Worker's Compensation license document</label>
+                                <input name="workcompDoc" type="file" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-sm-6 col-12">
+                            <div class="form-group">
+                                <label>Nhima license document</label>
+                                <input name="nhimaDoc" type="file" class="form-control" required>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="col-lg-6 col-sm-6 col-12">
+                            <div class="form-group">
+                                <label>ERB license document</label>
+                                <input name="erbDoc" type="file" class="form-control" required>
+                            </div>
+                        </div>
+
+                        
+
+                        <!-- Submit -->
+                        <div class="col-lg-12">
+                            <button type="submit" class="btn btn-primary">Submit Statutory Compliance Documents</button>
+                            <button type="reset" class="btn btn-secondary">Clear Form</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+

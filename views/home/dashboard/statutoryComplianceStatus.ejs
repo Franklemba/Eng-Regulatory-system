@@ -1,0 +1,89 @@
+
+<div class="page-wrapper">
+    <div class="content container-fluid">
+    
+    <div class="page-header">
+    <div class="row">
+    <div class="col">
+    <h3 class="page-title">Statutory Compliance Status</h3>
+    <ul class="breadcrumb">
+    <!-- <li class="breadcrumb-item"><a href="/">Dashboard</a></li> -->
+    <!-- <li class="breadcrumb-item active">Data Tables</li> -->
+    </ul>
+    </div>
+    </div>
+    </div>
+    
+    <div class="row">
+    <div class="col-sm-12">
+    <div class="card">
+    <div class="card-header">
+    <h4 class="card-title">Statutory Compliance Documents</h4>
+    <!-- <p class="card-text">
+    This is the most basic example of the datatables with zero configuration. Use the <code>.datatable</code> class to initialize datatables.
+    </p> -->
+    </div>
+    <div class="card-body">
+    <div class="table-responsive">
+    <table class="table  datanew ">
+    <thead>
+    <tr>
+    <th>Document Name</th>
+    <th>Status</th>
+    <th>Action</th>
+    
+    </tr>
+    </thead>
+    
+    <% if (statutoryComplianceDocs == null) { %>
+          
+        <% } else { %>
+         
+            <tbody>
+            <tr>
+            <td><strong>ZPPA license</strong></td>
+            <td><button type="button" class="btn btn-danger">Pending</button></td>
+            <td><button type="button" class="btn btn-info"><a href= "/<%=statutoryComplianceDocs.zppaDoc.replace(/\\/g, '/')%>" >view</a></button></td>
+            </tr>
+            <%=statutoryComplianceDocs.zppaDoc.replace(/\\/g, '/')%>
+            <tr>
+        
+                <td><strong>PACRA license</strong></td>
+                <td><button type="button" class="btn btn-danger">Pending</button></td>
+                <td><button type="button" class="btn btn-info"><a href="/<%=statutoryComplianceDocs.pacraDoc.replace(/\\/g, '/')%>">view</a></button></td>
+               
+            </tr>
+            <tr>
+                <td><strong>Worker's Compensation license</strong></td>
+                <td><button type="button" class="btn btn-danger">Pending</button></td>
+                <td><button type="button" class="btn btn-info"><a href="/<%=statutoryComplianceDocs.workcompDoc.replace(/\\/g, '/')%>">view</a></button></td>
+               
+            </tr>
+            
+            <tr>
+                <td><strong>Nhima license</strong></td>
+                <td><button type="button" class="btn btn-danger">Pending</button></td>
+                <td><button type="button" class="btn btn-info"><a href="/<%=statutoryComplianceDocs.nhimaDoc.replace(/\\/g, '/')%>">view</a></button></td>
+               
+            </tr>
+        
+            <tr>
+                <td><strong>ERB license</strong></td>
+                <td><button type="button" class="btn btn-danger">Pending</button></td>
+                <td><button type="button" class="btn btn-info"><a href="/<%=statutoryComplianceDocs.erbDoc.replace(/\\/g, '/')%>">view</a></button></td>
+               
+            </tr>
+           
+            
+            </tbody>
+     
+    <% } %>
+
+    </table>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>

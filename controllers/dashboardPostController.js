@@ -11,6 +11,7 @@ const BusinessClosure = require("../models/businessClosureSchema");
 const OrderForSupply = require("../models/orderForSupplySchema");
 const AwarenessAdvert = require("../models/awarenessAdvertSchema");
 const StructuralEnvironmentalLicence = require("../models/structuralEnvironmentalLicenceSchema");
+const StatutoryCompliance = require("../models/statutoryComplianceSchema");
 
 
 const base64Encode = (data) => {
@@ -141,9 +142,9 @@ const submitStructuralEnvironmentalLicence = async (req, res) => {
 
 // const uploadedDoc = req.file.path;
 console.log(req.files);
-const structuralIntegrityEvaluationReport = req.files.structuralIntegrityEvaluationReport[0].path;
-const environmentImpactMitigationPlan = req.files.environmentImpactMitigationPlan[0].path;
-const supportingDocument = req.files.supportingDocument[0].path;
+const structuralIntegrityEvaluationReport = req.files.structuralIntegrityEvaluationReport?.[0]?.path.replace(/.*public[\\/]/, '');
+const environmentImpactMitigationPlan = req.files.environmentImpactMitigationPlan?.[0]?.path.replace(/.*public[\\/]/, '');
+const supportingDocument = req.files.supportingDocument?.[0]?.path.replace(/.*public[\\/]/, '');
 
 try{
   
@@ -248,6 +249,47 @@ const submitAwarenessAdvert = async (req, res) => {
   }
 
 };
+
+// ####statutory compliance documents route
+const statutoryCompliance = async (req, res) => {
+  const user = req.user;
+  if(!req.files){
+    return res.status(404).send('no files uploaded');
+  }
+
+// const uploadedDoc = req.file.path;
+console.log(req.email)
+console.log(req.files);
+const zppaDoc = req.files.zppaDoc?.[0]?.path.replace(/.*public[\\/]/, '');
+const pacraDoc = req.files.pacraDoc?.[0]?.path.replace(/.*public[\\/]/, '');
+const workcompDoc = req.files.workcompDoc?.[0]?.path.replace(/.*public[\\/]/, '');
+const nhimaDoc = req.files.nhimaDoc?.[0]?.path.replace(/.*public[\\/]/, '');
+const erbDoc = req.files.erbDoc?.[0]?.path.replace(/.*public[\\/]/, '');
+
+
+try{
+  
+  const statutoryCompliance = new StatutoryCompliance({
+    userEmail: user.email,
+    zppaDoc,
+    pacraDoc,
+    workcompDoc,
+    nhimaDoc,
+    erbDoc
+  })
+
+  await statutoryCompliance.save();
+  console.log(statutoryCompliance)
+  successMessage = ` Statutory compliance documents uploaded successfully`;
+
+  res.redirect(`/dashboard/newCompliance?message=${encodeURIComponent(base64Encode(successMessage))}`);
+
+}catch (error) {
+  console.error(`Error uploading statutory documents : ${error.message}`);
+  res.send("Error uploading statutory documents");
+}
+};
+
 const submitAssessment = async (req, res) => console.log(req.body);
 
 
@@ -264,5 +306,6 @@ module.exports = {
   submitStructuralEnvironmentalLicence,
   submitOrderForSupply,
   submitAwarenessAdvert,
+  statutoryCompliance,
   submitAssessment,
 };
