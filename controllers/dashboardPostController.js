@@ -14,6 +14,7 @@ const StructuralEnvironmentalLicense = require("../models/structuralEnvironmenta
 
 
 
+
 const base64Encode = (data) => {
   return Buffer.from(data).toString('base64');
 };
@@ -62,26 +63,47 @@ const submitApplication = async (req, res) => {
 };
 
 const submitProject = async (req, res) => {
-
   try {
     const {
-
+      title,
+      type,
+      budget,
+      duration,
+      status,
+      objectives,
+      teamMembers,
+      permits,
+      locations
     } = req.body;
-
+console.log(req.body)
+    // Create a new project instance with the data from the request
     const newProject = new EngineeringProject({
-
+      title:'',
+      type:'',
+      budget:'',
+      duration:'',
+      status:'',	
+      objectives:'',
+      teamMembers:'',
+      permits:'',	
+      locations, // Assuming locations are sent as a stringified array
     });
 
+    // Handle file uploads if there are any
     const documents = req.files?.map(file => file.path) || [];
+    newProject.files = documents;
+
+    // Save the new project to the database
     await newProject.save();
+
+    // Redirect to a new page after the project is saved
     res.redirect("/dashboard/newApplication");
-  }
-  catch (error) {
+  } catch (error) {
     console.error("Error saving project application:", error);
     res.status(500).send("An error occurred while processing your application.");
   }
-
 };
+
 
 
 const submitPremiseLeasing = async (req, res) => {

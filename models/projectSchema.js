@@ -16,7 +16,7 @@ const projectSchema = new mongoose.Schema({
     objectives: { type: String, required: true },
     locations: [locationSchema],
     files: [{ type: String }], // Store file paths or URLs
-    team_members: { type: String },
+    teamMembers: { type: String },
     permits: { type: String },
 }, { timestamps: true });
 
