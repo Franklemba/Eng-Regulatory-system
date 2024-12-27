@@ -9,15 +9,14 @@
 
         <div class="card">
             <div class="card-body">
-                <form id="project-form">
+                <form id="project-form" method="post" action="/dashboard/newProject" enctype="multipart/form-data">
                     <h5 class="mb-4">Project Details</h5>
-                    <!-- ROOOOOOWWW  problem detection -->
                     <div class="row">
                         <!-- Project Title -->
                         <div class="col-lg-6 col-sm-12">
                             <div class="form-group">
                                 <label>Project Title</label>
-                                <input type="text" class="form-control" placeholder="Enter project title" required>
+                                <input type="text" name="title" class="form-control" placeholder="Enter project title" required>
                             </div>
                         </div>
 
@@ -25,7 +24,7 @@
                         <div class="col-lg-6 col-sm-12">
                             <div class="form-group">
                                 <label>Project Type</label>
-                                <select class="form-control select" required>
+                                <select name="projectType" class="form-control select" required>
                                     <option>Infrastructure</option>
                                     <option>Energy</option>
                                     <option>Transportation</option>
@@ -39,7 +38,7 @@
                         <div class="col-lg-4 col-sm-12">
                             <div class="form-group">
                                 <label>Budget (USD)</label>
-                                <input type="number" class="form-control" placeholder="Enter budget" required>
+                                <input type="number" name="budget" class="form-control" placeholder="Enter budget" required>
                             </div>
                         </div>
 
@@ -47,7 +46,7 @@
                         <div class="col-lg-4 col-sm-12">
                             <div class="form-group">
                                 <label>Duration (Months)</label>
-                                <input type="number" class="form-control" placeholder="Enter duration" required>
+                                <input type="number" name="duration" class="form-control" placeholder="Enter duration" required>
                             </div>
                         </div>
 
@@ -55,7 +54,7 @@
                         <div class="col-lg-4 col-sm-12">
                             <div class="form-group">
                                 <label>Status</label>
-                                <select class="form-control select">
+                                <select name="status" class="form-control select">
                                     <option>Planned</option>
                                     <option>In Progress</option>
                                     <option>Completed</option>
@@ -68,11 +67,11 @@
                         <div class="col-lg-12">
                             <div class="form-group">
                                 <label>Objectives</label>
-                                <textarea class="form-control" rows="3" placeholder="Describe the objectives of the project" required></textarea>
+                                <textarea name="objectives" class="form-control" rows="3" placeholder="Describe the objectives of the project" required></textarea>
                             </div>
                         </div>
                     </div>
-                     <!-- ROOOOOOWWW  problem detection -->
+
                     <hr>
                     <h5 class="mb-4">Project Locations</h5>
                     <div id="locations-section">
@@ -81,25 +80,25 @@
                             <div class="col-lg-6 col-sm-12">
                                 <div class="form-group">
                                     <label>Location Name</label>
-                                    <input type="text" class="form-control" placeholder="Enter location name" required>
+                                    <input type="text" name="locations[0][name]" class="form-control" placeholder="Enter location name" required>
                                 </div>
                             </div>
                             <div class="col-lg-3 col-sm-12">
                                 <div class="form-group">
                                     <label>Latitude</label>
-                                    <input type="text" class="form-control" placeholder="Enter latitude" required>
+                                    <input type="text" name="locations[0][latitude]" class="form-control" placeholder="Enter latitude" required>
                                 </div>
                             </div>
                             <div class="col-lg-3 col-sm-12">
                                 <div class="form-group">
                                     <label>Longitude</label>
-                                    <input type="text" class="form-control" placeholder="Enter longitude" required>
+                                    <input type="text" name="locations[0][longitude]" class="form-control" placeholder="Enter longitude" required>
                                 </div>
                             </div>
                             <div class="col-lg-12">
                                 <div class="form-group">
                                     <label>Location Description</label>
-                                    <textarea class="form-control" rows="2" placeholder="Describe this location" required></textarea>
+                                    <textarea name="locations[0][description]" class="form-control" rows="2" placeholder="Describe this location" required></textarea>
                                 </div>
                             </div>
                         </div>
@@ -113,7 +112,7 @@
                     <div class="form-group">
                         <label>Upload Documents</label>
                         <div class="image-upload">
-                            <input type="file" multiple>
+                            <input type="file" name="documents" multiple>
                             <div class="image-uploads">
                                 <img src="/assets/img/icons/upload.svg" alt="img">
                                 <h4>Drag and drop files to upload</h4>
@@ -129,7 +128,7 @@
                         <div class="col-lg-6 col-sm-12">
                             <div class="form-group">
                                 <label>Team Members</label>
-                                <input type="text" class="form-control" placeholder="Enter team members (comma separated)">
+                                <input type="text" name="teamMembers" class="form-control" placeholder="Enter team members (comma separated)">
                             </div>
                         </div>
 
@@ -137,7 +136,7 @@
                         <div class="col-lg-6 col-sm-12">
                             <div class="form-group">
                                 <label>Associated Permits or Licenses</label>
-                                <input type="text" class="form-control" placeholder="Enter related permits/licenses">
+                                <input type="text" name="permits" class="form-control" placeholder="Enter related permits/licenses">
                             </div>
                         </div>
                     </div>
@@ -153,8 +152,18 @@
 </div>
 
 <script>
+    let locationCount = 0;
     document.getElementById('add-location-btn').addEventListener('click', function () {
+        locationCount++;
         const locationEntry = document.querySelector('.location-entry').cloneNode(true);
+        
+        // Update the name attributes for the new location
+        locationEntry.querySelectorAll('input, textarea').forEach(input => {
+            if (input.name) {
+                input.name = input.name.replace('[0]', `[${locationCount}]`);
+            }
+        });
+        
         document.getElementById('locations-section').appendChild(locationEntry);
     });
 </script>

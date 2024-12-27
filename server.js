@@ -9,7 +9,7 @@ const flash = require('connect-flash');
 const MongoStore = require('connect-mongo');
 const mongoose = require('mongoose')
 const passport = require('passport')
-
+const path = require('path')
 const { ensureAuthenticated} = require('./config/auth'); 
 
 // Route definitions
@@ -40,9 +40,10 @@ app.set('views', __dirname + '/views/')
 app.set('layout', 'layouts/layout')
 app.use(expressLayouts)
 app.use(express.static(__dirname + '/public'))
-app.use(bodyParser.urlencoded({ limit: '10mb', extended: false }))
-app.use(express.json());
+app.use(bodyParser.urlencoded({ limit: '10mb', extended: true }))
 app.use(express.urlencoded({ extended: true }))
+app.use(express.json());
+
 
 app.set('trust proxy', 1);
 
@@ -62,11 +63,13 @@ app.use(session({
   store: sessionStore,
   cookie: { secure: process.env.NODE_ENV === 'production' }
 }));
+app.use('/uploads', express.static(path.join(__dirname, 'public/uploads')));
 
 app.use(flash());
 require('./config/passport')(passport);
 app.use(passport.initialize());
 app.use(passport.session());
+
 
 // Routes
 app.use('/',homeRouter);

@@ -7,11 +7,13 @@
             </div>
         </div>
 
+        <%- include(`../../partials/notification`) %>
+
         <!-- Awareness Advert Form -->
         <div class="card">
             <div class="card-body">
                 <h5>Create a New Awareness Advert</h5>
-                <form>
+                <form method="post" action="/dashboard/newAwarenessAdvert" enctype="multipart/form-data">
                     <div class="row">
                         <div class="col-lg-6">
                             <div class="form-group">
@@ -22,39 +24,39 @@
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <label for="advert-title">Advert Title</label>
-                                <input type="text" id="advert-title" class="form-control" placeholder="Enter the title of the advert">
+                                <input type="text" id="advert-title" name="advertTitle" class="form-control" placeholder="Enter the title of the advert">
                             </div>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label for="advert-description">Description</label>
-                        <textarea id="advert-description" class="form-control" rows="5" placeholder="Provide a detailed description of the advert"></textarea>
+                        <textarea id="advert-description" name="description" class="form-control" rows="5" placeholder="Provide a detailed description of the advert"></textarea>
                     </div>
 
                     <div class="row">
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <label for="start-date">Start Date</label>
-                                <input type="date" id="start-date" class="form-control">
+                                <input type="date" id="start-date" name="startDate" class="form-control">
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <label for="end-date">End Date</label>
-                                <input type="date" id="end-date" class="form-control">
+                                <input type="date" id="end-date" name="endDate" class="form-control">
                             </div>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label for="target-audience">Target Audience</label>
-                        <textarea id="target-audience" class="form-control" rows="3" placeholder="Specify the target audience"></textarea>
+                        <textarea id="target-audience" name="targetAudience" class="form-control" rows="3" placeholder="Specify the target audience"></textarea>
                     </div>
 
                     <div class="form-group">
                         <label for="advert-files">Upload Advert Media</label>
-                        <input type="file" id="advert-files" class="form-control" multiple>
+                        <input type="file" id="advert-files" name="advertMedia" class="form-control" multiple>
                     </div>
 
                     <button type="submit" class="btn btn-primary">Submit Advert</button>
@@ -79,17 +81,31 @@
                     </thead>
                     <tbody>
                         <!-- Sample Advert Row -->
-                        <tr>
-                            <td>ADV12345</td>
-                            <td>Health Awareness Campaign</td>
-                            <td>2024-12-01</td>
-                            <td>2024-12-31</td>
-                            <td><span class="badge badge-warning">Pending</span></td>
-                            <td>
-                                <button class="btn btn-info btn-sm">View</button>
-                                <button class="btn btn-danger btn-sm">Cancel</button>
-                            </td>
-                        </tr>
+                         <% if (awarenessAdvert[0] == null) { %>
+
+                            
+                                <h3>No adverts available yet</h3>
+                            
+
+                            <% } else  { %>
+                             
+                                <% awarenessAdvert.forEach(element => { %>
+                                   <tr>
+                                       <td><%=element._id %></td>
+                                       <td><%=element.advertTitle %></td>
+                                       <td><%=element.startDate.toLocaleDateString('en-GB') %></td>
+                                       <td><%=element.endDate.toLocaleDateString('en-GB') %></td>
+                                       <td><span class="badge badge-warning"><%=element.status %></span></td>
+                                       <td>
+                                           <button class="btn btn-info btn-sm">View</button>
+                                           <button class="btn btn-danger btn-sm">Cancel</button>
+                                       </td>
+                                   </tr>
+                                 
+                                <% }) %>
+                          
+                         <% } %>
+
                     </tbody>
                 </table>
             </div>
