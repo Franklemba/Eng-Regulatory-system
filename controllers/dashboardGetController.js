@@ -56,8 +56,8 @@ const getDashboard = async (req, res) => {
     });
   };
   
-  const getStructuralEnvironmentalLicencePage = async (req, res) => {
-    res.render("home/dashboard/structuralEnvironmentalLicence", {
+  const getStructuralEnvironmentalLicensePage = async (req, res) => {
+    res.render("home/dashboard/structuralEnvironmentalLicense", {
       layout: "layouts/dashboardHeader.ejs",
       user: req.user,
     });
@@ -93,7 +93,7 @@ const getDashboard = async (req, res) => {
     getAnnualDeclarationPage,
     getExportImportApplicationPage,
     getBusinessClosurePage,
-    getStructuralEnvironmentalLicencePage,
+    getStructuralEnvironmentalLicensePage,
     getOrderForSupplyPage,
     getAwarenessAdvertPage,
     getAssessmentPage,
