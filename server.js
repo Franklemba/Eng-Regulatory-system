@@ -77,18 +77,18 @@ app.use('/media',mediaRouter);
 app.use('/auth', authRouter);
 app.use('/dashboard',ensureAuthenticated, dashboardPostRouter);
 app.use('/dashboard',ensureAuthenticated, dashboardGetRouter);
-app.use('/null', (req,res)=>{
-  const layout = "layouts/non_headerLayout"
+// app.use('/null', (req,res)=>{
+//   const layout = "layouts/non_headerLayout"
   
-  res.render("home/errorPage", {
-    layout
-  });
+//   res.render("home/errorPage", {
+//     layout
+//   });
 
-});
+// });
 
-app.use('*', (req, res) => {
-  res.status(404).redirect('/null'); // You can replace '/' with the URL of your 404 page
-});
+// app.use('*', (req, res) => {
+//   res.status(404).redirect('/null'); // You can replace '/' with the URL of your 404 page
+// });
 
 
 

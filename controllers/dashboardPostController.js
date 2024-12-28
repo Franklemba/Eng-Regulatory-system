@@ -10,7 +10,7 @@ const PremiseLeasing = require("../models/premiseSchema");
 const BusinessClosure = require("../models/businessClosureSchema");
 const OrderForSupply = require("../models/orderForSupplySchema");
 const AwarenessAdvert = require("../models/awarenessAdvertSchema");
-const StructuralEnvironmentalLicence = require("../models/structuralEnvironmentalLicenceSchema");
+const StructuralEnvironmentalLicense = require("../models/structuralEnvironmentalLicenceSchema");
 const StatutoryCompliance = require("../models/statutoryComplianceSchema");
 
 
@@ -183,7 +183,7 @@ const submitBusinessClosure =  async (req, res, next) => {
       closureDate
     } = req.body;
 
-  const uploadedDoc = req.file.path;
+  const uploadedDoc = req.file.path.replace(/.*public[\\/]/, '').replace(/\\/g, '/');
 
   try{
     
@@ -226,11 +226,11 @@ const submitStructuralEnvironmentalLicense = async (req, res) => {
     return res.status(404).send('no files uploaded');
   }
 
-// const uploadedDoc = req.file.path;
+// const uploadedDoc = req.file.path.replace(/.*public[\\/]/, '');
 console.log(req.files);
-const structuralIntegrityEvaluationReport = req.files.structuralIntegrityEvaluationReport?.[0]?.path.replace(/.*public[\\/]/, '');
-const environmentImpactMitigationPlan = req.files.environmentImpactMitigationPlan?.[0]?.path.replace(/.*public[\\/]/, '');
-const supportingDocument = req.files.supportingDocument?.[0]?.path.replace(/.*public[\\/]/, '');
+const structuralIntegrityEvaluationReport = req.files.structuralIntegrityEvaluationReport?.[0]?.path.replace(/.*public[\\/]/, '').replace(/\\/g, '/');
+const environmentImpactMitigationPlan = req.files.environmentImpactMitigationPlan?.[0]?.path.replace(/.*public[\\/]/, '').replace(/\\/g, '/');
+const supportingDocument = req.files.supportingDocument?.[0]?.path.replace(/.*public[\\/]/, '').replace(/\\/g, '/');
 
 try{
   
@@ -253,7 +253,7 @@ try{
   console.log(structuralEnvironmentalLicence)
   successMessage = ` ${projectName} uploaded successfully`;
 
-  res.redirect(`/dashboard/structuralEnvironmentalLicence?message=${encodeURIComponent(base64Encode(successMessage))}`);
+  res.redirect(`/dashboard/structuralEnvironmentalLicense?message=${encodeURIComponent(base64Encode(successMessage))}`);
 
 }catch (error) {
   console.error(`Error uploading environment structural what what error : ${error.message}`);
@@ -273,7 +273,7 @@ const submitOrderForSupply = async (req, res) => {
   orderDetails
   } = req.body;
 
-const uploadedDoc = req.file.path;
+const uploadedDoc = req.file.path.replace(/.*public[\\/]/, '').replace(/\\/g, '/');
 
 try{
   
@@ -310,7 +310,7 @@ const submitAwarenessAdvert = async (req, res) => {
         targetAudience,
     } = req.body;
 
-  const uploadedDoc = req.file.path;
+  const uploadedDoc = req.file.path.replace(/.*public[\\/]/, '').replace(/\\/g, '/');
 
   try{
     
@@ -343,14 +343,14 @@ const statutoryCompliance = async (req, res) => {
     return res.status(404).send('no files uploaded');
   }
 
-// const uploadedDoc = req.file.path;
+// const uploadedDoc = req.file.path.replace(/.*public[\\/]/, '');
 console.log(req.email)
 console.log(req.files);
-const zppaDoc = req.files.zppaDoc?.[0]?.path.replace(/.*public[\\/]/, '');
-const pacraDoc = req.files.pacraDoc?.[0]?.path.replace(/.*public[\\/]/, '');
-const workcompDoc = req.files.workcompDoc?.[0]?.path.replace(/.*public[\\/]/, '');
-const nhimaDoc = req.files.nhimaDoc?.[0]?.path.replace(/.*public[\\/]/, '');
-const erbDoc = req.files.erbDoc?.[0]?.path.replace(/.*public[\\/]/, '');
+const zppaDoc = req.files.zppaDoc?.[0]?.path.replace(/.*public[\\/]/, '').replace(/\\/g, '/');
+const pacraDoc = req.files.pacraDoc?.[0]?.path.replace(/.*public[\\/]/, '').replace(/\\/g, '/');
+const workcompDoc = req.files.workcompDoc?.[0]?.path.replace(/.*public[\\/]/, '').replace(/\\/g, '/');
+const nhimaDoc = req.files.nhimaDoc?.[0]?.path.replace(/.*public[\\/]/, '').replace(/\\/g, '/');
+const erbDoc = req.files.erbDoc?.[0]?.path.replace(/.*public[\\/]/, '').replace(/\\/g, '/');
 
 
 try{

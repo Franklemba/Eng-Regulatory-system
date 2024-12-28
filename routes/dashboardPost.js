@@ -43,7 +43,7 @@ router.post("/newEnvironmentAndStructuralLicence",
   upload.fields([
        { name: 'structuralIntegrityEvaluationReport', maxCount: 1 },
       { name: 'environmentImpactMitigationPlan', maxCount: 1 }, 
-      {name: 'supportingDocument', maxCount: 1}]), dashboardPostController.submitStructuralEnvironmentalLicence);
+      {name: 'supportingDocument', maxCount: 1}]), dashboardPostController.submitStructuralEnvironmentalLicense);
 router.post("/orderForSupply", upload.single('supportingDocument'), dashboardPostController.submitOrderForSupply);
 router.post("/newAwarenessAdvert",  upload.single('advertMedia'), dashboardPostController.submitAwarenessAdvert);
 router.post("/newAssessment", dashboardPostController.submitAssessment);
