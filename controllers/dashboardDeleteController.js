@@ -10,6 +10,7 @@ const AwarenessAdvert = require("../models/awarenessAdvertSchema");
 const StructuralEnvironmentalLicense = require("../models/structuralEnvironmentalLicenceSchema");
 
 
+
 const deleteLicenseApplication = async (req, res) => {
     try {
       const { id } = req.params;
