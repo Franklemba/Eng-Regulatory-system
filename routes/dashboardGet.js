@@ -16,8 +16,8 @@ router.get("/importExportApplication", dashboardGetController.getExportImportApp
 // Lembalemba onwards
 router.get("/businessClosure", dashboardGetController.getBusinessClosurePage);
 router.get("/structuralEnvironmentalLicense", dashboardGetController.getStructuralEnvironmentalLicensePage);
-router.get("/orderForSupply", dashboardGetController.getOrderForSupplyPage);
-router.get("/awarenessAdvert", dashboardGetController.getAwarenessAdvertPage);
+// router.get("/orderForSupply", dashboardGetController.getOrderForSupplyPage);
+// router.get("/awarenessAdvert", dashboardGetController.getAwarenessAdvertPage);
 router.get("/assessment", dashboardGetController.getAssessmentPage);
 router.get("/newCompliance", dashboardGetController.getStatutoryCompliance);
 router.get("/reviewCompliance", dashboardGetController.getStatutoryComplianceStatus);
