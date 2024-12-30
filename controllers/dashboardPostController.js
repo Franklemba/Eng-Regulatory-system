@@ -67,27 +67,36 @@ const submitProject = async (req, res) => {
   try {
     const {
       title,
-      type,
-      budget,
+      projectType,
+      projectValue,
       duration,
       status,
       objectives,
+      locations,
+      workers,
       teamMembers,
       permits,
-      locations
     } = req.body;
-console.log(req.body)
-    // Create a new project instance with the data from the request
+
+    console.log("Received Data:", req.body);
+
+    
+    // Parse locations and workers if sent as JSON strings (adjust if frontend sends raw arrays)
+    const parsedLocations = typeof locations === 'string' ? JSON.parse(locations) : locations;
+    const parsedWorkers = typeof workers === 'string' ? JSON.parse(workers) : workers;
+
+    // Create a new project instance
     const newProject = new EngineeringProject({
-      title:'',
-      type:'',
-      budget:'',
-      duration:'',
-      status:'',	
-      objectives:'',
-      teamMembers:'',
-      permits:'',	
-      locations, // Assuming locations are sent as a stringified array
+      title,
+      type: projectType,
+      budget: projectValue,
+      duration,
+      status,
+      objectives,
+      locations: parsedLocations, // Array of location objects
+      workers: parsedWorkers, // Object with worker categories
+      teamMembers: teamMembers ? teamMembers.split(',') : [], // Convert comma-separated team members to array
+      permits,
     });
 
     // Handle file uploads if there are any
@@ -96,6 +105,8 @@ console.log(req.body)
 
     // Save the new project to the database
     await newProject.save();
+
+    console.log("Project saved successfully:", newProject);
 
     // Redirect to a new page after the project is saved
     res.redirect("/dashboard/newApplication");
