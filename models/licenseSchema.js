@@ -46,6 +46,11 @@ const engineeringLicenseSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  engineeringOrg: {
+  type: String,
+    required: true,
+  },
+  
   documents: {
     type: [String], // Array of file paths or URLs
     required: true,
