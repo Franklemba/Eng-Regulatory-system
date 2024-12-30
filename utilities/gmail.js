@@ -1,22 +1,20 @@
-
-
+require("dotenv").config();
 var SibApiV3Sdk = require("sib-api-v3-sdk");
 var defaultClient = SibApiV3Sdk.ApiClient.instance;
 
 var apiKey = defaultClient.authentications["api-key"];
-apiKey.apiKey = process.env.Sendinblue_API_Key;
+apiKey.apiKey = "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";
 
-
+//apiKey.apiKey =   	v.BREVO_EMAIL_API;
 
 var apiInstance = new SibApiV3Sdk.TransactionalEmailsApi();
-
 
 const sendOTPemail = (userName, email, otp)=>{
 
     apiInstance
          .sendTransacEmail({
-           sender: { email: `tayantpay@gmail.com`, name: 'Tayant Merchant' },
-           subject: "Tayant Merchant Account",
+           sender: { email: `odtm00@gmail.com`, name: 'ZEPRA' },
+           subject: "ZEPRA Account",
            htmlContent: `<html>
            <head></head>
            <body></body>
@@ -32,7 +30,7 @@ const sendOTPemail = (userName, email, otp)=>{
                  },
                ],
                htmlContent: generateOtpHTML({otp }),
-               subject: "Email Verification! ~ Tayant Merchant",
+               subject: "Email Verification! ~ ZEPRA",
              }
            ],
          })
@@ -52,14 +50,14 @@ const sendOTPemail = (userName, email, otp)=>{
   function generateOtpHTML({ otp }) {
     const emailHtml = `
     <div style="max-width: 400px; margin: 0 auto; background-color: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
-    <h2 style="color: #333;">Tayant Merchant Account Email Verification</h2>
-    <p style="color: #555; margin-bottom: 20px;">Thank you for registering with Tayant. OTP code:</p>
+    <h2 style="color: #333;">ZEPRA Account Email Verification</h2>
+    <p style="color: #555; margin-bottom: 20px;">Thank you for registering with ZEPRA. OTP code:</p>
 
 
     <h1 style="display: inline-block; text-decoration: none; background-color: #ffc107; color: #333; padding: 10px 20px; border-radius: 5px; font-weight: bold; font-size: 16px; transition: background-color 0.3s;">${otp}</h1>
 
   
-    <p style="color: #555; margin-top: 20px;">If you didn't register with Tayant Pay, please ignore this email.</p>
+    <p style="color: #555; margin-top: 20px;">If you didn't register with ZEPRA , please ignore this email.</p>
   </div>
     `
     return emailHtml;

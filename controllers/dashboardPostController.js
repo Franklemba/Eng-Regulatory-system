@@ -34,6 +34,7 @@ const submitApplication = async (req, res) => {
       engineeringFields,
       licenseType,
       description,
+      engineeringOrg
     } = req.body;
     const documents = req.files.documents?.map(file => file.path) || [];
     console.log(documents)
@@ -49,6 +50,7 @@ const submitApplication = async (req, res) => {
       registrationNumber,
       engineeringFields,
       licenseType,
+      engineeringOrg,
       documents,
       description,
     });
@@ -296,79 +298,79 @@ try{
 };
 
 // ##Order supply over here
-const submitOrderForSupply = async (req, res) => {
+// const submitOrderForSupply = async (req, res) => {
     
-  const {
-    supplierName,
-  contactPerson,
-  contactNumber,
-  expectedDeliveryDate,
-  priotyLevel,
-  orderDetails
-  } = req.body;
+//   const {
+//     supplierName,
+//   contactPerson,
+//   contactNumber,
+//   expectedDeliveryDate,
+//   priotyLevel,
+//   orderDetails
+//   } = req.body;
 
-const uploadedDoc = req.file.path.replace(/.*public[\\/]/, '').replace(/\\/g, '/');
+// const uploadedDoc = req.file.path.replace(/.*public[\\/]/, '').replace(/\\/g, '/');
 
-try{
+// try{
   
-  const onwardsrderForSupply = new OrderForSupply({
-    supplierName,
-  contactPerson,
-  contactNumber,
-  expectedDeliveryDate,
-  priotyLevel,
-  orderDetails,
-  supportingDocument:uploadedDoc
-  })
+//   const onwardsrderForSupply = new OrderForSupply({
+//     supplierName,
+//   contactPerson,
+//   contactNumber,
+//   expectedDeliveryDate,
+//   priotyLevel,
+//   orderDetails,
+//   supportingDocument:uploadedDoc
+//   })
 
-  await onwardsrderForSupply.save();
-  console.log(onwardsrderForSupply)
-  successMessage = `Order supply named ${supplierName} uploaded successfully`;
+//   await onwardsrderForSupply.save();
+//   console.log(onwardsrderForSupply)
+//   successMessage = `Order supply named ${supplierName} uploaded successfully`;
 
-  res.redirect(`/dashboard/orderForSupply?message=${encodeURIComponent(base64Encode(successMessage))}`);
+//   res.redirect(`/dashboard/orderForSupply?message=${encodeURIComponent(base64Encode(successMessage))}`);
 
-}catch (error) {
-  console.error(`Error uploading order supply : ${error.message}`);
-  res.send("Error uploading order supply");
-}
+// }catch (error) {
+//   console.error(`Error uploading order supply : ${error.message}`);
+//   res.send("Error uploading order supply");
+// }
 
 
-};
-const submitAwarenessAdvert = async (req, res) => {
+// };
+// const submitAwarenessAdvert = async (req, res) => {
         
-    const {
-      advertTitle,
-      description,
-      startDate,
-      endDate,
-        targetAudience,
-    } = req.body;
+//     const {
+//       advertTitle,
+//       description,
+//       startDate,
+//       endDate,
+//         targetAudience,
+//     } = req.body;
 
-  const uploadedDoc = req.file.path.replace(/.*public[\\/]/, '').replace(/\\/g, '/');
+//   const uploadedDoc = req.file.path.replace(/.*public[\\/]/, '').replace(/\\/g, '/');
 
-  try{
+//   try{
     
-    const awarenessAdvert = new AwarenessAdvert({
-      advertTitle,
-      description,
-      startDate,
-      endDate,
-        targetAudience,
-      advertMedia:uploadedDoc
-    })
+//     const awarenessAdvert = new AwarenessAdvert({
+//       advertTitle,
+//       description,
+//       startDate,
+//       endDate,
+//         targetAudience,
+//       advertMedia:uploadedDoc
+//     })
 
-    await awarenessAdvert.save();
-    console.log(awarenessAdvert)
-    successMessage = `Awareness advert with title ${advertTitle} uploaded successfully`;
+//     await awarenessAdvert.save();
+//     console.log(awarenessAdvert)
+//     successMessage = `Awareness advert with title ${advertTitle} uploaded successfully`;
 
-    res.redirect(`/dashboard/awarenessAdvert?message=${encodeURIComponent(base64Encode(successMessage))}`);
+//     res.redirect(`/dashboard/awarenessAdvert?message=${encodeURIComponent(base64Encode(successMessage))}`);
 
-  }catch (error) {
-    console.error(`Error uploading awareness advert media : ${error.message}`);
-    res.send("Error uploading awareness advert media");
-  }
+//   }catch (error) {
+//     console.error(`Error uploading awareness advert media : ${error.message}`);
+//     res.send("Error uploading awareness advert media");
+//   }
 
-};
+// };
 
 // ####statutory compliance documents route
 const statutoryCompliance = async (req, res) => {
@@ -377,7 +379,6 @@ const statutoryCompliance = async (req, res) => {
     return res.status(404).send('no files uploaded');
   }
 
-// const uploadedDoc = req.file.path.replace(/.*public[\\/]/, '');
 console.log(req.email)
 console.log(req.files);
 const zppaDoc = req.files.zppaDoc?.[0]?.path.replace(/.*public[\\/]/, '').replace(/\\/g, '/');
@@ -385,6 +386,7 @@ const pacraDoc = req.files.pacraDoc?.[0]?.path.replace(/.*public[\\/]/, '').repl
 const workcompDoc = req.files.workcompDoc?.[0]?.path.replace(/.*public[\\/]/, '').replace(/\\/g, '/');
 const nhimaDoc = req.files.nhimaDoc?.[0]?.path.replace(/.*public[\\/]/, '').replace(/\\/g, '/');
 const erbDoc = req.files.erbDoc?.[0]?.path.replace(/.*public[\\/]/, '').replace(/\\/g, '/');
+const others = req.files.others?.[0]?.path.replace(/.*public[\\/]/, '').replace(/\\/g, '/');
 
 
 try{
@@ -395,7 +397,8 @@ try{
     pacraDoc,
     workcompDoc,
     nhimaDoc,
-    erbDoc
+    erbDoc,
+    others
   })
 
   await statutoryCompliance.save();
@@ -424,8 +427,8 @@ module.exports = {
 
   submitBusinessClosure,
   submitStructuralEnvironmentalLicense,
-  submitOrderForSupply,
-  submitAwarenessAdvert,
+  // submitOrderForSupply,
+  // submitAwarenessAdvert,
   statutoryCompliance,
   submitAssessment,
 };

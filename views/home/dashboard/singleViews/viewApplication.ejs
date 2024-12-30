@@ -1,77 +1,82 @@
-<div class="container my-5">
-    <div class="card shadow-sm">
-        <div class="card-header text-center">
-            <h4 class="mb-0">Application Details</h4>
-        </div>
-        <div class="card-body">
-            <!-- Applicant Details -->
-            <h5 class="text-muted mb-3">Applicant Information</h5>
-            <div class="row mb-3">
-                <div class="col-md-6">
-                    <p><strong>Name:</strong> <%= application.applicantName %></p>
-                </div>
-                <div class="col-md-6">
-                    <p><strong>Email:</strong> <%= application.email %></p>
-                </div>
-                <div class="col-md-6">
-                    <p><strong>Phone:</strong> <%= application.phone %></p>
-                </div>
-                <div class="col-md-6">
-                    <p><strong>Country:</strong> <%= application.country %></p>
-                </div>
-                <div class="col-md-6">
-                    <p><strong>City:</strong> <%= application.city %></p>
-                </div>
-                <div class="col-md-6">
-                    <p><strong>Address:</strong> <%= application.address %></p>
-                </div>
+<div class="page-wrapper">
+    <div class="container my-5">
+        <div class="card shadow-sm">
+            <div class="card-header text-center">
+                <h4 class="mb-0">Application Details</h4>
             </div>
-
-            <!-- Company Details -->
-            <h5 class="text-muted mb-3">Company Information</h5>
-            <div class="row mb-3">
-                <div class="col-md-6">
-                    <p><strong>Company Name:</strong> <%= application.companyName %></p>
-                </div>
-                <div class="col-md-6">
-                    <p><strong>Registration Number:</strong> <%= application.registrationNumber %></p>
-                </div>
-                <div class="col-md-6">
-                    <p><strong>Engineering Fields:</strong> <%= application.engineeringFields %></p>
-                </div>
-                <div class="col-md-6">
-                    <p><strong>License Type:</strong> <%= application.licenseType %></p>
-                </div>
-            </div>
-
-            <!-- Additional Details -->
-            <h5 class="text-muted mb-3">Additional Information</h5>
-            <div class="row mb-3">
-                <div class="col-12">
-                    <p><strong>Description:</strong></p>
-                    <p><%= application.description || 'N/A' %></p>
-                </div>
-                <div class="col-12">
-                    <p><strong>Submitted On:</strong> <%= new Date(application.createdAt).toLocaleString() %></p>
-                </div>
-            </div>
-
-            <!-- Documents -->
-            <h5 class="text-muted mb-3">Uploaded Documents</h5>
-            <div class="row">
-                <% application.documents?.forEach((doc, index) => { %>
-                    <div class="col-md-4 mb-3">
-                        <a href="/dashboard/download/<%= doc %>" 
-                            class="btn btn-sm " 
-                            download="<%=doc %>">
-                            Download Doc <%= index + 1 %>
-                        </a>
+            <div class="card-body">
+                <!-- Applicant Details -->
+                <h5 class="text-muted mb-3">Applicant Information</h5>
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <p><strong>Name:</strong> <%= application.applicantName %></p>
                     </div>
-                <% }); %>
+                    <div class="col-md-6">
+                        <p><strong>Email:</strong> <%= application.email %></p>
+                    </div>
+                    <div class="col-md-6">
+                        <p><strong>Phone:</strong> <%= application.phone %></p>
+                    </div>
+                    <div class="col-md-6">
+                        <p><strong>Country:</strong> <%= application.country %></p>
+                    </div>
+                    <div class="col-md-6">
+                        <p><strong>City:</strong> <%= application.city %></p>
+                    </div>
+                    <div class="col-md-6">
+                        <p><strong>Address:</strong> <%= application.address %></p>
+                    </div>
+                </div>
+    
+                <!-- Company Details -->
+                <h5 class="text-muted mb-3">Company Information</h5>
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <p><strong>Company Name:</strong> <%= application.companyName %></p>
+                    </div>
+                    <div class="col-md-6">
+                        <p><strong>Registration Number:</strong> <%= application.registrationNumber %></p>
+                    </div>
+                    <div class="col-md-6">
+                        <p><strong>Engineering Fields:</strong> <%= application.engineeringFields %></p>
+                    </div>
+                    <div class="col-md-6">
+                        <p><strong>License Type:</strong> <%= application.licenseType %></p>
+                    </div>
+                    <div class="col-md-6">
+                        <p><strong>Engineering organisation:</strong> <%= application.engineeringOrg %></p>
+                    </div>
+                </div>
+    
+                <!-- Additional Details -->
+                <h5 class="text-muted mb-3">Additional Information</h5>
+                <div class="row mb-3">
+                    <div class="col-12">
+                        <p><strong>Description:</strong></p>
+                        <p><%= application.description || 'N/A' %></p>
+                    </div>
+                    <div class="col-12">
+                        <p><strong>Submitted On:</strong> <%= new Date(application.createdAt).toLocaleString() %></p>
+                    </div>
+                </div>
+    
+                <!-- Documents -->
+                <h5 class="text-muted mb-3">Uploaded Documents</h5>
+                <div class="row">
+                    <% application.documents?.forEach((doc, index) => { %>
+                        <div class="col-md-4 mb-3">
+                            <a href="/dashboard/download/<%= doc %>" 
+                                class="btn btn-sm " 
+                                download="<%=doc %>">
+                                Download Doc <%= index + 1 %>
+                            </a>
+                        </div>
+                    <% }); %>
+                </div>
             </div>
-        </div>
-        <div class="card-footer text-end">
-            <a href="/dashboard/submittedApplication" class="btn btn-secondary">Back to Applications</a>
+            <div class="card-footer text-end">
+                <a href="/dashboard/submittedApplication" class="btn btn-secondary">Back to Applications</a>
+            </div>
         </div>
     </div>
 </div>

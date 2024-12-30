@@ -48,13 +48,16 @@ router.post("/newEnvironmentAndStructuralLicence",
        { name: 'structuralIntegrityEvaluationReport', maxCount: 1 },
       { name: 'environmentImpactMitigationPlan', maxCount: 1 }, 
       {name: 'supportingDocument', maxCount: 1}]), dashboardPostController.submitStructuralEnvironmentalLicense);
-router.post("/orderForSupply", upload.single('supportingDocument'), dashboardPostController.submitOrderForSupply);
-router.post("/newAwarenessAdvert",  upload.single('advertMedia'), dashboardPostController.submitAwarenessAdvert);
+// router.post("/orderForSupply", upload.single('supportingDocument'), dashboardPostController.submitOrderForSupply);
+// router.post("/newAwarenessAdvert",  upload.single('advertMedia'), dashboardPostController.submitAwarenessAdvert);
 router.post("/newAssessment", dashboardPostController.submitAssessment);
-router.post("/statutoryCompliance", upload.fields([{ name: 'zppaDoc', maxCount: 1 },{ name: 'pacraDoc', maxCount: 1 },{name: 'workcompDoc', maxCount: 1},{name: 'nhimaDoc', maxCount: 1}, {name: 'erbDoc', maxCount: 1}]), dashboardPostController.statutoryCompliance);
+router.post("/statutoryCompliance", upload.fields([
+           { name: 'zppaDoc', maxCount: 1 },
+           { name: 'pacraDoc', maxCount: 1 },
+           {name: 'workcompDoc', maxCount: 1},
+           {name: 'nhimaDoc', maxCount: 1}, 
+           {name: 'erbDoc', maxCount: 1}, 
+           {name: 'others', maxCount: 1}]), dashboardPostController.statutoryCompliance);
                                   
-
-
-
 
 module.exports = router;

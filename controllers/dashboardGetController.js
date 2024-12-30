@@ -15,11 +15,14 @@ const base64Decode = (data) => {
 
 const getDashboard = async (req, res) => {
   const projects = await EngineeringProject.find()
+  // const totalComplianceDoc = await StatutoryCompliance.find()
+  const totalComplianceDocs = await StatutoryCompliance.countDocuments();
+
     res.render("home/dashboard/dashboard", {
       layout: "layouts/dashboardHeader.ejs",
       user: req.user,
-      activeProjects:projects
-
+      activeProjects:projects,
+      totalComplianceDocs
     });
   };
   
@@ -192,7 +195,7 @@ const getDashboard = async (req, res) => {
   const getStatutoryComplianceStatus =  async (req, res) => {
     // const message = req.query.message;
 
-    const statutoryComplianceDocs = await StatutoryCompliance.findOne().sort({ _id: -1 })
+    const statutoryComplianceDocs = await StatutoryCompliance.find().sort({ _id: -1 })
 
     
     res.render("home/dashboard/statutoryComplianceStatus", {

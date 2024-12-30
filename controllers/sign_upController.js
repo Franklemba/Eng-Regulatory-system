@@ -37,26 +37,26 @@ function generateOTP() {
       // Generate OTP
       const otp = generateOTP();
       const otpExpiration = new Date(Date.now() + 15 * 60 * 1000); // 15 minutes from now
-      console.log(otp);
+      // console.log(otp);
   
       // Save OTP to user document
       newUser.verificationOTP = await bcrypt.hash(otp, 10); // Hash the OTP
       newUser.otpExpiration = otpExpiration;
       await newUser.save();
   
-      res.redirect('/dashboard');
+      // res.redirect('/dashboard');
 
-    //  sendOTPemail(`${firstName} ${lastName}`, email, otp)
+     sendOTPemail(nameOfEntity, email, otp)
   
-      // res.render("auth/email_verification", {
-      //   message: `We have sent a verification OTP to ${email}. Please enter the OTP to verify your email. Expires in 15 minutes`,
-      //   url: `/auth/verify-otp/${newUser._id}`,
-      //   buttonText: "Verify OTP",
-      //   user: req.user,
-      //   incorrectCredentials: false,
-      //   errorMessage: '',
-      //   layout
-      // });
+      res.render("auth/email_verification", {
+        message: `We have sent a verification OTP to ${email}. Please enter the OTP to verify your email. Expires in 15 minutes`,
+        url: `/auth/verify-otp/${newUser._id}`,
+        buttonText: "Verify OTP",
+        user: req.user,
+        incorrectCredentials: false,
+        errorMessage: '',
+        layout
+      });
   
     } catch (error) {
       console.error(`Error registering user: ${error.message}`);
@@ -72,9 +72,8 @@ function generateOTP() {
     const { otp } = req.body;
   
     try {
-      res.redirect('/merchant');
+      // res.redirect('/merchant');
       const user = await User.findById(userId);
-  return
       if (!user) {
         return res.status(400).send('User not found');
       }
@@ -115,9 +114,11 @@ function generateOTP() {
         }
   
         // Redirect to the home page or any other route after login
-        res.redirect('/merchant');
+        res.redirect('/dashboard');
       });
-  
+
+        return
+    
     } catch (error) {
       console.error(`Error verifying OTP: ${error.message}`);
       res.status(500).send('An error occurred during verification');

@@ -30,6 +30,15 @@ userEmail: {
     type: String,
     required: true,
   },
+  others: {
+    type: String,
+    required: true,
+  },
+  status: {
+    type: String,
+    required: true,
+    default: 'pending'
+  },
   createdAt: {
     type: Date,
     default: Date.now,

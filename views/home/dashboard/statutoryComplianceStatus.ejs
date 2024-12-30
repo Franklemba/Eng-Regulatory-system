@@ -24,62 +24,162 @@
     </p> -->
     </div>
     <div class="card-body">
-    <div class="table-responsive">
-    <table class="table  datanew ">
-    <thead>
-    <tr>
-    <th>Document Name</th>
-    <th>Status</th>
-    <th>Action</th>
-    
-    </tr>
-    </thead>
-    
-    <% if (statutoryComplianceDocs == null) { %>
-          
-        <% } else { %>
-         
-            <tbody>
-            <tr>
-            <td><strong>ZPPA license</strong></td>
-            <td><button type="button" class="btn btn-danger">Pending</button></td>
-            <td><button type="button" class="btn btn-info"><a href= "/<%=statutoryComplianceDocs.zppaDoc%>" >view</a></button></td>
-            </tr>
-            <tr>
         
-                <td><strong>PACRA license</strong></td>
-                <td><button type="button" class="btn btn-danger">Pending</button></td>
-                <td><button type="button" class="btn btn-info"><a href="/<%=statutoryComplianceDocs.pacraDoc%>">view</a></button></td>
-               
-            </tr>
-            <tr>
-                <td><strong>Worker's Compensation license</strong></td>
-                <td><button type="button" class="btn btn-danger">Pending</button></td>
-                <td><button type="button" class="btn btn-info"><a href="/<%=statutoryComplianceDocs.workcompDoc%>">view</a></button></td>
-               
-            </tr>
+        <% if (statutoryComplianceDocs == null) { %>
             
-            <tr>
-                <td><strong>Nhima license</strong></td>
-                <td><button type="button" class="btn btn-danger">Pending</button></td>
-                <td><button type="button" class="btn btn-info"><a href="/<%=statutoryComplianceDocs.nhimaDoc%>">view</a></button></td>
-               
-            </tr>
-        
-            <tr>
-                <td><strong>ERB license</strong></td>
-                <td><button type="button" class="btn btn-danger">Pending</button></td>
-                <td><button type="button" class="btn btn-info"><a href="/<%=statutoryComplianceDocs.erbDoc%>">view</a></button></td>
-               
-            </tr>
-           
-            
-            </tbody>
-     
-    <% } %>
-
-    </table>
-    </div>
+            <% } else { %>
+                
+                <% statutoryComplianceDocs.forEach(element => { %>
+                    <div class="table-responsive">
+                    <h4>Submitted on <%=element.createdAt.toLocaleDateString('en-GB') %> <i><%=element.createdAt.toLocaleTimeString('en-GB') %></i></h4>
+                    <table class="table   ">
+                    <thead>
+                    <tr>
+                    <th>Document Name</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                    
+                    </tr>
+                    </thead>
+                    
+                         
+                            <tbody>
+                            <tr>
+                            <td><strong>ZPPA license</strong></td>
+                            <td><button type="button" class="btn btn-danger">Pending</button></td>
+                            <td>
+                                <div class="dropdown">
+                                <a href="javascript:void(0);" data-bs-toggle="dropdown" aria-expanded="false" class="dropset">
+                                <i class="fa fa-ellipsis-v"></i>
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <li>
+                                    <a class="dropdown-item" href= "/<%=element.zppaDoc%>" >View</a>
+                                </li>
+                                <li>
+                                <a href="/dashboard/newApplication" class="dropdown-item">Delete</a>
+                                </li>
+                                </ul>
+                                </div>
+                            </td>
+                            </tr>
+                            <tr>
+                        
+                                <td><strong>PACRA license</strong></td>
+                                <td><button type="button" class="btn btn-danger">Pending</button></td>
+                                
+                                    <td>
+                                        <div class="dropdown">
+                                        <a href="javascript:void(0);" data-bs-toggle="dropdown" aria-expanded="false" class="dropset">
+                                        <i class="fa fa-ellipsis-v"></i>
+                                        </a>
+                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <li>
+                                            <a class="dropdown-item" href= "/<%=element.pacraDoc%>" >View</a>
+                                        </li>
+                                        <li>
+                                        <a href="/dashboard/newApplication" class="dropdown-item">Delete</a>
+                                        </li>
+                                        </ul>
+                                        </div>
+                                    </td>
+                                
+                               
+                            </tr>
+                            <tr>
+                                <td><strong>Worker Compensation </strong></td>
+                                <td><button type="button" class="btn btn-danger">Pending</button></td>
+                               
+                                <td>
+                                    <div class="dropdown">
+                                    <a href="javascript:void(0);" data-bs-toggle="dropdown" aria-expanded="false" class="dropset">
+                                    <i class="fa fa-ellipsis-v"></i>
+                                    </a>
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <li>
+                                        <a class="dropdown-item" href= "/<%=element.workcompDoc%>" >View</a>
+                                    </li>
+                                    <li>
+                                    <a href="/dashboard/newApplication" class="dropdown-item">Delete</a>
+                                    </li>
+                                    </ul>
+                                    </div>
+                                </td>
+                               
+                            </tr>
+                            
+                            <tr>
+                                <td><strong>Nhima </strong></td>
+                                <td><button type="button" class="btn btn-danger">Pending</button></td>
+                                <td>
+                                    <div class="dropdown">
+                                    <a href="javascript:void(0);" data-bs-toggle="dropdown" aria-expanded="false" class="dropset">
+                                    <i class="fa fa-ellipsis-v"></i>
+                                    </a>
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <li>
+                                        <a class="dropdown-item" href= "/<%=element.nhimaDoc%>" >View</a>
+                                    </li>
+                                    <li>
+                                    <a href="/dashboard/newApplication" class="dropdown-item">Delete</a>
+                                    </li>
+                                    </ul>
+                                    </div>
+                                </td>
+                               
+                            </tr>
+                        
+                            <tr>
+                                <td><strong>ERB </strong></td>
+                                <td><button type="button" class="btn btn-danger">Pending</button></td>
+                                <td>
+                                    <div class="dropdown">
+                                    <a href="javascript:void(0);" data-bs-toggle="dropdown" aria-expanded="false" class="dropset">
+                                    <i class="fa fa-ellipsis-v"></i>
+                                    </a>
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <li>
+                                        <a class="dropdown-item" href= "/<%=element.erbDoc%>" >View</a>
+                                    </li>
+                                    <li>
+                                    <a href="/dashboard/newApplication" class="dropdown-item">Delete</a>
+                                    </li>
+                                    </ul>
+                                    </div>
+                                </td>
+                               
+                            </tr>
+                            <tr>
+                                <td><strong>Others</strong></td>
+                                <td><button type="button" class="btn btn-danger">Pending</button></td>
+                                <td>
+                                    <div class="dropdown">
+                                    <a href="javascript:void(0);" data-bs-toggle="dropdown" aria-expanded="false" class="dropset">
+                                    <i class="fa fa-ellipsis-v"></i>
+                                    </a>
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <li>
+                                        <a class="dropdown-item" href= "/<%=element.others%>" >View</a>
+                                    </li>
+                                    <li>
+                                    <a href="/dashboard/newApplication" class="dropdown-item">Delete</a>
+                                    </li>
+                                    </ul>
+                                    </div>
+                                </td>
+                               
+                            </tr>
+                           
+                            
+                            </tbody>
+                     
+                            
+                        </table>
+                    </div>
+                        <hr>
+                 
+                <% }) %>
+        <% } %>
     </div>
     </div>
     </div>
