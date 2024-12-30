@@ -9,11 +9,11 @@ var defaultClient = SibApiV3Sdk.ApiClient.instance;
 var apiInstance = new SibApiV3Sdk.TransactionalEmailsApi();
 
 
-// Check if the API key is set properly
-if (!process.env.EMAILAPI) {
-  console.error("API key is not defined");
-  process.exit(1);
-}
+// // Check if the API key is set properly
+// if (!process.env.EMAILAPI) {
+//   console.error("API key is not defined");
+//   process.exit(1);
+// }
 
 
 
