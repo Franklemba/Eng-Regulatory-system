@@ -1,0 +1,141 @@
+<div class="page-wrapper">
+    <div class="content">
+        <div class="page-header">
+            <div class="page-title">
+                <h4>Profile Management</h4>
+                <h6>Manage and update your profile information</h6>
+            </div>
+        </div>
+
+        <!-- Profile Overview Section -->
+        <div class="card">
+            <div class="card-body">
+                <h5>Account Overview</h5>
+                <div class="row">
+                    <div class="col-lg-9">
+                        <table class="table table-borderless">
+                            <tr>
+                                <th>Full Name:</th>
+                                <td><%= user.nameOfEntity %></td>
+                            </tr>
+                            <tr>
+                                <th>Email Address:</th>
+                                <td><%= user.email %></td>
+                            </tr>
+                            <tr>
+                                <th>Phone Number:</th>
+                                <td><%= user.phoneNumber %></td>
+                            </tr>
+                            <tr>
+                                <th>Type of Entity:</th>
+                                <td><%= user.typeOfEntity %></td>
+                            </tr>
+                            <tr>
+                                <th>Address:</th>
+                                <td><%= user.address %>, <%= user.city %>, <%= user.country %></td>
+                            </tr>
+                            <tr>
+                                <th>Business Registration Number:</th>
+                                <td><%= user.businessRegistrationNumber %></td>
+                            </tr>
+                            <tr>
+                                <th>Account Status:</th>
+                                <td><%= user.accountStatus %></td>
+                            </tr>
+                        </table>
+                        <button class="btn btn-primary btn-sm mt-3" id="edit-profile-toggle">Edit Details</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Edit Profile Section -->
+        <div class="card mt-4" id="edit-profile-section" style="display: none;">
+            <div class="card-body">
+                <h5>Edit Profile Details</h5>
+                <form id="edit-profile-form">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label>Full Name</label>
+                                <input type="text" class="form-control" name="nameOfEntity" value="<%= user.nameOfEntity %>">
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label>Email Address</label>
+                                <input type="email" class="form-control" name="email" value="<%= user.email %>">
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label>Phone Number</label>
+                                <input type="text" class="form-control" name="phoneNumber" value="<%= user.phoneNumber %>">
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label>Business Registration Number</label>
+                                <input type="text" class="form-control" name="businessRegistrationNumber" value="<%= user.businessRegistrationNumber %>">
+                            </div>
+                        </div>
+
+                        
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label>Address</label>
+                                <input type="text" class="form-control" name="address" value="<%= user.address %>">
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label>City</label>
+                                <input type="text" class="form-control" name="city" value="<%= user.city %>">
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label>Country</label>
+                                <input type="text" class="form-control" name="country" value="<%= user.country %>">
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-success mt-3">Save Changes</button>
+                    <button type="button" class="btn btn-secondary mt-3" id="cancel-edit-button">Cancel</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Toggle Edit Profile Section
+    document.getElementById('edit-profile-toggle').addEventListener('click', () => {
+        document.getElementById('edit-profile-section').style.display = 'block';
+    });
+
+    document.getElementById('cancel-edit-button').addEventListener('click', () => {
+        document.getElementById('edit-profile-section').style.display = 'none';
+    });
+
+    // Submit Profile Update
+    document.getElementById('edit-profile-form').addEventListener('submit', async (event) => {
+        event.preventDefault();
+
+        const formData = new FormData(event.target);
+        const formObject = Object.fromEntries(formData.entries());
+
+        const response = await fetch('/auth/updateProfile', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(formObject),
+        });
+
+        if (response.ok) {
+            alert('Profile updated successfully!');
+            window.location.reload();
+        } else {
+            alert('Failed to update profile.');
+        }
+    });
+</script>

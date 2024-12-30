@@ -19,7 +19,7 @@ module.exports = function(passport) {
         }
 
         // Check if the email is verified
-        if (!user.isVerified) {
+        if (!user.isEmailVerified) {
           return done(null, false, { message: 'Please verify your email before logging in.' });
         }
 

@@ -1,7 +1,7 @@
 
 const EngineeringLicense = require("../models/licenseSchema");
 const EngineeringProject = require("../models/projectSchema");
-const ImportExportSchema = require("../models/importExportSchema");
+const ProductCertifications = require("../models/productCertificationSchema");
 const AnnualDeclaration = require("../models/annualDeclarationSchema");
 const PremiseLeasing = require("../models/premiseSchema");
 const BusinessClosure = require("../models/businessClosureSchema");
@@ -11,16 +11,28 @@ const StructuralEnvironmentalLicense = require("../models/structuralEnvironmenta
 
 
 
-const deleteLicenseApplication = async (req, res) => {
+const deleteApplication = async (req, res) => {
     try {
       const { id } = req.params;
       await EngineeringLicense.findByIdAndDelete(id);
       res.redirect("/dashboard/submittedApplication");
     } catch (error) {
-      console.error("Error saving engineering license application:", error);
+      console.error("Error: ", error);
+      res.status(500).send("An error occurred while processing your application.");
+    }
+  };
+
+  const deleteProductCertification = async (req, res) => {
+    try {
+      const { id } = req.params;
+      console.log(id);
+      await ProductCertifications.findByIdAndDelete(id);
+      res.redirect("/dashboard/productCertificationApplications");
+    } catch (error) {
+      console.error("Error: ", error);
       res.status(500).send("An error occurred while processing your application.");
     }
   };
 
 
-  module.exports = {deleteLicenseApplication};
+  module.exports = {deleteApplication, deleteProductCertification};

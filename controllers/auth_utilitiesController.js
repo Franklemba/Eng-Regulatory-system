@@ -11,6 +11,26 @@ exports.profileSetting = (req, res) => {
     });
 };
 
+exports.updateProfile = (async(req,res)=>{
+
+  try {
+    const userId = req.user._id; // Adjust based on session management
+    const updatedData = req.body;
+console.log(updatedData)
+    // Find and update the user
+    const user = await User.findByIdAndUpdate(userId, updatedData, { new: true });
+
+    if (!user) {
+        return res.status(404).json({ message: 'User not found' });
+    }
+
+    res.status(200).json({ message: 'Profile updated successfully', user });
+} catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Internal server error' });
+}
+})
+
 exports.changePassword = (req, res) => {
   const layout = "layouts/non_headerLayout"
     res.render("auth/change_password", {

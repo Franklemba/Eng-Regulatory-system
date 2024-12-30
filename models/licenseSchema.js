@@ -59,6 +59,11 @@ const engineeringLicenseSchema = new mongoose.Schema({
     default: Date.now,
     required: true,
   },
+  status:{
+    type: String,
+    required: false,
+    default:'Pending'
+  }
 });
 
 module.exports = mongoose.model("EngineeringLicense", engineeringLicenseSchema);

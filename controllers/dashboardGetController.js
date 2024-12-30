@@ -1,7 +1,7 @@
 // dashboardGetController.js
 const EngineeringLicense = require("../models/licenseSchema");
 const EngineeringProject = require("../models/projectSchema");
-const ImportExportSchema = require("../models/importExportSchema");
+const ProductCertificationSchema = require("../models/productCertificationSchema");
 const AnnualDeclaration = require("../models/annualDeclarationSchema");
 const PremiseLeasing = require("../models/premiseSchema");
 const BusinessClosure = require("../models/businessClosureSchema");
@@ -14,9 +14,12 @@ const base64Decode = (data) => {
 
 
 const getDashboard = async (req, res) => {
+  const projects = await EngineeringProject.find()
     res.render("home/dashboard/dashboard", {
       layout: "layouts/dashboardHeader.ejs",
       user: req.user,
+      activeProjects:projects
+
     });
   };
   
@@ -26,6 +29,8 @@ const getDashboard = async (req, res) => {
       user: req.user,
     });
   };
+
+
   
   const getNewProjectListingPage = async (req, res) => {
     res.render("home/dashboard/newProject", {
@@ -89,10 +94,19 @@ const getDashboard = async (req, res) => {
     });
   };
   
-  const getExportImportApplicationPage = async (req, res) => {
-    res.render("home/dashboard/importExportApplication", {
+  const getProductCertificationApplicationPage = async (req, res) => {
+    res.render("home/dashboard/productCertification", {
       layout: "layouts/dashboardHeader.ejs",
       user: req.user,
+    });
+  };
+
+  const getProductCertificationApplicationsPage = async (req, res) => {
+    const productCertifications = await ProductCertificationSchema.find({}).sort({ _id: -1 });
+    res.render("home/dashboard/productCertifications", {
+      layout: "layouts/dashboardHeader.ejs",
+      user: req.user,
+      productCertifications
     });
   };
   
@@ -198,6 +212,13 @@ const getDashboard = async (req, res) => {
     });
   };
 
+  const getProfileManagement = async (req, res) => {
+    res.render("auth/profileManagement", {
+      layout: "layouts/dashboardHeader.ejs",
+      user: req.user,
+    });
+  };
+
 
   const downloadFile = async (req, res) => {
     
@@ -219,7 +240,8 @@ const getDashboard = async (req, res) => {
     getReviewProgressPage,
     getPremiseLeasingPage,
     getAnnualDeclarationPage,
-    getExportImportApplicationPage,
+    getProductCertificationApplicationPage,
+    getProductCertificationApplicationsPage,
     getBusinessClosurePage,
     getStructuralEnvironmentalLicensePage,
     getOrderForSupplyPage,
@@ -228,6 +250,7 @@ const getDashboard = async (req, res) => {
     getStatutoryComplianceStatus,
     getAssessmentPage,
     downloadFile,
-    getNewProjectListingPage
+    getNewProjectListingPage,
+    getProfileManagement
   };
   

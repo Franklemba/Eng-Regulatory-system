@@ -1,0 +1,118 @@
+<div class="container my-5">
+    <div class="card shadow-sm">
+        <div class="card-header text-center">
+            <h4 class="mb-0">Product Certification Details</h4>
+        </div>
+        <div class="card-body">
+            <!-- Product Information -->
+            <h5 class="text-muted mb-3">1. Product Information</h5>
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <p><strong>Product Name:</strong> <%= productCertification.productName %></p>
+                </div>
+                <div class="col-md-6">
+                    <p><strong>Manufacturer’s Name:</strong> <%= productCertification.manufacturerName %></p>
+                </div>
+                <div class="col-md-6">
+                    <p><strong>Model:</strong> <%= productCertification.model %></p>
+                </div>
+                <div class="col-md-6">
+                    <p><strong>Serial Number:</strong> <%= productCertification.serialNumber %></p>
+                </div>
+            </div>
+
+            <!-- Origin of the Product -->
+            <h5 class="text-muted mb-3">2. Origin of the Product</h5>
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <p><strong>Source:</strong> <%= productCertification.source.charAt(0).toUpperCase() + productCertification.source.slice(1) %></p>
+                </div>
+                <div class="col-md-6">
+                    <p><strong>Country of Manufacture:</strong> <%= productCertification.countryOfManufacture %></p>
+                </div>
+            </div>
+
+            <!-- Technical Specifications -->
+            <h5 class="text-muted mb-3">3. Technical Specifications</h5>
+            <div class="row mb-3">
+                <div class="col-12">
+                    <p><strong>Description of Product Functionality:</strong></p>
+                    <p><%= productCertification.productFunctionality %></p>
+                </div>
+                <div class="col-12">
+                    <p><strong>Relevant Standards:</strong></p>
+                    <ul>
+                        <% productCertification.standards?.forEach((standard) => { %>
+                            <li><%= standard %></li>
+                        <% }); %>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Attachments Section -->
+            <h5 class="text-muted mb-3">4. Attachments</h5>
+            <div class="row mb-3">
+                <div class="col-md-4">
+                    <p><strong>Product Datasheet:</strong></p>
+                    <a
+                    href="/dashboard/download/<%= productCertification.productDatasheet %>"
+                     download="<%= productCertification.productDatasheet %>"
+                     class="btn btn-outline-primary" >
+                        Download Datasheet
+                    </a>
+                </div>
+                <div class="col-md-4">
+                    <p><strong>Standard Certifications:</strong></p>
+                    <a
+                    href="/dashboard/download/<%= productCertification.standardCertifications %>"
+                     download="<%= productCertification.standardCertifications %>"
+                     class="btn btn-outline-primary" >
+                        Download Certifications
+                    </a>
+                </div>
+                <div class="col-md-4">
+                    <p><strong>Manufacturer’s Authorization:</strong></p>
+                    <a
+                    href="/dashboard/download/<%= productCertification.manufacturerAuthorization %>"
+                     download="<%= productCertification.manufacturerAuthorization %>"
+                     class="btn btn-outline-primary" >
+                        Download Authorization
+                    </a>
+                </div>
+            </div>
+
+            <!-- Declaration and Consent -->
+            <h5 class="text-muted mb-3">5. Declaration and Consent</h5>
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <p><strong>Applicant’s Name:</strong> <%= productCertification.applicantName %></p>
+                </div>
+                <div class="col-md-6">
+                    <p><strong>Submission Date:</strong> <%= new Date(productCertification.submissionDate).toLocaleDateString() %></p>
+                </div>
+                <div class="col-md-6">
+                    <p><strong>Declaration:</strong> <%= productCertification.declaration ? 'Agreed' : 'Not Agreed' %></p>
+                </div>
+                <div class="col-md-6">
+                    <p><strong>Signature:</strong></p>
+                    <img src="<%= productCertification.signature %>" alt="Signature" class="img-fluid border rounded" />
+                </div>
+            </div>
+
+            <!-- Status and Metadata -->
+            <h5 class="text-muted mb-3">6. Status</h5>
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <p><strong>productCertification. Status:</strong> <%= productCertification.status.replace('_', ' ').toUpperCase() %></p>
+                </div>
+                <div class="col-md-6">
+                    <p><strong>Last Updated:</strong> <%= new Date(productCertification.updatedAt).toLocaleString() %></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-footer text-end">
+            <a href="/dashboard/productCertificationApplications" class="btn btn-secondary">Back to Product Certifications</a>
+        </div>
+    </div>
+</div>

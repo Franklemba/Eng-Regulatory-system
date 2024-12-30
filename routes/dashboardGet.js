@@ -8,10 +8,12 @@ router.get("/newApplication", dashboardGetController.getNewApplicationPage);
 router.get("/newProjectListing", dashboardGetController.getNewProjectListingPage);
 
 router.get("/submittedApplication", dashboardGetController.getSubmittedApplicationPage);
+
 router.get("/reviewProgress", dashboardGetController.getReviewProgressPage);
 router.get("/premiseLeasing", dashboardGetController.getPremiseLeasingPage);
 router.get("/annualDeclaration", dashboardGetController.getAnnualDeclarationPage);
-router.get("/importExportApplication", dashboardGetController.getExportImportApplicationPage);
+router.get("/productCertificationApplication", dashboardGetController.getProductCertificationApplicationPage);
+router.get("/productCertificationApplications", dashboardGetController.getProductCertificationApplicationsPage);
 
 // Lembalemba onwards
 router.get("/businessClosure", dashboardGetController.getBusinessClosurePage);
@@ -21,5 +23,6 @@ router.get("/structuralEnvironmentalLicense", dashboardGetController.getStructur
 router.get("/assessment", dashboardGetController.getAssessmentPage);
 router.get("/newCompliance", dashboardGetController.getStatutoryCompliance);
 router.get("/reviewCompliance", dashboardGetController.getStatutoryComplianceStatus);
+router.get("/profileManagement", dashboardGetController.getProfileManagement);
 
 module.exports = router;

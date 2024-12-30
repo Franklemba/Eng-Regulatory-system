@@ -36,7 +36,11 @@ router.post("/newApplication", upload.fields([{ name: 'supportingDocument', maxC
 router.post("/newProject", dashboardPostController.submitProject);
 router.post("/newPremiseLeasing", dashboardPostController.submitPremiseLeasing);
 router.post("/newAnnualDeclaration", dashboardPostController.submitAnnualDeclaration);
-router.post("/newExportImportApplication", dashboardPostController.submitExportImportApplication);
+router.post("/newProductCertification", upload.fields([
+  { name: 'productDatasheet', maxCount: 1 },
+  { name: 'standardCertifications', maxCount: 1 },
+  { name: 'manufacturerAuthorization', maxCount: 1 }
+]), dashboardPostController.submitProductCertificationApplication);
 
 router.post("/businessClosure",  upload.single('finalFinancialStatement'), dashboardPostController.submitBusinessClosure);
 router.post("/newEnvironmentAndStructuralLicence", 

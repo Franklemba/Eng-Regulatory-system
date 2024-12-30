@@ -56,10 +56,14 @@ const userSchema = new mongoose.Schema({
     type: Date,
     required: false
   },
-  isVerified: {
+  isEmailVerified: {
     type: Boolean,
     required: true,
     default: true
+  },
+  accountStatus:{
+    type:String,
+    default:'Pending Zepra Approval'
   }
 });
 

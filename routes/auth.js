@@ -3,7 +3,7 @@ const router = express.Router();
 const passport = require('passport')
 
 
-const authControllerUtilites = require('../controllers/auth_utilitiesController');
+const authControllerUtilities = require('../controllers/auth_utilitiesController');
 const authControllerSignUP = require('../controllers/sign_upController');
 
 
@@ -41,10 +41,13 @@ router.post("/login", (req, res, next) => {
       failureFlash: true,
     })(req, res, next);
   });
+
+  
     
 router.get("/register", authControllerSignUP.getSignUp);
 
 router.post("/register", authControllerSignUP.postSignUp);
+router.post("/updateProfile", authControllerUtilities.updateProfile);
 
 router.post("/verify-otp/:userId", authControllerSignUP.verifyOTP);
 
@@ -52,17 +55,17 @@ router.post("/resend-otp/:userId", authControllerSignUP.resendOTP);
 
 
 // Profile settings route
-router.get("/profile-setting", authControllerUtilites.profileSetting);
+router.get("/profile-setting", authControllerUtilities.profileSetting);
 // Change password route
-router.get("/change-password", authControllerUtilites.changePassword);
+router.get("/change-password", authControllerUtilities.changePassword);
 
-router.post("/change-password", authControllerUtilites.postChangePassword);
+router.post("/change-password", authControllerUtilities.postChangePassword);
 
 // Two-step verification route
-router.get("/two-step", authControllerUtilites.twoStep);
+router.get("/two-step", authControllerUtilities.twoStep);
 
 // Logout route
-router.get("/logout", authControllerUtilites.logout);
+router.get("/logout", authControllerUtilities.logout);
 
 
 

@@ -19,15 +19,17 @@ const authRouter = require('./routes/auth')
 
 const dashboardPostRouter = require('./routes/dashboardPost')
 const dashboardGetRouter = require('./routes/dashboardGet')
+const dashboardDeleteRouter = require('./routes/dashboardDelete')
+const singlePageGetRouter = require('./routes/singlePageGet')
 ////////////database connection////////////
 
 
 const localDB = "mongodb://127.0.0.1:27017/EngRegulatoryBoard"
 const liveDB = "mongodb+srv://Engineering:96EceAsGquKn3aLt@cluster0.cq29s.mongodb.net/?retryWrites=true&w=majority&appName=Cluster096EceAsGquKn3aLt"
 mongoose.set('strictQuery', true);
+const mainDB = liveDB
 
-
-mongoose.connect(liveDB,{useNewUrlParser: true}).then(() => {
+mongoose.connect(mainDB,{useNewUrlParser: true}).then(() => {
   console.log('database is connected')
 }).catch((err) => console.log('error connecting to database ', err))
   
@@ -49,7 +51,7 @@ app.set('trust proxy', 1);
 
  // Session configuration
 const sessionStore = MongoStore.create({ 
-mongoUrl: liveDB,
+mongoUrl: mainDB,
   ttl: 14 * 24 * 60 * 60 // 14 days
 });
 
@@ -77,6 +79,9 @@ app.use('/media',mediaRouter);
 app.use('/auth', authRouter);
 app.use('/dashboard',ensureAuthenticated, dashboardPostRouter);
 app.use('/dashboard',ensureAuthenticated, dashboardGetRouter);
+app.use('/dashboard',ensureAuthenticated, dashboardDeleteRouter);
+app.use('/singlePage',ensureAuthenticated, singlePageGetRouter);
+
 app.use('/null', (req,res)=>{
   const layout = "layouts/non_headerLayout"
   
@@ -85,6 +90,7 @@ app.use('/null', (req,res)=>{
   });
 
 });
+
 
 app.use('*', (req, res) => {
   res.status(404).redirect('/null'); // You can replace '/' with the URL of your 404 page

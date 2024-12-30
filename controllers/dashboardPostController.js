@@ -4,7 +4,7 @@
 
 const EngineeringLicense = require("../models/licenseSchema");
 const EngineeringProject = require("../models/projectSchema");
-const ImportExportSchema = require("../models/importExportSchema");
+const ProductCertificationSchema = require("../models/productCertificationSchema");
 const AnnualDeclaration = require("../models/annualDeclarationSchema");
 const PremiseLeasing = require("../models/premiseSchema");
 const BusinessClosure = require("../models/businessClosureSchema");
@@ -149,26 +149,60 @@ const submitAnnualDeclaration= async (req, res) => {
 
 };
 
-const submitExportImportApplication = async (req, res) => {
-
+const submitProductCertificationApplication = async (req, res) => {
   try {
     const {
-
+      productName,
+      manufacturerName,
+      model,
+      serialNumber,
+      source,
+      countryOfManufacture,
+      productFunctionality,
+      standards,
+      applicantName,
+      submissionDate,
+      declaration,
+      signature
     } = req.body;
 
-    const newExportImportApplication = new ImportExportSchema({
+    // Validate required files
+    if (!req.files || !req.files['productDatasheet'] || !req.files['standardCertifications'] || !req.files['manufacturerAuthorization']) {
+      throw new Error('Missing required files');
+    }
 
+    const productCertificationApplication = new ProductCertificationSchema({
+      productName,
+      manufacturerName,
+      model,
+      serialNumber,
+      source,
+      countryOfManufacture,
+      productFunctionality,
+      standards: Array.isArray(standards) ? standards : [standards].filter(Boolean),
+      applicantName,
+      submissionDate,
+      declaration: declaration === 'on' || declaration === true,
+      signature,
+      // File paths
+      productDatasheet: req.files['productDatasheet'][0].path,
+      standardCertifications: req.files['standardCertifications'][0].path,
+      manufacturerAuthorization: req.files['manufacturerAuthorization'][0].path,
+      // Set initial status
+      status: 'submitted'
     });
 
-    const documents = req.files?.map(file => file.path) || [];
-    await newExportImportApplication.save();
-    res.redirect("/dashboard/newApplication");
+    // res.send(req.body)
+    await productCertificationApplication.save();
+
+    req.flash('success', 'Product certification application submitted successfully');
+    res.redirect("/dashboard/productCertificationApplications");
   }
   catch (error) {
-    console.error("Error saving import export application:", error);
-    res.status(500).send("An error occurred while processing your application.");
+    console.error("Error submitting product certification application:", error);
+    req.flash('error', 'An error occurred while processing your application');
+    res.redirect("/dashboard/productCertificationApplications");
   }
-
 };
 
 
@@ -385,7 +419,7 @@ module.exports = {
   submitProject,
   submitPremiseLeasing,
   submitAnnualDeclaration,
-  submitExportImportApplication,
+  submitProductCertificationApplication,
 
 
   submitBusinessClosure,

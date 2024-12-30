@@ -1,0 +1,292 @@
+
+    <style>
+        .card-header {
+            background-color: #ffffff !important;
+            color: rgb(0, 0, 0) !important;
+        }
+        .btn-primary {
+            background-color: #ffffff !important;
+            border-color: #1a472a !important;
+        }
+        .btn-primary:hover {
+            background-color: #2c6a3f !important;
+            border-color: #2c6a3f !important;
+        }
+
+        .green{
+            background-color: #1a472a !important;
+        }
+        .page-wrapper {
+            min-height: 100vh;
+            background-color: #f8f9fa;
+            padding: 2rem;
+        }
+        #signatureCanvas {
+            background: #fff;
+            cursor: crosshair;
+        }
+    </style>
+
+<div class="page-wrapper">
+    <div class="container bg-white shadow-lg rounded-3 p-4">
+        <h2 class="text-center mb-4 fw-bold" style="color: #1a472a;">Product Certification Application</h2>
+        
+        <form action="/dashboard/newProductCertification" method="POST" enctype="multipart/form-data" class="needs-validation" novalidate>
+            <!-- Product Information Section -->
+            <div class="card mb-4 border-0 shadow-sm">
+                <div class="card-header">
+                    <h4 class="mb-0">1. Product Information</h4>
+                </div>
+                <div class="card-body">
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label class="form-label fw-semibold">Product Name</label>
+                            <input type="text" name="productName" class="form-control" required>
+                            <div class="invalid-feedback">
+                                Please provide a product name
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label fw-semibold">Manufacturer's Name</label>
+                            <input type="text" name="manufacturerName" class="form-control" required>
+                            <div class="invalid-feedback">
+                                Please provide manufacturer's name
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label fw-semibold">Model</label>
+                            <input type="text" name="model" class="form-control" required>
+                            <div class="invalid-feedback">
+                                Please provide a model number
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label fw-semibold">Serial Number</label>
+                            <input type="text" name="serialNumber" class="form-control" required>
+                            <div class="invalid-feedback">
+                                Please provide a serial number
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Origin Section -->
+            <div class="card mb-4 border-0 shadow-sm">
+                <div class="card-header">
+                    <h4 class="mb-0">2. Origin of the Product</h4>
+                </div>
+                <div class="card-body">
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label class="form-label fw-semibold">Source</label>
+                            <select name="source" class="form-select" required>
+                                <option value="">Select source...</option>
+                                <option value="local">Locally Sourced</option>
+                                <option value="imported">Imported</option>
+                            </select>
+                            <div class="invalid-feedback">
+                                Please select a source
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label fw-semibold">Country of Manufacture</label>
+                            <input type="text" name="countryOfManufacture" class="form-control" required>
+                            <div class="invalid-feedback">
+                                Please provide country of manufacture
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Technical Specifications -->
+            <div class="card mb-4 border-0 shadow-sm">
+                <div class="card-header">
+                    <h4 class="mb-0">3. Technical Specifications</h4>
+                </div>
+                <div class="card-body">
+                    <div class="row g-3">
+                        <div class="col-12">
+                            <label class="form-label fw-semibold">Description of Product Functionality</label>
+                            <textarea name="productFunctionality" class="form-control" rows="4" required></textarea>
+                            <div class="invalid-feedback">
+                                Please provide product functionality description
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label fw-semibold">Relevant Standards</label>
+                            <div class="row g-2">
+                                <div class="col-md-3">
+                                    <div class="form-check">
+                                        <input class="form-check-input standards-check" type="checkbox" name="standards" value="ISO">
+                                        <label class="form-check-label">ISO</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-check">
+                                        <input class="form-check-input standards-check" type="checkbox" name="standards" value="ASTM">
+                                        <label class="form-check-label">ASTM</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-check">
+                                        <input class="form-check-input standards-check" type="checkbox" name="standards" value="IEC">
+                                        <label class="form-check-label">IEC</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-check">
+                                        <input class="form-check-input standards-check" type="checkbox" name="standards" value="Other">
+                                        <label class="form-check-label">Other</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="standards-error" class="invalid-feedback" style="display: none;">
+                                Please select at least one standard
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Attachments Section -->
+            <div class="card mb-4 border-0 shadow-sm">
+                <div class="card-header">
+                    <h4 class="mb-0">4. Attachments</h4>
+                </div>
+                <div class="card-body">
+                    <div class="row g-3">
+                        <div class="col-md-12">
+                            <label class="form-label fw-semibold">Product Datasheet</label>
+                            <input type="file" name="productDatasheet" class="form-control" required 
+                                   accept=".pdf,.doc,.docx,.xls,.xlsx">
+                            <div class="invalid-feedback">
+                                Please upload product datasheet
+                            </div>
+                            <div class="form-text">Upload technical specifications and performance details</div>
+                        </div>
+                        <div class="col-md-12">
+                            <label class="form-label fw-semibold">Standard Certifications</label>
+                            <input type="file" name="standardCertifications" class="form-control" required
+                                   accept=".pdf,.doc,.docx">
+                            <div class="invalid-feedback">
+                                Please upload standard certifications
+                            </div>
+                            <div class="form-text">Upload ISO compliance or safety approval documents</div>
+                        </div>
+                        <div class="col-md-12">
+                            <label class="form-label fw-semibold">Manufacturer's Authorization</label>
+                            <input type="file" name="manufacturerAuthorization" class="form-control" required
+                                   accept=".pdf,.doc,.docx">
+                            <div class="invalid-feedback">
+                                Please upload manufacturer's authorization
+                            </div>
+                            <div class="form-text">Upload authorization letter from manufacturer</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Declaration Section -->
+            <div class="card mb-4 border-0 shadow-sm">
+                <div class="card-header">
+                    <h4 class="mb-0">5. Declaration and Consent</h4>
+                </div>
+                <div class="card-body">
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label class="form-label fw-semibold">Applicant's Name</label>
+                            <input type="text" name="applicantName" class="form-control" required>
+                            <div class="invalid-feedback">
+                                Please provide applicant's name
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label fw-semibold">Date of Submission</label>
+                            <input type="date" name="submissionDate" class="form-control" required>
+                            <div class="invalid-feedback">
+                                Please select submission date
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="declaration" required>
+                                <label class="form-check-label">
+                                    I declare that all information provided in this application is true and accurate.
+                                </label>
+                                <div class="invalid-feedback">
+                                    You must agree before submitting
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label fw-semibold">Signature</label>
+                            <canvas id="signatureCanvas" class="border rounded" width="400" height="200"></canvas>
+                            <input type="hidden" name="signature" id="signatureData">
+                            <div class="form-text">Please sign above using your mouse or touch screen</div>
+                            <button type="button" class="btn btn-sm btn-secondary mt-2" id="clearSignature">Clear Signature</button>
+                            <div class="invalid-feedback" id="signature-error" style="display: none;">
+                                Please provide your signature
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hidden status field -->
+            <input type="hidden" name="status" value="submitted">
+
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <button type="submit" class="btn btn-primary px-4">Submit Application</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Canvas signature pad initialization
+    const canvas = document.getElementById('signatureCanvas');
+    const signatureInput = document.getElementById('signatureData');
+    const ctx = canvas.getContext('2d');
+    let isDrawing = false;
+    let lastX = 0;
+    let lastY = 0;
+
+    canvas.addEventListener('mousedown', startDrawing);
+    canvas.addEventListener('mousemove', draw);
+    canvas.addEventListener('mouseup', stopDrawing);
+    canvas.addEventListener('mouseout', stopDrawing);
+
+    function startDrawing(e) {
+        isDrawing = true;
+        [lastX, lastY] = [e.offsetX, e.offsetY];
+    }
+
+    function draw(e) {
+        if (!isDrawing) return;
+        ctx.beginPath();
+        ctx.moveTo(lastX, lastY);
+        ctx.lineTo(e.offsetX, e.offsetY);
+        ctx.stroke();
+        [lastX, lastY] = [e.offsetX, e.offsetY];
+        // Save signature data
+        signatureInput.value = canvas.toDataURL();
+    }
+
+    function stopDrawing() {
+        isDrawing = false;
+    }
+
+    // Form validation
+    const form = document.querySelector('.needs-validation');
+    form.addEventListener('submit', event => {
+        if (!form.checkValidity()) {
+            event.preventDefault();
+            event.stopPropagation();
+        }
+        form.classList.add('was-validated');
+    }, false);
+});
+</script>

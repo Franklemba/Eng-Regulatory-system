@@ -1,0 +1,69 @@
+<div class="page-wrapper">
+    <div class="content">
+        <div class="page-header">
+            <div class="page-title">
+                <h4>Product Certifications</h4>
+                <h6>View and track the status of submitted product certifications</h6>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                            
+                                <th>Product Name</th>
+                                <th>Manufacturer</th>
+                                <th>Model</th>
+                                <th>Source</th>
+                                <th>Submission Date</th>
+                                <th>Status</th>
+                                <th>Documents</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="applications-table-body">
+                            <% productCertifications.forEach((certification) => { %>
+                                <tr>
+                                
+                                    <td><%= certification.productName %></td>
+                                    <td><%= certification.manufacturerName %></td>
+                                    <td><%= certification.model %></td>
+                                    <td><%= certification.source %></td>
+                                    <td><%= new Date(certification.submissionDate).toLocaleDateString() %></td>
+                                    <td>
+                                        <% if (certification.status === "submitted") { %>
+                                            <span class="badge bg-warning text-dark">Pending</span>
+                                        <% } else if (certification.status === "approved") { %>
+                                            <span class="badge bg-success">Approved</span>
+                                        <% } else if (certification.status === "rejected") { %>
+                                            <span class="badge bg-danger">Rejected</span>
+                                        <% } else { %>
+                                            <span class="badge bg-secondary">Draft</span>
+                                        <% } %>
+                                    </td>
+                                    <td>
+                                     Click View more to see docs
+                                    </td>
+                                    <td>
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                                Action
+                                            </button>
+                                            <ul class="dropdown-menu">
+                                                <li><a class="dropdown-item" href="/singlePage/ViewProductCertification/<%= certification._id %>">View Details</a></li>
+                                                <li><a class="dropdown-item" href="/dashboard/deleteProductCertification/<%= certification._id %>">Delete</a></li>
+                                            </ul>
+                                        </div>
+                                    </td>
+                                </tr>
+                            <% }); %>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

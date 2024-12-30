@@ -78,108 +78,23 @@
 
 
 
-<!-- <li class="nav-item dropdown">
-<a href="javascript:void(0);" class="dropdown-toggle nav-link" data-bs-toggle="dropdown">
-<img src="/assets/img/icons/notification-bing.svg" alt="img"> <span class="badge rounded-pill">4</span>
-</a>
-<div class="dropdown-menu notifications">
-<div class="topnav-dropdown-header">
-<span class="notification-title">Notifications</span>
-<a href="javascript:void(0)" class="clear-noti"> Clear All </a>
-</div>
-<div class="noti-content">
-<ul class="notification-list">
-<li class="notification-message">
-<a href="activities.html">
-<div class="media d-flex">
-<span class="avatar flex-shrink-0">
-<img alt="" src="/assets/img/profiles/avatar-02.jpg">
-</span>
-<div class="media-body flex-grow-1">
-<p class="noti-details"><span class="noti-title">Lawson Kawaza</span> added new task <span class="noti-title">Patient appointment booking</span></p>
-<p class="noti-time"><span class="notification-time">4 mins ago</span></p>
-</div>
-</div>
-</a>
-</li>
-<li class="notification-message">
-<a href="activities.html">
-<div class="media d-flex">
-<span class="avatar flex-shrink-0">
-<img alt="" src="/assets/img/profiles/avatar-03.jpg">
-</span>
-<div class="media-body flex-grow-1">
-<p class="noti-details"><span class="noti-title">Tarah Shropshire</span> changed the task name <span class="noti-title">Appointment booking with payment gateway</span></p>
-<p class="noti-time"><span class="notification-time">6 mins ago</span></p>
-</div>
-</div>
-</a>
-</li>
-<li class="notification-message">
-<a href="activities.html">
-<div class="media d-flex">
-<span class="avatar flex-shrink-0">
-<img alt="" src="/assets/img/profiles/avatar-06.jpg">
-</span>
-<div class="media-body flex-grow-1">
-<p class="noti-details"><span class="noti-title">Misty Tison</span> added <span class="noti-title">Domenic Houston</span> and <span class="noti-title">Claire Mapes</span> to project <span class="noti-title">Doctor available module</span></p>
-<p class="noti-time"><span class="notification-time">8 mins ago</span></p>
-</div>
-</div>
-</a>
-</li>
-<li class="notification-message">
-<a href="activities.html">
-<div class="media d-flex">
-<span class="avatar flex-shrink-0">
-<img alt="" src="/assets/img/profiles/avatar-17.jpg">
-</span>
-<div class="media-body flex-grow-1">
-<p class="noti-details"><span class="noti-title">Rolland Webber</span> completed task <span class="noti-title">Patient and Doctor video conferencing</span></p>
-<p class="noti-time"><span class="notification-time">12 mins ago</span></p>
-</div>
-</div>
-</a>
-</li>
-<li class="notification-message">
-<a href="activities.html">
-<div class="media d-flex">
-<span class="avatar flex-shrink-0">
-<img alt="" src="/assets/img/profiles/avatar-13.jpg">
-</span>
-<div class="media-body flex-grow-1">
-<p class="noti-details"><span class="noti-title">Bernardo Galaviz</span> added new task <span class="noti-title">Private chat module</span></p>
-<p class="noti-time"><span class="notification-time">2 days ago</span></p>
-</div>
-</div>
-</a>
-</li>
-</ul>
-</div>
-<div class="topnav-dropdown-footer">
-<a href="activities.html">View all Notifications</a>
-</div>
-</div>
-</li> -->
-
 <li class="nav-item dropdown has-arrow main-drop">
 <a href="javascript:void(0);" class="dropdown-toggle nav-link userset" data-bs-toggle="dropdown">
-<span class="user-img"><img src="/img/oneeyedcow logo.png" alt="">
+<span class="user-img"><img src="/img/settingsIcon.png" alt="">
 <span class="status online"></span></span>
 </a>
 <div class="dropdown-menu menu-drop-user">
 <div class="profilename">
 <div class="profileset">
-<span class="user-img"><img src="/img/oneeyedcow logo.png" alt="">
+<span class="user-img"><img src="" alt="">
 <span class="status online"></span></span>
 <div class="profilesets">
 <h6><%= user.email %></h6>
-<h5>Client</h5>
+<h5>Client Email</h5>
 </div>
 </div>
 <hr class="m-0">
-<a class="dropdown-item" href="/profile"> <i class="me-2" data-feather="user"></i> My Profile</a>
-<a class="dropdown-item" href="/generalsettings"><i class="me-2" data-feather="settings"></i>Settings</a>
+<a class="dropdown-item" href="/dashboard/profileManagement"> <i class="me-2" data-feather="user"></i> My Profile</a>
 <hr class="m-0">
 <a class="dropdown-item logout pb-0" href="/auth/logout"><img src="/assets/img/icons/log-out.svg" class="me-2" alt="img">Logout</a>
 </div>
@@ -203,30 +118,31 @@
 <div class="sidebar" id="sidebar">
 <div class="sidebar-inner slimscroll">
 <div id="sidebar-menu" class="sidebar-menu">
+
 <ul>
 <li class="active">
 <a href="/dashboard"><img src="/assets/img/icons/dashboard.svg" alt="img"><span>Portal</span> </a>
 </li>
+
 <li class="submenu">
-<a href="#"><img src="/assets/img/icons/product.svg" alt="img"><span> Engineering Authorization Application</span> <span class="menu-arrow"></span></a>
+<a href="javascript:void(0);"><img src="/assets/img/icons/plus-circle.svg" alt="img"><span> Project Listing Application</span> <span class="menu-arrow"></span></a>
 <ul>
-<li><a href="/dashboard/newApplication">Apply</a></li>
-<li><a href="/dashboard/submittedApplication">Submitted Applications</a></li>
-<li><a href="/dashboard/reviewProgress">Review Progress</a></li>
+<li><a href="/dashboard/newProjectListing">Projects Listing Application</a></li>
+<li><a href="/dashboard/premisesLeasing">Premises Leasing and Annual Returns Application</a></li>
 
 </ul>
 </li>
 <li class="submenu">
-<a href="javascript:void(0);"><img src="/assets/img/icons/plus-circle.svg" alt="img"><span> Project Listing Application</span> <span class="menu-arrow"></span></a>
-<ul>
-<li><a href="/dashboard/newProjectListing">New Projects Listing</a></li>
-<li><a href="/dashboard/premisesLeasing">Premises Leasing and Annual Returns Application</a></li>
-<li><a href="/dashboard/PremisesRegistration">Premises Registration Certificate</a></li>
-<li><a href="/dashboard/declarationOfReturns">Declaration of Annual Returns</a></li>
-</ul>
-</li>
+    <a href="#"><img src="/assets/img/icons/product.svg" alt="img"><span> Engineering Authorization Application</span> <span class="menu-arrow"></span></a>
+    <ul>
+    <li><a href="/dashboard/newApplication">Apply</a></li>
+    <li><a href="/dashboard/submittedApplication">Submitted Applications</a></li>
+    <li><a href="/dashboard/reviewProgress">Review Progress</a></li>
+    
+    </ul>
+    </li>
 <li class="submenu">
-    <a href="javascript:void(0);"><img src="/assets/img/icons/purchase1.svg" alt="img"><span>Statutory Compliance</span> <span class="menu-arrow"></span></a>
+    <a href="javascript:void(0);"><img src="/assets/img/icons/purchase1.svg" alt="img"><span> Compliance</span> <span class="menu-arrow"></span></a>
     <ul>
     <li><a href="/dashboard/newCompliance">New Application</a></li>
     <li><a href="/dashboard/reviewCompliance">Review Application Progress</a></li>
@@ -234,21 +150,20 @@
     </ul>
     </li>
 <li class="submenu">
-<a href="javascript:void(0);"><img src="/assets/img/icons/purchase1.svg" alt="img"><span>Engineering Licenses</span> <span class="menu-arrow"></span></a>
+<a href="javascript:void(0);"><img src="/assets/img/icons/purchase1.svg" alt="img"><span>Engineering Licenses and Certification</span> <span class="menu-arrow"></span></a>
 <ul>
-<li><a href="/dashboard/newLicence">New Licenses</a></li>
-<li><a href="/dashboard/licenceRenewal">Renewal Licenses</a></li>
-<li><a href="/dashboard/ammendments">Amendments</a></li>
-<li><a href="/dashboard/businessClosure">Business Closure</a></li>
+<li><a href="/dashboard/newLicence">Attach Licenses</a></li>
+<li><a href="/dashboard/licenceRenewal">Review Licenses</a></li>
+
 
 </ul>
 </li>
 
 <li class="submenu">
-<a href="javascript:void(0);"><img src="/assets/img/icons/transfer1.svg" alt="img"><span>Import and Export Permits</span> <span class="menu-arrow"></span></a>
+<a href="javascript:void(0);"><img src="/assets/img/icons/transfer1.svg" alt="img"><span>Product Certification</span> <span class="menu-arrow"></span></a>
 <ul>
-<li><a href="/dashboard/importExportApplication">Import and Export Permit Application</a></li>
-<li><a href="/dashboard/importExportApplicationStatus">Application Progress</a></li>
+<li><a href="/dashboard/productCertificationApplication">Product Certification Application</a></li>
+<li><a href="/dashboard/productCertificationApplications">Sumbitted Applications</a></li>
 </ul>
 </li>
 <li class="submenu">
@@ -265,13 +180,7 @@
 <li><a href="/dashboard/orderForSupply">Order for Supply of Resources</a></li>
 </ul>
 </li> -->
-<li class="submenu">
-<a href="javascript:void(0);"><img src="/assets/img/icons/users1.svg" alt="img"><span>  Project Approvals & Assessment</span> <span class="menu-arrow"></span></a>
-<ul>
-<li><a href="/dashboard/assessments">Project Assessments</a></li>
 
-</ul>
-</li> 
 
 <!-- <li class="submenu">
 <a href="javascript:void(0);"><img src="/assets/img/icons/places.svg" alt="img"><span>Public Awareness & Advertisement</span> <span class="menu-arrow"></span></a>
@@ -288,6 +197,7 @@
 <a href="javascript:void(0);"><img src="/assets/img/icons/time.svg" alt="img"><span>Account Management</span> <span class="menu-arrow"></span></a>
 <ul>
 <li><a href="/dashboard/profileManagement">Account Profile</a></li>
+<li><a href="/auth/logout">Logout</a></li>
 
 
 
@@ -320,5 +230,23 @@
 <script src="/assets/plugins/apexchart/chart-data.js"></script>
 
 <script src="/assets/js/script.js"></script>
+
+<script>
+    function sendDeleteRequest(url) {
+        fetch(url, {
+            method: 'DELETE',
+        })
+        .then(response => {
+            if (response.ok) {
+                alert('Item deleted successfully');
+                // Optionally redirect or update UI
+            } else {
+                alert('Failed to delete item');
+            }
+        })
+        .catch(error => console.error('Error:', error));
+    }
+    </script>
+
 </body>
 </html>

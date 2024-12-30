@@ -116,22 +116,39 @@
 </div>
 </div>
 <div class="card-body">
-<div class="table-responsive dataview">
-<table class="table datatable ">
-<thead>
-<tr>
-<th>Sno</th>
-<th>Products</th>
-<th>Price</th>
-</tr>
-</thead>
-<tbody>
+    <div class="table-responsive dataview">
+        <table class="table datatable">
+            <thead>
+                <tr>
+                    
+                    <th>Project Title</th>
+                    <th>Type</th>
+                    <th>Project Value (USD)</th>
+                    <th>Duration (Days)</th>
+                    <th>Status</th>
+                    <th>Objectives</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% activeProjects.forEach((project, index) => { %>
+                <tr>
+                    
+                    <td><%= project.title %></td>
+                    <td><%= project.type %></td>
+                    <td><%= project.budget.toLocaleString() %></td>
+                    <td><%= project.duration %></td>
+                    <td><%= project.status %></td>
+                    <td><%= project.objectives %></td>
+                </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    </div>
+    
 
-</tbody>
-</table>
 </div>
 </div>
-</div>
+
 </div>
 </div>
 
