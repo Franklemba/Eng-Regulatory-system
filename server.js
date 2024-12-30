@@ -29,7 +29,7 @@ const liveDB = "mongodb+srv://Engineering:96EceAsGquKn3aLt@cluster0.cq29s.mongod
 mongoose.set('strictQuery', true);
 const mainDB = liveDB
 
-mongoose.connect(localDB,{useNewUrlParser: true}).then(() => {
+mongoose.connect(mainDB,{useNewUrlParser: true}).then(() => {
   console.log('database is connected')
 }).catch((err) => console.log('error connecting to database ', err))
   
@@ -51,7 +51,7 @@ app.set('trust proxy', 1);
 
  // Session configuration
 const sessionStore = MongoStore.create({ 
-mongoUrl: localDB,
+mongoUrl: mainDB,
   ttl: 14 * 24 * 60 * 60 // 14 days
 });
 
