@@ -2,9 +2,9 @@ require("dotenv").config();
 var SibApiV3Sdk = require("sib-api-v3-sdk");
 var defaultClient = SibApiV3Sdk.ApiClient.instance;
 
-var apiKey = defaultClient.authentications["api-key"];
-const key = process.env.EMAILAPI;
-apiKey.apiKey = key;
+// var apiKey = defaultClient.authentications["api-key"];
+// const key = process.env.EMAILAPI;
+// apiKey.apiKey = key;
 
 var apiInstance = new SibApiV3Sdk.TransactionalEmailsApi();
 
