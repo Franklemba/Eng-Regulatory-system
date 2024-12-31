@@ -29,6 +29,7 @@ const liveDB = "mongodb+srv://Engineering:96EceAsGquKn3aLt@cluster0.cq29s.mongod
 mongoose.set('strictQuery', true);
 const mainDB = liveDB
 
+
 mongoose.connect(mainDB,{useNewUrlParser: true}).then(() => {
   console.log('database is connected')
 }).catch((err) => console.log('error connecting to database ', err))

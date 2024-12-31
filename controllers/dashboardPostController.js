@@ -366,20 +366,27 @@ try{
 }
 };
 const submitLicenseAndCertification = async (req, res) => {
-
   try {
     const {
-
+      companyName,
+      membershipClass,
+      country,
+      additionalInfo
     } = req.body;
-    const newCertificationAndLicense = new LicenseAndCertification({
 
+
+
+    const newCertificationAndLicense = new LicenseAndCertification({
+      companyName,
+      membershipClass,
+      country,
+      additionalInfo
     });
 
     await newCertificationAndLicense.save();
     res.redirect("/dashboard/newApplication");
-  }
-  catch (error) {
-    console.error("Error annual declaration application:", error);
+  } catch (error) {
+    console.error("Error in license and certification submission:", error);
     res.status(500).send("An error occurred while processing your application.");
   }
 
@@ -435,11 +442,9 @@ module.exports = {
   submitPremiseLeasing,
   submitAnnualDeclaration,
   submitProductCertificationApplication,
-
   submitBusinessClosure,
   submitStructuralEnvironmentalLicense,
 submitLicenseAndCertification,
-
   statutoryCompliance,
   submitAssessment,
 };

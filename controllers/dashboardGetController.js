@@ -6,6 +6,7 @@ const AnnualDeclaration = require("../models/annualDeclarationSchema");
 const PremiseLeasing = require("../models/premiseSchema");
 const BusinessClosure = require("../models/businessClosureSchema");
 const OrderForSupply = require("../models/orderForSupplySchema");
+const LicenseAndCertification = require("../models/licenseAndCertificationSchema");
 
 const StatutoryCompliance = require("../models/statutoryComplianceSchema");
 const base64Decode = (data) => {
@@ -171,7 +172,23 @@ const getDashboard = async (req, res) => {
     
   };
   
+  const getReviewLicenseAndCertificationsPage = async (req, res) => {
+    const submittedLicenses = await LicenseAndCertification.find({}).sort({ _id: -1 });
+  
+    try{
 
+      res.render("home/dashboard/reviewLicensesAndCertifications", {
+        layout: "layouts/dashboardHeader.ejs",
+        user: req.user,
+        submittedLicenses
+      });
+      
+      
+    }catch(error){
+         res.send(error.message)
+    }
+    
+  };
 
   const getStatutoryCompliance =  async (req, res) => {
     const message = req.query.message;
@@ -258,6 +275,7 @@ const getDashboard = async (req, res) => {
     getProfileManagement,
     getProjectApplicationProgress,
     getSubmittedLeasingsPage,
-    getLicenseAndCertificationsPage
+    getLicenseAndCertificationsPage,
+    getReviewLicenseAndCertificationsPage
   };
   

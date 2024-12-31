@@ -28,6 +28,6 @@ router.get("/reviewCompliance", dashboardGetController.getStatutoryComplianceSta
 router.get("/profileManagement", dashboardGetController.getProfileManagement);
 
 router.get("/attachLicense", dashboardGetController.getLicenseAndCertificationsPage);
-router.get("/reviewLicense", dashboardGetController.getLicenseAndCertificationsPage);
+router.get("/reviewLicense", dashboardGetController.getReviewLicenseAndCertificationsPage);
 
 module.exports = router;
