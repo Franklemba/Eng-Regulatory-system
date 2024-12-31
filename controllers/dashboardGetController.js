@@ -33,6 +33,8 @@ const getDashboard = async (req, res) => {
     });
   };
 
+  
+
 
   
   const getNewProjectListingPage = async (req, res) => {
@@ -149,19 +151,17 @@ const getDashboard = async (req, res) => {
     });
   };
   
-  const getOrderForSupplyPage = async (req, res) => {
+  const getLicenseAndCertificationsPage = async (req, res) => {
     const message = req.query.message;
 
     try{
 
-      const orderSupplies = await OrderForSupply.find({}).sort({ _id: -1 });
-      res.render("home/dashboard/orderForSupply", {
+      res.render("home/dashboard/licensesAndCertificationsPage", {
         layout: "layouts/dashboardHeader.ejs",
         message: message !=  undefined
             ? `${base64Decode(message)}`
             : null ,
-        user: req.user,
-        orderSupplies 
+        user: req.user
       });
       
       
@@ -250,7 +250,6 @@ const getDashboard = async (req, res) => {
     getProductCertificationApplicationsPage,
     getBusinessClosurePage,
     getStructuralEnvironmentalLicensePage,
-    getOrderForSupplyPage,
     getStatutoryCompliance,
     getStatutoryComplianceStatus,
     getAssessmentPage,
@@ -258,6 +257,7 @@ const getDashboard = async (req, res) => {
     getNewProjectListingPage,
     getProfileManagement,
     getProjectApplicationProgress,
-    getSubmittedLeasingsPage
+    getSubmittedLeasingsPage,
+    getLicenseAndCertificationsPage
   };
   

@@ -48,6 +48,11 @@ router.post("/newPremiseLeasing",  upload.fields([
 
 
 router.post("/newAnnualDeclaration", dashboardPostController.submitAnnualDeclaration);
+router.post("/newLicenseAndCertification", dashboardPostController.submitLicenseAndCertification
+  
+);
+
+
 router.post("/newProductCertification", upload.fields([
   { name: 'productDatasheet', maxCount: 1 },
   { name: 'standardCertifications', maxCount: 1 },

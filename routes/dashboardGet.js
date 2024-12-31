@@ -27,4 +27,7 @@ router.get("/newCompliance", dashboardGetController.getStatutoryCompliance);
 router.get("/reviewCompliance", dashboardGetController.getStatutoryComplianceStatus);
 router.get("/profileManagement", dashboardGetController.getProfileManagement);
 
+router.get("/attachLicense", dashboardGetController.getLicenseAndCertificationsPage);
+router.get("/reviewLicense", dashboardGetController.getLicenseAndCertificationsPage);
+
 module.exports = router;

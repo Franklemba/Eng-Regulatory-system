@@ -1,0 +1,140 @@
+
+        
+        <%- include(`../../partials/notification`) %>
+        <div class="page-wrapper">
+            <div class="content">
+                <div class="page-header">
+                    <div class="page-title">
+                        <h4>License and Certification</h4>
+                        <h6>Manage and add new licenses or certifications</h6>
+                    </div>
+                </div>
+        
+                <div class="card">
+                    <div class="card-body">
+                        <form id="license-form" method="post" action="/dashboard/newLicenseAndCertification" enctype="multipart/form-data">
+                            <h5 class="mb-4">License Details</h5>
+                            <div class="row">
+                                <!-- Company Name -->
+                                <div class="col-lg-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label>Company Name</label>
+                                        <input type="text" name="companyName" class="form-control" placeholder="Enter company name" required>
+                                    </div>
+                                </div>
+        
+                                <!-- Corporate Membership Class -->
+                                <div class="col-lg-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label>Corporate Membership Class</label>
+                                        <select name="membershipClass" class="form-control select" required>
+                                            <option value="">Select Membership Class</option>
+                                            <optgroup label="Engineering Organizations">
+                                                <option>ENGINEERING ORGANIZATION C1</option>
+                                                <option>ENGINEERING ORGANIZATION C2</option>
+                                                <option>ENGINEERING ORGANIZATION C3</option>
+                                                <option>ENGINEERING ORGANIZATION A1</option>
+                                                <option>ENGINEERING ORGANIZATION A2</option>
+                                                <option>ENGINEERING ORGANIZATION A3</option>
+                                                <option>ENGINEERING ORGANIZATION B1</option>
+                                                <option>ENGINEERING ORGANIZATION B2</option>
+                                                <option>ENGINEERING ORGANIZATION B3</option>
+                                                <option>ENGINEERING ORGANIZATION D1</option>
+                                                <option>ENGINEERING ORGANIZATION D2</option>
+                                                <option>ENGINEERING ORGANIZATION D3</option>
+                                            </optgroup>
+                                            <optgroup label="Engineering Units">
+                                                <option>ENGINEERING UNIT C1</option>
+                                                <option>ENGINEERING UNIT C2</option>
+                                                <option>ENGINEERING UNIT C3</option>
+                                                <option>ENGINEERING UNIT A1</option>
+                                                <option>ENGINEERING UNIT A2</option>
+                                                <option>ENGINEERING UNIT A3</option>
+                                                <option>ENGINEERING UNIT B1</option>
+                                                <option>ENGINEERING UNIT B2</option>
+                                                <option>ENGINEERING UNIT B3</option>
+                                                <option>ENGINEERING UNIT D1</option>
+                                                <option>ENGINEERING UNIT D2</option>
+                                                <option>ENGINEERING UNIT D3</option>
+                                            </optgroup>
+                                        </select>
+                                    </div>
+                                </div>
+        
+                                <!-- Is Foreign License -->
+                                <div class="col-lg-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label>Foreign License</label>
+                                        <select name="foreignLicense" class="form-control select">
+                                            <option value="No">No</option>
+                                            <option value="Yes">Yes</option>
+                                        </select>
+                                    </div>
+                                </div>
+        
+                                <!-- Additional Information -->
+                                <div class="col-lg-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label>Additional Information</label>
+                                        <textarea name="additionalInfo" class="form-control" rows="3" placeholder="Provide additional details"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+        
+                            <hr>
+                            <h5 class="mb-4">Add More Parts</h5>
+                            <div id="parts-section">
+                                <!-- Initial Part Entry -->
+                                <div class="row part-entry mb-4">
+                                    <div class="col-lg-4 col-sm-12">
+                                        <div class="form-group">
+                                            <label>Part Name</label>
+                                            <input type="text" name="parts[0][name]" class="form-control" placeholder="Enter part name" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-sm-12">
+                                        <div class="form-group">
+                                            <label>Part Type</label>
+                                            <input type="text" name="parts[0][type]" class="form-control" placeholder="Enter part type" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-sm-12">
+                                        <div class="form-group">
+                                            <label>Part Description</label>
+                                            <textarea name="parts[0][description]" class="form-control" rows="2" placeholder="Enter part description" required></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="text-end">
+                                <button type="button" class="btn btn-secondary" id="add-part-btn">Add Another Part</button>
+                            </div>
+        
+                            <div class="text-end mt-4">
+                                <button type="submit" class="btn btn-primary">Submit License</button>
+                                <button type="reset" class="btn btn-secondary">Cancel</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <script>
+            let partCount = 0;
+            document.getElementById('add-part-btn').addEventListener('click', function () {
+                partCount++;
+                const partEntry = document.querySelector('.part-entry').cloneNode(true);
+                
+                // Update the name attributes for the new part
+                partEntry.querySelectorAll('input, textarea').forEach(input => {
+                    if (input.name) {
+                        input.name = input.name.replace('[0]', `[${partCount}]`);
+                    }
+                    input.value = ''; // Clear the values for the new part entry
+                });
+                
+                document.getElementById('parts-section').appendChild(partEntry);
+            });
+        </script>
+        

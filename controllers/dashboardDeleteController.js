@@ -4,12 +4,10 @@ const EngineeringProject = require("../models/projectSchema");
 const ProductCertifications = require("../models/productCertificationSchema");
 const AnnualDeclaration = require("../models/annualDeclarationSchema");
 const PremiseLeasing = require("../models/premiseSchema");
-const BusinessClosure = require("../models/businessClosureSchema");
-const OrderForSupply = require("../models/orderForSupplySchema");
-const AwarenessAdvert = require("../models/awarenessAdvertSchema");
+
 const StructuralEnvironmentalLicense = require("../models/structuralEnvironmentalLicenceSchema");
 
-
+// .deleteMany({}).then((done)=>console.log(done))
 
 const deleteApplication = async (req, res) => {
     try {
