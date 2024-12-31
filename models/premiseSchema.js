@@ -1,33 +1,35 @@
-const mongoose = require("mongoose");
-
-// Clear the existing model if it exists
-if (mongoose.connection.models['client']) {
-  delete mongoose.connection.models['client']
-}
+const mongoose = require('mongoose');
 
 const premiseSchema = new mongoose.Schema({
- 
-  phoneNumber: {
-    type: String,
-    required: true,
-  },
-  address: {
-    type: String,
-    required: true,
-  },
-  city: {
-    type: String,
-    required: true
-  },
-  country: {
-    type: String,
-    required: true
-  },
-  createdAt: {
-    type: Date,
-    required: true,
-    default: Date.now
-  }
-});
+    applicationType: { type: String,  },
+    applicantName: { type: String,  },
+    organizationName: { type: String,  },
+    zepraClientId: { type: String },
+    phoneNumber: { type: String,  },
+    emailAddress: { type: String,  },
+    premisesType: { type: String,  },
+    physicalAddress: { type: String,  },
+    provinceCity: { type: String,  },
+    gpsCoordinates: { type: String },
+    landlordName: { type: String },
+    landlordContact: { type: String },
+    leaseAgreement: { type: String,  },
+    leaseStartDate: { type: Date,  },
+    leaseEndDate: { type: Date,  },
+    monthlyRent: { type: Number,  },
+    totalLeaseValue: { type: Number,  },
+    projectName: { type: mongoose.Schema.Types.ObjectId, ref: 'Project' },
+    purposeOfPremises: { type: String },
+    areaSize: { type: Number },
+    zoningType: { type: String },
+    zoningApproval: { type: String },
+    environmentalClearance: { type: String },
+    buildingSafetyCert: { type: String },
+    otherDocs: { type: [String] },
+    declaration: {   },
+    authorizedPersonName: { type: String,  },
+    submissionDate: { type: Date,  },
+    digitalSignature: { type: String,  },
+}, { timestamps: true });
 
-module.exports = mongoose.model("Premis", premiseSchema);
+module.exports = mongoose.model('Application', premiseSchema);

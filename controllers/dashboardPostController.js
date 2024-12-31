@@ -67,38 +67,49 @@ const submitProject = async (req, res) => {
   try {
     const {
       title,
-      type,
-      budget,
+      projectType,
+      projectValue,
       duration,
       status,
       objectives,
-      teamMembers,
-      permits,
-      locations
+      locations,
+      workers
     } = req.body;
-console.log(req.body)
-    // Create a new project instance with the data from the request
+
+    console.log("Received Data:", req.body);
+
+    
+    // Parse locations and workers if sent as JSON strings (adjust if frontend sends raw arrays)
+    const parsedLocations = typeof locations === 'string' ? JSON.parse(locations) : locations;
+    const parsedWorkers = typeof workers === 'string' ? JSON.parse(workers) : workers;
+    
+    const documents = req.files.documents?.map(file => file.path) || [];
+    // console.log(req.files);
+    // Create a new project instance
     const newProject = new EngineeringProject({
-      title:'',
-      type:'',
-      budget:'',
-      duration:'',
-      status:'',	
-      objectives:'',
-      teamMembers:'',
-      permits:'',	
-      locations, // Assuming locations are sent as a stringified array
+      title,
+      projectType,
+      projectValue,
+      duration,
+      status,
+      objectives,
+      locations: parsedLocations, // Array of location objects
+      workers: parsedWorkers, // Object with worker categories
     });
 
     // Handle file uploads if there are any
-    const documents = req.files?.map(file => file.path) || [];
     newProject.files = documents;
 
     // Save the new project to the database
     await newProject.save();
 
+    console.log("Project saved successfully:", newProject);
+
     // Redirect to a new page after the project is saved
-    res.redirect("/dashboard/newApplication");
+    successMessage = `Project successfully uploaded, Please complete other required mini applications.`;
+
+    res.redirect(`/dashboard/?message=${encodeURIComponent(base64Encode(successMessage))}`);
+  
   } catch (error) {
     console.error("Error saving project application:", error);
     res.status(500).send("An error occurred while processing your application.");
@@ -109,23 +120,82 @@ console.log(req.body)
 
 const submitPremiseLeasing = async (req, res) => {
 
+
   try {
+  
+
     const {
+      applicationType,
+      applicantName,
+      organizationName,
+      zepraClientId,
+      phoneNumber,
+      emailAddress,
+      premisesType,
+      physicalAddress,
+      provinceCity,
+      gpsCoordinates,
+      landlordName,
+      landlordContact,
+      leaseStartDate,
+      leaseEndDate,
+      monthlyRent,
+      totalLeaseValue,
+      projectName,
+      purposeOfPremises,
+      areaSize,
+      zoningType,
+      declaration,
+      authorizedPersonName,
+      submissionDate,
+      digitalSignature
+  } = req.body;
 
-    } = req.body;
+  const files = req.files;
 
-    const newPremiseLeasing = new PremiseLeasing({
+  // Create a new application
+  const application = new PremiseLeasing({
+      applicationType,
+      applicantName,
+      organizationName,
+      zepraClientId,
+      phoneNumber,
+      emailAddress,
+      premisesType,
+      physicalAddress,
+      provinceCity,
+      gpsCoordinates,
+      landlordName,
+      landlordContact,
+      leaseAgreement: files?.leaseAgreement ? files.leaseAgreement[0].path : undefined,
+      leaseStartDate,
+      leaseEndDate,
+      monthlyRent,
+      totalLeaseValue,
+      projectName,
+      purposeOfPremises,
+      areaSize,
+      zoningType,
+      zoningApproval: files?.zoningApproval ? files.zoningApproval[0].path : undefined,
+      environmentalClearance: files?.environmentalClearance ? files.environmentalClearance[0].path : undefined,
+      buildingSafetyCert: files?.buildingSafetyCert ? files.buildingSafetyCert[0].path : undefined,
+      otherDocs: files?.otherDocs ? files.otherDocs.map(doc => doc.path) : [],
+      declaration,
+      authorizedPersonName,
+      submissionDate,
+      digitalSignature
+  });
 
-    });
+    // Save the application to the database
+    await application.save();
+    const successMessage = ` ${applicantName} premise leasing uploaded successfully`;
 
-    const documents = req.files?.map(file => file.path) || [];
-    await newPremiseLeasing.save();
-    res.redirect("/dashboard/newApplication");
-  }
-  catch (error) {
-    console.error("Error saving project application:", error);
-    res.status(500).send("An error occurred while processing your application.");
-  }
+    res.redirect(`/dashboard/submittedPremiseLeasings?message=${encodeURIComponent(base64Encode(successMessage))}`);
+
+} catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Error submitting application', error });
+}
 
 };
 
@@ -423,7 +493,6 @@ module.exports = {
   submitPremiseLeasing,
   submitAnnualDeclaration,
   submitProductCertificationApplication,
-
 
   submitBusinessClosure,
   submitStructuralEnvironmentalLicense,
