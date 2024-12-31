@@ -187,9 +187,9 @@ const submitProductCertificationApplication = async (req, res) => {
       declaration: declaration === 'on' || declaration === true,
       signature,
       // File paths
-      productDatasheet: req.files['productDatasheet'][0].path,
-      standardCertifications: req.files['standardCertifications'][0].path,
-      manufacturerAuthorization: req.files['manufacturerAuthorization'][0].path,
+      productDatasheet: req.files['productDatasheet'][0].location,
+      standardCertifications: req.files['standardCertifications'][0].location,
+      manufacturerAuthorization: req.files['manufacturerAuthorization'][0].location,
       // Set initial status
       status: 'submitted'
     });
@@ -219,7 +219,7 @@ const submitBusinessClosure =  async (req, res, next) => {
       closureDate
     } = req.body;
 
-  const uploadedDoc = req.file.path.replace(/.*public[\\/]/, '').replace(/\\/g, '/');
+  const uploadedDoc = req.file.location;
 
   try{
     
@@ -264,9 +264,9 @@ const submitStructuralEnvironmentalLicense = async (req, res) => {
 
 // const uploadedDoc = req.file.path.replace(/.*public[\\/]/, '');
 console.log(req.files);
-const structuralIntegrityEvaluationReport = req.files.structuralIntegrityEvaluationReport?.[0]?.path.replace(/.*public[\\/]/, '').replace(/\\/g, '/');
-const environmentImpactMitigationPlan = req.files.environmentImpactMitigationPlan?.[0]?.path.replace(/.*public[\\/]/, '').replace(/\\/g, '/');
-const supportingDocument = req.files.supportingDocument?.[0]?.path.replace(/.*public[\\/]/, '').replace(/\\/g, '/');
+const structuralIntegrityEvaluationReport = req.files.structuralIntegrityEvaluationReport[0].location;
+const environmentImpactMitigationPlan = req.files.environmentImpactMitigationPlan[0].location;
+const supportingDocument = req.files.supportingDocument[0].location;
 
 try{
   
@@ -381,12 +381,12 @@ const statutoryCompliance = async (req, res) => {
 
 console.log(req.email)
 console.log(req.files);
-const zppaDoc = req.files.zppaDoc?.[0]?.path.replace(/.*public[\\/]/, '').replace(/\\/g, '/');
-const pacraDoc = req.files.pacraDoc?.[0]?.path.replace(/.*public[\\/]/, '').replace(/\\/g, '/');
-const workcompDoc = req.files.workcompDoc?.[0]?.path.replace(/.*public[\\/]/, '').replace(/\\/g, '/');
-const nhimaDoc = req.files.nhimaDoc?.[0]?.path.replace(/.*public[\\/]/, '').replace(/\\/g, '/');
-const erbDoc = req.files.erbDoc?.[0]?.path.replace(/.*public[\\/]/, '').replace(/\\/g, '/');
-const others = req.files.others?.[0]?.path.replace(/.*public[\\/]/, '').replace(/\\/g, '/');
+const zppaDoc = req.files.zppaDoc[0].location;
+const pacraDoc = req.files.pacraDoc[0].location;
+const workcompDoc = req.files.workcompDoc[0].location;
+const nhimaDoc = req.files.nhimaDoc[0].location;
+const erbDoc = req.files.erbDoc[0].location;
+const others = req.files.others[0].location;
 
 
 try{
