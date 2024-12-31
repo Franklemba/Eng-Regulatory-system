@@ -5,28 +5,32 @@ const fs = require('fs');
 const multer = require('multer');
 const path = require('path');
 const dashboardPostController = require("../controllers/dashboardPostController");
+const upload = require("../utilities/awsConfig");
 
 const app = express();
 app.use(express.urlencoded({ extended: true }));
 
-const publicUploadsDir = path.join(__dirname, '../public/uploads');
-if (!fs.existsSync(publicUploadsDir)) {
-  fs.mkdirSync(publicUploadsDir, { recursive: true });
-}
 
 
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    // Define upload directory
-    cb(null, publicUploadsDir);
-  },
-  filename: (req, file, cb) => {
-    cb(null, Date.now()+ "-" +  file.originalname );
-  }
-});
 
-// Set up multer with the custom storage
-const upload = multer({ storage: storage });
+// const publicUploadsDir = path.join(__dirname, '../public/uploads');
+// if (!fs.existsSync(publicUploadsDir)) {
+//   fs.mkdirSync(publicUploadsDir, { recursive: true });
+// }
+
+
+// const storage = multer.diskStorage({
+//   destination: (req, file, cb) => {
+//     // Define upload directory
+//     cb(null, publicUploadsDir);
+//   },
+//   filename: (req, file, cb) => {
+//     cb(null, Date.now()+ "-" +  file.originalname );
+//   }
+// });
+
+// // Set up multer with the custom storage
+// const upload = multer({ storage: storage });
   
   
 
@@ -50,7 +54,11 @@ router.post("/newProductCertification", upload.fields([
   { name: 'manufacturerAuthorization', maxCount: 1 }
 ]), dashboardPostController.submitProductCertificationApplication);
 
-router.post("/businessClosure",  upload.single('finalFinancialStatement'), dashboardPostController.submitBusinessClosure);
+router.post('/businessClosure', upload.single('finalFinancialStatement'), (req, res, next) => {
+  console.log('File Received:', req.file);
+  next();
+}, dashboardPostController.submitBusinessClosure);
+
 router.post("/newEnvironmentAndStructuralLicence", 
   upload.fields([
        { name: 'structuralIntegrityEvaluationReport', maxCount: 1 },

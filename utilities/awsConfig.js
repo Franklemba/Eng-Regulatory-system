@@ -1,43 +1,52 @@
-const aws = require('aws-sdk');
+const { S3Client } = require('@aws-sdk/client-s3');
 const multer = require('multer');
 const multerS3 = require('multer-s3');
 const path = require('path');
-require('dotenv').config();	
+require('dotenv').config();
 
-// Configure AWS SDK
-aws.config.update({
-    accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
-    region: process.env.AWS_REGION
+// Configure S3 Client with AWS SDK v3 including timeout and retry settings
+const s3Client = new S3Client({
+    credentials: {
+        accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+        secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+    },
+    region: process.env.AWS_REGION,
+    requestHandler: {
+        connectionTimeout: 30000, // 30 seconds
+        socketTimeout: 60000      // 60 seconds
+    },
+    maxAttempts: 3,  // Number of retry attempts
+    retryMode: 'adaptive'  // Use adaptive retry mode
 });
 
-// Create S3 instance
-const s3 = new aws.S3();
-
 const applicationMimeType = [
-    'image/jpeg',
-    'image/png',
-    'image/gif',
-    'image/bmp',
-    'image/webp'
+    'application/pdf',
+    'application/msword',
+    'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+    'application/vnd.ms-excel',
+    'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+    'application/vnd.oasis.opendocument.text',
+    'text/plain'
 ];
 
 // Configure multer-s3 storage
 const storage = multerS3({
-    s3: s3,
+    s3: s3Client,
     bucket: process.env.AWS_S3_BUCKET_NAME,
-    acl: 'public-read',
     key: function(req, file, cb) {
         const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
         const extension = path.extname(file.originalname);
-        const productName = `uploaded-${timestamp}${extension}`;
-        cb(null, productName);
+        const docName = `uploaded-${timestamp}${extension}`;
+        cb(null, docName);
     }
 });
 
-// Create multer upload object
+// Create multer upload object with size limits
 const uploadConfig = multer({
     storage: storage,
+    limits: {
+        fileSize: 10 * 1024 * 1024, // 10MB limit
+    },
     fileFilter: (req, file, callback) => {
         if (applicationMimeType.includes(file.mimetype)) {
             callback(null, true);
@@ -47,7 +56,7 @@ const uploadConfig = multer({
     }
 });
 
-// Export specific middleware for handling the 'documents' field
+// Export with original structure
 const upload = {
     single: (fieldName) => uploadConfig.single(fieldName),
     array: (fieldName, maxCount) => uploadConfig.array(fieldName, maxCount),

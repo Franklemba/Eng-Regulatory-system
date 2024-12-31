@@ -1,20 +1,16 @@
 require("dotenv").config();
+// require("dotenv").config();
 var SibApiV3Sdk = require("sib-api-v3-sdk");
 var defaultClient = SibApiV3Sdk.ApiClient.instance;
 
-// var apiKey = defaultClient.authentications["api-key"];
-// const key = process.env.EMAILAPI;
-// apiKey.apiKey = key;
+var apiKey = defaultClient.authentications["api-key"];
+apiKey.apiKey = process.env.EMAILAPI;
+
+// BREVO_EMAIL_API = 
+
+//apiKey.apiKey =   	v.BREVO_EMAIL_API;
 
 var apiInstance = new SibApiV3Sdk.TransactionalEmailsApi();
-
-
-// // Check if the API key is set properly
-// if (!process.env.EMAILAPI) {
-//   console.error("API key is not defined");
-//   process.exit(1);
-// }
-
 
 
 const sendOTPemail = (userName, email, otp)=>{
