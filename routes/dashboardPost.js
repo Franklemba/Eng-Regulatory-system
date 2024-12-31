@@ -30,11 +30,19 @@ const upload = multer({ storage: storage });
   
   
 
-
 router.post("/newApplication", upload.fields([{ name: 'supportingDocument', maxCount: 1 }, { name: 'documents', maxCount: 1 }]), dashboardPostController.submitApplication);
 // router.post("/newApplication",dashboardPostController.submitApplication);
-router.post("/newProject", dashboardPostController.submitProject);
-router.post("/newPremiseLeasing", dashboardPostController.submitPremiseLeasing);
+router.post("/newProject", upload.fields([{ name: 'documents', maxCount: 4 }]),dashboardPostController.submitProject);
+
+router.post("/newPremiseLeasing",  upload.fields([
+  { name: 'leaseAgreement', maxCount: 1 },
+  { name: 'zoningApproval', maxCount: 1 },
+  { name: 'environmentalClearance', maxCount: 1 },
+  { name: 'buildingSafetyCert', maxCount: 1 },
+  { name: 'otherDocs', maxCount: 10 }
+]),dashboardPostController.submitPremiseLeasing);
+
+
 router.post("/newAnnualDeclaration", dashboardPostController.submitAnnualDeclaration);
 router.post("/newProductCertification", upload.fields([
   { name: 'productDatasheet', maxCount: 1 },

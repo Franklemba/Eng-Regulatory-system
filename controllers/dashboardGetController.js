@@ -6,7 +6,7 @@ const AnnualDeclaration = require("../models/annualDeclarationSchema");
 const PremiseLeasing = require("../models/premiseSchema");
 const BusinessClosure = require("../models/businessClosureSchema");
 const OrderForSupply = require("../models/orderForSupplySchema");
-const AwarenessAdvert = require("../models/awarenessAdvertSchema");
+
 const StatutoryCompliance = require("../models/statutoryComplianceSchema");
 const base64Decode = (data) => {
   return Buffer.from(data, 'base64').toString('utf-8');
@@ -84,9 +84,20 @@ const getDashboard = async (req, res) => {
   };
   
   const getPremiseLeasingPage = async (req, res) => {
-    res.render("home/dashboard/premiseLeasing", {
+    const projects = await EngineeringProject.find({}).sort({ _id: -1 });
+    res.render("home/dashboard/premisesLeasing", {
       layout: "layouts/dashboardHeader.ejs",
       user: req.user,
+      projects
+    });
+  };
+  
+  const getSubmittedLeasingsPage = async (req, res) => {
+    const premises = await PremiseLeasing.find({}).sort({ _id: -1 });
+    res.render("home/dashboard/submittedLeasingsPage", {
+      layout: "layouts/dashboardHeader.ejs",
+      user: req.user,
+      premises
     });
   };
   
@@ -160,24 +171,7 @@ const getDashboard = async (req, res) => {
     
   };
   
-  const getAwarenessAdvertPage = async (req, res) => {
-    const message = req.query.message;
-    const awarenessAdvert = await AwarenessAdvert.find({}).sort({ _id: -1 });
-    try{
-      res.render("home/dashboard/awarenessAdvert", {
-        layout: "layouts/dashboardHeader.ejs",
-        message: message !=  undefined
-            ? `${base64Decode(message)}`
-            : null ,
-        user: req.user,
-        awarenessAdvert
-      });
-      
-    }catch(error){
-      res.send(error.message)
-    }
- 
-  };
+
 
   const getStatutoryCompliance =  async (req, res) => {
     const message = req.query.message;
@@ -222,7 +216,16 @@ const getDashboard = async (req, res) => {
     });
   };
 
+  
 
+  const getProjectApplicationProgress = async (req, res) => {
+    const projects = await EngineeringProject.find({}).sort({ _id: -1 });
+    res.render("home/dashboard/projectApplicationsProgress", {
+      layout: "layouts/dashboardHeader.ejs",
+      user: req.user,
+      projects
+    });
+  };
   const downloadFile = async (req, res) => {
     
   const filePath = req.params.filename;
@@ -248,12 +251,13 @@ const getDashboard = async (req, res) => {
     getBusinessClosurePage,
     getStructuralEnvironmentalLicensePage,
     getOrderForSupplyPage,
-    getAwarenessAdvertPage,
     getStatutoryCompliance,
     getStatutoryComplianceStatus,
     getAssessmentPage,
     downloadFile,
     getNewProjectListingPage,
-    getProfileManagement
+    getProfileManagement,
+    getProjectApplicationProgress,
+    getSubmittedLeasingsPage
   };
   

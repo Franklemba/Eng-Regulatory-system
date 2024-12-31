@@ -1,0 +1,66 @@
+<div class="page-wrapper py-5">
+    <div class="container">
+        <h1 class="text-center mb-5 ">Application Progress</h1>
+        <div class="row g-4">
+            <% projects.forEach((app, index) => { %>
+                <div class="col-12">
+                    <div class="card shadow-sm border-0 rounded">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <h5 class="mb-0">Project Title: <%= app.title %></h5>
+                            <span class="badge bg-secondary"><%= app.status %></span>
+                        </div>
+                        <div class="card-body">
+                            <p class="mb-1"><strong>Project Type:</strong> <%= app.projectType %></p>
+                            <p class="mb-1">
+                                <strong>Value:</strong> $<%= app.projectValue.toLocaleString() %> 
+                                | <strong>Duration:</strong> <%= app.duration %> months
+                            </p>
+                            <p class="mb-3"><strong>Objectives:</strong> <%= app.objectives %></p>
+
+                            <button class="btn btn-outline-primary" type="button" data-bs-toggle="collapse" data-bs-target="#details-<%= index %>" aria-expanded="false">
+                                View Details
+                            </button>
+
+                            <div class="collapse mt-3" id="details-<%= index %>">
+                                <h6 class="text-secondary">Locations</h6>
+                                <ul class="list-unstyled mb-3">
+                                    <% app.locations.forEach(loc => { %>
+                                        <li>
+                                            <strong><%= loc.name %>:</strong> <%= loc.description %> 
+                                            (<%= loc.latitude %>, <%= loc.longitude %>)
+                                        </li>
+                                    <% }) %>
+                                </ul>
+
+                                <h6 class="text-secondary">Workers</h6>
+                                <ul class="list-unstyled mb-3">
+                                    <li><strong>Professionals:</strong> <%= app.workers.professionals %></li>
+                                    <li><strong>Skilled:</strong> <%= app.workers.skilled %></li>
+                                    <li><strong>Semi-Skilled:</strong> <%= app.workers.semiSkilled %></li>
+                                    <li><strong>Unskilled:</strong> <%= app.workers.unskilled %></li>
+                                </ul>
+
+                                <h6 class="text-secondary">Attached Files</h6>
+                                <ul class="list-unstyled">
+                                    <% app.files.forEach(file => { %>
+                                        <li>
+                                            <a href="<%= file %>" download class="btn btn-link p-0 text-primary">
+                                                <%=file%>
+                                            </a>
+                                        </li>
+                                    <% }) %>
+                                </ul>
+                                <div class="card-footer text-end bg-light">
+                                    <form action="/suspend/<%= app._id %>" method="POST" class="d-inline">
+                                        <button class="btn btn-danger btn-sm" type="submit">Suspend Application</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                      
+                    </div>
+                </div>
+            <% }) %>
+        </div>
+    </div>
+</div>

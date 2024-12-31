@@ -1,0 +1,180 @@
+<div class="page-wrapper my-5">
+    <div class="container-fluid px-4">
+        <div class="row mb-5">
+            <div class="col-12 text-center">
+                <div class="d-inline-flex align-items-center justify-content-center p-2 mb-3 rounded" >
+                    <h1 class="h2 mb-0">Submitted Premises Leasings</h1>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row g-4">
+            <% premises.forEach((premise, index) => { %>
+            <div class="col-12">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="row g-0">
+                        <div class="col-lg-3">
+                            <div class="h-100 p-4 text-white" >
+                                <h4 class="mb-2"><%= premise.organizationName %></h4>
+                                <span class="badge bg-warning text-dark"><%= premise.applicationType %></span>
+                                <hr class="opacity-25">
+                                <div class="mt-3">
+                                    <div class="d-flex align-items-center mb-2">
+                                        <i class="bi bi-person-fill me-2"></i>
+                                        <span><%= premise.applicantName %></span>
+                                    </div>
+                                    <div class="d-flex align-items-center mb-2">
+                                        <i class="bi bi-envelope-fill me-2"></i>
+                                        <span><%= premise.emailAddress %></span>
+                                    </div>
+                                    <div class="d-flex align-items-center">
+                                        <i class="bi bi-telephone-fill me-2"></i>
+                                        <span><%= premise.phoneNumber %></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-9">
+                            <div class="card-body p-4">
+                                <div class="row mb-4">
+                                    <div class="col-md-6">
+                                        <div class="d-flex align-items-center mb-3">
+                                            <div class="rounded-circle p-2 me-3" style="background-color: #f0f4f8;">
+                                                <i class="bi bi-building text-primary"></i>
+                                            </div>
+                                            <div>
+                                                <small class="text-muted text-uppercase">Premises Type</small>
+                                                <div class="fw-medium"><%= premise.premisesType %></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="d-flex align-items-center mb-3">
+                                            <div class="rounded-circle p-2 me-3" style="background-color: #f0f4f8;">
+                                                <i class="bi bi-geo-alt text-primary"></i>
+                                            </div>
+                                            <div>
+                                                <small class="text-muted text-uppercase">Location</small>
+                                                <div class="fw-medium"><%= premise.provinceCity %></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <button 
+                                    class="btn w-100 position-relative mb-3"
+                                    type="button"
+                                    data-bs-toggle="collapse"
+                                    data-bs-target="#details-<%= index %>"
+                                    style="background-color: #f0f4f8;"
+                                >
+                                    <span class="details-text fw-medium">View Additional Details</span>
+                                    <i class="bi bi-chevron-down ms-2 details-icon"></i>
+                                </button>
+
+                                <div class="collapse" id="details-<%= index %>">
+                                    <div class="row g-4">
+                                        <div class="col-md-6">
+                                            <div class="p-3 rounded" style="background-color: #f8fafc;">
+                                                <small class="text-muted text-uppercase d-block mb-2">Address Details</small>
+                                                <p class="mb-2"><strong>Physical Address:</strong><br><%= premise.physicalAddress %></p>
+                                                <p class="mb-0"><strong>GPS Coordinates:</strong><br><%= premise.gpsCoordinates || 'N/A' %></p>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="p-3 rounded" style="background-color: #f8fafc;">
+                                                <small class="text-muted text-uppercase d-block mb-2">Financial Details</small>
+                                                <p class="mb-2">
+                                                    <strong>Monthly Rent:</strong><br>
+                                                    <span class="text-success">$<%= premise.monthlyRent.toLocaleString() %></span>
+                                                </p>
+                                                <p class="mb-0">
+                                                    <strong>Total Lease Value:</strong><br>
+                                                    <span class="text-success">$<%= premise.totalLeaseValue.toLocaleString() %></span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="p-3 rounded" style="background-color: #f8fafc;">
+                                                <small class="text-muted text-uppercase d-block mb-2">Lease Period</small>
+                                                <div class="d-flex align-items-center">
+                                                    <i class="bi bi-calendar3 me-2"></i>
+                                                    <span><%= premise.leaseStartDate %> to <%= premise.leaseEndDate %></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <% }) %>
+        </div>
+    </div>
+</div>
+
+<style>
+.card {
+    transition: all 0.2s ease-in-out;
+    border-radius: 8px;
+}
+
+.card:hover {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12) !important;
+}
+
+.btn {
+    transition: all 0.2s ease;
+}
+
+.btn:hover {
+    background-color: #e2e8f0 !important;
+}
+
+.btn:focus {
+    box-shadow: none;
+}
+
+.details-icon {
+    transition: transform 0.3s ease;
+}
+
+[aria-expanded="true"] .details-icon {
+    transform: rotate(180deg);
+}
+
+.collapse {
+    transition: all 0.3s ease-out;
+}
+
+.badge {
+    font-weight: 500;
+    padding: 0.5em 1em;
+}
+
+.text-primary {
+    color: #1a365d !important;
+}
+
+small.text-uppercase {
+    letter-spacing: 0.5px;
+    font-weight: 600;
+    font-size: 0.75rem;
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const buttons = document.querySelectorAll('[data-bs-toggle="collapse"]');
+    buttons.forEach(button => {
+        button.addEventListener('click', function() {
+            const isExpanded = this.getAttribute('aria-expanded') === 'true';
+            const textElement = this.querySelector('.details-text');
+            textElement.textContent = isExpanded ? 'Hide Additional Details' : 'View Additional Details';
+        });
+    });
+});
+</script>

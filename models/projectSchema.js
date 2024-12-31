@@ -17,10 +17,10 @@ const workerSchema = new mongoose.Schema({
 });
 
 // Main project schema
-const projectSchema = new mongoose.Schema({
+const projectSchema = new mongoose.Schema({ 
     title: { type: String, required: true },
-    type: { type: String, required: true },
-    budget: { type: Number, required: true }, // Changed from "budget" to "value"
+    projectType: { type: String, required: true },
+    projectValue: { type: Number, required: true }, // Changed from "budget" to "value"
     duration: { type: Number, required: true },
     status: { 
         type: String, 
@@ -31,8 +31,7 @@ const projectSchema = new mongoose.Schema({
     locations: [locationSchema], // List of project locations
     workers: workerSchema, // Workers schema added
     files: [{ type: String }], // Array to store file paths or URLs
-    teamMembers: { type: String }, // Team members as a comma-separated string
-    permits: { type: String }, // Associated permits/licenses
+ 
 }, { timestamps: true });
 
 module.exports = mongoose.model('Project', projectSchema);

@@ -6,8 +6,10 @@ router.get("/", dashboardGetController.getDashboard);
 router.get("/download/:filename", dashboardGetController.downloadFile);
 router.get("/newApplication", dashboardGetController.getNewApplicationPage);
 router.get("/newProjectListing", dashboardGetController.getNewProjectListingPage);
+router.get("/projectApplicationProgress", dashboardGetController.getProjectApplicationProgress);
 
 router.get("/submittedApplication", dashboardGetController.getSubmittedApplicationPage);
+router.get("/submittedPremiseLeasings", dashboardGetController.getSubmittedLeasingsPage);
 
 router.get("/reviewProgress", dashboardGetController.getReviewProgressPage);
 router.get("/premiseLeasing", dashboardGetController.getPremiseLeasingPage);
