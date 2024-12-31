@@ -140,7 +140,7 @@ const getDashboard = async (req, res) => {
   const getStructuralEnvironmentalLicensePage = async (req, res) => {
      const message = req.query.message;
      
-    res.render("home/dashboard/enviromentalAndStructural", {
+    res.render("home/dashboard/environmentalAndStructural", {
       layout: "layouts/dashboardHeader.ejs",
       message: message !=  undefined
             ? `${base64Decode(message)}`
