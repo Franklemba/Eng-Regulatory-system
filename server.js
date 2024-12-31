@@ -27,9 +27,9 @@ const singlePageGetRouter = require('./routes/singlePageGet')
 const localDB = "mongodb://127.0.0.1:27017/EngRegulatoryBoard"
 const liveDB = "mongodb+srv://Engineering:96EceAsGquKn3aLt@cluster0.cq29s.mongodb.net/?retryWrites=true&w=majority&appName=Cluster096EceAsGquKn3aLt"
 mongoose.set('strictQuery', true);
-const mainDB = localDB
+const mainDB = liveDB
 
-mongoose.connect(localDB,{useNewUrlParser: true}).then(() => {
+mongoose.connect(mainDB,{useNewUrlParser: true}).then(() => {
   console.log('database is connected')
 }).catch((err) => console.log('error connecting to database ', err))
   
@@ -51,7 +51,7 @@ app.set('trust proxy', 1);
 
  // Session configuration
 const sessionStore = MongoStore.create({ 
-mongoUrl: localDB,
+mongoUrl: mainDB,
   ttl: 14 * 24 * 60 * 60 // 14 days
 });
 

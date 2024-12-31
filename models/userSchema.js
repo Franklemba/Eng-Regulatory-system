@@ -59,7 +59,7 @@ const userSchema = new mongoose.Schema({
   isEmailVerified: {
     type: Boolean,
     required: true,
-    default: true
+    default: false
   },
   accountStatus:{
     type:String,

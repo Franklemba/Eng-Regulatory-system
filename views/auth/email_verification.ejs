@@ -9,11 +9,12 @@
                     <a href="/"><figure><img src="/img/ZEPRA LOGO.png" alt="sing up image"></figure></a>
                     <!-- <a href="/auth/register" class="signup-image-link">Create an account</a> -->
                     <p style="text-align: center;" ><%= message %></p>
+
                 </div>
                 
                 <form class="register-form" action="<%= url %>" method="post" onsubmit="return recaptcha();">
-                    <div class="col-sm-12 form-group">
-                        <label class="form--label" for="otp">Enter OTP</label>
+                    <div class="col-sm-12 form-group" >
+                        <!-- <label class="form--label" for="otp">Enter OTP</label> -->
                         <div class="otp-input-wrapper">
                             <input type="text" name="otp1" maxlength="1" class="otp-input" required>
                             <input type="text" name="otp2" maxlength="1" class="otp-input" required>
@@ -35,6 +36,7 @@
 </section>
 
 <div class="fixed--anime">
+
     <span class="banner-elem elem1">&nbsp;</span>
     <span class="banner-elem elem2">&nbsp;</span>
     <span class="banner-elem elem3">&nbsp;</span>
@@ -80,12 +82,16 @@
         justify-content: center;
     }
     .otp-input {
+        all: unset; /* Reset all styles */
         width: 40px;
         height: 50px;
         font-size: 24px;
         text-align: center;
         border: 1px solid #ccc;
         border-radius: 5px;
+        color: black;
+        background-color: white;
+        padding: 0;
     }
 </style>
 

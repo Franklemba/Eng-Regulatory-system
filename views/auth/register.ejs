@@ -382,3 +382,274 @@
     <a href="/auth/login" class="signup-image-link">I am already member</a>
 </div>
 </section>
+
+
+<script>
+  // Add these styles to your CSS
+const styles = `
+.error-message {
+  color: #dc3545;
+  font-size: 0.875rem;
+  margin-top: 4px;
+  display: none;
+}
+
+.input-box.error input,
+.input-box.error select {
+  border-color: #dc3545;
+}
+
+.input-box.error .error-message {
+  display: block;
+}
+
+.error-summary {
+  color: #dc3545;
+  background-color: #f8d7da;
+  border: 1px solid #f5c6cb;
+  border-radius: 4px;
+  padding: 12px;
+  margin-bottom: 16px;
+  display: none;
+}
+
+.form-group.error .label-agree-term {
+  color: #dc3545;
+}
+`;
+
+// Add styles to document
+const styleSheet = document.createElement("style");
+styleSheet.textContent = styles;
+document.head.appendChild(styleSheet);
+
+class FormValidator {
+  constructor(formElement) {
+    this.form = formElement;
+    this.errors = new Map();
+    
+    // Regex patterns
+    this.patterns = {
+      email: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+      phone: /^\d{10,15}$/,
+      password: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/
+    };
+
+    // Initialize error containers
+    this.setupErrorContainers();
+    
+    // Add input event listeners for real-time validation
+    this.setupInputListeners();
+  }
+
+  setupErrorContainers() {
+    // Add error container for each input box
+    this.form.querySelectorAll('.input-box, .form-group').forEach(box => {
+      const errorDiv = document.createElement('div');
+      errorDiv.className = 'error-message';
+      box.appendChild(errorDiv);
+    });
+
+    // Add error summary at the top of the form
+    const errorSummary = document.createElement('div');
+    errorSummary.className = 'error-summary';
+    this.form.insertBefore(errorSummary, this.form.firstChild);
+  }
+
+  setupInputListeners() {
+    // Add input event listeners for real-time validation
+    this.form.querySelectorAll('input, select').forEach(input => {
+      input.addEventListener('blur', () => {
+        this.validateField(input);
+      });
+
+      input.addEventListener('input', () => {
+        // Remove error styling when user starts typing
+        const container = input.closest('.input-box') || input.closest('.form-group');
+        if (container) {
+          container.classList.remove('error');
+          const errorMessage = container.querySelector('.error-message');
+          if (errorMessage) {
+            errorMessage.textContent = '';
+          }
+        }
+      });
+    });
+  }
+
+  showError(field, message) {
+    const container = field.closest('.input-box') || field.closest('.form-group');
+    if (container) {
+      container.classList.add('error');
+      const errorMessage = container.querySelector('.error-message');
+      if (errorMessage) {
+        errorMessage.textContent = message;
+      }
+    }
+    this.errors.set(field.name || field.id, message);
+  }
+
+  clearError(field) {
+    const container = field.closest('.input-box') || field.closest('.form-group');
+    if (container) {
+      container.classList.remove('error');
+      const errorMessage = container.querySelector('.error-message');
+      if (errorMessage) {
+        errorMessage.textContent = '';
+      }
+    }
+    this.errors.delete(field.name || field.id);
+  }
+
+  updateErrorSummary() {
+    const errorSummary = this.form.querySelector('.error-summary');
+    if (this.errors.size > 0) {
+      const errorList = Array.from(this.errors.values())
+        .map(error => `• ${error}`)
+        .join('<br>');
+      errorSummary.innerHTML = `<strong>Please correct the following errors:</strong><br>${errorList}`;
+      errorSummary.style.display = 'block';
+    } else {
+      errorSummary.style.display = 'none';
+    }
+  }
+
+  validateField(field) {
+    const name = field.name || field.id;
+    
+    switch(name) {
+      case 'nameOfEntity':
+        if (!field.value.trim()) {
+          this.showError(field, 'Entity name is required');
+        } else if (field.value.trim().length < 2) {
+          this.showError(field, 'Entity name must be at least 2 characters long');
+        } else {
+          this.clearError(field);
+        }
+        break;
+
+      case 'typeOfEntity':
+        if (field.value === 'Select Entity Type') {
+          this.showError(field, 'Please select an entity type');
+        } else {
+          this.clearError(field);
+        }
+        break;
+
+      case 'businessRegistrationNumber':
+        if (!field.value.trim()) {
+          this.showError(field, 'Business registration number is required');
+        } else {
+          this.clearError(field);
+        }
+        break;
+
+      case 'email':
+        if (!this.patterns.email.test(field.value)) {
+          this.showError(field, 'Please enter a valid email address');
+        } else {
+          this.clearError(field);
+        }
+        break;
+
+      case 'phoneNumber':
+        if (!this.patterns.phone.test(field.value)) {
+          this.showError(field, 'Please enter a valid phone number (10-15 digits)');
+        } else {
+          this.clearError(field);
+        }
+        break;
+
+      case 'address':
+        if (!field.value.trim()) {
+          this.showError(field, 'Street address is required');
+        } else {
+          this.clearError(field);
+        }
+        break;
+
+      case 'city':
+        if (!field.value.trim()) {
+          this.showError(field, 'City is required');
+        } else {
+          this.clearError(field);
+        }
+        break;
+
+      case 'country':
+        if (!field.value || field.value === 'Country') {
+          this.showError(field, 'Please select a country');
+        } else {
+          this.clearError(field);
+        }
+        break;
+
+      case 'password':
+        if (!this.patterns.password.test(field.value)) {
+          this.showError(field, 'Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one number, and one special character');
+        } else {
+          this.clearError(field);
+          // Also validate confirm password if it has a value
+          const confirmPassword = this.form.querySelectorAll('input[type="password"]')[1];
+          if (confirmPassword.value) {
+            this.validateField(confirmPassword);
+          }
+        }
+        break;
+
+      case 'agree-term':
+        if (!field.checked) {
+          this.showError(field, 'You must agree to the Terms of Service');
+        } else {
+          this.clearError(field);
+        }
+        break;
+    }
+
+    // Special case for confirm password
+    if (field.type === 'password' && field !== this.form.querySelector('input[name="password"]')) {
+      const password = this.form.querySelector('input[name="password"]');
+      if (field.value !== password.value) {
+        this.showError(field, 'Passwords do not match');
+      } else {
+        this.clearError(field);
+      }
+    }
+
+    this.updateErrorSummary();
+  }
+
+  validate() {
+    this.errors.clear();
+    
+    // Validate all fields
+    this.form.querySelectorAll('input, select').forEach(field => {
+      this.validateField(field);
+    });
+
+    this.updateErrorSummary();
+    
+    return {
+      isValid: this.errors.size === 0,
+      errors: Array.from(this.errors.values())
+    };
+  }
+}
+
+// Initialize the validator
+document.addEventListener('DOMContentLoaded', () => {
+  const form = document.querySelector('form');
+  const validator = new FormValidator(form);
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    
+    const { isValid, errors } = validator.validate();
+    
+    if (isValid) {
+      // If valid, proceed with form submission
+      form.submit();
+    }
+  });
+});
+</script>
