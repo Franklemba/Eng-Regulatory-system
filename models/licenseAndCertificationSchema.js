@@ -6,7 +6,7 @@ const LicenseSchema = new mongoose.Schema({
     membershipClass: { type: String, required: true },
     country: { type: String, default: "No" },
     additionalInfo: { type: String },
-  
+    userId:{ type: String, required: true },
     createdAt: { type: Date, default: Date.now }
 });
 

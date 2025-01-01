@@ -15,9 +15,9 @@ const base64Decode = (data) => {
 
 
 const getDashboard = async (req, res) => {
-  const projects = await EngineeringProject.find()
+  const projects = await EngineeringProject.find({userId:req.user._id})
   // const totalComplianceDoc = await StatutoryCompliance.find()
-  const totalComplianceDocs = await StatutoryCompliance.countDocuments();
+  const totalComplianceDocs = await StatutoryCompliance.countDocuments({userId:req.user._id});
 
     res.render("home/dashboard/dashboard", {
       layout: "layouts/dashboardHeader.ejs",
@@ -50,7 +50,7 @@ const getDashboard = async (req, res) => {
   const getSubmittedApplicationPage = async (req, res) => {
       try {
           // Fetch submitted applications from the database and sort them
-          const submittedApplications = await EngineeringLicense.find({}).sort({ _id: -1 });
+          const submittedApplications = await EngineeringLicense.find({userId:req.user._id}).sort({ _id: -1 });
   
           // Process document paths for each application
           const applicationsWithDocuments = submittedApplications.map(application => {
@@ -87,7 +87,7 @@ const getDashboard = async (req, res) => {
   };
   
   const getPremiseLeasingPage = async (req, res) => {
-    const projects = await EngineeringProject.find({}).sort({ _id: -1 });
+    const projects = await EngineeringProject.find({userId:req.user._id}).sort({ _id: -1 });
     res.render("home/dashboard/premisesLeasing", {
       layout: "layouts/dashboardHeader.ejs",
       user: req.user,
@@ -96,7 +96,7 @@ const getDashboard = async (req, res) => {
   };
   
   const getSubmittedLeasingsPage = async (req, res) => {
-    const premises = await PremiseLeasing.find({}).sort({ _id: -1 });
+    const premises = await PremiseLeasing.find({userId:req.user._id}).sort({ _id: -1 });
     res.render("home/dashboard/submittedLeasingsPage", {
       layout: "layouts/dashboardHeader.ejs",
       user: req.user,
@@ -119,7 +119,7 @@ const getDashboard = async (req, res) => {
   };
 
   const getProductCertificationApplicationsPage = async (req, res) => {
-    const productCertifications = await ProductCertificationSchema.find({}).sort({ _id: -1 });
+    const productCertifications = await ProductCertificationSchema.find({userId:req.user._id}).sort({ _id: -1 });
     res.render("home/dashboard/productCertifications", {
       layout: "layouts/dashboardHeader.ejs",
       user: req.user,
@@ -173,7 +173,7 @@ const getDashboard = async (req, res) => {
   };
   
   const getReviewLicenseAndCertificationsPage = async (req, res) => {
-    const submittedLicenses = await LicenseAndCertification.find({}).sort({ _id: -1 });
+    const submittedLicenses = await LicenseAndCertification.find({userId:req.user._id}).sort({ _id: -1 });
   
     try{
 
@@ -206,7 +206,7 @@ const getDashboard = async (req, res) => {
   const getStatutoryComplianceStatus =  async (req, res) => {
     // const message = req.query.message;
 
-    const statutoryComplianceDocs = await StatutoryCompliance.find().sort({ _id: -1 })
+    const statutoryComplianceDocs = await StatutoryCompliance.find({userId:req.user._id}).sort({ _id: -1 })
 
     
     res.render("home/dashboard/statutoryComplianceStatus", {
@@ -236,7 +236,7 @@ const getDashboard = async (req, res) => {
   
 
   const getProjectApplicationProgress = async (req, res) => {
-    const projects = await EngineeringProject.find({}).sort({ _id: -1 });
+    const projects = await EngineeringProject.find({userId:req.user._id}).sort({ _id: -1 });
     res.render("home/dashboard/projectApplicationsProgress", {
       layout: "layouts/dashboardHeader.ejs",
       user: req.user,

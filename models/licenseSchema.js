@@ -68,7 +68,8 @@ const engineeringLicenseSchema = new mongoose.Schema({
     type: String,
     required: false,
     default:'Pending'
-  }
+  },
+  userId:{ type: String, required: true }
 });
 
 module.exports = mongoose.model("EngineeringLicense", engineeringLicenseSchema);

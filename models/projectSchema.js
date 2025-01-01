@@ -27,6 +27,7 @@ const projectSchema = new mongoose.Schema({
         enum: ['Planned', 'In Progress', 'Completed', 'On Hold'], 
         default: 'Planned' 
     },
+    userId:{ type: String, required: true },
     objectives: { type: String, required: true }, // Project description with objectives
     locations: [locationSchema], // List of project locations
     workers: workerSchema, // Workers schema added

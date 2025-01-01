@@ -44,6 +44,7 @@ userEmail: {
     default: Date.now,
     required: true,
   },
+  userId:{ type: String, required: true }
 });
 
 module.exports = mongoose.model("StatutoryCompliance", statutoryComplianceSchema);

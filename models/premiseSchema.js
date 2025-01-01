@@ -29,6 +29,7 @@ const premiseSchema = new mongoose.Schema({
     declaration: {   },
     authorizedPersonName: { type: String,  },
     submissionDate: { type: Date,  },
+    userId:{ type: String, required: true },
     digitalSignature: { type: String,  },
 }, { timestamps: true });
 

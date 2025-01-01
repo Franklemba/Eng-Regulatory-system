@@ -7,9 +7,8 @@ const EngineeringProject = require("../models/projectSchema");
 const ProductCertificationSchema = require("../models/productCertificationSchema");
 const AnnualDeclaration = require("../models/annualDeclarationSchema");
 const PremiseLeasing = require("../models/premiseSchema");
-const BusinessClosure = require("../models/businessClosureSchema");
 const LicenseAndCertification = require("../models/licenseAndCertificationSchema");
-
+const BusinessClosure = require('../models/businessClosureSchema')
 const StructuralEnvironmentalLicense = require("../models/structuralEnvironmentalLicenceSchema");
 const StatutoryCompliance = require("../models/statutoryComplianceSchema");
 
@@ -53,6 +52,7 @@ const submitApplication = async (req, res) => {
       engineeringOrg,
       documents,
       description,
+      userId:req.user._id
     });
 
     await newLicense.save();
@@ -93,6 +93,7 @@ const submitProject = async (req, res) => {
       duration,
       status,
       objectives,
+      userId:req.user._id,
       locations: parsedLocations, // Array of location objects
       workers: parsedWorkers, // Object with worker categories
     });
@@ -183,7 +184,9 @@ const submitPremiseLeasing = async (req, res) => {
       declaration,
       authorizedPersonName,
       submissionDate,
-      digitalSignature
+      digitalSignature,
+      userId:req.user._id
+
   });
 
     // Save the application to the database
@@ -260,7 +263,9 @@ const submitProductCertificationApplication = async (req, res) => {
       standardCertifications: req.files['standardCertifications'][0].location,
       manufacturerAuthorization: req.files['manufacturerAuthorization'][0].location,
       // Set initial status
-      status: 'submitted'
+      status: 'submitted',
+      userId:req.user._id
+
     });
 
     // res.send(req.body)
@@ -297,7 +302,9 @@ const submitBusinessClosure =  async (req, res, next) => {
       licenseID,
       reasonForClosure,
       closureDate,
-      finalFinancialStatement : uploadedDoc
+      finalFinancialStatement : uploadedDoc,
+      userId:req.user._id
+
     })
 
     await businessClosure.save();
@@ -351,7 +358,9 @@ try{
     environmentalAssessDetails,
     structuralSafetyDetails,
     emergencyResponsePlan,
-    supportingDocument: supportingDocument 
+    supportingDocument: supportingDocument ,
+    userId:req.user._id
+
   })
 
   await structuralEnvironmentalLicence.save();
@@ -380,7 +389,9 @@ const submitLicenseAndCertification = async (req, res) => {
       companyName,
       membershipClass,
       country,
-      additionalInfo
+      additionalInfo,
+      userId:req.user._id
+
     });
 
     await newCertificationAndLicense.save();
@@ -417,7 +428,9 @@ try{
     workcompDoc,
     nhimaDoc,
     erbDoc,
-    others
+    others,
+    userId:req.user._id
+
   })
 
   await statutoryCompliance.save();
