@@ -45,7 +45,11 @@
                                     <% app.files.forEach(file => { %>
                                         <li>
                                             <a href="<%= file %>" download class="btn btn-link p-0 text-primary">
-                                                <%=file%>
+                                               <button class="btn btn-sm text-white btn-primary" >
+
+                                                   Download Doc 
+                                               </button>
+                                               <%=file%>
                                             </a>
                                         </li>
                                     <% }) %>

@@ -33,4 +33,4 @@ const premiseSchema = new mongoose.Schema({
     digitalSignature: { type: String,  },
 }, { timestamps: true });
 
-module.exports = mongoose.model('Application', premiseSchema);
+module.exports = mongoose.model('Premise', premiseSchema);

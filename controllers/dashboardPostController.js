@@ -83,8 +83,9 @@ const submitProject = async (req, res) => {
     const parsedLocations = typeof locations === 'string' ? JSON.parse(locations) : locations;
     const parsedWorkers = typeof workers === 'string' ? JSON.parse(workers) : workers;
     
-    const documents = req.files.documents?.map(file => file.path) || [];
-    // console.log(req.files);
+    const documents = req.files.documents?.map(file => file.location) || [];
+    //  console.log('files',req.files);
+    //  console.log('documents',documents);
     // Create a new project instance
     const newProject = new EngineeringProject({
       title,
@@ -212,7 +213,7 @@ const submitAnnualDeclaration= async (req, res) => {
 
     });
 
-    const documents = req.files?.map(file => file.path) || [];
+    const documents = req.files?.map(file => file.location) || [];
     await newAnnualDeclaration.save();
     res.redirect("/dashboard/newApplication");
   }
