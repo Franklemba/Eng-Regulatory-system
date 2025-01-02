@@ -4,3 +4,7 @@ span#accountStatus{
 	justify-content: center;
 
 }
+
+.grnbtn{
+	background-color: green !important;
+}
