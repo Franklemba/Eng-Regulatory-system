@@ -1,0 +1,76 @@
+<div class="page-wrapper">
+    <div class="container my-5">
+        <div class="card shadow-sm">
+            <div class="card-header text-center">
+                <h4 class="mb-0">Structural License Details</h4>
+            </div>
+            <div class="card-body">
+                <!-- Project Details -->
+                <h5 class="text-muted mb-3">Project Information</h5>
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <p><strong>Project Name:</strong> <%= environmentalStructural.projectName %></p>
+                    </div>
+                    <div class="col-md-6">
+                        <p><strong>Project ID:</strong> <%= environmentalStructural.projectID %></p>
+                    </div>
+                    <div class="col-md-6">
+                        <p><strong>Structure Type:</strong> <%= environmentalStructural.structureType %></p>
+                    </div>
+                    <div class="col-md-6">
+                        <p><strong>EIA Required:</strong> <%= environmentalStructural.isEIArequired === "Yes" ? "Yes" : "No" %></p>
+                    </div>
+                    <div class="col-md-6">
+                        <p><strong>Submitted On:</strong> <%= new Date(environmentalStructural.createdAt).toLocaleString() %></p>
+                    </div>
+                </div>
+    
+                <!-- Safety and Environmental Details -->
+                <h5 class="text-muted mb-3">Safety and Environmental Information</h5>
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <p><strong>Safety Standards:</strong> <%= environmentalStructural.structuralSafetyStandards %></p>
+                    </div>
+                    <div class="col-md-6">
+                        <p><strong>Integrity Evaluation Report:</strong> <%= environmentalStructural.structuralIntegrityEvaluationReport %></p>
+                    </div>
+                    <div class="col-md-6">
+                        <p><strong>Impact Mitigation Plan:</strong> <%= environmentalStructural.environmentImpactMitigationPlan %></p>
+                    </div>
+                    <div class="col-md-6">
+                        <p><strong>Emergency Response Plan:</strong> <%= environmentalStructural.emergencyResponsePlan %></p>
+                    </div>
+                </div>
+    
+                <!-- Environmental Impact Details -->
+                <h5 class="text-muted mb-3">Environmental Impact Details</h5>
+                <div class="row mb-3">
+                    <div class="col-12">
+                        <p><strong>Local Ecosystem Impact Description:</strong></p>
+                        <p><%= environmentalStructural.localEcosystemImpactDescription %></p>
+                    </div>
+                    <div class="col-12">
+                        <p><strong>Environmental Assessment Details:</strong></p>
+                        <p><%= environmentalStructural.environmentalAssessDetails %></p>
+                    </div>
+                </div>
+    
+                <!-- Uploaded Documents -->
+                <h5 class="text-muted mb-3">Uploaded Documents</h5>
+                <div class="row">
+                    <div class="col-12">
+                        <p><strong>Supporting Document:</strong></p>
+                        <a href="<%=environmentalStructural.supportingDocument %>" 
+                            class="btn btn-sm btn-primary" 
+                            download="<%= environmentalStructural.supportingDocument %>">
+                            Download Supporting Document
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer text-end">
+                <a href="/dashboard/structuralEnvironmentalLicenses" class="btn btn-secondary">Back to Licenses</a>
+            </div>
+        </div>
+    </div>
+</div>

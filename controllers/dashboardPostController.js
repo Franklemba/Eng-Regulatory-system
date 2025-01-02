@@ -368,7 +368,7 @@ try{
   console.log(structuralEnvironmentalLicence)
   successMessage = ` ${projectName} uploaded successfully`;
 
-  res.redirect(`/dashboard/structuralEnvironmentalLicense?message=${encodeURIComponent(base64Encode(successMessage))}`);
+  res.redirect(`/dashboard/structuralEnvironmentalLicenses?message=${encodeURIComponent(base64Encode(successMessage))}`);
 
 }catch (error) {
   console.error(`Error uploading environment structural what what error : ${error.message}`);

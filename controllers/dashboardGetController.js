@@ -7,7 +7,7 @@ const PremiseLeasing = require("../models/premiseSchema");
 const BusinessClosure = require("../models/businessClosureSchema");
 const OrderForSupply = require("../models/orderForSupplySchema");
 const LicenseAndCertification = require("../models/licenseAndCertificationSchema");
-
+const StructuralEnvironmentalLicense = require("../models/structuralEnvironmentalLicenceSchema");
 const StatutoryCompliance = require("../models/statutoryComplianceSchema");
 const base64Decode = (data) => {
   return Buffer.from(data, 'base64').toString('utf-8');
@@ -152,6 +152,21 @@ const getDashboard = async (req, res) => {
     });
   };
   
+  const getStructuralEnvironmentalLicenses = async (req, res) => {
+    const message = req.query.message;
+    const structuralLicenses = await StructuralEnvironmentalLicense.find({userId:req.user._id}).sort({ _id: -1 });
+  
+    
+   res.render("home/dashboard/environmentalAndStructuralStatus", {
+     layout: "layouts/dashboardHeader.ejs",
+     message: message !=  undefined
+           ? `${base64Decode(message)}`
+           : null ,
+       user: req.user,
+       structuralLicenses
+   });
+ };
+
   const getLicenseAndCertificationsPage = async (req, res) => {
     const message = req.query.message;
 
@@ -267,6 +282,7 @@ const getDashboard = async (req, res) => {
     getProductCertificationApplicationsPage,
     getBusinessClosurePage,
     getStructuralEnvironmentalLicensePage,
+    getStructuralEnvironmentalLicenses,
     getStatutoryCompliance,
     getStatutoryComplianceStatus,
     getAssessmentPage,
