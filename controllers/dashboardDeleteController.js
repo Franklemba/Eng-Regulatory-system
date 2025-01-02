@@ -9,6 +9,8 @@ const StructuralEnvironmentalLicense = require("../models/structuralEnvironmenta
 
 // .deleteMany({}).then((done)=>console.log(done))
 
+
+
 const deleteApplication = async (req, res) => {
     try {
       const { id } = req.params;
