@@ -20,11 +20,14 @@ router.get("/productCertificationApplications", dashboardGetController.getProduc
 // Lembalemba onwards
 router.get("/businessClosure", dashboardGetController.getBusinessClosurePage);
 router.get("/structuralEnvironmentalLicense", dashboardGetController.getStructuralEnvironmentalLicensePage);
-// router.get("/orderForSupply", dashboardGetController.getOrderForSupplyPage);
-// router.get("/awarenessAdvert", dashboardGetController.getAwarenessAdvertPage);
+router.get("/structuralEnvironmentalLicenses", dashboardGetController.getStructuralEnvironmentalLicenses);
+
 router.get("/assessment", dashboardGetController.getAssessmentPage);
 router.get("/newCompliance", dashboardGetController.getStatutoryCompliance);
 router.get("/reviewCompliance", dashboardGetController.getStatutoryComplianceStatus);
 router.get("/profileManagement", dashboardGetController.getProfileManagement);
+
+router.get("/attachLicense", dashboardGetController.getLicenseAndCertificationsPage);
+router.get("/reviewLicense", dashboardGetController.getReviewLicenseAndCertificationsPage);
 
 module.exports = router;

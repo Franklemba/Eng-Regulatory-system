@@ -8,7 +8,7 @@ const OrderForSupply = require("../models/orderForSupplySchema");
 const AwarenessAdvert = require("../models/awarenessAdvertSchema");
 const StatutoryCompliance = require("../models/statutoryComplianceSchema");
 const productCertificationSchema = require("../models/productCertificationSchema");
-
+const StructuralEnvironmentalLicense = require("../models/structuralEnvironmentalLicenceSchema");
 
 const viewApplicationPage = async (req, res) => {
   try {
@@ -51,4 +51,25 @@ const viewProductCertificationPage = async (req, res) => {
         res.status(500).send('Error loading productCertification');
     }
   };
-  module.exports = {viewApplicationPage, viewProductCertificationPage};
+
+  const viewEnvironmentalStructuralPage = async (req, res) => {
+    try {
+        const id = req.params.id;
+        const environmentalStructural = await StructuralEnvironmentalLicense.findOne({_id: id});
+        
+        if (!environmentalStructural) {
+            return res.status(404).send('Environmental Structural not found');
+        }
+  
+        res.render("home/dashboard/singleViews/viewEnvironmentalStructural", {
+            layout: "layouts/dashboardHeader.ejs",
+            user: req.user,
+            environmentalStructural
+        });
+    } catch (error) {
+        console.error('Error fetching Environmental Structural:', error);
+        res.status(500).send('Error loading Environmental Structural');
+    }
+  };
+
+  module.exports = {viewApplicationPage, viewProductCertificationPage,viewEnvironmentalStructuralPage};

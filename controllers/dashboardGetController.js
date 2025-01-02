@@ -6,7 +6,8 @@ const AnnualDeclaration = require("../models/annualDeclarationSchema");
 const PremiseLeasing = require("../models/premiseSchema");
 const BusinessClosure = require("../models/businessClosureSchema");
 const OrderForSupply = require("../models/orderForSupplySchema");
-
+const LicenseAndCertification = require("../models/licenseAndCertificationSchema");
+const StructuralEnvironmentalLicense = require("../models/structuralEnvironmentalLicenceSchema");
 const StatutoryCompliance = require("../models/statutoryComplianceSchema");
 const base64Decode = (data) => {
   return Buffer.from(data, 'base64').toString('utf-8');
@@ -14,9 +15,9 @@ const base64Decode = (data) => {
 
 
 const getDashboard = async (req, res) => {
-  const projects = await EngineeringProject.find()
+  const projects = await EngineeringProject.find({userId:req.user._id})
   // const totalComplianceDoc = await StatutoryCompliance.find()
-  const totalComplianceDocs = await StatutoryCompliance.countDocuments();
+  const totalComplianceDocs = await StatutoryCompliance.countDocuments({userId:req.user._id});
 
     res.render("home/dashboard/dashboard", {
       layout: "layouts/dashboardHeader.ejs",
@@ -33,6 +34,8 @@ const getDashboard = async (req, res) => {
     });
   };
 
+  
+
 
   
   const getNewProjectListingPage = async (req, res) => {
@@ -47,7 +50,7 @@ const getDashboard = async (req, res) => {
   const getSubmittedApplicationPage = async (req, res) => {
       try {
           // Fetch submitted applications from the database and sort them
-          const submittedApplications = await EngineeringLicense.find({}).sort({ _id: -1 });
+          const submittedApplications = await EngineeringLicense.find({userId:req.user._id}).sort({ _id: -1 });
   
           // Process document paths for each application
           const applicationsWithDocuments = submittedApplications.map(application => {
@@ -84,7 +87,7 @@ const getDashboard = async (req, res) => {
   };
   
   const getPremiseLeasingPage = async (req, res) => {
-    const projects = await EngineeringProject.find({}).sort({ _id: -1 });
+    const projects = await EngineeringProject.find({userId:req.user._id}).sort({ _id: -1 });
     res.render("home/dashboard/premisesLeasing", {
       layout: "layouts/dashboardHeader.ejs",
       user: req.user,
@@ -93,7 +96,7 @@ const getDashboard = async (req, res) => {
   };
   
   const getSubmittedLeasingsPage = async (req, res) => {
-    const premises = await PremiseLeasing.find({}).sort({ _id: -1 });
+    const premises = await PremiseLeasing.find({userId:req.user._id}).sort({ _id: -1 });
     res.render("home/dashboard/submittedLeasingsPage", {
       layout: "layouts/dashboardHeader.ejs",
       user: req.user,
@@ -116,7 +119,7 @@ const getDashboard = async (req, res) => {
   };
 
   const getProductCertificationApplicationsPage = async (req, res) => {
-    const productCertifications = await ProductCertificationSchema.find({}).sort({ _id: -1 });
+    const productCertifications = await ProductCertificationSchema.find({userId:req.user._id}).sort({ _id: -1 });
     res.render("home/dashboard/productCertifications", {
       layout: "layouts/dashboardHeader.ejs",
       user: req.user,
@@ -140,7 +143,7 @@ const getDashboard = async (req, res) => {
   const getStructuralEnvironmentalLicensePage = async (req, res) => {
      const message = req.query.message;
      
-    res.render("home/dashboard/enviromentalAndStructural", {
+    res.render("home/dashboard/environmentalAndStructural", {
       layout: "layouts/dashboardHeader.ejs",
       message: message !=  undefined
             ? `${base64Decode(message)}`
@@ -149,19 +152,32 @@ const getDashboard = async (req, res) => {
     });
   };
   
-  const getOrderForSupplyPage = async (req, res) => {
+  const getStructuralEnvironmentalLicenses = async (req, res) => {
+    const message = req.query.message;
+    const structuralLicenses = await StructuralEnvironmentalLicense.find({userId:req.user._id}).sort({ _id: -1 });
+  
+    
+   res.render("home/dashboard/environmentalAndStructuralStatus", {
+     layout: "layouts/dashboardHeader.ejs",
+     message: message !=  undefined
+           ? `${base64Decode(message)}`
+           : null ,
+       user: req.user,
+       structuralLicenses
+   });
+ };
+
+  const getLicenseAndCertificationsPage = async (req, res) => {
     const message = req.query.message;
 
     try{
 
-      const orderSupplies = await OrderForSupply.find({}).sort({ _id: -1 });
-      res.render("home/dashboard/orderForSupply", {
+      res.render("home/dashboard/licensesAndCertificationsPage", {
         layout: "layouts/dashboardHeader.ejs",
         message: message !=  undefined
             ? `${base64Decode(message)}`
             : null ,
-        user: req.user,
-        orderSupplies 
+        user: req.user
       });
       
       
@@ -171,7 +187,23 @@ const getDashboard = async (req, res) => {
     
   };
   
+  const getReviewLicenseAndCertificationsPage = async (req, res) => {
+    const submittedLicenses = await LicenseAndCertification.find({userId:req.user._id}).sort({ _id: -1 });
+  
+    try{
 
+      res.render("home/dashboard/reviewLicensesAndCertifications", {
+        layout: "layouts/dashboardHeader.ejs",
+        user: req.user,
+        submittedLicenses
+      });
+      
+      
+    }catch(error){
+         res.send(error.message)
+    }
+    
+  };
 
   const getStatutoryCompliance =  async (req, res) => {
     const message = req.query.message;
@@ -189,7 +221,7 @@ const getDashboard = async (req, res) => {
   const getStatutoryComplianceStatus =  async (req, res) => {
     // const message = req.query.message;
 
-    const statutoryComplianceDocs = await StatutoryCompliance.find().sort({ _id: -1 })
+    const statutoryComplianceDocs = await StatutoryCompliance.find({userId:req.user._id}).sort({ _id: -1 })
 
     
     res.render("home/dashboard/statutoryComplianceStatus", {
@@ -219,7 +251,7 @@ const getDashboard = async (req, res) => {
   
 
   const getProjectApplicationProgress = async (req, res) => {
-    const projects = await EngineeringProject.find({}).sort({ _id: -1 });
+    const projects = await EngineeringProject.find({userId:req.user._id}).sort({ _id: -1 });
     res.render("home/dashboard/projectApplicationsProgress", {
       layout: "layouts/dashboardHeader.ejs",
       user: req.user,
@@ -250,7 +282,7 @@ const getDashboard = async (req, res) => {
     getProductCertificationApplicationsPage,
     getBusinessClosurePage,
     getStructuralEnvironmentalLicensePage,
-    getOrderForSupplyPage,
+    getStructuralEnvironmentalLicenses,
     getStatutoryCompliance,
     getStatutoryComplianceStatus,
     getAssessmentPage,
@@ -258,6 +290,8 @@ const getDashboard = async (req, res) => {
     getNewProjectListingPage,
     getProfileManagement,
     getProjectApplicationProgress,
-    getSubmittedLeasingsPage
+    getSubmittedLeasingsPage,
+    getLicenseAndCertificationsPage,
+    getReviewLicenseAndCertificationsPage
   };
   

@@ -7,9 +7,8 @@ const EngineeringProject = require("../models/projectSchema");
 const ProductCertificationSchema = require("../models/productCertificationSchema");
 const AnnualDeclaration = require("../models/annualDeclarationSchema");
 const PremiseLeasing = require("../models/premiseSchema");
-const BusinessClosure = require("../models/businessClosureSchema");
-const OrderForSupply = require("../models/orderForSupplySchema");
-const AwarenessAdvert = require("../models/awarenessAdvertSchema");
+const LicenseAndCertification = require("../models/licenseAndCertificationSchema");
+const BusinessClosure = require('../models/businessClosureSchema')
 const StructuralEnvironmentalLicense = require("../models/structuralEnvironmentalLicenceSchema");
 const StatutoryCompliance = require("../models/statutoryComplianceSchema");
 
@@ -53,6 +52,7 @@ const submitApplication = async (req, res) => {
       engineeringOrg,
       documents,
       description,
+      userId:req.user._id
     });
 
     await newLicense.save();
@@ -83,8 +83,9 @@ const submitProject = async (req, res) => {
     const parsedLocations = typeof locations === 'string' ? JSON.parse(locations) : locations;
     const parsedWorkers = typeof workers === 'string' ? JSON.parse(workers) : workers;
     
-    const documents = req.files.documents?.map(file => file.path) || [];
-    // console.log(req.files);
+    const documents = req.files.documents?.map(file => file.location) || [];
+    //  console.log('files',req.files);
+    //  console.log('documents',documents);
     // Create a new project instance
     const newProject = new EngineeringProject({
       title,
@@ -93,6 +94,7 @@ const submitProject = async (req, res) => {
       duration,
       status,
       objectives,
+      userId:req.user._id,
       locations: parsedLocations, // Array of location objects
       workers: parsedWorkers, // Object with worker categories
     });
@@ -183,7 +185,9 @@ const submitPremiseLeasing = async (req, res) => {
       declaration,
       authorizedPersonName,
       submissionDate,
-      digitalSignature
+      digitalSignature,
+      userId:req.user._id
+
   });
 
     // Save the application to the database
@@ -205,12 +209,11 @@ const submitAnnualDeclaration= async (req, res) => {
     const {
 
     } = req.body;
-
     const newAnnualDeclaration = new AnnualDeclaration({
 
     });
 
-    const documents = req.files?.map(file => file.path) || [];
+    const documents = req.files?.map(file => file.location) || [];
     await newAnnualDeclaration.save();
     res.redirect("/dashboard/newApplication");
   }
@@ -261,7 +264,9 @@ const submitProductCertificationApplication = async (req, res) => {
       standardCertifications: req.files['standardCertifications'][0].location,
       manufacturerAuthorization: req.files['manufacturerAuthorization'][0].location,
       // Set initial status
-      status: 'submitted'
+      status: 'submitted',
+      userId:req.user._id
+
     });
 
     // res.send(req.body)
@@ -298,7 +303,9 @@ const submitBusinessClosure =  async (req, res, next) => {
       licenseID,
       reasonForClosure,
       closureDate,
-      finalFinancialStatement : uploadedDoc
+      finalFinancialStatement : uploadedDoc,
+      userId:req.user._id
+
     })
 
     await businessClosure.save();
@@ -352,96 +359,50 @@ try{
     environmentalAssessDetails,
     structuralSafetyDetails,
     emergencyResponsePlan,
-    supportingDocument: supportingDocument 
+    supportingDocument: supportingDocument ,
+    userId:req.user._id
+
   })
 
   await structuralEnvironmentalLicence.save();
   console.log(structuralEnvironmentalLicence)
   successMessage = ` ${projectName} uploaded successfully`;
 
-  res.redirect(`/dashboard/structuralEnvironmentalLicense?message=${encodeURIComponent(base64Encode(successMessage))}`);
+  res.redirect(`/dashboard/structuralEnvironmentalLicenses?message=${encodeURIComponent(base64Encode(successMessage))}`);
 
 }catch (error) {
   console.error(`Error uploading environment structural what what error : ${error.message}`);
   res.send("Error uploading environment structural what what error");
 }
 };
-
-// ##Order supply over here
-// const submitOrderForSupply = async (req, res) => {
-    
-//   const {
-//     supplierName,
-//   contactPerson,
-//   contactNumber,
-//   expectedDeliveryDate,
-//   priotyLevel,
-//   orderDetails
-//   } = req.body;
-
-// const uploadedDoc = req.file.path.replace(/.*public[\\/]/, '').replace(/\\/g, '/');
-
-// try{
-  
-//   const onwardsrderForSupply = new OrderForSupply({
-//     supplierName,
-//   contactPerson,
-//   contactNumber,
-//   expectedDeliveryDate,
-//   priotyLevel,
-//   orderDetails,
-//   supportingDocument:uploadedDoc
-//   })
-
-//   await onwardsrderForSupply.save();
-//   console.log(onwardsrderForSupply)
-//   successMessage = `Order supply named ${supplierName} uploaded successfully`;
-
-//   res.redirect(`/dashboard/orderForSupply?message=${encodeURIComponent(base64Encode(successMessage))}`);
-
-// }catch (error) {
-//   console.error(`Error uploading order supply : ${error.message}`);
-//   res.send("Error uploading order supply");
-// }
+const submitLicenseAndCertification = async (req, res) => {
+  try {
+    const {
+      companyName,
+      membershipClass,
+      country,
+      additionalInfo
+    } = req.body;
 
 
-// };
-// const submitAwarenessAdvert = async (req, res) => {
-        
-//     const {
-//       advertTitle,
-//       description,
-//       startDate,
-//       endDate,
-//         targetAudience,
-//     } = req.body;
 
-//   const uploadedDoc = req.file.path.replace(/.*public[\\/]/, '').replace(/\\/g, '/');
+    const newCertificationAndLicense = new LicenseAndCertification({
+      companyName,
+      membershipClass,
+      country,
+      additionalInfo,
+      userId:req.user._id
 
-//   try{
-    
-//     const awarenessAdvert = new AwarenessAdvert({
-//       advertTitle,
-//       description,
-//       startDate,
-//       endDate,
-//         targetAudience,
-//       advertMedia:uploadedDoc
-//     })
+    });
 
-//     await awarenessAdvert.save();
-//     console.log(awarenessAdvert)
-//     successMessage = `Awareness advert with title ${advertTitle} uploaded successfully`;
+    await newCertificationAndLicense.save();
+    res.redirect("/dashboard/newApplication");
+  } catch (error) {
+    console.error("Error in license and certification submission:", error);
+    res.status(500).send("An error occurred while processing your application.");
+  }
 
-//     res.redirect(`/dashboard/awarenessAdvert?message=${encodeURIComponent(base64Encode(successMessage))}`);
-
-//   }catch (error) {
-//     console.error(`Error uploading awareness advert media : ${error.message}`);
-//     res.send("Error uploading awareness advert media");
-//   }
-
-// };
-
+};
 // ####statutory compliance documents route
 const statutoryCompliance = async (req, res) => {
   const user = req.user;
@@ -468,7 +429,9 @@ try{
     workcompDoc,
     nhimaDoc,
     erbDoc,
-    others
+    others,
+    userId:req.user._id
+
   })
 
   await statutoryCompliance.save();
@@ -493,11 +456,9 @@ module.exports = {
   submitPremiseLeasing,
   submitAnnualDeclaration,
   submitProductCertificationApplication,
-
   submitBusinessClosure,
   submitStructuralEnvironmentalLicense,
-  // submitOrderForSupply,
-  // submitAwarenessAdvert,
+submitLicenseAndCertification,
   statutoryCompliance,
   submitAssessment,
 };

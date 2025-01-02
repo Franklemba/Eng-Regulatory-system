@@ -105,6 +105,82 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="col-12">
+                                        <div class="p-3 rounded" style="background-color: #f8fafc;">
+                                            <small class="text-muted text-uppercase d-block mb-2">Attached Documents</small>
+                                            
+                                            <div class="row g-3">
+                                                <!-- Lease Agreement -->
+                                                <div class="col-md-6">
+                                                    <div class="d-flex align-items-center">
+                                                        <i class="bi bi-file-earmark-pdf me-2 text-danger"></i>
+                                                        <a href="<%= premise.leaseAgreement %>" class="text-decoration-none" target="_blank">
+                                                           <button  class="btn btn-sm text-white btn-primary" >
+                                                            
+                                                               Download Lease Agreement
+                                                           </button>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                                
+                                                <!-- Zoning Approval -->
+                                                <div class="col-md-6">
+                                                    <div class="d-flex align-items-center">
+                                                        <i class="bi bi-file-earmark-text me-2 text-primary"></i>
+                                                        <a href="<%= premise.zoningApproval %>" class="text-decoration-none" target="_blank">
+                                                            <button  class="btn btn-sm text-white btn-primary" >
+                                                               Download Zoning Approval
+                                                            
+                                                            </button>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                                
+                                                <!-- Environmental Clearance -->
+                                                <div class="col-md-6">
+                                                    <div class="d-flex align-items-center">
+                                                        <i class="bi bi-file-earmark-text me-2 text-primary"></i>
+                                                        <a href="<%= premise.environmentalClearance %>" class="text-decoration-none" target="_blank">
+                                                            <button  class="btn btn-sm text-white btn-primary" >
+                                                                Download Environmental Clearance
+                                                            
+                                                            </button>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                                
+                                                <!-- Building Safety Certificate -->
+                                                <div class="col-md-6">
+                                                    <div class="d-flex align-items-center">
+                                                        <i class="bi bi-file-earmark-text me-2 text-primary"></i>
+                                                        <a href="<%= premise.buildingSafetyCert %>" class="text-decoration-none" target="_blank">
+                                                            <button  class="btn btn-sm text-white btn-primary" >
+                                                                Download Building Safety Certificate
+                                                            
+                                                            </button>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                                
+                                                <!-- Other Documents -->
+                                                <% if (premise.otherDocs && premise.otherDocs.length > 0) { %>
+                                                    <% premise.otherDocs.forEach((doc, docIndex) => { %>
+                                                        <div class="col-md-6">
+                                                            <div class="d-flex align-items-center">
+                                                                <i class="bi bi-file-earmark-text me-2 text-primary"></i>
+                                                                <a href="<%= doc %>" class="text-decoration-none" target="_blank">
+                                                                    <button  class="btn btn-sm text-white btn-primary" >
+                                                                       Download Additional Document <%= docIndex + 1 %>
+                                                            
+                                                                    </button>
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    <% }) %>
+                                                <% } %>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>

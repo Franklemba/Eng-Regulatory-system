@@ -59,6 +59,7 @@ const structuralEnvironmentalLicenceSchema = new mongoose.Schema({
     default: Date.now,
     required: true,
   },
+  userId:{ type: String, required: true }
 });
 
 module.exports = mongoose.model("StructuralEnvironmentalLicence", structuralEnvironmentalLicenceSchema);

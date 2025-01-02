@@ -380,10 +380,3 @@ body {
 	}
 }
 
-li#accountStatus{
-	display:flex !important; 
-	align-items: center;
-	background-color: red !important;
-	justify-content: center;
-	padding: 100%;
-}

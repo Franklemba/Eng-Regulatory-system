@@ -1,0 +1,10 @@
+span#accountStatus{
+	display:flex !important; 
+	align-items: center;
+	justify-content: center;
+
+}
+
+.grnbtn{
+	background-color: green !important;
+}

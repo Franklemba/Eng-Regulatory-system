@@ -1,5 +1,6 @@
 const { response } = require("express");
 const User = require("../models/userSchema");
+// User.deleteMany({}).then((done)=>console.log(done))
 const bcrypt = require("bcrypt");
 
 exports.profileSetting = (req, res) => {
