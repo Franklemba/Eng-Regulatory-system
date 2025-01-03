@@ -113,7 +113,7 @@ const getDashboard = async (req, res) => {
   };
   
   const getProductCertificationApplicationPage = async (req, res) => {
-    res.render("home/dashboard/productCertification", {
+    res.render("home/dashboard/ProductCertification", {
       layout: "layouts/dashboardHeader.ejs",
       user: req.user,
     });
