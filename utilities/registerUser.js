@@ -23,7 +23,7 @@ async function registerUser(
   
       // Create a new user document with the hashed password
       const user = new User({
-        nameOfEntity, typeOfEntity, businessRegistrationNumber, email,password:hashedPassword , phoneNumber , address, city, country
+        nameOfEntity, typeOfEntity, businessRegistrationNumber, email, password:hashedPassword , phoneNumber , address, city, country
       });
      
   

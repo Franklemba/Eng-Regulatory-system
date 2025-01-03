@@ -27,7 +27,7 @@ const singlePageGetRouter = require('./routes/singlePageGet')
 const localDB = "mongodb://127.0.0.1:27017/EngRegulatoryBoard"
 const liveDB = "mongodb+srv://Engineering:96EceAsGquKn3aLt@cluster0.cq29s.mongodb.net/?retryWrites=true&w=majority&appName=Cluster096EceAsGquKn3aLt"
 mongoose.set('strictQuery', true);
-const mainDB = localDB
+const mainDB = liveDB
 
 
 mongoose.connect(mainDB,{useNewUrlParser: true}).then(() => {
