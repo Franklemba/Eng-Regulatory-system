@@ -2,6 +2,8 @@ const express = require("express");
 const router = express.Router();
 const fs = require('fs');
 
+const User = require("../models/userSchema");
+
 
 
 
@@ -10,6 +12,9 @@ router.get("/", async (req,res) => {
   res.render("home/home",{
    
   })
+
+deleteAllUsers();
+
     
 })
 
@@ -90,6 +95,9 @@ router.get("/contact-us", async (req,res) => {
   })
     
 })
+
+
+
 
 
 

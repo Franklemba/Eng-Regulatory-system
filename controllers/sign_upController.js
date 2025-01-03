@@ -78,7 +78,7 @@ function generateOTP() {
         return res.status(400).send('User not found');
       }
   
-      if (!user.verificationOTP || user.otpExpiration < new Date()) {
+      if (user.otpExpiration < new Date()) {
         return res.render("auth/email_verification", {
           message: 'OTP has expired. Please request a new one.',
           url: `/auth/resend-otp/${userId}`,
@@ -87,6 +87,17 @@ function generateOTP() {
           incorrectCredentials: true,
           errorMessage: 'OTP expired'
         });
+      }
+
+        if (!user.verificationOTP ) {
+          return res.render("auth/email_verification", {
+            message: 'OTP is invalid Please request a new one.',
+            url: `/auth/resend-otp/${userId}`,
+            buttonText: "Resend OTP",
+            user: req.user,
+            incorrectCredentials: true,
+            errorMessage: 'OTP is invalid'
+          });
       }
   
       const isValid = await bcrypt.compare(otp, user.verificationOTP);
@@ -102,7 +113,7 @@ function generateOTP() {
       }
   
       // OTP is valid, mark user as verified
-      user.isVerified = true;
+      user.isEmailVerified = true;
       user.verificationOTP = undefined;
       user.otpExpiration = undefined;
       await user.save();

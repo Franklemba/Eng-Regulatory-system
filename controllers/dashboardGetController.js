@@ -9,6 +9,7 @@ const OrderForSupply = require("../models/orderForSupplySchema");
 const LicenseAndCertification = require("../models/licenseAndCertificationSchema");
 const StructuralEnvironmentalLicense = require("../models/structuralEnvironmentalLicenceSchema");
 const StatutoryCompliance = require("../models/statutoryComplianceSchema");
+
 const base64Decode = (data) => {
   return Buffer.from(data, 'base64').toString('utf-8');
 };
