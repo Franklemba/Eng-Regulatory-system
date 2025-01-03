@@ -1,6 +1,6 @@
 const { response } = require("express");
 const User = require("../models/userSchema");
-//User.deleteMany({}).then((done)=>console.log(done))
+// User.deleteMany({email:'chisalecharles32@gmail.com'}).then((done)=>console.log(done))
 const bcrypt = require("bcrypt");
 
 exports.profileSetting = (req, res) => {
@@ -33,11 +33,12 @@ console.log(updatedData)
 })
 
 exports.changePassword = (req, res) => {
-  const layout = "layouts/non_headerLayout"
+  const layout = "layouts/dashboardHeader"
     res.render("auth/updatePassword", {
         layout,
         pageTitle: 'Update password',
-        user: req.user
+        user: req.user,
+        message:''
     });
 };
 
@@ -48,7 +49,7 @@ exports.postChangePassword = async (req, res) => {
 
         const user = await User.findOne({_id:req.user._id});
     
-        const isMatch =  bcrypt.compare(newPassword, user.password);
+        const isMatch = await bcrypt.compare(oldPassword, user.password);
 
         if(isMatch){
             const salt = await bcrypt.genSalt(10);
@@ -57,10 +58,16 @@ exports.postChangePassword = async (req, res) => {
             
             user.password = hashedPassword;
             user.save();
-            console.log(user);
+            console.log(newPassword);
+            res.redirect("/dashboard");
         }else{
-            response.redirect("/auth/updatePassword");	
-            console.log("incorrect password");
+          const layout = "layouts/dashboardHeader"
+          res.render("auth/updatePassword", {
+              layout,
+              pageTitle: 'Update password',
+              user: req.user,
+              message:"Incorrect Password"
+          });
         }
     }catch(err){
           console.log(err);
