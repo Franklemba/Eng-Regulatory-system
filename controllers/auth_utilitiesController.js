@@ -1,6 +1,6 @@
 const { response } = require("express");
 const User = require("../models/userSchema");
-// User.deleteMany({}).then((done)=>console.log(done))
+//User.deleteMany({}).then((done)=>console.log(done))
 const bcrypt = require("bcrypt");
 
 exports.profileSetting = (req, res) => {
@@ -34,34 +34,32 @@ console.log(updatedData)
 
 exports.changePassword = (req, res) => {
   const layout = "layouts/non_headerLayout"
-    res.render("auth/change_password", {
+    res.render("auth/updatePassword", {
         layout,
-        pageTitle: 'change-password',
+        pageTitle: 'Update password',
         user: req.user
     });
 };
 
 exports.postChangePassword = async (req, res) => {
-    const { old_pass, password } = req.body;
+    const { oldPassword, newPassword } = req.body;
 
     try{
 
-        const user = await User.findOne({email:req.user.email});
+        const user = await User.findOne({_id:req.user._id});
     
-        const isMatch =  bcrypt.compare(old_pass, user.password);
+        const isMatch =  bcrypt.compare(newPassword, user.password);
 
         if(isMatch){
             const salt = await bcrypt.genSalt(10);
 
-            const hashedPassword = await bcrypt.hash(password, salt);
+            const hashedPassword = await bcrypt.hash(newPassword, salt);
             
             user.password = hashedPassword;
             user.save();
-
             console.log(user);
-
         }else{
-            response.redirect
+            response.redirect("/auth/updatePassword");	
             console.log("incorrect password");
         }
     }catch(err){

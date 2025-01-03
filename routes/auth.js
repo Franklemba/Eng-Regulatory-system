@@ -57,9 +57,9 @@ router.post("/resend-otp/:userId", authControllerSignUP.resendOTP);
 // Profile settings route
 router.get("/profile-setting", authControllerUtilities.profileSetting);
 // Change password route
-router.get("/change-password", authControllerUtilities.changePassword);
+router.get("/updatePassword", authControllerUtilities.changePassword);
 
-router.post("/change-password", authControllerUtilities.postChangePassword);
+router.post("/updatePassword", authControllerUtilities.postChangePassword);
 
 // Two-step verification route
 router.get("/two-step", authControllerUtilities.twoStep);
