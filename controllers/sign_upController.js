@@ -37,7 +37,7 @@ function generateOTP() {
       // Generate OTP
       const otp = generateOTP();
       const otpExpiration = new Date(Date.now() + 15 * 60 * 1000); // 15 minutes from now
-      // console.log(otp);
+      console.log(otp);
   
       // Save OTP to user document
       newUser.verificationOTP = await bcrypt.hash(otp, 10); // Hash the OTP
@@ -46,7 +46,7 @@ function generateOTP() {
   
       // res.redirect('/dashboard');
 
-     sendOTPemail(nameOfEntity, email, otp)
+    //  sendOTPemail(nameOfEntity, email, otp)
   
       res.render("auth/email_verification", {
         message: `We have sent a verification OTP to ${email}. Please enter the OTP to verify your email. Expires in 15 minutes`,
@@ -153,7 +153,8 @@ function generateOTP() {
       const otpExpiration = new Date(Date.now() + 15 * 60 * 1000); // 15 minutes from now
   
       
-      sendOTPemail(`${tradeName}`, user.email, otp)
+      // sendOTPemail(`${tradeName}`, user.email, otp)
+      console.log(otp);
       // Save new OTP to user document
       user.verificationOTP = await bcrypt.hash(otp, 10); 
       user.otpExpiration = otpExpiration;

@@ -13,7 +13,10 @@ router.get("/", async (req,res) => {
    
   })
 
+<<<<<<< HEAD
 // deleteAllUsers();
+=======
+>>>>>>> 97fb4855297d956d4af1f2420d2f30bb9cd78437
 
     
 })
