@@ -78,13 +78,18 @@ const submitProject = async (req, res) => {
 
     console.log("Received Data:", req.body);
 
+    const filePaths = {};
+        for (const field in req.files) {
+            filePaths[field] = req.files[field][0].location;
+        }
+
     
     // Parse locations and workers if sent as JSON strings (adjust if frontend sends raw arrays)
     const parsedLocations = typeof locations === 'string' ? JSON.parse(locations) : locations;
     const parsedWorkers = typeof workers === 'string' ? JSON.parse(workers) : workers;
     
-    const documents = req.files.documents?.map(file => file.location) || [];
-    //  console.log('files',req.files);
+    // const documents = req.files.documents?.map(file => file.location) || [];
+     console.log('files',req.files);
     //  console.log('documents',documents);
     // Create a new project instance
     const newProject = new EngineeringProject({
@@ -97,10 +102,11 @@ const submitProject = async (req, res) => {
       userId:req.user._id,
       locations: parsedLocations, // Array of location objects
       workers: parsedWorkers, // Object with worker categories
+      documents: filePaths
     });
 
     // Handle file uploads if there are any
-    newProject.files = documents;
+    // newProject.files = documents;
 
     // Save the new project to the database
     await newProject.save();
