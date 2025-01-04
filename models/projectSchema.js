@@ -16,6 +16,19 @@ const workerSchema = new mongoose.Schema({
     unskilled: { type: Number, required: true },
 });
 
+const docsSchema = new mongoose.Schema({
+    CFEdoc: { type: String, required: true },
+    pastExperienceRefDoc: { type: String, required: true },
+    CFCdoc: { type: String, required: true },
+    taxComplianceDoc: { type: String, required: true },
+    proofOfAdherenceDoc: { type: String, required: true },
+    detailedProjectDoc: { type: String, required: true },
+    productSummaryDoc: { type: String, required: true },
+    techSpecOverviewDoc: { type: String, required: true },
+    commercialInvoice: { type: String, required: true },
+    invoiceInstrumentDoc: { type: String, required: true }
+});
+
 // Main project schema
 const projectSchema = new mongoose.Schema({ 
     title: { type: String, required: true },
@@ -31,6 +44,7 @@ const projectSchema = new mongoose.Schema({
     objectives: { type: String, required: true }, // Project description with objectives
     locations: [locationSchema], // List of project locations
     workers: workerSchema, // Workers schema added
+    documents: docsSchema, // List of documents
     files: [{ type: String }], // Array to store file paths or URLs
  
 }, { timestamps: true });

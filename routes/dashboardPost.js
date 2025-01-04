@@ -36,7 +36,18 @@ app.use(express.urlencoded({ extended: true }));
 
 router.post("/newApplication", upload.fields([{ name: 'supportingDocument', maxCount: 1 }, { name: 'documents', maxCount: 1 }]), dashboardPostController.submitApplication);
 // router.post("/newApplication",dashboardPostController.submitApplication);
-router.post("/newProject", upload.fields([{ name: 'documents', maxCount: 4 }]),dashboardPostController.submitProject);
+router.post("/newProject", upload.fields([
+  { name: 'CFEdoc', maxCount: 1 },
+  { name: 'pastExperienceRefDoc', maxCount: 1 },
+  { name: 'CFCdoc', maxCount: 1 },
+  { name: 'taxComplianceDoc', maxCount: 1 },
+  { name: 'proofOfAdherenceDoc', maxCount: 1 },
+  { name: 'detailedProjectDoc', maxCount: 1 },
+  { name: 'productSummaryDoc', maxCount: 1 },
+  { name: 'techSpecOverviewDoc', maxCount: 1 },
+  { name: 'commercialInvoice', maxCount: 1 },
+  { name: 'invoiceInstrumentDoc', maxCount: 1 }
+]),dashboardPostController.submitProject);
 
 router.post("/newPremiseLeasing",  upload.fields([
   { name: 'leaseAgreement', maxCount: 1 },

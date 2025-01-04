@@ -2,3 +2,6 @@ node_modules
 home.html
 package-lock.json
 .env
+
+public/img
+views/aboutUsPages

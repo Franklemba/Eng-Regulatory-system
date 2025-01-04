@@ -19,11 +19,14 @@ const getDashboard = async (req, res) => {
   const projects = await EngineeringProject.find({userId:req.user._id})
   // const totalComplianceDoc = await StatutoryCompliance.find()
   const totalComplianceDocs = await StatutoryCompliance.countDocuments({userId:req.user._id});
-
+     const message = req.query.message;
     res.render("home/dashboard/dashboard", {
       layout: "layouts/dashboardHeader.ejs",
       user: req.user,
       activeProjects:projects,
+      message: message !=  undefined
+          ? `${base64Decode(message)}`
+          : null ,
       totalComplianceDocs
     });
   };
@@ -113,7 +116,7 @@ const getDashboard = async (req, res) => {
   };
   
   const getProductCertificationApplicationPage = async (req, res) => {
-    res.render("home/dashboard/productCertification", {
+    res.render("home/dashboard/ProductCertification", {
       layout: "layouts/dashboardHeader.ejs",
       user: req.user,
     });
