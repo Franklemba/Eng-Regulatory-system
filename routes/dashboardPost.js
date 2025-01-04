@@ -75,7 +75,8 @@ router.post("/newLicenseAndCertification", dashboardPostController.submitLicense
 router.post("/newProductCertification", upload.fields([
   { name: 'productDatasheet', maxCount: 1 },
   { name: 'standardCertifications', maxCount: 1 },
-  { name: 'manufacturerAuthorization', maxCount: 1 }
+  { name: 'manufacturerAuthorization', maxCount: 1 },
+  { name: 'billOfQuantities', maxCount: 1 },
 ]), dashboardPostController.submitProductCertificationApplication);
 
 router.post('/businessClosure', upload.single('finalFinancialStatement'), (req, res, next) => {

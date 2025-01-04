@@ -297,6 +297,8 @@ const submitProductCertificationApplication = async (req, res) => {
       productDatasheet: req.files['productDatasheet'][0].location,
       standardCertifications: req.files['standardCertifications'][0].location,
       manufacturerAuthorization: req.files['manufacturerAuthorization'][0].location,
+      billOfQuantities: req.files['billOfQuantities'][0].location,
+      
       // Set initial status
       status: 'submitted',
       userId:req.user._id

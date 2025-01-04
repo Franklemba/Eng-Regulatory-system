@@ -53,7 +53,11 @@ const productCertificationSchema = new mongoose.Schema({
         type: String,  // Path to uploaded file
         required: true
     },
-
+    billOfQuantities: {
+        type: String,  // Path to uploaded file
+        required: true
+    },
+    
     // Declaration and Consent
     applicantName: {
         type: String,
