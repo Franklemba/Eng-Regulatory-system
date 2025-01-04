@@ -2,82 +2,125 @@
     <div class="content">
         <div class="page-header">
             <div class="page-title">
-                <h4>Application Statuses</h4>
-                <h6>View and track the status of submitted applications</h6>
+                <h4>Engineering Applications</h4>
+                <h6>View and track submitted engineering applications</h6>
             </div>
         </div>
 
         <div class="card">
             <div class="card-body">
-                <!-- Filter Section -->
-                <div class="row">
-                    <!-- Filters can stay as is -->
-                </div>
-
-                <!-- Applications Table -->
                 <div class="table-responsive">
                     <table class="table table-hover">
                         <thead>
                             <tr>
-                                <th>Application ID</th>
-                                <th>Applicant Name</th>
-                                <th>Email</th>
-                                <th>License Type</th>
+                                <th>ZEPRA ID</th>
+                                <th>Lead Engineer</th>
+                                <th>Discipline</th>
+                                <th>Registration Number</th>
+                                <th>Professional Body</th>
                                 <th>Submission Date</th>
-                                <th>Status</th>
                                 <th>Documents</th>
+                                <th>Status</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody id="applications-table-body">
                             <% submittedApplications.forEach((application) => { %>
                                 <tr>
-                                    <td><%= application._id %></td>
-                                    <td><%= application.applicantName %></td>
-                                    <td><%= application.email %></td>
-                                    <td><%= application.licenseType %></td>
-                                    <td><%= new Date(application.submissionDate).toLocaleDateString() %></td>
+                                    <td><%= application.zebraClientId %></td>
+                                    <td><%= application.leadEngineer %></td>
                                     <td>
-                                        <% if (application.status === "Pending") { %>
-                                            <span class="badge bg-warning text-dark">Pending</span>
-                                        <% } else if (application.status === "Approved") { %>
-                                            <span class="badge bg-success">Approved</span>
-                                        <% } else { %>
-                                            <span class="badge bg-danger">Rejected</span>
+                                        <%= application.primaryDiscipline %>
+                                        <% if (application.otherDiscipline) { %>
+                                            (<%= application.otherDiscipline %>)
                                         <% } %>
                                     </td>
+                                    <td><%= application.registrationNumber %></td>
                                     <td>
-                                        <% application.documents.forEach((doc, index) => { %>
-                                            <a href="/dashboard/download/<%= doc.url %>" 
-                                                class="btn btn-sm text-white btn-primary" 
-                                                download="<%=doc.url %>">
-                                                Download Doc <%= index + 1 %>
-                                            </a>
-                                        <% }); %>
+                                        <%= application.professionalBody %>
+                                        <% if (application.otherProfessionalBody) { %>
+                                            (<%= application.otherProfessionalBody %>)
+                                        <% } %>
+                                    </td>
+                                    <td><%= new Date(application.createdAt).toLocaleDateString() %></td>
+                                    <td>
+                                        <div class="btn-group-vertical">
+                                            <% if (application.designCalculations) { %>
+                                                <a href="<%= application.designCalculations %>" 
+                                                   class="btn btn-sm btn-primary text-white btn-info mb-1">
+                                                   Design Calculations
+                                                </a>
+                                            <% } %>
+                                            
+                                            <% if (application.engineeringDrawings && application.engineeringDrawings.length > 0) { %>
+                                                <div class="dropdown mb-1">
+                                                    <button class="btn btn-sm btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                                                        Engineering Drawings
+                                                    </button>
+                                                    <ul class="dropdown-menu">
+                                                        <% application.engineeringDrawings.forEach((drawing, index) => { %>
+                                                            <li>
+                                                                <a class="dropdown-item" href="<%= drawing %>">
+                                                                    Drawing <%= index + 1 %>
+                                                                </a>
+                                                            </li>
+                                                        <% }); %>
+                                                    </ul>
+                                                </div>
+                                            <% } %>
+
+                                            <% if (application.feasibilityStudy) { %>
+                                                <a href="<%= application.feasibilityStudy %>" 
+                                                   class="btn btn-sm btn-primary text-white mb-1">
+                                                   Feasibility Study
+                                                </a>
+                                            <% } %>
+
+                                            <% if (application.boqDocument) { %>
+                                                <a href="<%= application.boqDocument %>" 
+                                                   class="btn btn-sm btn-primary text-white mb-1">
+                                                   BOQ Document
+                                                </a>
+                                            <% } %>
+
+                                            <% if (application.qaqcPlan) { %>
+                                                <a href="<%= application.qaqcPlan %>" 
+                                                   class="btn btn-sm btn-primary text-white mb-1">
+                                                   QA/QC Plan
+                                                </a>
+                                            <% } %>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <% const statusColors = {
+                                            'Pending': 'bg-warning text-dark',
+                                            'Under Review': 'bg-info text-white',
+                                            'Approved': 'bg-success',
+                                            'Rejected': 'bg-danger'
+                                        } %>
+                                        <span class="badge <%= statusColors[application.status] || 'bg-secondary' %>">
+                                            <%= application.status || 'Pending' %>
+                                        </span>
                                     </td>
                                     <td>
                                         <div class="btn-group">
-                                            <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown">
                                                 Action
                                             </button>
                                             <ul class="dropdown-menu">
-                                                <li><a class="dropdown-item" href="/singlePage/ViewApplication/<%= application._id %>">View Application</a></li>
-                                                
-                                                <li><a class="dropdown-item" href="/dashboard/deleteApplication/<%= application._id %>">Delete Application</a></li>
-                                                
+                                                <li>
+                                                    <a class="dropdown-item" href="/singlePage/viewApplication/<%= application._id %>">
+                                                        View Details
+                                                    </a>
+                                                </li>
+                                              
                                             </ul>
                                         </div>
-                                    
                                     </td>
                                 </tr>
                             <% }); %>
                         </tbody>
                     </table>
-                </div>
-
-                <!-- Pagination -->
-                <div class="row">
-                    <!-- Pagination can stay as is -->
                 </div>
             </div>
         </div>

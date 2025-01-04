@@ -19,47 +19,75 @@ const base64Encode = (data) => {
 
 
 // Charles's routes
+
 const submitApplication = async (req, res) => {
   try {
+    // Extract basic form fields
     const {
-      applicantName,
-      email,
-      phone,
-      country,
-      city,
-      address,
-      companyName,
+      zebraClientId,
+      primaryDiscipline,
+      otherDiscipline,
+      technicalDescription,
+      leadEngineer,
       registrationNumber,
-      engineeringFields,
-      licenseType,
-      description,
-      engineeringOrg
+      professionalBody,
+      otherProfessionalBody,
+      teamMember
     } = req.body;
-    const documents = req.files.documents?.map(file => file.path) || [];
-    console.log(documents)
 
-    const newLicense = new EngineeringLicense({
-      applicantName,
-      email,
-      phone,
-      country,
-      city,
-      address,
-      companyName,
+    // Process file uploads and get their paths
+    const designCalculations = req.files.designCalculations?.[0]?.location || '';
+    const engineeringDrawings = req.files.engineeringDrawings?.map(file => file.location) || [];
+    const feasibilityStudy = req.files.feasibilityStudy?.[0]?.location || '';
+    const boqDocument = req.files.boqDocument?.[0]?.location || '';
+    const qaqcPlan = req.files.qaqcPlan?.[0]?.location || '';
+
+    // Process team members array
+    const teamMembers = [];
+    if (Array.isArray(teamMember)) {
+      for (let i = 0; i < teamMember.length; i++) {
+        if (teamMember[i].name) {  // Only add if name exists
+          teamMembers.push({
+            name: teamMember[i].name,
+            role: teamMember[i].role,
+            contact: teamMember[i].contact,
+            regNumber: teamMember[i].regNumber
+          });
+        }
+      }
+    }
+console.log(req.files)
+    // Create new application instance
+    const newApplication = new EngineeringLicense({
+      zebraClientId,
+      primaryDiscipline,
+      otherDiscipline,
+      technicalDescription,
+      designCalculations,
+      engineeringDrawings,
+      leadEngineer,
       registrationNumber,
-      engineeringFields,
-      licenseType,
-      engineeringOrg,
-      documents,
-      description,
-      userId:req.user._id
+      professionalBody,
+      otherProfessionalBody,
+      teamMembers,
+      feasibilityStudy,
+      boqDocument,
+      qaqcPlan,
+      userId: req.user._id  // Assuming you have user authentication
     });
 
-    await newLicense.save();
+    await newApplication.save();
+
+    // Redirect after successful submission
     res.redirect("/dashboard/submittedApplication");
+
   } catch (error) {
-    console.error("Error saving engineering license application:", error);
-    res.status(500).send("An error occurred while processing your application.");
+    console.error("Error saving engineering application:", error);
+    res.status(500).json({
+      success: false,
+      message: "An error occurred while processing your application.",
+      error: error.message
+    });
   }
 };
 

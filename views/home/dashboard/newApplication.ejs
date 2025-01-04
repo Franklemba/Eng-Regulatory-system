@@ -2,324 +2,200 @@
     <div class="content">
         <div class="page-header">
             <div class="page-title">
-                <h4>New Engineering License</h4>
-                <h6>Fill out the form to apply for an engineering license</h6>
+                <h4>Engineering Authorization Application</h4>
+                <h6>Fill out the form for engineering authorization</h6>
             </div>
         </div>
 
         <div class="card">
             <div class="card-body">
                 <form method="post" action="/dashboard/newApplication" enctype="multipart/form-data">
+                    <!-- ZEPRA Client ID -->
                     <div class="row">
-                        <!-- Applicant Details -->
-                        <div class="col-lg-3 col-sm-6 col-12">
+                        <div class="col-lg-4 col-sm-6 col-12">
                             <div class="form-group">
-                                <label for="applicant-name">Applicant Name</label>
-                                <input type="text" id="applicant-name" name="applicantName" class="form-control" required>
+                                <label>ZEPRA Client ID</label>
+                                <input value="<%=user.zepraId%>" type="text" name="zebraClientId" class="form-control" readonly >
                             </div>
                         </div>
-                        <div class="col-lg-3 col-sm-6 col-12">
+
+                        <div class="col-lg-8 col-sm-6 col-12">
                             <div class="form-group">
-                                <label for="email">Email</label>
-                                <input type="email" id="email" name="email" class="form-control" required>
+                                <label>Primary Engineering Discipline</label>
+                                <div class="select-box">
+
+                                    <select name="primaryDiscipline" class="form-control" required>
+                                        <option value="civil">Civil Engineering</option>
+                                        <option value="electrical">Electrical Engineering</option>
+                                        <option value="mechanical">Mechanical Engineering</option>
+                                        <option value="structural">Structural Engineering</option>
+                                        <option value="environmental">Environmental Engineering</option>
+                                        <option value="geotechnical">Geotechnical Engineering</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
-                        <div class="col-lg-3 col-sm-6 col-12">
-                            <div class="form-group">
-                                <label for="phone">Phone</label>
-                                <input type="tel" id="phone" name="phone" class="form-control" required>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-sm-6 col-12">
-                            <div class="form-group">
-                                <label for="country">Choose Country</label>
-                                <select name="country" class="form-control select" required>
-                                    <option hidden>Country</option>
-                                    <option value="AF">Afghanistan</option>
-                                    <option value="AL">Albania</option>
-                                    <option value="DZ">Algeria</option>
-                                    <option value="AS">American Samoa</option>
-                                    <option value="AD">Andorra</option>
-                                    <option value="AO">Angola</option>
-                                    <option value="AI">Anguilla</option>
-                                    <option value="AQ">Antarctica</option>
-                                    <option value="AG">Antigua and Barbuda</option>
-                                    <option value="AR">Argentina</option>
-                                    <option value="AM">Armenia</option>
-                                    <option value="AW">Aruba</option>
-                                    <option value="AU">Australia</option>
-                                    <option value="AT">Austria</option>
-                                    <option value="AZ">Azerbaijan</option>
-                                    <option value="BS">Bahamas</option>
-                                    <option value="BH">Bahrain</option>
-                                    <option value="BD">Bangladesh</option>
-                                    <option value="BB">Barbados</option>
-                                    <option value="BY">Belarus</option>
-                                    <option value="BE">Belgium</option>
-                                    <option value="BZ">Belize</option>
-                                    <option value="BJ">Benin</option>
-                                    <option value="BM">Bermuda</option>
-                                    <option value="BT">Bhutan</option>
-                                    <option value="BO">Bolivia</option>
-                                    <option value="BA">Bosnia and Herzegovina</option>
-                                    <option value="BW">Botswana</option>
-                                    <option value="BR">Brazil</option>
-                                    <option value="IO">British Indian Ocean Territory</option>
-                                    <option value="BN">Brunei Darussalam</option>
-                                    <option value="BG">Bulgaria</option>
-                                    <option value="BF">Burkina Faso</option>
-                                    <option value="BI">Burundi</option>
-                                    <option value="CV">Cabo Verde</option>
-                                    <option value="KH">Cambodia</option>
-                                    <option value="CM">Cameroon</option>
-                                    <option value="CA">Canada</option>
-                                    <option value="KY">Cayman Islands</option>
-                                    <option value="CF">Central African Republic</option>
-                                    <option value="TD">Chad</option>
-                                    <option value="CL">Chile</option>
-                                    <option value="CN">China</option>
-                                    <option value="CO">Colombia</option>
-                                    <option value="KM">Comoros</option>
-                                    <option value="CG">Congo</option>
-                                    <option value="CR">Costa Rica</option>
-                                    <option value="HR">Croatia</option>
-                                    <option value="CU">Cuba</option>
-                                    <option value="CY">Cyprus</option>
-                                    <option value="CZ">Czechia</option>
-                                    <option value="DK">Denmark</option>
-                                    <option value="DJ">Djibouti</option>
-                                    <option value="DM">Dominica</option>
-                                    <option value="DO">Dominican Republic</option>
-                                    <option value="EC">Ecuador</option>
-                                    <option value="EG">Egypt</option>
-                                    <option value="SV">El Salvador</option>
-                                    <option value="GQ">Equatorial Guinea</option>
-                                    <option value="ER">Eritrea</option>
-                                    <option value="EE">Estonia</option>
-                                    <option value="SZ">Eswatini</option>
-                                    <option value="ET">Ethiopia</option>
-                                    <option value="FJ">Fiji</option>
-                                    <option value="FI">Finland</option>
-                                    <option value="FR">France</option>
-                                    <option value="GA">Gabon</option>
-                                    <option value="GM">Gambia</option>
-                                    <option value="GE">Georgia</option>
-                                    <option value="DE">Germany</option>
-                                    <option value="GH">Ghana</option>
-                                    <option value="GR">Greece</option>
-                                    <option value="GD">Grenada</option>
-                                    <option value="GT">Guatemala</option>
-                                    <option value="GN">Guinea</option>
-                                    <option value="GW">Guinea-Bissau</option>
-                                    <option value="GY">Guyana</option>
-                                    <option value="HT">Haiti</option>
-                                    <option value="HN">Honduras</option>
-                                    <option value="HU">Hungary</option>
-                                    <option value="IS">Iceland</option>
-                                    <option value="IN">India</option>
-                                    <option value="ID">Indonesia</option>
-                                    <option value="IR">Iran</option>
-                                    <option value="IQ">Iraq</option>
-                                    <option value="IE">Ireland</option>
-                                    <option value="IL">Israel</option>
-                                    <option value="IT">Italy</option>
-                                    <option value="JM">Jamaica</option>
-                                    <option value="JP">Japan</option>
-                                    <option value="JO">Jordan</option>
-                                    <option value="KZ">Kazakhstan</option>
-                                    <option value="KE">Kenya</option>
-                                    <option value="KI">Kiribati</option>
-                                    <option value="KP">Korea (North)</option>
-                                    <option value="KR">Korea (South)</option>
-                                    <option value="KW">Kuwait</option>
-                                    <option value="KG">Kyrgyzstan</option>
-                                    <option value="LA">Lao People's Democratic Republic</option>
-                                    <option value="LV">Latvia</option>
-                                    <option value="LB">Lebanon</option>
-                                    <option value="LS">Lesotho</option>
-                                    <option value="LR">Liberia</option>
-                                    <option value="LY">Libya</option>
-                                    <option value="LI">Liechtenstein</option>
-                                    <option value="LT">Lithuania</option>
-                                    <option value="LU">Luxembourg</option>
-                                    <option value="MG">Madagascar</option>
-                                    <option value="MW">Malawi</option>
-                                    <option value="MY">Malaysia</option>
-                                    <option value="MV">Maldives</option>
-                                    <option value="ML">Mali</option>
-                                    <option value="MT">Malta</option>
-                                    <option value="MH">Marshall Islands</option>
-                                    <option value="MR">Mauritania</option>
-                                    <option value="MU">Mauritius</option>
-                                    <option value="MX">Mexico</option>
-                                    <option value="FM">Micronesia</option>
-                                    <option value="MD">Moldova</option>
-                                    <option value="MC">Monaco</option>
-                                    <option value="MN">Mongolia</option>
-                                    <option value="ME">Montenegro</option>
-                                    <option value="MA">Morocco</option>
-                                    <option value="MZ">Mozambique</option>
-                                    <option value="MM">Myanmar</option>
-                                    <option value="NA">Namibia</option>
-                                    <option value="NR">Nauru</option>
-                                    <option value="NP">Nepal</option>
-                                    <option value="NL">Netherlands</option>
-                                    <option value="NZ">New Zealand</option>
-                                    <option value="NI">Nicaragua</option>
-                                    <option value="NE">Niger</option>
-                                    <option value="NG">Nigeria</option>
-                                    <option value="NO">Norway</option>
-                                    <option value="OM">Oman</option>
-                                    <option value="PK">Pakistan</option>
-                                    <option value="PW">Palau</option>
-                                    <option value="PS">Palestine</option>
-                                    <option value="PA">Panama</option>
-                                    <option value="PG">Papua New Guinea</option>
-                                    <option value="PY">Paraguay</option>
-                                    <option value="PE">Peru</option>
-                                    <option value="PH">Philippines</option>
-                                    <option value="PL">Poland</option>
-                                    <option value="PT">Portugal</option>
-                                    <option value="QA">Qatar</option>
-                                    <option value="RO">Romania</option>
-                                    <option value="RU">Russian Federation</option>
-                                    <option value="RW">Rwanda</option>
-                                    <option value="KN">Saint Kitts and Nevis</option>
-                                    <option value="LC">Saint Lucia</option>
-                                    <option value="VC">Saint Vincent and the Grenadines</option>
-                                    <option value="WS">Samoa</option>
-                                    <option value="SM">San Marino</option>
-                                    <option value="ST">Sao Tome and Principe</option>
-                                    <option value="SA">Saudi Arabia</option>
-                                    <option value="SN">Senegal</option>
-                                    <option value="RS">Serbia</option>
-                                    <option value="SC">Seychelles</option>
-                                    <option value="SL">Sierra Leone</option>
-                                    <option value="SG">Singapore</option>
-                                    <option value="SK">Slovakia</option>
-                                    <option value="SI">Slovenia</option>
-                                    <option value="SB">Solomon Islands</option>
-                                    <option value="SO">Somalia</option>
-                                    <option value="ZA">South Africa</option>
-                                    <option value="SS">South Sudan</option>
-                                    <option value="ES">Spain</option>
-                                    <option value="LK">Sri Lanka</option>
-                                    <option value="SD">Sudan</option>
-                                    <option value="SR">Suriname</option>
-                                    <option value="SE">Sweden</option>
-                                    <option value="CH">Switzerland</option>
-                                    <option value="SY">Syrian Arab Republic</option>
-                                    <option value="TW">Taiwan</option>
-                                    <option value="TJ">Tajikistan</option>
-                                    <option value="TZ">Tanzania</option>
-                                    <option value="TH">Thailand</option>
-                                    <option value="TL">Timor-Leste</option>
-                                    <option value="TG">Togo</option>
-                                    <option value="TO">Tonga</option>
-                                    <option value="TT">Trinidad and Tobago</option>
-                                    <option value="TN">Tunisia</option>
-                                    <option value="TR">Turkey</option>
-                                    <option value="TM">Turkmenistan</option>
-                                    <option value="TV">Tuvalu</option>
-                                    <option value="UG">Uganda</option>
-                                    <option value="UA">Ukraine</option>
-                                    <option value="AE">United Arab Emirates</option>
-                                    <option value="GB">United Kingdom</option>
-                                    <option value="US">United States</option>
-                                    <option value="UY">Uruguay</option>
-                                    <option value="UZ">Uzbekistan</option>
-                                    <option value="VU">Vanuatu</option>
-                                    <option value="VE">Venezuela</option>
-                                    <option value="VN">Viet Nam</option>
-                                    <option value="YE">Yemen</option>
-                                    <option value="ZM">Zambia</option>
-                                    <option value="ZW">Zimbabwe</option>
-                                  </select>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-sm-6 col-12">
-                            <div class="form-group">
-                                <label for="city">City</label>
-                                <input id="city" name="city" type="text" class="form-control" placeholder="Enter city">
-                            </div>
-                        </div>
-                        <div class="col-lg-9 col-12">
-                            <div class="form-group">
-                                <label for="address">Address</label>
-                                <input type="text" id="address" name="address" class="form-control" required>
-                            </div>
-                        </div>
-                        <!-- Company Details -->
-                        <div class="col-lg-6 col-12">
-                            <div class="form-group">
-                                <label for="company-name">Company Name</label>
-                                <input type="text" id="company-name" name="companyName" class="form-control" required>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-12">
-                            <div class="form-group">
-                                <label for="registration-number">Company Registration Number</label>
-                                <input type="text" id="registration-number" name="registrationNumber" class="form-control" required>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-12">
-                            <div class="form-group">
-                                <label for="engineering-fields">Engineering Fields</label>
-                                <input type="text" id="engineering-fields" name="engineeringFields" class="form-control" placeholder="e.g., Civil, Mechanical" required>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-12">
-                            <div class="form-group">
-                                <label for="license-type">License Type</label>
-                                <select id="license-type" name="licenseType" class="form-control select" required>
-                                    <option value="">Select License Type</option>
-                                    <option value="Professional">Professional</option>
-                                    <option value="Industrial">Industrial</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-12">
-                            <div class="form-group">
-                                <label for="engineering-org">Engineering organisation</label>
-                                <select id="engineering-org" name="engineeringOrg" class="form-control select" required>
-                                    <option value="">Select engineering organisation</option>
-                                    <option value="C1">Engineering Org C1</option>
-                                    <option value="C2">Engineering Org C2</option>
-                                    <option value="C3">Engineering Org C3</option>
-                                    <option value="A1">Engineering Org A1</option>
-                                    <option value="A2">Engineering Org A2</option>
-                                    <option value="A3">Engineering Org A3</option>
-                                    <option value="B1">Engineering Org B1</option>
-                                    <option value="B2">Engineering Org B2</option>
-                                    <option value="B3">Engineering Org B3</option>
-                                    <option value="D1">Engineering Org D1</option>
-                                    <option value="D2">Engineering Org D2</option>
-                                    <option value="D3">Engineering Org D3</option>
-                                    
-                                </select>
-                            </div>
-                        </div>
-                        <!-- Supporting Documents -->
+
                         <div class="col-lg-12">
                             <div class="form-group">
-                                <label for="documents">Upload Supporting Documents</label>
+                                <label>Other Engineering Discipline (if applicable)</label>
+                                <input type="text" name="otherDiscipline" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Engineering Scope -->
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <label>Detailed Technical Description</label>
+                                <textarea name="technicalDescription" class="form-control" rows="6" 
+                                    placeholder="Include detailed technical aspects of the project component, such as materials, processes, and methodologies." required></textarea>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <label>Design Calculations and Assumptions</label>
                                 <div class="image-upload">
-                                    <input type="file" id="documents" name="documents" class="form-control" multiple required>
+                                    <input type="file" name="designCalculations" class="form-control" required>
                                     <div class="image-uploads">
-                                        <img src="/assets/img/icons/upload.svg" alt="upload icon">
-                                        <h4>Drag and drop files to upload</h4>
+                                        <img src="/assets/img/icons/upload.svg" alt="upload">
+                                        <h4>Drag and drop calculations file to upload</h4>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <!-- Additional Information -->
+
                         <div class="col-lg-12">
                             <div class="form-group">
-                                <label for="description">Additional Details</label>
-                                <textarea id="description" name="description" class="form-control" rows="5" placeholder="Provide any additional information"></textarea>
+                                <label>Engineering Drawings and Schematics</label>
+                                <div class="image-upload">
+                                    <input type="file" name="engineeringDrawings" class="form-control" multiple required>
+                                    <div class="image-uploads">
+                                        <img src="/assets/img/icons/upload.svg" alt="upload">
+                                        <h4>Drag and drop CAD files, blueprints, and schematics</h4>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <!-- Submit and Cancel Buttons -->
+                    </div>
+
+                    <!-- Technical Team Information -->
+                    <div class="row">
+                        <div class="col-lg-6 col-sm-6 col-12">
+                            <div class="form-group">
+                                <label>Lead Engineer's Name</label>
+                                <input type="text" name="leadEngineer" class="form-control" required>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6 col-sm-6 col-12">
+                            <div class="form-group">
+                                <label>Professional Registration Number</label>
+                                <input type="text" name="registrationNumber" class="form-control" required>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6 col-sm-6 col-12">
+                            <div class="form-group">
+                                <label>Affiliated Professional Body</label>
+                                <select name="professionalBody" class="form-control select" required>
+                                    <option value="">Select Professional Body</option>
+                                    <option value="EIZ">Engineering Institution of Zambia (EIZ)</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6 col-sm-6 col-12">
+                            <div class="form-group">
+                                <label>Other Professional Body (Specify)</label>
+                                <input type="text" name="otherProfessionalBody" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Team Members Table -->
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <label>List of Key Engineers and Specialists</label>
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>Name</th>
+                                                <th>Role</th>
+                                                <th>Contact Information</th>
+                                                <th>Professional Registration Number</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td><input type="text" name="teamMember[0][name]" class="form-control"></td>
+                                                <td><input type="text" name="teamMember[0][role]" class="form-control"></td>
+                                                <td><input type="text" name="teamMember[0][contact]" class="form-control"></td>
+                                                <td><input type="text" name="teamMember[0][regNumber]" class="form-control"></td>
+                                            </tr>
+                                            <tr>
+                                                <td><input type="text" name="teamMember[1][name]" class="form-control"></td>
+                                                <td><input type="text" name="teamMember[1][role]" class="form-control"></td>
+                                                <td><input type="text" name="teamMember[1][contact]" class="form-control"></td>
+                                                <td><input type="text" name="teamMember[1][regNumber]" class="form-control"></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Documentation Uploads -->
+                    <div class="row">
+                        <div class="col-lg-4 col-sm-6 col-12">
+                            <div class="form-group">
+                                <label>Engineering Feasibility Study Report</label>
+                                <div class="image-upload">
+                                    <input type="file" name="feasibilityStudy" class="form-control" required>
+                                    <div class="image-uploads">
+                                        <img src="/assets/img/icons/upload.svg" alt="upload">
+                                        <h4>Upload Feasibility Report</h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4 col-sm-6 col-12">
+                            <div class="form-group">
+                                <label>Detailed Bill of Quantities (BOQ)</label>
+                                <div class="image-upload">
+                                    <input type="file" name="boqDocument" class="form-control" required>
+                                    <div class="image-uploads">
+                                        <img src="/assets/img/icons/upload.svg" alt="upload">
+                                        <h4>Upload BOQ Document</h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4 col-sm-6 col-12">
+                            <div class="form-group">
+                                <label>Quality Assurance/Quality Control Plan</label>
+                                <div class="image-upload">
+                                    <input type="file" name="qaqcPlan" class="form-control" required>
+                                    <div class="image-uploads">
+                                        <img src="/assets/img/icons/upload.svg" alt="upload">
+                                        <h4>Upload QA/QC Plan</h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Submit Buttons -->
+                    <div class="row">
                         <div class="col-lg-12">
                             <button type="submit" class="btn btn-submit me-2">Submit</button>
                             <button type="reset" class="btn btn-cancel">Cancel</button>

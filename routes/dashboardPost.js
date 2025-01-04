@@ -34,7 +34,15 @@ app.use(express.urlencoded({ extended: true }));
   
   
 
-router.post("/newApplication", upload.fields([{ name: 'supportingDocument', maxCount: 1 }, { name: 'documents', maxCount: 1 }]), dashboardPostController.submitApplication);
+router.post("/newApplication", 
+  upload.fields([
+    { name: 'designCalculations', maxCount: 1 },
+    { name: 'engineeringDrawings', maxCount: 10 },
+    { name: 'feasibilityStudy', maxCount: 1 },
+    { name: 'boqDocument', maxCount: 1 },
+    { name: 'qaqcPlan', maxCount: 1 }
+  ]),
+dashboardPostController.submitApplication);
 // router.post("/newApplication",dashboardPostController.submitApplication);
 router.post("/newProject", upload.fields([
   { name: 'CFEdoc', maxCount: 1 },
