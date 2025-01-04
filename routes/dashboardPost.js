@@ -92,12 +92,13 @@ router.post("/newEnvironmentAndStructuralLicence",
 // router.post("/newAwarenessAdvert",  upload.single('advertMedia'), dashboardPostController.submitAwarenessAdvert);
 router.post("/newAssessment", dashboardPostController.submitAssessment);
 router.post("/statutoryCompliance", upload.fields([
-           { name: 'zppaDoc', maxCount: 1 },
-           { name: 'pacraDoc', maxCount: 1 },
-           {name: 'workcompDoc', maxCount: 1},
-           {name: 'nhimaDoc', maxCount: 1}, 
-           {name: 'erbDoc', maxCount: 1}, 
-           {name: 'others', maxCount: 1}]), dashboardPostController.statutoryCompliance);
-                                  
+  { name: 'zppaDocument', maxCount: 1 },
+  { name: 'pacraDocument', maxCount: 1 },
+  { name: 'taxDocument', maxCount: 1 },
+  { name: 'workersCompensation', maxCount: 1 },
+  { name: 'energyRegulation', maxCount: 1 },
+  { name: 'nhimaDocument', maxCount: 1 },
+  { name: 'otherDocuments', maxCount: 5 } // Allow multiple files
+]), dashboardPostController.statutoryCompliance);
 
 module.exports = router;

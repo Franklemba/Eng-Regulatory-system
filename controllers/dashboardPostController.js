@@ -439,47 +439,51 @@ const submitLicenseAndCertification = async (req, res) => {
 };
 // ####statutory compliance documents route
 const statutoryCompliance = async (req, res) => {
-  const user = req.user;
-  if(!req.files){
-    return res.status(404).send('no files uploaded');
+  try {
+    const user = req.user;
+    
+    if (!req.files) {
+      return res.status(400).json({ error: 'No files uploaded' });
+    }
+
+    // Verify all required files are present
+    const requiredFiles = ['zppaDocument', 'pacraDocument', 'taxDocument', 
+                          'workersCompensation', 'energyRegulation', 'nhimaDocument'];
+    
+    for (const field of requiredFiles) {
+      if (!req.files[field]) {
+        return res.status(400).json({ error: `Missing required document: ${field}` });
+      }
+    }
+
+    // Create document object with required fields
+    const documentData = {
+      userId: req.user._id,
+      userEmail: user.email,
+      zppaDocument: req.files.zppaDocument[0].location,
+      pacraDocument: req.files.pacraDocument[0].location,
+      taxDocument: req.files.taxDocument[0].location,
+      workersCompensation: req.files.workersCompensation[0].location,
+      energyRegulation: req.files.energyRegulation[0].location,
+      nhimaDocument: req.files.nhimaDocument[0].location
+    };
+
+    // Add other documents if present
+    if (req.files.otherDocuments) {
+      documentData.otherDocuments = req.files.otherDocuments.map(file => file.location);
+    }
+
+    const statutoryComplianceDoc = new StatutoryCompliance(documentData);
+    await statutoryComplianceDoc.save();
+
+    const successMessage = 'Statutory compliance documents uploaded successfully';
+    res.redirect(`/dashboard/newCompliance?message=${encodeURIComponent(base64Encode(successMessage))}`);
+
+  } catch (error) {
+    console.error('Error uploading statutory documents:', error);
+    res.status(500).json({ error: 'Error uploading statutory documents' });
   }
-
-console.log(req.email)
-console.log(req.files);
-const zppaDoc = req.files.zppaDoc[0].location;
-const pacraDoc = req.files.pacraDoc[0].location;
-const workcompDoc = req.files.workcompDoc[0].location;
-const nhimaDoc = req.files.nhimaDoc[0].location;
-const erbDoc = req.files.erbDoc[0].location;
-const others = req.files.others[0].location;
-
-
-try{
-  
-  const statutoryCompliance = new StatutoryCompliance({
-    userEmail: user.email,
-    zppaDoc,
-    pacraDoc,
-    workcompDoc,
-    nhimaDoc,
-    erbDoc,
-    others,
-    userId:req.user._id
-
-  })
-
-  await statutoryCompliance.save();
-  console.log(statutoryCompliance)
-  successMessage = ` Statutory compliance documents uploaded successfully`;
-
-  res.redirect(`/dashboard/newCompliance?message=${encodeURIComponent(base64Encode(successMessage))}`);
-
-}catch (error) {
-  console.error(`Error uploading statutory documents : ${error.message}`);
-  res.send("Error uploading statutory documents");
-}
 };
-
 const submitAssessment = async (req, res) => console.log(req.body);
 
 
