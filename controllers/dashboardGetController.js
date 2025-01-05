@@ -236,6 +236,7 @@ const getDashboard = async (req, res) => {
     });
   };
 
+ 
   const getProfileManagement = async (req, res) => {
     res.render("auth/profileManagement", {
       layout: "layouts/dashboardHeader.ejs",
@@ -265,6 +266,16 @@ const getDashboard = async (req, res) => {
 });
 
   };
+
+
+
+  const getReport = async (req, res) => {
+
+    res.render("home/dashboard/report", {
+      layout: "layouts/dashboardHeader.ejs",
+      user: req.user
+    });
+  };
   
   module.exports = {
     getDashboard,
@@ -284,6 +295,7 @@ const getDashboard = async (req, res) => {
     downloadFile,
     getNewProjectListingPage,
     getProfileManagement,
+    getReport,
     getProjectApplicationProgress,
     getSubmittedLeasingsPage,
     getLicenseAndCertificationsPage,
