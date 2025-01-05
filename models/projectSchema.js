@@ -26,13 +26,15 @@ const docsSchema = new mongoose.Schema({
     productSummaryDoc: { type: String, required: true },
     techSpecOverviewDoc: { type: String, required: true },
     commercialInvoice: { type: String, required: true },
-    invoiceInstrumentDoc: { type: String, required: true }
+    invoiceInstrumentDoc: { type: String, required: true },
+    noticeOfAwardDoc: { type: String, required: false }
 });
 
 // Main project schema
 const projectSchema = new mongoose.Schema({ 
     title: { type: String, required: true },
     projectType: { type: String, required: true },
+    projectScope: { type: String, required: true },
     projectValue: { type: Number, required: true }, // Changed from "budget" to "value"
     duration: { type: Number, required: true },
     status: { 
