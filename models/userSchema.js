@@ -65,15 +65,15 @@ const userSchema = new mongoose.Schema({
     type:String,
     default:'Pending Zepra Approval'
   },
-  zepraId:{
+  registrationId:{
     type: String,
-    default: generateZepraId
+    default: generateRegistrationId
   }
 
 });
 
 
-function generateZepraId (){
+function generateRegistrationId (){
   // Get current year
   const year = new Date().getFullYear();
   
@@ -86,7 +86,7 @@ function generateZepraId (){
   
   // Combine all parts: ZEPRA-YEAR-SEQUENCE-CODE-LETTER
   // Example output: ZEPRA-2025-4527-089-X
-  return `ZEPRA-${year}-${sequence}-${engineeringCode}-${letter}`;
+  return `RegID-${year}-${sequence}-${engineeringCode}-${letter}`;
 };
 
 
