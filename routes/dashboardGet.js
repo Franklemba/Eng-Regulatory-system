@@ -29,5 +29,6 @@ router.get("/profileManagement", dashboardGetController.getProfileManagement);
 
 router.get("/attachLicense", dashboardGetController.getLicenseAndCertificationsPage);
 router.get("/reviewLicense", dashboardGetController.getReviewLicenseAndCertificationsPage);
+router.get("/submitForReview", dashboardGetController.sendRequestForReviewEmail);
 
 module.exports = router;

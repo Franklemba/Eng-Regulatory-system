@@ -1,4 +1,4 @@
-span#accountStatus{
+span#accountStatus, #submitForReview{
 	display:flex !important; 
 	align-items: center;
 	justify-content: center;
@@ -7,4 +7,11 @@ span#accountStatus{
 
 .grnbtn{
 	background-color: green !important;
+}
+
+#submitForReviewBtn{
+	border: green 2px solid;
+	border-radius: 4px;
+color: green;
+background-color: white;
 }

@@ -4,12 +4,13 @@ const EngineeringProject = require("../models/projectSchema");
 const ProductCertificationSchema = require("../models/productCertificationSchema");
 const AnnualDeclaration = require("../models/annualDeclarationSchema");
 const PremiseLeasing = require("../models/premiseSchema");
-const BusinessClosure = require("../models/businessClosureSchema");
+const RequestForReview = require("../models/reviewRequest");
+//RequestForReview.deleteMany({}).then((done)=>console.log(done))
 const OrderForSupply = require("../models/orderForSupplySchema");
 const LicenseAndCertification = require("../models/licenseAndCertificationSchema");
 const StructuralEnvironmentalLicense = require("../models/structuralEnvironmentalLicenceSchema");
 const StatutoryCompliance = require("../models/statutoryComplianceSchema");
-
+const {sendReviewRequestEmail} = require('../utilities/gmail')
 
 const base64Decode = (data) => {
   return Buffer.from(data, 'base64').toString('utf-8');
@@ -265,6 +266,56 @@ const getDashboard = async (req, res) => {
 });
 
   };
+
+
+
+  const sendRequestForReviewEmail = async (req, res) => {
+    try {
+      // Find existing review request
+      const requestForReview = await RequestForReview.findOne({ userId: req.user._id });
+  
+      if (!requestForReview) {
+        // Create new review request if none exists
+        const newRequestReview = new RequestForReview({
+          userId: req.user._id,
+          requestCount: 1
+        });
+        
+        // Save the new request
+        await newRequestReview.save();
+        
+        // Send email for first request
+        await sendReviewRequestEmail(req.user.email, 1);
+        
+        // Redirect with success message
+        return res.redirect(
+          "/dashboard?message=" + 
+          Buffer.from("Request For Review Sent").toString('base64')
+        );
+      }
+  
+      // Increment existing request count
+      requestForReview.requestCount += 1;
+      await requestForReview.save();
+      
+      // Send email with updated count
+      await sendReviewRequestEmail(req.user.email, requestForReview.requestCount);
+      
+      // Redirect with count message
+      return res.redirect(
+        "/dashboard?message=" + 
+        Buffer.from(`Request For Review Sent ${requestForReview.requestCount} times`).toString('base64')
+      );
+  
+    } catch (error) {
+      console.error('Error in sendRequestForReviewEmail:', error);
+      return res.status(500).redirect(
+        "/dashboard?message=" + 
+        Buffer.from("Error processing review request").toString('base64')
+      );
+    }
+  };
+
   
   module.exports = {
     getDashboard,
@@ -287,6 +338,7 @@ const getDashboard = async (req, res) => {
     getProjectApplicationProgress,
     getSubmittedLeasingsPage,
     getLicenseAndCertificationsPage,
-    getReviewLicenseAndCertificationsPage
+    getReviewLicenseAndCertificationsPage,
+    sendRequestForReviewEmail
   };
   

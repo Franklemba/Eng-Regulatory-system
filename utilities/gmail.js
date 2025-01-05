@@ -68,7 +68,160 @@ const sendOTPemail = (userName, email, otp)=>{
   }
 
 
+  function sendReviewRequestEmail(email, requestCount){
+
+  }
+
+  function generateRequestForReviewEmail(){
+
+  }
+
+  function generateRequestForReviewAdminEmail(){
+
+  }
 
 
+  async function sendReviewRequestEmail(email, requestCount) {
+    try {
+      // Send email to user
+      apiInstance.sendTransacEmail({
+        sender: { 
+          email: 'support@yourcompany.com', 
+          name: 'Your Company Name' 
+        },
+        subject: "Review Request Confirmation",
+        htmlContent: `<html><head></head><body></body></html>`,
+        messageVersions: [
+          {
+            to: [{ email }],
+            htmlContent: generateRequestForReviewEmail(requestCount),
+            subject: "Your Review Request Has Been Submitted",
+          }
+        ],
+      });
+  
+      // Send notification to admin
+      await apiInstance.sendTransacEmail({
+        sender: { 
+          email: 'notifications@yourcompany.com', 
+          name: 'System Notifications' 
+        },
+        subject: "New Review Request",
+        htmlContent: `<html><head></head><body></body></html>`,
+        messageVersions: [
+          {
+            to: [{ 
+              email: 'admin@yourcompany.com',
+              name: 'Admin'
+            }],
+            htmlContent: generateRequestForReviewAdminEmail(email, requestCount),
+            subject: "New Review Request Received",
+          }
+        ],
+      });
+  
+      return true;
+    } catch (error) {
+      console.error('Failed to send review request emails:', error);
+      throw error;
+    }
+  }
+  
+  function generateRequestForReviewEmail(requestCount) {
+    const isFirstRequest = requestCount === 1;
+    
+    return `
+      <!DOCTYPE html>
+      <html>
+      <head>
+        <style>
+          body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
+          .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+          .header { background-color: #f8f9fa; padding: 20px; text-align: center; }
+          .content { padding: 20px; }
+          .footer { text-align: center; padding: 20px; font-size: 12px; color: #666; }
+        </style>
+      </head>
+      <body>
+        <div class="container">
+          <div class="header">
+            <h2>Review Request Confirmation</h2>
+          </div>
+          <div class="content">
+            <p>Hello,</p>
+            ${isFirstRequest ? `
+              <p>Thank you for submitting your first review request! We have received your submission and our team will review it shortly.</p>
+            ` : `
+              <p>Thank you for submitting another review request! This is request number ${requestCount} from you.</p>
+            `}
+            
+            <p>What happens next:</p>
+            <ul>
+              <li>Our review team will assess your submission</li>
+              <li>You will receive feedback within 2-3 business days</li>
+              <li>We may contact you if we need any additional information</li>
+            </ul>
+  
+            <p>If you have any questions, please don't hesitate to reach out to our support team.</p>
+            
+            <p>Best regards,<br>Your Company Team</p>
+          </div>
+          <div class="footer">
+            <p>This is an automated message, please do not reply directly to this email.</p>
+          </div>
+        </div>
+      </body>
+      </html>
+    `;
+  }
+  
+  function generateRequestForReviewAdminEmail(userEmail, requestCount) {
+    return `
+      <!DOCTYPE html>
+      <html>
+      <head>
+        <style>
+          body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
+          .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+          .header { background-color: #f8f9fa; padding: 20px; text-align: center; }
+          .content { padding: 20px; }
+          .footer { text-align: center; padding: 20px; font-size: 12px; color: #666; }
+          .highlight { background-color: #ffffd0; padding: 2px 5px; }
+        </style>
+      </head>
+      <body>
+        <div class="container">
+          <div class="header">
+            <h2>New Review Request Received</h2>
+          </div>
+          <div class="content">
+            <p>Hello Admin,</p>
+            
+            <p>A new review request has been submitted with the following details:</p>
+            
+            <ul>
+              <li>User Email: <span class="highlight">${userEmail}</span></li>
+              <li>Request Count: <span class="highlight">${requestCount}</span></li>
+              <li>Submission Time: <span class="highlight">${new Date().toLocaleString()}</span></li>
+            </ul>
+  
+            <p>Please review this submission at your earliest convenience.</p>
+            
+            <p>User History:</p>
+            <ul>
+              <li>Total Requests: ${requestCount}</li>
+              <li>Status: ${requestCount === 1 ? 'First-time requester' : 'Returning requester'}</li>
+            </ul>
+  
+            <p>System Notice</p>
+          </div>
+          <div class="footer">
+            <p>This is an automated administrative notification.</p>
+          </div>
+        </div>
+      </body>
+      </html>
+    `;
+  }
 
-module.exports = { sendOTPemail };
+module.exports = { sendOTPemail, sendReviewRequestEmail};
