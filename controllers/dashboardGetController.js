@@ -10,6 +10,7 @@ const LicenseAndCertification = require("../models/licenseAndCertificationSchema
 const StructuralEnvironmentalLicense = require("../models/structuralEnvironmentalLicenceSchema");
 const StatutoryCompliance = require("../models/statutoryComplianceSchema");
 
+
 const base64Decode = (data) => {
   return Buffer.from(data, 'base64').toString('utf-8');
 };
@@ -19,6 +20,7 @@ const getDashboard = async (req, res) => {
   const projects = await EngineeringProject.find({userId:req.user._id})
   // const totalComplianceDoc = await StatutoryCompliance.find()
   const totalComplianceDocs = await StatutoryCompliance.countDocuments({userId:req.user._id});
+  const totalEngineeringProject = await EngineeringProject.countDocuments({userId:req.user._id});
      const message = req.query.message;
     res.render("home/dashboard/dashboard", {
       layout: "layouts/dashboardHeader.ejs",

@@ -53,8 +53,8 @@ app.set('trust proxy', 1);
 
  // Session configuration
 const sessionStore = MongoStore.create({ 
-mongoUrl: mainDB,
-  ttl: 14 * 24 * 60 * 60 // 14 days
+    mongoUrl: mainDB,
+    ttl: 14 * 24 * 60 * 60 // 14 days
 });
 
 
@@ -67,6 +67,7 @@ app.use(session({
   store: sessionStore,
   cookie: { secure: process.env.NODE_ENV === 'production' }
 }));
+
 app.use('/uploads', express.static(path.join(__dirname, 'public/uploads')));
 
 app.use(flash());
