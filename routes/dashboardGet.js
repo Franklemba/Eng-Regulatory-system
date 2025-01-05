@@ -25,10 +25,14 @@ router.get("/structuralEnvironmentalLicenses", dashboardGetController.getStructu
 router.get("/assessment", dashboardGetController.getAssessmentPage);
 router.get("/newCompliance", dashboardGetController.getStatutoryCompliance);
 router.get("/reviewCompliance", dashboardGetController.getStatutoryComplianceStatus);
-router.get("/profileManagement", dashboardGetController.getProfileManagement);
 
 router.get("/attachLicense", dashboardGetController.getLicenseAndCertificationsPage);
 router.get("/reviewLicense", dashboardGetController.getReviewLicenseAndCertificationsPage);
+<<<<<<< HEAD
 router.get("/submitForReview", dashboardGetController.sendRequestForReviewEmail);
+=======
+router.get("/report", dashboardGetController.getReport);
+router.get("/profileManagement", dashboardGetController.getProfileManagement);
+>>>>>>> 88f5ebb238aede68449260133a92c5b6b92eaeb2
 
 module.exports = router;

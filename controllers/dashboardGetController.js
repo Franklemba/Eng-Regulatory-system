@@ -237,6 +237,7 @@ const getDashboard = async (req, res) => {
     });
   };
 
+ 
   const getProfileManagement = async (req, res) => {
     res.render("auth/profileManagement", {
       layout: "layouts/dashboardHeader.ejs",
@@ -269,6 +270,7 @@ const getDashboard = async (req, res) => {
 
 
 
+<<<<<<< HEAD
   const sendRequestForReviewEmail = async (req, res) => {
     try {
       // Find existing review request
@@ -316,6 +318,15 @@ const getDashboard = async (req, res) => {
     }
   };
 
+=======
+  const getReport = async (req, res) => {
+
+    res.render("home/dashboard/report", {
+      layout: "layouts/dashboardHeader.ejs",
+      user: req.user
+    });
+  };
+>>>>>>> 88f5ebb238aede68449260133a92c5b6b92eaeb2
   
   module.exports = {
     getDashboard,
@@ -335,6 +346,7 @@ const getDashboard = async (req, res) => {
     downloadFile,
     getNewProjectListingPage,
     getProfileManagement,
+    getReport,
     getProjectApplicationProgress,
     getSubmittedLeasingsPage,
     getLicenseAndCertificationsPage,
