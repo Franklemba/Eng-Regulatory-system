@@ -8,11 +8,11 @@ if (mongoose.connection.models['StructuralEnvironmentalLicence']) {
 const structuralEnvironmentalLicenceSchema = new mongoose.Schema({
   projectName: {
     type: String,
-    required: true,
+    required: false,
   },
   projectID: {
     type: String,
-    required: true,
+    required: false,
   },
   isEIArequired: {
     type: String,
