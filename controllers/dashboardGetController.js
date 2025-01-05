@@ -30,7 +30,8 @@ const getDashboard = async (req, res) => {
       message: message !=  undefined
           ? `${base64Decode(message)}`
           : null ,
-      totalComplianceDocs
+      totalComplianceDocs,
+      totalEngineeringProject
     });
   };
   

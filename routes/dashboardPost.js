@@ -54,7 +54,8 @@ router.post("/newProject", upload.fields([
   { name: 'productSummaryDoc', maxCount: 1 },
   { name: 'techSpecOverviewDoc', maxCount: 1 },
   { name: 'commercialInvoice', maxCount: 1 },
-  { name: 'invoiceInstrumentDoc', maxCount: 1 }
+  { name: 'invoiceInstrumentDoc', maxCount: 1 },
+  { name: 'noticeOfAwardDoc', maxCount: 1 }
 ]),dashboardPostController.submitProject);
 
 router.post("/newPremiseLeasing",  upload.fields([

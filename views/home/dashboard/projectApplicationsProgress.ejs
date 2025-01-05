@@ -11,6 +11,7 @@
                         </div>
                         <div class="card-body">
                             <p class="mb-1"><strong>Project Type:</strong> <%= app.projectType %></p>
+                            <p class="mb-1"><strong>Project Scope:</strong> <%= app.projectScope %></p>
                             <p class="mb-1">
                                 <strong>Value:</strong> $<%= app.projectValue.toLocaleString() %> 
                                 | <strong>Duration:</strong> <%= app.duration %> months
@@ -118,6 +119,14 @@
                                         <a href="<%= app.documents.invoiceInstrumentDoc %>" download class="btn btn-link p-0 text-primary">
                                             <button class="btn btn-sm text-white btn-primary">
                                     Instruments
+                                            </button>
+                                           
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="<%= app.documents.noticeOfAwardDoc %>" download class="btn btn-link p-0 text-primary">
+                                            <button class="btn btn-sm text-white btn-primary">
+                                    Notice of Award Document
                                             </button>
                                            
                                         </a>

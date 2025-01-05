@@ -96,6 +96,7 @@ const submitProject = async (req, res) => {
     const {
       title,
       projectType,
+      projectScope,
       projectValue,
       duration,
       status,
@@ -123,6 +124,7 @@ const submitProject = async (req, res) => {
     const newProject = new EngineeringProject({
       title,
       projectType,
+      projectScope,
       projectValue,
       duration,
       status,
