@@ -1,81 +1,185 @@
 <div class="page-wrapper">
-    <div class="container my-5">
-        <div class="card shadow-sm">
-            <div class="card-header text-center">
-                <h4 class="mb-0">Application Details</h4>
+    <div class="content">
+        <div class="page-header">
+            <div class="page-title">
+                <h4>Engineering Application Details</h4>
+                <h6>ZEPRA ID: <%= application.zebraClientId %></h6>
             </div>
-            <div class="card-body">
-                <!-- Applicant Details -->
-                <h5 class="text-muted mb-3">Applicant Information</h5>
-                <div class="row mb-3">
-                    <div class="col-md-6">
-                        <p><strong>Name:</strong> <%= application.applicantName %></p>
+            <div class="page-btn">
+                <a href="/dashboard/submittedApplication" class="btn btn-outline-primary">
+                    <i class="fas fa-arrow-left"></i> Back to Applications
+                </a>
+            </div>
+        </div>
+
+        <!-- Main Application Details -->
+        <div class="row">
+            <!-- Primary Information Card -->
+            <div class="col-lg-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title">Primary Information</h5>
                     </div>
-                    <div class="col-md-6">
-                        <p><strong>Email:</strong> <%= application.email %></p>
-                    </div>
-                    <div class="col-md-6">
-                        <p><strong>Phone:</strong> <%= application.phone %></p>
-                    </div>
-                    <div class="col-md-6">
-                        <p><strong>Country:</strong> <%= application.country %></p>
-                    </div>
-                    <div class="col-md-6">
-                        <p><strong>City:</strong> <%= application.city %></p>
-                    </div>
-                    <div class="col-md-6">
-                        <p><strong>Address:</strong> <%= application.address %></p>
-                    </div>
-                </div>
-    
-                <!-- Company Details -->
-                <h5 class="text-muted mb-3">Company Information</h5>
-                <div class="row mb-3">
-                    <div class="col-md-6">
-                        <p><strong>Company Name:</strong> <%= application.companyName %></p>
-                    </div>
-                    <div class="col-md-6">
-                        <p><strong>Registration Number:</strong> <%= application.registrationNumber %></p>
-                    </div>
-                    <div class="col-md-6">
-                        <p><strong>Engineering Fields:</strong> <%= application.engineeringFields %></p>
-                    </div>
-                    <div class="col-md-6">
-                        <p><strong>License Type:</strong> <%= application.licenseType %></p>
-                    </div>
-                    <div class="col-md-6">
-                        <p><strong>Engineering organisation:</strong> <%= application.engineeringOrg %></p>
-                    </div>
-                </div>
-    
-                <!-- Additional Details -->
-                <h5 class="text-muted mb-3">Additional Information</h5>
-                <div class="row mb-3">
-                    <div class="col-12">
-                        <p><strong>Description:</strong></p>
-                        <p><%= application.description || 'N/A' %></p>
-                    </div>
-                    <div class="col-12">
-                        <p><strong>Submitted On:</strong> <%= new Date(application.createdAt).toLocaleString() %></p>
-                    </div>
-                </div>
-    
-                <!-- Documents -->
-                <h5 class="text-muted mb-3">Uploaded Documents</h5>
-                <div class="row">
-                    <% application.documents?.forEach((doc, index) => { %>
-                        <div class="col-md-4 mb-3">
-                            <a href="/dashboard/download/<%= doc %>" 
-                                class="btn btn-sm " 
-                                download="<%=doc %>">
-                                Download Doc <%= index + 1 %>
-                            </a>
+                    <div class="card-body">
+                        <div class="row mb-3">
+                            <div class="col-sm-4 text-muted">Lead Engineer</div>
+                            <div class="col-sm-8"><%= application.leadEngineer %></div>
                         </div>
-                    <% }); %>
+                        <div class="row mb-3">
+                            <div class="col-sm-4 text-muted">Registration Number</div>
+                            <div class="col-sm-8"><%= application.registrationNumber %></div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-sm-4 text-muted">Professional Body</div>
+                            <div class="col-sm-8">
+                                <%= application.professionalBody %>
+                                <% if (application.otherProfessionalBody) { %>
+                                    (<%= application.otherProfessionalBody %>)
+                                <% } %>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-sm-4 text-muted">Discipline</div>
+                            <div class="col-sm-8">
+                                <%= application.primaryDiscipline %>
+                                <% if (application.otherDiscipline) { %>
+                                    (<%= application.otherDiscipline %>)
+                                <% } %>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-sm-4 text-muted">Submission Date</div>
+                            <div class="col-sm-8"><%= new Date(application.createdAt).toLocaleString() %></div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-sm-4 text-muted">Status</div>
+                            <div class="col-sm-8">
+                                <span class="badge <%= application.status === 'Approved' ? 'bg-success' : 
+                                                     application.status === 'Rejected' ? 'bg-danger' : 
+                                                     'bg-warning' %>">
+                                    <%= application.status || 'Pending' %>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="card-footer text-end">
-                <a href="/dashboard/submittedApplication" class="btn btn-secondary">Back to Applications</a>
+
+            <!-- Documents Card -->
+            <div class="col-lg-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title">Uploaded Documents</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="list-group">
+                            <% if (application.designCalculations) { %>
+                                <a href="<%= application.designCalculations %>" 
+                                   class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <i class="fas fa-file-pdf text-danger me-2"></i>
+                                        Design Calculations
+                                    </div>
+                                    <span class="badge bg-primary rounded-pill">
+                                        <i class="fas fa-download"></i>
+                                    </span>
+                                </a>
+                            <% } %>
+
+                            <% if (application.engineeringDrawings && application.engineeringDrawings.length > 0) { %>
+                                <div class="list-group-item">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <i class="fas fa-drafting-compass text-info me-2"></i>
+                                            Engineering Drawings
+                                        </div>
+                                        <span class="badge bg-info rounded-pill">
+                                            <%= application.engineeringDrawings.length %>
+                                        </span>
+                                    </div>
+                                    <div class="mt-2">
+                                        <% application.engineeringDrawings.forEach((drawing, index) => { %>
+                                            <a href="<%= drawing %>" 
+                                               class="btn fas fa-download btn-sm btn-outline-info me-2 mb-2">
+                                                download doc <%= index + 1 %>
+                                            </a>
+                                        <% }); %>
+                                    </div>
+                                </div>
+                            <% } %>
+
+                            <% const documents = [
+                                { name: 'Feasibility Study', path: application.feasibilityStudy, icon: 'file-alt', color: 'success' },
+                                { name: 'BOQ Document', path: application.boqDocument, icon: 'file-invoice-dollar', color: 'warning' },
+                                { name: 'QA/QC Plan', path: application.qaqcPlan, icon: 'clipboard-check', color: 'secondary' }
+                            ] %>
+
+                            <% documents.forEach(doc => { %>
+                                <% if (doc.path) { %>
+                                    <a href="<%= doc.path %>" 
+                                       class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <i class="fas fa-<%= doc.icon %> text-<%= doc.color %> me-2"></i>
+                                            <%= doc.name %>
+                                        </div>
+                                        <span class="badge bg-primary rounded-pill">
+                                            <i class="fas fa-download"></i>
+                                        </span>
+                                    </a>
+                                <% } %>
+                            <% }); %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Technical Description -->
+        <div class="row mt-4">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title">Technical Description</h5>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text"><%= application.technicalDescription %></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Team Members -->
+        <div class="row mt-4">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title">Project Team Members</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Role</th>
+                                        <th>Contact Information</th>
+                                        <th>Registration Number</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <% application.teamMembers.forEach(member => { %>
+                                        <tr>
+                                            <td><%= member.name %></td>
+                                            <td><%= member.role %></td>
+                                            <td><%= member.contact %></td>
+                                            <td><%= member.regNumber %></td>
+                                        </tr>
+                                    <% }); %>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

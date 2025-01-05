@@ -1,75 +1,77 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
-// Clear existing model if it exists
-if (mongoose.connection.models['EngineeringLicense']) {
-  delete mongoose.connection.models['EngineeringLicense'];
-}
+const teamMemberSchema = new mongoose.Schema({
+  name: String,
+  role: String,
+  contact: String,
+  regNumber: String
+});
 
-const engineeringLicenseSchema = new mongoose.Schema({
-  applicantName: {
+const engineeringApplicationSchema = new mongoose.Schema({
+  zebraClientId: {
     type: String,
-    required: true,
+    required: true
   },
-  email: {
+  primaryDiscipline: {
     type: String,
     required: true,
+    enum: ['civil', 'electrical', 'mechanical', 'structural', 'environmental', 'geotechnical', 'other']
   },
-  phone: {
-    type: String,
-    required: true,
+  otherDiscipline: {
+    type: String
   },
-  country: {
+  technicalDescription: {
     type: String,
-    required: true,
+    required: true
   },
-  city: {
-    type: String,
-    required: true,
+  designCalculations: {
+    type: String,  // File path/URL
+    required: true
   },
-  address: {
+  engineeringDrawings: [{
+    type: String,  // Array of file paths/URLs
+    required: true
+  }],
+  leadEngineer: {
     type: String,
-    required: true,
-  },
-  companyName: {
-    type: String,
-    required: true,
+    required: true
   },
   registrationNumber: {
     type: String,
-    required: true,
+    required: true
   },
-  engineeringFields: {
+  professionalBody: {
     type: String,
     required: true,
+    enum: ['EIZ', 'other']
   },
-  licenseType: {
-    type: String,
-    required: true,
+  otherProfessionalBody: {
+    type: String
   },
-  engineeringOrg: {
-  type: String,
-    required: true,
+  teamMembers: [teamMemberSchema],
+  feasibilityStudy: {
+    type: String,  // File path/URL
+    required: true
   },
-  
-  documents: {
-    type: [String], // Array of file paths or URLs
-    required: true,
+  boqDocument: {
+    type: String,  // File path/URL
+    required: true
   },
-  description: {
-    type: String,
-    required: false,
+  qaqcPlan: {
+    type: String,  // File path/URL
+    required: true
   },
   createdAt: {
     type: Date,
-    default: Date.now,
-    required: true,
-  },
-  status:{
-    type: String,
-    required: false,
-    default:'Pending'
-  },
-  userId:{ type: String, required: true }
+    default: Date.now
+  }
 });
 
-module.exports = mongoose.model("EngineeringLicense", engineeringLicenseSchema);
+// Create indexes for common queries
+engineeringApplicationSchema.index({ zebraClientId: 1 });
+engineeringApplicationSchema.index({ leadEngineer: 1 });
+engineeringApplicationSchema.index({ createdAt: -1 });
+
+const EngineeringApplication = mongoose.model('EngineeringApplication', engineeringApplicationSchema);
+
+module.exports = EngineeringApplication;

@@ -19,47 +19,75 @@ const base64Encode = (data) => {
 
 
 // Charles's routes
+
 const submitApplication = async (req, res) => {
   try {
+    // Extract basic form fields
     const {
-      applicantName,
-      email,
-      phone,
-      country,
-      city,
-      address,
-      companyName,
+      zebraClientId,
+      primaryDiscipline,
+      otherDiscipline,
+      technicalDescription,
+      leadEngineer,
       registrationNumber,
-      engineeringFields,
-      licenseType,
-      description,
-      engineeringOrg
+      professionalBody,
+      otherProfessionalBody,
+      teamMember
     } = req.body;
-    const documents = req.files.documents?.map(file => file.path) || [];
-    console.log(documents)
 
-    const newLicense = new EngineeringLicense({
-      applicantName,
-      email,
-      phone,
-      country,
-      city,
-      address,
-      companyName,
+    // Process file uploads and get their paths
+    const designCalculations = req.files.designCalculations?.[0]?.location || '';
+    const engineeringDrawings = req.files.engineeringDrawings?.map(file => file.location) || [];
+    const feasibilityStudy = req.files.feasibilityStudy?.[0]?.location || '';
+    const boqDocument = req.files.boqDocument?.[0]?.location || '';
+    const qaqcPlan = req.files.qaqcPlan?.[0]?.location || '';
+
+    // Process team members array
+    const teamMembers = [];
+    if (Array.isArray(teamMember)) {
+      for (let i = 0; i < teamMember.length; i++) {
+        if (teamMember[i].name) {  // Only add if name exists
+          teamMembers.push({
+            name: teamMember[i].name,
+            role: teamMember[i].role,
+            contact: teamMember[i].contact,
+            regNumber: teamMember[i].regNumber
+          });
+        }
+      }
+    }
+console.log(req.files)
+    // Create new application instance
+    const newApplication = new EngineeringLicense({
+      zebraClientId,
+      primaryDiscipline,
+      otherDiscipline,
+      technicalDescription,
+      designCalculations,
+      engineeringDrawings,
+      leadEngineer,
       registrationNumber,
-      engineeringFields,
-      licenseType,
-      engineeringOrg,
-      documents,
-      description,
-      userId:req.user._id
+      professionalBody,
+      otherProfessionalBody,
+      teamMembers,
+      feasibilityStudy,
+      boqDocument,
+      qaqcPlan,
+      userId: req.user._id  // Assuming you have user authentication
     });
 
-    await newLicense.save();
+    await newApplication.save();
+
+    // Redirect after successful submission
     res.redirect("/dashboard/submittedApplication");
+
   } catch (error) {
-    console.error("Error saving engineering license application:", error);
-    res.status(500).send("An error occurred while processing your application.");
+    console.error("Error saving engineering application:", error);
+    res.status(500).json({
+      success: false,
+      message: "An error occurred while processing your application.",
+      error: error.message
+    });
   }
 };
 
@@ -269,6 +297,8 @@ const submitProductCertificationApplication = async (req, res) => {
       productDatasheet: req.files['productDatasheet'][0].location,
       standardCertifications: req.files['standardCertifications'][0].location,
       manufacturerAuthorization: req.files['manufacturerAuthorization'][0].location,
+      billOfQuantities: req.files['billOfQuantities'][0].location,
+      
       // Set initial status
       status: 'submitted',
       userId:req.user._id
@@ -411,47 +441,51 @@ const submitLicenseAndCertification = async (req, res) => {
 };
 // ####statutory compliance documents route
 const statutoryCompliance = async (req, res) => {
-  const user = req.user;
-  if(!req.files){
-    return res.status(404).send('no files uploaded');
+  try {
+    const user = req.user;
+    
+    if (!req.files) {
+      return res.status(400).json({ error: 'No files uploaded' });
+    }
+
+    // Verify all required files are present
+    const requiredFiles = ['zppaDocument', 'pacraDocument', 'taxDocument', 
+                          'workersCompensation', 'energyRegulation', 'nhimaDocument'];
+    
+    for (const field of requiredFiles) {
+      if (!req.files[field]) {
+        return res.status(400).json({ error: `Missing required document: ${field}` });
+      }
+    }
+
+    // Create document object with required fields
+    const documentData = {
+      userId: req.user._id,
+      userEmail: user.email,
+      zppaDocument: req.files.zppaDocument[0].location,
+      pacraDocument: req.files.pacraDocument[0].location,
+      taxDocument: req.files.taxDocument[0].location,
+      workersCompensation: req.files.workersCompensation[0].location,
+      energyRegulation: req.files.energyRegulation[0].location,
+      nhimaDocument: req.files.nhimaDocument[0].location
+    };
+
+    // Add other documents if present
+    if (req.files.otherDocuments) {
+      documentData.otherDocuments = req.files.otherDocuments.map(file => file.location);
+    }
+
+    const statutoryComplianceDoc = new StatutoryCompliance(documentData);
+    await statutoryComplianceDoc.save();
+
+    const successMessage = 'Statutory compliance documents uploaded successfully';
+    res.redirect(`/dashboard/newCompliance?message=${encodeURIComponent(base64Encode(successMessage))}`);
+
+  } catch (error) {
+    console.error('Error uploading statutory documents:', error);
+    res.status(500).json({ error: 'Error uploading statutory documents' });
   }
-
-console.log(req.email)
-console.log(req.files);
-const zppaDoc = req.files.zppaDoc[0].location;
-const pacraDoc = req.files.pacraDoc[0].location;
-const workcompDoc = req.files.workcompDoc[0].location;
-const nhimaDoc = req.files.nhimaDoc[0].location;
-const erbDoc = req.files.erbDoc[0].location;
-const others = req.files.others[0].location;
-
-
-try{
-  
-  const statutoryCompliance = new StatutoryCompliance({
-    userEmail: user.email,
-    zppaDoc,
-    pacraDoc,
-    workcompDoc,
-    nhimaDoc,
-    erbDoc,
-    others,
-    userId:req.user._id
-
-  })
-
-  await statutoryCompliance.save();
-  console.log(statutoryCompliance)
-  successMessage = ` Statutory compliance documents uploaded successfully`;
-
-  res.redirect(`/dashboard/newCompliance?message=${encodeURIComponent(base64Encode(successMessage))}`);
-
-}catch (error) {
-  console.error(`Error uploading statutory documents : ${error.message}`);
-  res.send("Error uploading statutory documents");
-}
 };
-
 const submitAssessment = async (req, res) => console.log(req.body);
 
 

@@ -19,9 +19,9 @@ module.exports = function(passport) {
         }
 
         // Check if the email is verified
-        if (!user.isEmailVerified) {
-          return done(null, false, { message: 'Please verify your email before logging in.' });
-        }
+        // if (!user.isEmailVerified) {
+        //   return done(null, false, { message: 'Please verify your email before logging in.' });
+        // }
 
         // Match password
         const isMatch =  bcrypt.compare(password, user.password);

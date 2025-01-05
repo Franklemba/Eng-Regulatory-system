@@ -1,50 +1,47 @@
-const mongoose = require("mongoose");
-
-// Clear existing model if it exists
-if (mongoose.connection.models['StatutoryCompliance']) {
-  delete mongoose.connection.models['StatutoryCompliance'];
-}
+const mongoose = require('mongoose');
 
 const statutoryComplianceSchema = new mongoose.Schema({
-userEmail: {
-    type: String,
-    required: true,
-    },
-  zppaDoc: {
-    type: String,
-    required: true,
+  userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    required: true
   },
-  pacraDoc: {
+  userEmail: {
     type: String,
-    required: true,
+    required: true
   },
-  workcompDoc: {
+  zppaDocument: {
     type: String,
-    required: true,
+    required: true
   },
-  nhimaDoc: {
+  pacraDocument: {
     type: String,
-    required: true,
+    required: true
   },
-  erbDoc: {
+  taxDocument: {
     type: String,
-    required: true,
+    required: true
   },
-  others: {
+  workersCompensation: {
     type: String,
-    required: true,
+    required: true
   },
-  status: {
+  energyRegulation: {
     type: String,
-    required: true,
-    default: 'pending'
+    required: true
   },
-  createdAt: {
+  nhimaDocument: {
+    type: String,
+    required: true
+  },
+  otherDocuments: [{
+    type: String
+  }],
+  submittedAt: {
     type: Date,
-    default: Date.now,
-    required: true,
-  },
-  userId:{ type: String, required: true }
+    default: Date.now
+  }
 });
 
-module.exports = mongoose.model("StatutoryCompliance", statutoryComplianceSchema);
+const StatutoryCompliance = mongoose.model('StatutoryCompliance', statutoryComplianceSchema);
+module.exports = StatutoryCompliance;

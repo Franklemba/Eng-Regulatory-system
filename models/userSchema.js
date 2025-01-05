@@ -64,7 +64,31 @@ const userSchema = new mongoose.Schema({
   accountStatus:{
     type:String,
     default:'Pending Zepra Approval'
+  },
+  zepraId:{
+    type: String,
+    default: generateZepraId
   }
+
 });
+
+
+function generateZepraId (){
+  // Get current year
+  const year = new Date().getFullYear();
+  
+  // Generate random components
+  const sequence = Math.floor(Math.random() * 10000).toString().padStart(4, '0');
+  const engineeringCode = Math.floor(Math.random() * 1000).toString().padStart(3, '0');
+  
+  // Generate a random letter (A-Z)
+  const letter = String.fromCharCode(65 + Math.floor(Math.random() * 26));
+  
+  // Combine all parts: ZEPRA-YEAR-SEQUENCE-CODE-LETTER
+  // Example output: ZEPRA-2025-4527-089-X
+  return `ZEPRA-${year}-${sequence}-${engineeringCode}-${letter}`;
+};
+
+
 
 module.exports = mongoose.model("client", userSchema);

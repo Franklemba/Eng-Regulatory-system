@@ -17,6 +17,7 @@ const base64Decode = (data) => {
 
 
 const getDashboard = async (req, res) => {
+  console.log(req.user)
   const projects = await EngineeringProject.find({userId:req.user._id})
   // const totalComplianceDoc = await StatutoryCompliance.find()
   const totalComplianceDocs = await StatutoryCompliance.countDocuments({userId:req.user._id});
@@ -59,25 +60,12 @@ const getDashboard = async (req, res) => {
           const submittedApplications = await EngineeringLicense.find({userId:req.user._id}).sort({ _id: -1 });
   
           // Process document paths for each application
-          const applicationsWithDocuments = submittedApplications.map(application => {
-            console.log('doc objectt', application.documents)
-              const processedDocuments = application.documents.map(doc => ({
-            
-                  url:doc, // Assuming `doc` contains the relative path to the file
-                  name: doc // Extract the filename from the path
-              }));
-  
-              return {
-                  ...application.toObject(), // Convert Mongoose document to plain JS object
-                  documents: processedDocuments
-              };
-          });
-  
+      
           // Render the EJS view with the processed applications
           res.render("home/dashboard/submittedApplication", {
               layout: "layouts/dashboardHeader.ejs",
               user: req.user, // Pass the authenticated user data
-              submittedApplications: applicationsWithDocuments
+              submittedApplications
           });
       } catch (err) {
           console.error("Error fetching submitted applications:", err.message);

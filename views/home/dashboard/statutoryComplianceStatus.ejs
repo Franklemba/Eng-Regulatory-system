@@ -1,188 +1,145 @@
-
 <div class="page-wrapper">
     <div class="content container-fluid">
-    
-    <div class="page-header">
-    <div class="row">
-    <div class="col">
-    <h3 class="page-title">Statutory Compliance Status</h3>
-    <ul class="breadcrumb">
-    <!-- <li class="breadcrumb-item"><a href="/">Dashboard</a></li> -->
-    <!-- <li class="breadcrumb-item active">Data Tables</li> -->
-    </ul>
-    </div>
-    </div>
-    </div>
-    
-    <div class="row">
-    <div class="col-sm-12">
-    <div class="card">
-    <div class="card-header">
-    <h4 class="card-title">Statutory Compliance Documents</h4>
-    <!-- <p class="card-text">
-    This is the most basic example of the datatables with zero configuration. Use the <code>.datatable</code> class to initialize datatables.
-    </p> -->
-    </div>
-    <div class="card-body">
-        
-        <% if (statutoryComplianceDocs == null) { %>
-            
-            <% } else { %>
-                
-                <% statutoryComplianceDocs.forEach(element => { %>
-                    <div class="table-responsive">
-                    <h4>Submitted on <%=element.createdAt.toLocaleDateString('en-GB') %> <i><%=element.createdAt.toLocaleTimeString('en-GB') %></i></h4>
-                    <table class="table   ">
-                    <thead>
-                    <tr>
-                    <th>Document Name</th>
-                    <th>Status</th>
-                    <th>Action</th>
-                    
-                    </tr>
-                    </thead>
-                    
-                         
-                            <tbody>
-                            <tr>
-                            <td><strong>ZPPA license</strong></td>
-                            <td><button type="button" class="btn btn-danger">Pending</button></td>
-                            <td>
-                                <div class="dropdown">
-                                <a href="javascript:void(0);" data-bs-toggle="dropdown" aria-expanded="false" class="dropset">
-                                <i class="fa fa-ellipsis-v"></i>
-                                </a>
-                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <li>
-                                    <a class="dropdown-item" href= "/<%=element.zppaDoc%>" >View</a>
-                                </li>
-                                <li>
-                                <a href="/dashboard/newApplication" class="dropdown-item">Delete</a>
-                                </li>
-                                </ul>
-                                </div>
-                            </td>
-                            </tr>
-                            <tr>
-                        
-                                <td><strong>PACRA license</strong></td>
-                                <td><button type="button" class="btn btn-danger">Pending</button></td>
-                                
-                                    <td>
-                                        <div class="dropdown">
-                                        <a href="javascript:void(0);" data-bs-toggle="dropdown" aria-expanded="false" class="dropset">
-                                        <i class="fa fa-ellipsis-v"></i>
-                                        </a>
-                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                        <li>
-                                            <a class="dropdown-item" href= "/<%=element.pacraDoc%>" >View</a>
-                                        </li>
-                                        <li>
-                                        <a href="/dashboard/newApplication" class="dropdown-item">Delete</a>
-                                        </li>
-                                        </ul>
-                                        </div>
-                                    </td>
-                                
-                               
-                            </tr>
-                            <tr>
-                                <td><strong>Worker Compensation </strong></td>
-                                <td><button type="button" class="btn btn-danger">Pending</button></td>
-                               
-                                <td>
-                                    <div class="dropdown">
-                                    <a href="javascript:void(0);" data-bs-toggle="dropdown" aria-expanded="false" class="dropset">
-                                    <i class="fa fa-ellipsis-v"></i>
-                                    </a>
-                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <li>
-                                        <a class="dropdown-item" href= "/<%=element.workcompDoc%>" >View</a>
-                                    </li>
-                                    <li>
-                                    <a href="/dashboard/newApplication" class="dropdown-item">Delete</a>
-                                    </li>
-                                    </ul>
-                                    </div>
-                                </td>
-                               
-                            </tr>
-                            
-                            <tr>
-                                <td><strong>Nhima </strong></td>
-                                <td><button type="button" class="btn btn-danger">Pending</button></td>
-                                <td>
-                                    <div class="dropdown">
-                                    <a href="javascript:void(0);" data-bs-toggle="dropdown" aria-expanded="false" class="dropset">
-                                    <i class="fa fa-ellipsis-v"></i>
-                                    </a>
-                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <li>
-                                        <a class="dropdown-item" href= "/<%=element.nhimaDoc%>" >View</a>
-                                    </li>
-                                    <li>
-                                    <a href="/dashboard/newApplication" class="dropdown-item">Delete</a>
-                                    </li>
-                                    </ul>
-                                    </div>
-                                </td>
-                               
-                            </tr>
-                        
-                            <tr>
-                                <td><strong>ERB </strong></td>
-                                <td><button type="button" class="btn btn-danger">Pending</button></td>
-                                <td>
-                                    <div class="dropdown">
-                                    <a href="javascript:void(0);" data-bs-toggle="dropdown" aria-expanded="false" class="dropset">
-                                    <i class="fa fa-ellipsis-v"></i>
-                                    </a>
-                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <li>
-                                        <a class="dropdown-item" href= "/<%=element.erbDoc%>" >View</a>
-                                    </li>
-                                    <li>
-                                    <a href="/dashboard/newApplication" class="dropdown-item">Delete</a>
-                                    </li>
-                                    </ul>
-                                    </div>
-                                </td>
-                               
-                            </tr>
-                            <tr>
-                                <td><strong>Others</strong></td>
-                                <td><button type="button" class="btn btn-danger">Pending</button></td>
-                                <td>
-                                    <div class="dropdown">
-                                    <a href="javascript:void(0);" data-bs-toggle="dropdown" aria-expanded="false" class="dropset">
-                                    <i class="fa fa-ellipsis-v"></i>
-                                    </a>
-                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <li>
-                                        <a class="dropdown-item" href= "/<%=element.others%>" >View</a>
-                                    </li>
-                                    <li>
-                                    <a href="/dashboard/newApplication" class="dropdown-item">Delete</a>
-                                    </li>
-                                    </ul>
-                                    </div>
-                                </td>
-                               
-                            </tr>
-                           
-                            
-                            </tbody>
-                     
-                            
-                        </table>
+        <!-- Page Header -->
+        <div class="page-header">
+            <div class="row align-items-center">
+                <div class="col">
+                    <h3 class="page-title">Statutory Compliance Documents</h3>
+                    <div class="breadcrumb">
+                        <span>Dashboard</span> / <span>Statutory Documents</span>
                     </div>
-                        <hr>
-                 
+                </div>
+            </div>
+        </div>
+
+        <!-- Documents Grid -->
+        <div class="row">
+            <% if (statutoryComplianceDocs && statutoryComplianceDocs.length > 0) { %>
+                <% statutoryComplianceDocs.forEach(doc => { %>
+                    <div class="col-md-12 mb-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row align-items-center">
+                                    <div class="col-md-8">
+                                        <h4 class="mb-3">Documents submitted on <%= new Date(doc.submittedAt).toLocaleDateString() %></h4>
+                                        
+                                        <!-- Document List -->
+                                        <div class="document-list">
+                                            <% const documents = {
+                                                'ZPPA Document': doc.zppaDocument,
+                                                'PACRA Document': doc.pacraDocument,
+                                                'Tax Document': doc.taxDocument,
+                                                'Workers Compensation': doc.workersCompensation,
+                                                'Energy Regulation': doc.energyRegulation,
+                                                'NHIMA Document': doc.nhimaDocument
+                                            } %>
+
+                                            <% for (const [name, url] of Object.entries(documents)) { %>
+                                                <div class="document-item mb-3 d-flex align-items-center justify-content-between p-3 bg-light rounded">
+                                                    <div class="document-info">
+                                                        <i class="fas fa-file-pdf text-danger me-2"></i>
+                                                        <span class="document-name"><%= name %></span>
+                                                    </div>
+                                                    <a href="<%= url %>" class="btn btn-sm btn-primary" download>
+                                                        <i class="fas fa-download me-1"></i> Download
+                                                    </a>
+                                                </div>
+                                            <% } %>
+
+                                            <!-- Other Documents Section -->
+                                            <% if (doc.otherDocuments && doc.otherDocuments.length > 0) { %>
+                                                <h5 class="mt-4 mb-3">Additional Documents</h5>
+                                                <% doc.otherDocuments.forEach((otherDoc, index) => { %>
+                                                    <div class="document-item mb-3 d-flex align-items-center justify-content-between p-3 bg-light rounded">
+                                                        <div class="document-info">
+                                                            <i class="fas fa-file text-secondary me-2"></i>
+                                                            <span class="document-name">Additional Document <%= index + 1 %></span>
+                                                        </div>
+                                                        <a href="<%= otherDoc %>" class="btn btn-sm btn-primary" download>
+                                                            <i class="fas fa-download me-1"></i> Download
+                                                        </a>
+                                                    </div>
+                                                <% }) %>
+                                            <% } %>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <div class="submission-info p-3 bg-light rounded">
+                                            <h5 class="mb-3">Submission Details</h5>
+                                            <p class="mb-2">
+                                                <strong>Submitted by:</strong> <%= doc.userEmail %>
+                                            </p>
+                                            <p class="mb-2">
+                                                <strong>Date:</strong> <%= new Date(doc.submittedAt).toLocaleString() %>
+                                            </p>
+                                            <button class="btn btn-success btn-sm mt-3" onclick="window.print()">
+                                                <i class="fas fa-print me-1"></i> Print Summary
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 <% }) %>
-        <% } %>
+            <% } else { %>
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body text-center py-5">
+                            <i class="fas fa-folder-open fa-3x text-muted mb-3"></i>
+                            <h4>No Documents Found</h4>
+                            <p class="text-muted">No statutory compliance documents have been uploaded yet.</p>
+                            <a href="/dashboard/statutoryCompliance" class="btn btn-primary">
+                                <i class="fas fa-upload me-1"></i> Upload Documents
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            <% } %>
+        </div>
     </div>
-    </div>
-    </div>
-    </div>
-    </div>
-    </div>
+</div>
+
+<style>
+    .document-item {
+        transition: all 0.3s ease;
+        border: 1px solid #e0e0e0;
+    }
+
+    .document-item:hover {
+        transform: translateX(5px);
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    .document-info {
+        display: flex;
+        align-items: center;
+    }
+
+    .document-name {
+        font-weight: 500;
+    }
+
+    .submission-info {
+        border: 1px solid #e0e0e0;
+    }
+
+    @media print {
+        .btn {
+            display: none;
+        }
+        
+        .document-item {
+            border: 1px solid #ccc;
+            margin-bottom: 10px;
+            page-break-inside: avoid;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .submission-info {
+            margin-top: 20px;
+        }
+    }
+</style>

@@ -34,7 +34,15 @@ app.use(express.urlencoded({ extended: true }));
   
   
 
-router.post("/newApplication", upload.fields([{ name: 'supportingDocument', maxCount: 1 }, { name: 'documents', maxCount: 1 }]), dashboardPostController.submitApplication);
+router.post("/newApplication", 
+  upload.fields([
+    { name: 'designCalculations', maxCount: 1 },
+    { name: 'engineeringDrawings', maxCount: 10 },
+    { name: 'feasibilityStudy', maxCount: 1 },
+    { name: 'boqDocument', maxCount: 1 },
+    { name: 'qaqcPlan', maxCount: 1 }
+  ]),
+dashboardPostController.submitApplication);
 // router.post("/newApplication",dashboardPostController.submitApplication);
 router.post("/newProject", upload.fields([
   { name: 'CFEdoc', maxCount: 1 },
@@ -67,7 +75,8 @@ router.post("/newLicenseAndCertification", dashboardPostController.submitLicense
 router.post("/newProductCertification", upload.fields([
   { name: 'productDatasheet', maxCount: 1 },
   { name: 'standardCertifications', maxCount: 1 },
-  { name: 'manufacturerAuthorization', maxCount: 1 }
+  { name: 'manufacturerAuthorization', maxCount: 1 },
+  { name: 'billOfQuantities', maxCount: 1 },
 ]), dashboardPostController.submitProductCertificationApplication);
 
 router.post('/businessClosure', upload.single('finalFinancialStatement'), (req, res, next) => {
@@ -84,12 +93,13 @@ router.post("/newEnvironmentAndStructuralLicence",
 // router.post("/newAwarenessAdvert",  upload.single('advertMedia'), dashboardPostController.submitAwarenessAdvert);
 router.post("/newAssessment", dashboardPostController.submitAssessment);
 router.post("/statutoryCompliance", upload.fields([
-           { name: 'zppaDoc', maxCount: 1 },
-           { name: 'pacraDoc', maxCount: 1 },
-           {name: 'workcompDoc', maxCount: 1},
-           {name: 'nhimaDoc', maxCount: 1}, 
-           {name: 'erbDoc', maxCount: 1}, 
-           {name: 'others', maxCount: 1}]), dashboardPostController.statutoryCompliance);
-                                  
+  { name: 'zppaDocument', maxCount: 1 },
+  { name: 'pacraDocument', maxCount: 1 },
+  { name: 'taxDocument', maxCount: 1 },
+  { name: 'workersCompensation', maxCount: 1 },
+  { name: 'energyRegulation', maxCount: 1 },
+  { name: 'nhimaDocument', maxCount: 1 },
+  { name: 'otherDocuments', maxCount: 5 } // Allow multiple files
+]), dashboardPostController.statutoryCompliance);
 
 module.exports = router;
