@@ -1,3 +1,15 @@
+
+<style>
+    .mb-3 {
+      display: inline-block; /* Prevent text wrapping */
+      overflow: hidden; /* Hide the overflowing text */
+      white-space: nowrap; /* Prevent the text from wrapping to a new line */
+      text-overflow: ellipsis; /* Add ellipsis to indicate the text is truncated */
+      width: fit-content; /* Adjust width to fit content */
+      max-width: calc(5ch + 1em); /* Adjust width to accommodate 5 words (approx. 5 characters per word + padding) */
+    }
+  </style>
+  
 <div class="page-wrapper">
     <div class="content">
         <div class="page-header">
@@ -72,6 +84,14 @@
                                     <option>Public</option>
                                     <option>Private</option>
                                 </select>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="col-lg-6 col-sm-6 col-12">
+                            <div class="form-group">
+                                <h6><strong>Notice of award document:</strong></h6>
+                                <p>Only upload if project scope is public</p>
+                                <input name="noticeOfAwardDoc" type="file" class="form-control" >
                             </div>
                         </div>
 
@@ -154,15 +174,15 @@
                     <div class="row">
                         <div class="col-lg-6 col-sm-6 col-12">
                             <div class="form-group">
-                                <h6><strong>Company Legal Documents (CFE):</strong></h6>
-                                <p>Proof of legal registration and certification to operate.</p>
+                                <h6><strong>Corporate Profile:</strong></h6>
+                                <p>Detailed company profile.</p>
                                 <input name="CFEdoc" type="file" class="form-control" required>
                             </div>
                         </div>
                         <div class="col-lg-6 col-sm-6 col-12">
                             <div class="form-group">
-                                <h6><strong>Past Experience References</strong></h6>
-                                <p>References from similar projects completed in the past.</p>
+                                <h6><strong>Risk management plan</strong></h6>
+                                <p>analysis of project risk and mitigation strategies</p>
                                 <input name="pastExperienceRefDoc" type="file" class="form-control" required>
                             </div>
                         </div>
@@ -171,16 +191,16 @@
                        
                         <div class="col-lg-6 col-sm-6 col-12">
                             <div class="form-group">
-                                <h6><strong>Audited Financial Statements (CFC)</strong></h6>
+                                <h6><strong>Audited Financial Statements</strong></h6>
                                 <p>Audited financial statements covering a period of six months.</p>
                                 <input name="CFCdoc" type="file" class="form-control" required>
                             </div>
                         </div>
                         <div class="col-lg-6 col-sm-6 col-12">
                             <div class="form-group">
-                                <h6><strong>Tax Compliance Certificate:</strong>
+                                <h6><strong>Standard operating procedures (SOPs):</strong>
                                     </h6>
-                                    <p>Proof of adherence to national tax regulations.</p>
+                                    <p>Specific procedures followed for key engineering operations</p>
                                 <input name="taxComplianceDoc" type="file" class="form-control" required>
                             </div>
                         </div>
@@ -195,54 +215,48 @@
                                 <input name="proofOfAdherenceDoc" type="file" class="form-control" required>
                             </div>
                         </div>
-                        <div class="col-lg-6 col-sm-6 col-12">
+                        <!-- <div class="col-lg-6 col-sm-6 col-12">
                             <div class="form-group">
                                 <h6><strong>Certificate of Quality:</strong></h6>
                                 <p>Issued by a qualified and internationally recognized testing institution.</p>
                                 <input name="detailedProjectDoc" type="file" class="form-control" required>
                             </div>
-                        </div>
+                        </div> -->
+<!-- 
+                        <hr> -->
 
-                        <hr>
-
-                        <div class="col-lg-6 col-sm-6 col-12">
+                        <!-- <div class="col-lg-6 col-sm-6 col-12">
                             <div class="form-group">
                                 <h6><strong>Product Summary Report:</strong></h6>
                                 <p> Comprehensive summary of the product, including its features and specifications.</p>
                                 <input name="productSummaryDoc" type="file" class="form-control" required>
                             </div>
-                        </div>
-                        <div class="col-lg-6 col-sm-6 col-12">
+                        </div> -->
+                        <!-- <div class="col-lg-6 col-sm-6 col-12">
                             <div class="form-group">
                                 <h6><strong>Technical Specifications Overview:</strong></h6>
                                 <p>A brief overview of the technical specifications of the product.</p>
                                 <input name="techSpecOverviewDoc" type="file" class="form-control" required>
                             </div>
-                        </div>
+                        </div> -->
 
-                        <hr>
+                        <!-- <hr> -->
 
                         <div class="col-lg-6 col-sm-6 col-12">
                             <div class="form-group">
-                                <h6><strong>Commercial Invoice:</strong></h6>
-                                <p>Invoice for the initial 30% down payment.</p>
+                                <h6><strong>Invoice:</strong></h6>
+                                <p>Invoice is contracted</p>
                                 <input name="commercialInvoice" type="file" class="form-control" required>
                             </div>
                         </div>
-                        <div class="col-lg-6 col-sm-6 col-12">
+                        <!-- <div class="col-lg-6 col-sm-6 col-12">
                             <div class="form-group">
                                 <h6><strong>Instruments:</strong></h6>
                                 <p>Any required instruments related to the project</p>
                                 <input name="invoiceInstrumentDoc" type="file" class="form-control" required>
                             </div>
-                        </div>
-                        <div class="col-lg-6 col-sm-6 col-12">
-                            <div class="form-group">
-                                <h6><strong>Notice of award document:</strong></h6>
-                                <p>Only upload if project scope is public</p>
-                                <input name="noticeOfAwardDoc" type="file" class="form-control" >
-                            </div>
-                        </div>
+                        </div> -->
+                        
 
                         
 

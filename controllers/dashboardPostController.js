@@ -419,7 +419,8 @@ const submitLicenseAndCertification = async (req, res) => {
       companyName,
       membershipClass,
       country,
-      additionalInfo
+      additionalInfo,
+      subcontractor
     } = req.body;
 
 
@@ -429,12 +430,15 @@ const submitLicenseAndCertification = async (req, res) => {
       membershipClass,
       country,
       additionalInfo,
+      subcontractor,
+      licenseAndCertificationDoc:req.file.location,
       userId:req.user._id
-
     });
 
     await newCertificationAndLicense.save();
-    res.redirect("/dashboard/newApplication");
+    const successMessage = 'Certificate and License uploaded successfully';
+    res.redirect(`/dashboard/?message=${encodeURIComponent(base64Encode(successMessage))}`);
+
   } catch (error) {
     console.error("Error in license and certification submission:", error);
     res.status(500).send("An error occurred while processing your application.");

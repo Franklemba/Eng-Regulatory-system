@@ -22,11 +22,11 @@ const docsSchema = new mongoose.Schema({
     CFCdoc: { type: String, required: true },
     taxComplianceDoc: { type: String, required: true },
     proofOfAdherenceDoc: { type: String, required: true },
-    detailedProjectDoc: { type: String, required: true },
-    productSummaryDoc: { type: String, required: true },
-    techSpecOverviewDoc: { type: String, required: true },
+    detailedProjectDoc: { type: String, required: false },
+    productSummaryDoc: { type: String, required: false },
+    techSpecOverviewDoc: { type: String, required: false },
     commercialInvoice: { type: String, required: true },
-    invoiceInstrumentDoc: { type: String, required: true },
+    invoiceInstrumentDoc: { type: String, required: false },
     noticeOfAwardDoc: { type: String, required: false }
 });
 
