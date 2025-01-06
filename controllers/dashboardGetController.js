@@ -23,6 +23,8 @@ const getDashboard = async (req, res) => {
   // const totalComplianceDoc = await StatutoryCompliance.find()
   const totalComplianceDocs = await StatutoryCompliance.countDocuments({userId:req.user._id});
   const totalEngineeringProject = await EngineeringProject.countDocuments({userId:req.user._id});
+  const requestForReviewCount = await RequestForReview.findOne({userId:req.user._id})
+
      const message = req.query.message;
     res.render("home/dashboard/dashboard", {
       layout: "layouts/dashboardHeader.ejs",
@@ -32,7 +34,8 @@ const getDashboard = async (req, res) => {
           ? `${base64Decode(message)}`
           : null ,
       totalComplianceDocs,
-      totalEngineeringProject
+      totalEngineeringProject,
+      requestForReviewCount:`${requestForReviewCount.requestCount}`
     });
   };
   
@@ -270,7 +273,6 @@ const getDashboard = async (req, res) => {
 
 
 
-<<<<<<< HEAD
   const sendRequestForReviewEmail = async (req, res) => {
     try {
       // Find existing review request
@@ -318,7 +320,6 @@ const getDashboard = async (req, res) => {
     }
   };
 
-=======
   const getReport = async (req, res) => {
 
     res.render("home/dashboard/report", {
@@ -326,7 +327,6 @@ const getDashboard = async (req, res) => {
       user: req.user
     });
   };
->>>>>>> 88f5ebb238aede68449260133a92c5b6b92eaeb2
   
   module.exports = {
     getDashboard,
