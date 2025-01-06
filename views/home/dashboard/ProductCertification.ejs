@@ -485,5 +485,20 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         form.classList.add('was-validated');
     }, false);
+
+    const clearButton = document.getElementById('clearSignature');
+    clearButton.addEventListener('click', clearSignature);
+
+    function clearSignature() {
+        // Clear the entire canvas
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        // Reset the signature input value
+        signatureInput.value = '';
+        // Hide any error message if it's visible
+        const errorElement = document.getElementById('signature-error');
+        if (errorElement) {
+            errorElement.style.display = 'none';
+        }
+    }
 });
 </script>
