@@ -24,7 +24,7 @@ const getDashboard = async (req, res) => {
   const totalComplianceDocs = await StatutoryCompliance.countDocuments({userId:req.user._id});
   const totalEngineeringProject = await EngineeringProject.countDocuments({userId:req.user._id});
   const requestForReviewCount = await RequestForReview.findOne({userId:req.user._id})
-
+  
      const message = req.query.message;
     res.render("home/dashboard/dashboard", {
       layout: "layouts/dashboardHeader.ejs",
@@ -35,7 +35,7 @@ const getDashboard = async (req, res) => {
           : null ,
       totalComplianceDocs,
       totalEngineeringProject,
-      requestForReviewCount:`${requestForReviewCount.requestCount}`
+      requestForReviewCount:`${requestForReviewCount?.requestCount||0}`
     });
   };
   
