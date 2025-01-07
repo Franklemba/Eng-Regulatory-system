@@ -404,7 +404,7 @@ try{
 
   await structuralEnvironmentalLicence.save();
   console.log(structuralEnvironmentalLicence)
-  successMessage = ` ${projectName} uploaded successfully`;
+  successMessage = ` License certification uploaded successfully`;
 
   res.redirect(`/dashboard/structuralEnvironmentalLicenses?message=${encodeURIComponent(base64Encode(successMessage))}`);
 
@@ -422,6 +422,9 @@ const submitLicenseAndCertification = async (req, res) => {
       additionalInfo,
       subcontractor
     } = req.body;
+
+
+    console.log(req.file);
 
 
 

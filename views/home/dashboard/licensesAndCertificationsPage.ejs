@@ -12,7 +12,7 @@
         
                 <div class="card">
                     <div class="card-body">
-                        <form id="license-form" method="post" action="/dashboard/newLicenseAndCertification" >
+                        <form id="license-form" method="post" action="/dashboard/newLicenseAndCertification" enctype="multipart/form-data" >
                             <h5 class="mb-4">License Details</h5>
                             <div class="row">
                                 <!-- Company Name -->
@@ -291,8 +291,8 @@
                             <div class="col-md-12 image-upload">
                                 <label class="form-label fw-semibold">License</label>
                                 
-                                <input type="file" name="licenseAndCertificationDoc" class="form-control" required
-                                       accept=".pdf,.doc,.docx">
+                                <input type="file" name="licenseAndCertificationDoc" class="form-control" required>
+                                       
                                        
                                 <div class="invalid-feedback">
                                     License

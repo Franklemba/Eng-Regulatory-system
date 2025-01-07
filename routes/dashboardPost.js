@@ -68,7 +68,7 @@ router.post("/newPremiseLeasing",  upload.fields([
 
 
 router.post("/newAnnualDeclaration", dashboardPostController.submitAnnualDeclaration);
-router.post("/newLicenseAndCertification",  upload.fields([{ name: 'licenseAndCertificationDoc', maxCount: 1 }]),dashboardPostController.submitLicenseAndCertification
+router.post("/newLicenseAndCertification",  upload.single('licenseAndCertificationDoc'),dashboardPostController.submitLicenseAndCertification
   
 );
 
