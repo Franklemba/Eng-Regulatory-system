@@ -247,5 +247,36 @@
     }
     </script>
 
+    <script>
+	
+        const allowedFileTypes = [
+        'application/pdf',
+        'application/msword',
+        'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+        'application/vnd.ms-excel',
+        'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+        'application/vnd.oasis.opendocument.text',
+        'text/plain'
+        ];
+        
+        const maxFileSize = 10 * 1024 * 1024; // 10 MB
+        
+        document.querySelectorAll('input[type="file"]').forEach(fileInput => {
+        fileInput.addEventListener('change', event => {
+            const file = event.target.files[0];
+            if (file) {
+                if (!allowedFileTypes.includes(file.type)) {
+                    alert('Invalid file type. Only PDF and image files are allowed.');
+                    event.target.value = ''; // Clear the input
+                } else if (file.size > maxFileSize) {
+                    alert('File size exceeds the 10MB limit.');
+                    event.target.value = ''; // Clear the input
+                }
+            }
+        });
+        });
+        
+        </script>
+
 </body>
 </html>
