@@ -79,6 +79,7 @@ const getDashboard = async (req, res) => {
   };
   
   const getReviewProgressPage = async (req, res) => {
+
     res.render("home/dashboard/reviewProgress", {
       layout: "layouts/dashboardHeader.ejs",
       user: req.user,
@@ -87,10 +88,12 @@ const getDashboard = async (req, res) => {
   
   const getPremiseLeasingPage = async (req, res) => {
     const projects = await EngineeringProject.find({userId:req.user._id}).sort({ _id: -1 });
+          
     res.render("home/dashboard/premisesLeasing", {
       layout: "layouts/dashboardHeader.ejs",
       user: req.user,
       projects
+      
     });
   };
   
@@ -247,17 +250,21 @@ const getDashboard = async (req, res) => {
       user: req.user,
     });
   };
-
+     
   
-
   const getProjectApplicationProgress = async (req, res) => {
     const projects = await EngineeringProject.find({userId:req.user._id}).sort({ _id: -1 });
+     const message = req.query.message;
     res.render("home/dashboard/projectApplicationsProgress", {
       layout: "layouts/dashboardHeader.ejs",
       user: req.user,
-      projects
+      projects,
+      message: message !=  undefined
+          ? `${base64Decode(message)}`
+          : null ,
     });
   };
+
   const downloadFile = async (req, res) => {
     
   const filePath = req.params.filename;

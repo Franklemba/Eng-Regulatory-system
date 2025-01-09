@@ -17,15 +17,15 @@ const workerSchema = new mongoose.Schema({
 });
 
 const docsSchema = new mongoose.Schema({
-    CFEdoc: { type: String, required: true },
-    pastExperienceRefDoc: { type: String, required: true },
-    CFCdoc: { type: String, required: true },
-    taxComplianceDoc: { type: String, required: true },
-    proofOfAdherenceDoc: { type: String, required: true },
+    CFEdoc: { type: String, required: false },
+    pastExperienceRefDoc: { type: String, required: false },
+    CFCdoc: { type: String, required: false },
+    taxComplianceDoc: { type: String, required: false },
+    proofOfAdherenceDoc: { type: String, required: false },
     detailedProjectDoc: { type: String, required: false },
     productSummaryDoc: { type: String, required: false },
     techSpecOverviewDoc: { type: String, required: false },
-    commercialInvoice: { type: String, required: true },
+    commercialInvoice: { type: String, required: false },
     invoiceInstrumentDoc: { type: String, required: false },
     noticeOfAwardDoc: { type: String, required: false }
 });

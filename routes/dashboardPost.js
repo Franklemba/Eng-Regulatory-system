@@ -58,6 +58,9 @@ router.post("/newProject", upload.fields([
   { name: 'noticeOfAwardDoc', maxCount: 1 }
 ]),dashboardPostController.submitProject);
 
+router.post("/uploadProjectDoc/:uploadSingleDoc", upload.single('uploadSingleDoc'),dashboardPostController.submitSingleDocForProject);
+
+
 router.post("/newPremiseLeasing",  upload.fields([
   { name: 'leaseAgreement', maxCount: 1 },
   { name: 'zoningApproval', maxCount: 1 },

@@ -1,6 +1,10 @@
 <div class="page-wrapper py-5">
     <div class="container">
         <h1 class="text-center mb-5 ">Application Progress</h1>
+
+
+
+        <%- include(`../../partials/notification`) %>
         <div class="row g-4">
             <% projects.forEach((app, index) => { %>
                 <div class="col-12">
@@ -45,96 +49,130 @@
                                 <h6 class="text-secondary">Attached Files</h6>
                                 <ul class="list-unstyled">
                                     <li>
-                                        <a href="<%= app.documents.CFEdoc %>" download class="btn btn-link p-0 text-primary">
-                                            <button class="btn btn-sm text-white btn-primary">
-                                                Company Legal Documents (CFE)
-                                            </button>
-                                           
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="<%= app.documents.pastExperienceRefDoc %>" download class="btn btn-link p-0 text-primary">
-                                            <button class="btn btn-sm text-white btn-primary">
-                                    Past Experience References
-                                            </button>
-                                           
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="<%= app.documents.CFCdoc %>" download class="btn btn-link p-0 text-primary">
-                                            <button class="btn btn-sm text-white btn-primary">
-                                    Audited Financial Statements (CFC)
-                                            </button>
-                                           
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="<%= app.documents.taxComplianceDoc %>" download class="btn btn-link p-0 text-primary">
-                                            <button class="btn btn-sm text-white btn-primary">
-                                    Tax Compliance Certificate
-                                            </button>
-                                           
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="<%= app.documents.proofOfAdherenceDoc %>" download class="btn btn-link p-0 text-primary">
-                                            <button class="btn btn-sm text-white btn-primary">
-                                    Projected Price Structure and Delivery Schedule
-                                            </button>
-                                           
-                                        </a>
-                                    </li>
-                                    <!-- <li>
-                                        <a href="<%= app.documents.detailedProjectDoc %>" download class="btn btn-link p-0 text-primary">
-                                            <button class="btn btn-sm text-white btn-primary">
-                                    Certificate of Quality
-                                            </button>
-                                           
-                                        </a>
-                                    </li> -->
-                                    <!-- <li>
-                                        <a href="<%= app.documents.productSummaryDoc %>" download class="btn btn-link p-0 text-primary">
-                                            <button class="btn btn-sm text-white btn-primary">
-                                    Product Summary Report
-                                            </button>
-                                           
-                                        </a>
-                                    </li> -->
-                                    <!-- <li>
-                                        <a href="<%= app.documents.techSpecOverviewDoc %>" download class="btn btn-link p-0 text-primary">
-                                            <button class="btn btn-sm text-white btn-primary">
-                                    Technical Specifications Overview
-                                            </button>
-                                           
-                                        </a>
-                                    </li> -->
-                                    <li>
-                                        <a href="<%= app.documents.commercialInvoice %>" download class="btn btn-link p-0 text-primary">
-                                            <button class="btn btn-sm text-white btn-primary">
-                                    Commercial Invoice
-                                            </button>
-                                           
-                                        </a>
-                                    </li>
-                                    <!-- <li>
-                                        <a href="<%= app.documents.invoiceInstrumentDoc %>" download class="btn btn-link p-0 text-primary">
-                                            <button class="btn btn-sm text-white btn-primary">
-                                    Instruments
-                                            </button>
-                                           
-                                        </a>
-                                    </li> -->
-                                    <li>
-                                        <a href="<%= app.documents.noticeOfAwardDoc %>" download class="btn btn-link p-0 text-primary">
-                                            <button class="btn btn-sm text-white btn-primary">
-                                    Notice of Award Document
-                                            </button>
-                                           
-                                        </a>
-                                    </li>
+                                        <% if (app.documents.CFEdoc) { %>
+                                            <a href="<%= app.documents.CFEdoc %>" download class="btn btn-link p-0 text-primary">
+                                                <button class="btn btn-sm text-white btn-primary">
+                                                    Company Legal Documents (CFE)
+                                                </button>
+                                            </a>
+                                        <% } else { %>
+                                            <form method="POST" action="/dashboard/uploadProjectDoc/CFEdoc" enctype="multipart/form-data">
+                                                <label for="uploadCFEdoc" class="btn btn-rounded btn-outline-danger">
+                                                    Upload Company Legal Documents (CFE)
+                                                </label>
 
-                                   
+                                                <input type="text" name="userId" hidden value="<%=app._id %>" id="">
+                                                <input type="file" id="uploadCFEdoc" name="uploadSingleDoc" style="display: none;" onchange="this.form.submit()" />
+                                            </form>
+                                        <% } %>
+                                    </li>
+                                    <li>
+                                        <% if (app.documents.pastExperienceRefDoc) { %>
+                                            <a href="<%= app.documents.pastExperienceRefDoc %>" download class="btn btn-link p-0 text-primary">
+                                                <button class="btn btn-sm text-white btn-primary">
+                                                    Past Experience References
+                                                </button>
+                                                
+                                            </a>
+                                        <% } else { %>
+                                            <form method="POST" action="/dashboard/uploadProjectDoc/pastExperienceRefDoc" enctype="multipart/form-data">
+                                                <label for="uploadPastExperience" class="btn btn-rounded btn-outline-danger">
+                                                    Upload Past Experience References
+                                                    <i class="ion-alert-circled"></i>
+                                                </label>
+                                                <input type="text" name="userId" hidden value="<%=app._id %>" id="">
+                                                <input type="file" id="uploadPastExperience" name="uploadSingleDoc" style="display: none;" onchange="this.form.submit()" />
+                                            </form>
+                                        <% } %>
+                                    </li>
+                                    <li>
+                                        <% if (app.documents.CFCdoc) { %>
+                                            <a href="<%= app.documents.CFCdoc %>" download class="btn btn-link p-0 text-primary">
+                                                <button class="btn btn-sm text-white btn-primary">
+                                                    Audited Financial Statements (CFC)
+                                                </button>
+                                            </a>
+                                        <% } else { %>
+                                            <form method="POST" action="/dashboard/uploadProjectDoc/CFCdoc" enctype="multipart/form-data">
+                                                <label for="uploadCFCdoc" class="btn btn-rounded btn-outline-danger">
+                                                    Upload Audited Financial Statements (CFC)
+                                                </label>
+                                                <input type="text" name="userId" hidden value="<%=app._id %>" id="">
+                                                <input type="file" id="uploadCFCdoc" name="uploadSingleDoc" style="display: none;" onchange="this.form.submit()" />
+                                            </form>
+                                        <% } %>
+                                    </li>
+                                    <li>
+                                        <% if (app.documents.taxComplianceDoc) { %>
+                                            <a href="<%= app.documents.taxComplianceDoc %>" download class="btn btn-link p-0 text-primary">
+                                                <button class="btn btn-sm text-white btn-primary">
+                                                    Tax Compliance Certificate
+                                                </button>
+                                            </a>
+                                        <% } else { %>
+                                            <form method="POST" action="/dashboard/uploadProjectDoc/taxComplianceDoc" enctype="multipart/form-data">
+                                                <label for="uploadTaxCompliance" class="btn btn-rounded btn-outline-danger">
+                                                    Upload Tax Compliance Certificate
+                                                </label>
+                                                <input type="text" name="userId" hidden value="<%=app._id %>" id="">
+                                                <input type="file" id="uploadTaxCompliance" name="uploadSingleDoc" style="display: none;" onchange="this.form.submit()" />
+                                            </form>
+                                        <% } %>
+                                    </li>
+                                    <li>
+                                        <% if (app.documents.proofOfAdherenceDoc) { %>
+                                            <a href="<%= app.documents.proofOfAdherenceDoc %>" download class="btn btn-link p-0 text-primary">
+                                                <button class="btn btn-sm text-white btn-primary">
+                                                    Projected Price Structure and Delivery Schedule
+                                                </button>
+                                            </a>
+                                        <% } else { %>
+                                            <form method="POST" action="/dashboard/uploadProjectDoc/proofOfAdherenceDoc" enctype="multipart/form-data">
+                                                <label for="uploadProofOfAdherence" class="btn btn-rounded btn-outline-danger">
+                                                    Upload Projected Price Structure and Delivery Schedule
+                                                </label>
+                                                <input type="text" name="userId" hidden value="<%=app._id %>" id="">
+                                                <input type="file" id="uploadProofOfAdherence" name="uploadSingleDoc" style="display: none;" onchange="this.form.submit()" />
+                                            </form>
+                                        <% } %>
+                                    </li>
+                                    <li>
+                                        <% if (app.documents.commercialInvoice) { %>
+                                            <a href="<%= app.documents.commercialInvoice %>" download class="btn btn-link p-0 text-primary">
+                                                <button class="btn btn-sm text-white btn-primary">
+                                                    Commercial Invoice
+                                                </button>
+                                            </a>
+                                        <% } else { %>
+                                            <form method="POST" action="/dashboard/uploadProjectDoc/commercialInvoice" enctype="multipart/form-data">
+                                                <label for="uploadCommercialInvoice" class="btn btn-rounded btn-outline-danger">
+                                                    Upload Commercial Invoice
+                                                    
+                                                </label>
+                                                <input type="text" name="userId" hidden value="<%=app._id %>" id="">
+                                                <input type="file" id="uploadCommercialInvoice" name="uploadSingleDoc" style="display: none;" onchange="this.form.submit()" />
+                                            </form>
+                                        <% } %>
+                                    </li>
+                                    <li>
+                                        <% if (app.documents.noticeOfAwardDoc) { %>
+                                            <a href="<%= app.documents.noticeOfAwardDoc %>" download class="btn btn-link p-0 text-primary">
+                                                <button class="btn btn-sm text-white btn-primary">
+                                                    Notice of Award Document
+                                                </button>
+                                            </a>
+                                        <% } else { %>
+                                            <form method="POST" action="/dashboard/uploadProjectDoc/noticeOfAwardDoc" enctype="multipart/form-data">
+                                                <label for="uploadNoticeOfAward" class="btn btn-rounded btn-outline-danger">
+                                                    Upload Notice of Award Document
+                                                </label>
+                                                <input type="text" name="userId" hidden value="<%=app._id %>" id="">
+                                                <input type="file" id="uploadNoticeOfAward" name="uploadSingleDoc" style="display: none;" onchange="this.form.submit()" />
+                                            </form>
+                                        <% } %>
+                                    </li>
                                 </ul>
+                                
                              
                             </div>
                         </div>

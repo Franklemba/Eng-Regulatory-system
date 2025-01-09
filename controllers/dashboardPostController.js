@@ -103,7 +103,7 @@ const submitProject = async (req, res) => {
       objectives,
       locations,
       workers
-    } = req.body;
+  } = req.body;
 
     console.log("Received Data:", req.body);
 
@@ -154,6 +154,50 @@ const submitProject = async (req, res) => {
   }
 };
 
+const submitSingleDocForProject = async (req,res) => {
+   const docName = req.params.uploadSingleDoc;
+  //  const updatedDocName = "documents." +docName;
+  console.log(docName);
+  
+  const projectId = req.body.userId; // Replace with the actual project ID
+
+  try {
+    
+
+    const updateData = {
+      [`documents.${docName}`]: req.file.location,
+        status: "In Progress", 
+    };
+    
+    console.log(updateData);
+    
+    EngineeringProject.findByIdAndUpdate(
+        projectId,
+        { $set: updateData },
+        { new: true } // Return the updated document
+
+    ).then(updatedProject => {
+        console.log("Updated Project:", updatedProject);
+    }).catch(error => {
+        console.error("Error updating project:", error);
+    });
+
+    const successMessage = ` ${docName} uploaded successfully`;
+  
+   res.redirect(`/dashboard/projectApplicationProgress?message=${encodeURIComponent(base64Encode(successMessage))}`);
+    
+  } catch (error) {
+
+    console.log(error);
+    res.send(error.message)
+    
+  }
+
+
+   
+
+
+};
 
 
 const submitPremiseLeasing = async (req, res) => {
@@ -502,12 +546,13 @@ const submitAssessment = async (req, res) => console.log(req.body);
 module.exports = {
   submitApplication,
   submitProject,
+  submitSingleDocForProject,
   submitPremiseLeasing,
   submitAnnualDeclaration,
   submitProductCertificationApplication,
   submitBusinessClosure,
   submitStructuralEnvironmentalLicense,
-submitLicenseAndCertification,
+  submitLicenseAndCertification,
   statutoryCompliance,
   submitAssessment,
 };
