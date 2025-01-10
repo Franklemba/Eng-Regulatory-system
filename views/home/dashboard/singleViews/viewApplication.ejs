@@ -68,7 +68,7 @@
             <!-- Documents Card -->
             <div class="col-lg-6">
                 <div class="card">
-                    <div class="card-header">
+                <div class="card-header">
                         <h5 class="card-title">Uploaded Documents</h5>
                     </div>
                     <div class="card-body">
@@ -84,6 +84,15 @@
                                         <i class="fas fa-download"></i>
                                     </span>
                                 </a>
+                                <% } else { %>
+                                    <form method="POST" action="/dashboard/uploadApplicationDoc/designCalculations" enctype="multipart/form-data">
+                                        <label for="uploadCFEdoc" class="btn btn-rounded btn-outline-danger">
+                                            Upload Design Calculations
+                                        </label>
+
+                                        <input type="text" name="userId" hidden value="<%=application._id %>" >
+                                        <input type="file" id="" name="uploadSingleDoc" style="display: none;" onchange="this.form.submit()" />
+                                    </form>
                             <% } %>
 
                             <% if (application.engineeringDrawings && application.engineeringDrawings.length > 0) { %>
@@ -106,6 +115,15 @@
                                         <% }); %>
                                     </div>
                                 </div>
+                                <% } else { %>
+                                    <form method="POST" action="/dashboard/uploadApplicationDoc/engineeringDrawings" enctype="multipart/form-data">
+                                        <label for="uploadCFEdoc" class="btn btn-rounded btn-outline-danger">
+                                            Engineering Drawings
+                                        </label>
+
+                                        <input type="text" name="userId" hidden value="<%=application._id %>" >
+                                        <input type="file" id="" name="uploadSingleDoc" style="display: none;" onchange="this.form.submit()" multiple />
+                                    </form>
                             <% } %>
 
                             <% const documents = [

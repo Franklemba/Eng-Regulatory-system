@@ -63,14 +63,17 @@ const getDashboard = async (req, res) => {
       try {
           // Fetch submitted applications from the database and sort them
           const submittedApplications = await EngineeringLicense.find({userId:req.user._id}).sort({ _id: -1 });
-  
+           const message = req.query.message;
           // Process document paths for each application
       
           // Render the EJS view with the processed applications
           res.render("home/dashboard/submittedApplication", {
               layout: "layouts/dashboardHeader.ejs",
               user: req.user, // Pass the authenticated user data
-              submittedApplications
+              submittedApplications,
+              message: message !=  undefined
+          ? `${base64Decode(message)}`
+          : null ,
           });
       } catch (err) {
           console.error("Error fetching submitted applications:", err.message);

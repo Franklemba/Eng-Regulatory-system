@@ -7,6 +7,8 @@
             </div>
         </div>
 
+        <%- include(`../../partials/notification`) %>
+
         <div class="card">
             <div class="card-body">
                 <div class="table-responsive">
@@ -26,7 +28,11 @@
                         </thead>
                         <tbody id="applications-table-body">
                             <% submittedApplications.forEach((application) => { %>
+
+                                <%=application._id %>
+
                                 <tr>
+                                
                                     <td><%= application.zebraClientId %></td>
                                     <td><%= application.leadEngineer %></td>
                                     <td>
@@ -50,6 +56,15 @@
                                                    class="btn btn-sm btn-primary text-white btn-info mb-1">
                                                    Design Calculations
                                                 </a>
+                                                <% } else { %>
+                                                    <form method="POST" action="/dashboard/uploadApplicationDoc/designCalculations" enctype="multipart/form-data">
+                                                        <label for="uploadCFEdoc" class="btn btn-rounded btn-outline-danger">
+                                                            Upload Design Calculations
+                                                        </label>
+                                                        <input type="file" id="" name="uploadSingleDoc" onchange="this.form.submit()" />
+        
+                                                        <input type="text" name="userId" hidden value="<%=application._id %>" >
+                                                    </form>
                                             <% } %>
                                             
                                             <% if (application.engineeringDrawings && application.engineeringDrawings.length > 0) { %>
@@ -67,13 +82,33 @@
                                                         <% }); %>
                                                     </ul>
                                                 </div>
+                                                <% } else { %>
+                                                    <form method="POST" action="/dashboard/uploadApplicationDoc/engineeringDrawings" enctype="multipart/form-data">
+                                                        <label for="uploadCFEdoc" class="btn btn-rounded btn-outline-danger">
+                                                            Upload Engineering Drawings
+                                                        </label>
+        
+                                                        <input type="text" name="userId" hidden value="<%=application._id %>" >
+                                                        <input type="file" id="" name="uploadSingleDoc" onchange="this.form.submit()" multiple />
+                                                    </form>
                                             <% } %>
+                                                
 
                                             <% if (application.feasibilityStudy) { %>
                                                 <a href="<%= application.feasibilityStudy %>" 
                                                    class="btn btn-sm btn-primary text-white mb-1">
                                                    Feasibility Study
                                                 </a>
+
+                                                <% } else { %>
+                                                    <form method="POST" action="/dashboard/uploadApplicationDoc/feasibilityStudy" enctype="multipart/form-data">
+                                                        <label for="uploadCFEdoc" class="btn btn-rounded btn-outline-danger">
+                                                            Upload Feasibility Study
+                                                        </label>
+                                                        <input type="file" id="" name="uploadSingleDoc" onchange="this.form.submit()" />
+        
+                                                        <input type="text" name="userId" hidden value="<%=application._id %>" >
+                                                    </form>
                                             <% } %>
 
                                             <% if (application.boqDocument) { %>
@@ -81,6 +116,15 @@
                                                    class="btn btn-sm btn-primary text-white mb-1">
                                                    BOQ Document
                                                 </a>
+                                                <% } else { %>
+                                                    <form method="POST" action="/dashboard/uploadApplicationDoc/boqDocument" enctype="multipart/form-data">
+                                                        <label for="uploadCFEdoc" class="btn btn-rounded btn-outline-danger">
+                                                            Upload BOQ Document
+                                                        </label>
+                                                        <input type="file" id="" name="uploadSingleDoc" onchange="this.form.submit()" />
+        
+                                                        <input type="text" name="userId" hidden value="<%=application._id %>" >
+                                                    </form>
                                             <% } %>
 
                                             <% if (application.qaqcPlan) { %>
@@ -88,16 +132,26 @@
                                                    class="btn btn-sm btn-primary text-white mb-1">
                                                    QA/QC Plan
                                                 </a>
+                                                <% } else { %>
+                                                    <form method="POST" action="/dashboard/uploadApplicationDoc/qaqcPlan" enctype="multipart/form-data">
+                                                        <label for="uploadCFEdoc" class="btn btn-rounded btn-outline-danger">
+                                                            Upload QA/QC Plan
+                                                        </label>
+                                                        <input type="file" id="" name="uploadSingleDoc" onchange="this.form.submit()" />
+        
+                                                        <input type="text" name="userId" hidden value="<%=application._id %>" >
+                                                    </form>
                                             <% } %>
                                         </div>
+
+
+
+
                                     </td>
+
                                     <td>
-                                        <% const statusColors = {
-                                            'Pending': 'bg-warning text-dark',
-                                            'Under Review': 'bg-info text-white',
-                                            'Approved': 'bg-success',
-                                            'Rejected': 'bg-danger'
-                                        } %>
+                                        <% const statusColors = {'Pending': 'bg-warning text-dark','Under Review': 'bg-info text-white','Approved': 'bg-success', 'Rejected': 'bg-danger'} %>
+
                                         <span class="badge <%= statusColors[application.status] || 'bg-secondary' %>">
                                             <%= application.status || 'Pending' %>
                                         </span>
@@ -118,7 +172,10 @@
                                         </div>
                                     </td>
                                 </tr>
-                            <% }); %>
+
+
+                            <% })%>
+                            
                         </tbody>
                     </table>
                 </div>

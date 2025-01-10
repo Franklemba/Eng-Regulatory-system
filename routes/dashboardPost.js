@@ -43,6 +43,12 @@ router.post("/newApplication",
     { name: 'qaqcPlan', maxCount: 1 }
   ]),
 dashboardPostController.submitApplication);
+
+router.post("/uploadApplicationDoc/:uploadSingleDoc",upload.single('uploadSingleDoc'),
+dashboardPostController.submitSingleDocForApplication);
+
+
+
 // router.post("/newApplication",dashboardPostController.submitApplication);
 router.post("/newProject", upload.fields([
   { name: 'CFEdoc', maxCount: 1 },

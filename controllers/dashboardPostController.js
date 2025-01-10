@@ -91,6 +91,46 @@ console.log(req.files)
   }
 };
 
+const submitSingleDocForApplication = async (req,res) =>{
+  
+  const docName = req.params.uploadSingleDoc;
+  const projectId = req.body.userId; // Replace with the actual project ID
+  console.log(docName);
+  console.log(projectId);
+  
+
+  try {
+    
+
+    const updateData = {
+      [`${docName}`]: req.file.location, 
+    };
+    
+    console.log(updateData);
+    
+    EngineeringLicense.findByIdAndUpdate(
+        projectId,
+        { $set: updateData },
+        { new: true } // Return the updated document
+
+    ).then(updatedProject => {
+        console.log("Updated Project:", updatedProject);
+    }).catch(error => {
+        console.error("Error updating project:", error);
+    });
+
+    const successMessage = ` ${docName} uploaded successfully`;
+  
+   res.redirect(`/dashboard/submittedApplication?message=${encodeURIComponent(base64Encode(successMessage))}`);
+    
+  } catch (error) {
+
+    console.log(error);
+    res.send(error.message)
+    
+  }
+}
+
 const submitProject = async (req, res) => {
   try {
     const {
@@ -163,7 +203,6 @@ const submitSingleDocForProject = async (req,res) => {
 
   try {
     
-
     const updateData = {
       [`documents.${docName}`]: req.file.location,
         status: "In Progress", 
@@ -545,6 +584,7 @@ const submitAssessment = async (req, res) => console.log(req.body);
 
 module.exports = {
   submitApplication,
+  submitSingleDocForApplication,
   submitProject,
   submitSingleDocForProject,
   submitPremiseLeasing,

@@ -26,11 +26,11 @@ const engineeringApplicationSchema = new mongoose.Schema({
   },
   designCalculations: {
     type: String,  // File path/URL
-    required: true
+    required: false
   },
   engineeringDrawings: [{
     type: String,  // Array of file paths/URLs
-    required: true
+    required: false
   }],
   leadEngineer: {
     type: String,
@@ -51,15 +51,15 @@ const engineeringApplicationSchema = new mongoose.Schema({
   teamMembers: [teamMemberSchema],
   feasibilityStudy: {
     type: String,  // File path/URL
-    required: true
+    required: false
   },
   boqDocument: {
     type: String,  // File path/URL
-    required: true
+    required: false
   },
   qaqcPlan: {
     type: String,  // File path/URL
-    required: true
+    required: false
   },
   createdAt: {
     type: Date,
