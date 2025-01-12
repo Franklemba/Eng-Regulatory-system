@@ -1,14 +1,17 @@
 const mongoose = require('mongoose');
 
+
 const statutoryComplianceSchema = new mongoose.Schema({
   userId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
-    required: true
+    required: true,
+    unique:false
   },
   userEmail: {
     type: String,
-    required: true
+    required: true,
+    unique:false
   },
   zppaDocument: {
     type: String,
@@ -42,6 +45,7 @@ const statutoryComplianceSchema = new mongoose.Schema({
     default: Date.now
   }
 });
+
 
 const StatutoryCompliance = mongoose.model('StatutoryCompliance', statutoryComplianceSchema);
 module.exports = StatutoryCompliance;
