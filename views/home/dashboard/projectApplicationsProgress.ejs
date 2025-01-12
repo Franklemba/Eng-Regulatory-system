@@ -52,13 +52,13 @@
                                         <% if (app.documents.CFEdoc) { %>
                                             <a href="<%= app.documents.CFEdoc %>" download class="btn btn-link p-0 text-primary">
                                                 <button class="btn btn-sm text-white btn-primary">
-                                                    Company Legal Documents (CFE)
+                                                    Corporate File (CF)
                                                 </button>
                                             </a>
                                         <% } else { %>
                                             <form method="POST" action="/dashboard/uploadProjectDoc/CFEdoc" enctype="multipart/form-data">
                                                 <label for="uploadCFEdoc" class="btn btn-rounded btn-outline-danger">
-                                                    Upload Company Legal Documents (CFE)
+                                                    Upload Corporate File (CF)
                                                 </label>
 
                                                 <input type="text" name="userId" hidden value="<%=app._id %>" id="">
@@ -70,14 +70,14 @@
                                         <% if (app.documents.pastExperienceRefDoc) { %>
                                             <a href="<%= app.documents.pastExperienceRefDoc %>" download class="btn btn-link p-0 text-primary">
                                                 <button class="btn btn-sm text-white btn-primary">
-                                                    Past Experience References
+                                                    Risk Management Plan
                                                 </button>
                                                 
                                             </a>
                                         <% } else { %>
                                             <form method="POST" action="/dashboard/uploadProjectDoc/pastExperienceRefDoc" enctype="multipart/form-data">
                                                 <label for="uploadPastExperience" class="btn btn-rounded btn-outline-danger">
-                                                    Upload Past Experience References
+                                                    Upload Risk Management Plan
                                                     <i class="ion-alert-circled"></i>
                                                 </label>
                                                 <input type="text" name="userId" hidden value="<%=app._id %>" id="">
@@ -89,13 +89,13 @@
                                         <% if (app.documents.CFCdoc) { %>
                                             <a href="<%= app.documents.CFCdoc %>" download class="btn btn-link p-0 text-primary">
                                                 <button class="btn btn-sm text-white btn-primary">
-                                                    Audited Financial Statements (CFC)
+                                                    Audited Financial Statements
                                                 </button>
                                             </a>
                                         <% } else { %>
                                             <form method="POST" action="/dashboard/uploadProjectDoc/CFCdoc" enctype="multipart/form-data">
                                                 <label for="uploadCFCdoc" class="btn btn-rounded btn-outline-danger">
-                                                    Upload Audited Financial Statements (CFC)
+                                                    Upload Audited Financial Statements
                                                 </label>
                                                 <input type="text" name="userId" hidden value="<%=app._id %>" id="">
                                                 <input type="file" id="uploadCFCdoc" name="uploadSingleDoc" style="display: none;" onchange="this.form.submit()" />
@@ -140,13 +140,13 @@
                                         <% if (app.documents.commercialInvoice) { %>
                                             <a href="<%= app.documents.commercialInvoice %>" download class="btn btn-link p-0 text-primary">
                                                 <button class="btn btn-sm text-white btn-primary">
-                                                    Commercial Invoice
+                                                    Invoice
                                                 </button>
                                             </a>
                                         <% } else { %>
                                             <form method="POST" action="/dashboard/uploadProjectDoc/commercialInvoice" enctype="multipart/form-data">
                                                 <label for="uploadCommercialInvoice" class="btn btn-rounded btn-outline-danger">
-                                                    Upload Commercial Invoice
+                                                    Upload Invoice
                                                     
                                                 </label>
                                                 <input type="text" name="userId" hidden value="<%=app._id %>" id="">
