@@ -6,13 +6,8 @@ const statutoryComplianceSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
     required: true,
-    unique:false
   },
-  userEmail: {
-    type: String,
-    required: true,
-    unique:false
-  },
+ 
   zppaDocument: {
     type: String,
     required: false
