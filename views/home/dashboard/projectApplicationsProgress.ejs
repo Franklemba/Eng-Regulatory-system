@@ -106,13 +106,13 @@
                                         <% if (app.documents.taxComplianceDoc) { %>
                                             <a href="<%= app.documents.taxComplianceDoc %>" download class="btn btn-link p-0 text-primary">
                                                 <button class="btn btn-sm text-white btn-primary">
-                                                    Tax Compliance Certificate
+                                                    Standard operating procedures (SOPs)
                                                 </button>
                                             </a>
                                         <% } else { %>
                                             <form method="POST" action="/dashboard/uploadProjectDoc/taxComplianceDoc" enctype="multipart/form-data">
                                                 <label for="uploadTaxCompliance" class="btn btn-rounded btn-outline-danger">
-                                                    Upload Tax Compliance Certificate
+                                                    Upload Standard operating procedures (SOPs)
                                                 </label>
                                                 <input type="text" name="userId" hidden value="<%=app._id %>" id="">
                                                 <input type="file" id="uploadTaxCompliance" name="uploadSingleDoc" style="display: none;" onchange="this.form.submit()" />
