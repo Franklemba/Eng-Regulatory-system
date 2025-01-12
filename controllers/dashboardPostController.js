@@ -223,7 +223,7 @@ const submitSingleDocForProject = async (req,res) => {
 
     const successMessage = ` ${docName} uploaded successfully`;
   
-   res.redirect(`/dashboard/projectApplicationProgress?message=${encodeURIComponent(base64Encode(successMessage))}`);
+   res.redirect(`/dashboard/reviewCompliance?message=${encodeURIComponent(base64Encode(successMessage))}`);
     
   } catch (error) {
 
@@ -536,36 +536,42 @@ const statutoryCompliance = async (req, res) => {
   try {
     const user = req.user;
     
-    if (!req.files) {
-      return res.status(400).json({ error: 'No files uploaded' });
-    }
+    // if (!req.files) {
+    //   return res.status(400).json({ error: 'No files uploaded' });
+    // }
 
-    // Verify all required files are present
-    const requiredFiles = ['zppaDocument', 'pacraDocument', 'taxDocument', 
-                          'workersCompensation', 'energyRegulation', 'nhimaDocument'];
+    // // Verify all required files are present
+    // const requiredFiles = ['zppaDocument', 'pacraDocument', 'taxDocument', 
+    //                       'workersCompensation', 'energyRegulation', 'nhimaDocument'];
     
-    for (const field of requiredFiles) {
-      if (!req.files[field]) {
-        return res.status(400).json({ error: `Missing required document: ${field}` });
-      }
-    }
+    // for (const field of requiredFiles) {
+    //   if (!req.files[field]) {
+    //     return res.status(400).json({ error: `Missing required document: ${field}` });
+    //   }
+    // }
+
+    const zppaDocument = req.files.zppaDocument?.[0]?.location || '' ;
+    const pacraDocument = req.files.pacraDocument?.[0]?.location || '';
+    const taxDocument = req.files.taxDocument?.[0]?.location || '';
+    const workersCompensation = req.files.workersCompensation?.[0]?.location || '';
+    const energyRegulation = req.files.energyRegulation?.[0]?.location || '';
+    const nhimaDocument = req.files.nhimaDocument?.[0]?.location || '';
 
     // Create document object with required fields
     const documentData = {
       userId: req.user._id,
       userEmail: user.email,
-      zppaDocument: req.files.zppaDocument[0].location,
-      pacraDocument: req.files.pacraDocument[0].location,
-      taxDocument: req.files.taxDocument[0].location,
-      workersCompensation: req.files.workersCompensation[0].location,
-      energyRegulation: req.files.energyRegulation[0].location,
-      nhimaDocument: req.files.nhimaDocument[0].location
+      zppaDocument,
+      pacraDocument,
+      taxDocument,
+      workersCompensation,
+      energyRegulation,
+      nhimaDocument
     };
 
+    documentData.otherDocuments = req.files.otherDocuments?.map(file => file.location) || [];
     // Add other documents if present
-    if (req.files.otherDocuments) {
-      documentData.otherDocuments = req.files.otherDocuments.map(file => file.location);
-    }
+    
 
     const statutoryComplianceDoc = new StatutoryCompliance(documentData);
     await statutoryComplianceDoc.save();
@@ -580,6 +586,41 @@ const statutoryCompliance = async (req, res) => {
 };
 
 const submitSingleDocForCompliance = async (req, res) => {
+  const docName = req.params.uploadSingleDoc;
+  //  const updatedDocName = "documents." +docName;
+  console.log(docName);
+  
+  const projectId = req.body.userId; // Replace with the actual project ID
+
+  try {
+    
+    const updateData = {
+      [`${docName}`]: req.file.location
+    };
+    
+    console.log(updateData);
+    
+    StatutoryCompliance.findByIdAndUpdate(
+        projectId,
+        { $set: updateData },
+        { new: true } // Return the updated document
+
+    ).then(updatedProject => {
+        console.log("Updated Project:", updatedProject);
+    }).catch(error => {
+        console.error("Error updating project:", error);
+    });
+
+    const successMessage = ` ${docName} uploaded successfully`;
+  
+   res.redirect(`/dashboard/reviewCompliance?message=${encodeURIComponent(base64Encode(successMessage))}`);
+    
+  } catch (error) {
+
+    console.log(error);
+    res.send(error.message)
+    
+  }
 
 }
 

@@ -224,16 +224,16 @@ const getDashboard = async (req, res) => {
 
 
   const getStatutoryComplianceStatus =  async (req, res) => {
-    // const message = req.query.message;
+    const message = req.query.message;
 
     const statutoryComplianceDocs = await StatutoryCompliance.find({userId:req.user._id}).sort({ _id: -1 })
 
     
     res.render("home/dashboard/statutoryComplianceStatus", {
       layout: "layouts/dashboardHeader.ejs",
-      // message: message !=  undefined
-      //       ? `${base64Decode(message)}`
-      //       : null ,
+      message: message !=  undefined
+            ? `${base64Decode(message)}`
+            : null ,
       user: req.user,
       statutoryComplianceDocs
     });
