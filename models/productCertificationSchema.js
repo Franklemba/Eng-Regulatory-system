@@ -43,19 +43,19 @@ const productCertificationSchema = new mongoose.Schema({
     // Attachments (storing file paths)
     productDatasheet: {
         type: String,  // Path to uploaded file
-        required: true
+        required: false
     },
     standardCertifications: {
         type: String,  // Path to uploaded file
-        required: true
+        required: false
     },
     manufacturerAuthorization: {
         type: String,  // Path to uploaded file
-        required: true
+        required: false
     },
     billOfQuantities: {
         type: String,  // Path to uploaded file
-        required: true
+        required: false
     },
     
     // Declaration and Consent

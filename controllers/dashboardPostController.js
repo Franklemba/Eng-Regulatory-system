@@ -361,9 +361,7 @@ const submitProductCertificationApplication = async (req, res) => {
     } = req.body;
 
     // Validate required files
-    if (!req.files || !req.files['productDatasheet'] || !req.files['standardCertifications'] || !req.files['manufacturerAuthorization']) {
-      throw new Error('Missing required files');
-    }
+    
 
     const productCertificationApplication = new ProductCertificationSchema({
       productName,
@@ -379,10 +377,10 @@ const submitProductCertificationApplication = async (req, res) => {
       declaration: declaration === 'on' || declaration === true,
       signature,
       // File paths
-      productDatasheet: req.files['productDatasheet'][0].location,
-      standardCertifications: req.files['standardCertifications'][0].location,
-      manufacturerAuthorization: req.files['manufacturerAuthorization'][0].location,
-      billOfQuantities: req.files['billOfQuantities'][0].location,
+      productDatasheet: req.files.productDatasheet?.[0]?.location || '' ,
+      standardCertifications: req.files.standardCertifications?.[0]?.location || '' ,
+      manufacturerAuthorization: req.files.manufacturerAuthorization?.[0]?.location || '' ,
+      billOfQuantities: req.files.billOfQuantities?.[0]?.location || '' ,
       
       // Set initial status
       status: 'submitted',
@@ -402,6 +400,45 @@ const submitProductCertificationApplication = async (req, res) => {
     res.redirect("/dashboard/productCertificationApplications");
   }
 };
+
+const submitSingleDocForProductCertification = async (req, res) => {
+  const docName = req.params.uploadSingleDoc;
+  //  const updatedDocName = "documents." +docName;
+  console.log(docName);
+  
+  const projectId = req.body.userId; // Replace with the actual project ID
+
+  try {
+    
+    const updateData = {
+      [`${docName}`]: req.file.location
+    };
+    
+    console.log(updateData);
+    
+    ProductCertificationSchema.findByIdAndUpdate(
+        projectId,
+        { $set: updateData },
+        { new: true } // Return the updated document
+
+    ).then(updatedProject => {
+        console.log("Updated Project:", updatedProject);
+    }).catch(error => {
+        console.error("Error updating project:", error);
+    });
+
+    const successMessage = ` ${docName} uploaded successfully`;
+  
+   res.redirect(`/dashboard/productCertificationApplications?message=${encodeURIComponent(base64Encode(successMessage))}`);
+    
+  } catch (error) {
+
+    console.log(error);
+    res.send(error.message)
+    
+  }
+
+}
 
 
 //Franks routes
@@ -456,15 +493,15 @@ const submitStructuralEnvironmentalLicense = async (req, res) => {
     emergencyResponsePlan
   } = req.body;
 
-  if(!req.files){
-    return res.status(404).send('no files uploaded');
-  }
+  // if(!req.files){
+  //   return res.status(404).send('no files uploaded');
+  // }
 
 // const uploadedDoc = req.file.path.replace(/.*public[\\/]/, '');
 console.log(req.files);
-const structuralIntegrityEvaluationReport = req.files.structuralIntegrityEvaluationReport[0].location;
-const environmentImpactMitigationPlan = req.files.environmentImpactMitigationPlan[0].location;
-const supportingDocument = req.files.supportingDocument[0].location;
+const structuralIntegrityEvaluationReport = req.files.structuralIntegrityEvaluationReport?.[0]?.location || '';
+const environmentImpactMitigationPlan = req.files.environmentImpactMitigationPlan?.[0]?.location || '';
+const supportingDocument = req.files.supportingDocument?.[0]?.location || '';
 
 try{
   
@@ -496,6 +533,47 @@ try{
   res.send("Error uploading environment structural what what error");
 }
 };
+
+
+const submitSingleDocForEnvStructural = async (req, res) => {
+  const docName = req.params.uploadSingleDoc;
+  //  const updatedDocName = "documents." +docName;
+  console.log(docName);
+  
+  const projectId = req.body.userId; // Replace with the actual project ID
+
+  try {
+    
+    const updateData = {
+      [`${docName}`]: req.file.location
+    };
+    
+    console.log(updateData);
+    
+    StructuralEnvironmentalLicense.findByIdAndUpdate(
+        projectId,
+        { $set: updateData },
+        { new: true } // Return the updated document
+
+    ).then(updatedProject => {
+        console.log("Updated Project:", updatedProject);
+    }).catch(error => {
+        console.error("Error updating project:", error);
+    });
+
+    const successMessage = ` ${docName} uploaded successfully`;
+  
+   res.redirect(`/dashboard/structuralEnvironmentalLicenses?message=${encodeURIComponent(base64Encode(successMessage))}`);
+    
+  } catch (error) {
+
+    console.log(error);
+    res.send(error.message)
+    
+  }
+
+}
+
 const submitLicenseAndCertification = async (req, res) => {
   try {
     const {
@@ -535,20 +613,7 @@ const submitLicenseAndCertification = async (req, res) => {
 const statutoryCompliance = async (req, res) => {
   try {
     const user = req.user;
-    
-    // if (!req.files) {
-    //   return res.status(400).json({ error: 'No files uploaded' });
-    // }
-
-    // // Verify all required files are present
-    // const requiredFiles = ['zppaDocument', 'pacraDocument', 'taxDocument', 
-    //                       'workersCompensation', 'energyRegulation', 'nhimaDocument'];
-    
-    // for (const field of requiredFiles) {
-    //   if (!req.files[field]) {
-    //     return res.status(400).json({ error: `Missing required document: ${field}` });
-    //   }
-    // }
+ 
 
     const zppaDocument = req.files.zppaDocument?.[0]?.location || '' ;
     const pacraDocument = req.files.pacraDocument?.[0]?.location || '';
@@ -636,8 +701,10 @@ module.exports = {
   submitPremiseLeasing,
   submitAnnualDeclaration,
   submitProductCertificationApplication,
+  submitSingleDocForProductCertification,
   submitBusinessClosure,
   submitStructuralEnvironmentalLicense,
+  submitSingleDocForEnvStructural,
   submitLicenseAndCertification,
   statutoryCompliance,
   submitSingleDocForCompliance,

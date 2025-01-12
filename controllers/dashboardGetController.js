@@ -125,10 +125,14 @@ const getDashboard = async (req, res) => {
 
   const getProductCertificationApplicationsPage = async (req, res) => {
     const productCertifications = await ProductCertificationSchema.find({userId:req.user._id}).sort({ _id: -1 });
+    const message = req.query.message;
     res.render("home/dashboard/productCertifications", {
       layout: "layouts/dashboardHeader.ejs",
       user: req.user,
-      productCertifications
+      productCertifications,
+      message: message !=  undefined
+      ? `${base64Decode(message)}`
+      : null ,
     });
   };
   

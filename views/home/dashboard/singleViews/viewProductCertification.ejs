@@ -52,42 +52,115 @@
             <!-- Attachments Section -->
             <h5 class="text-muted mb-3">4. Attachments</h5>
             <div class="row mb-3">
-                <div class="col-md-4">
-                    <p><strong>Product Datasheet:</strong></p>
-                    <a
-                    href="/dashboard/download/<%= productCertification.productDatasheet %>"
-                     download="<%= productCertification.productDatasheet %>"
-                     class="btn btn-primary text-white btn-outline-primary" >
-                        Download Datasheet
-                    </a>
-                </div>
-                <div class="col-md-4">
-                    <p><strong>Standard Certifications:</strong></p>
-                    <a
-                    href="/dashboard/download/<%= productCertification.standardCertifications %>"
-                     download="<%= productCertification.standardCertifications %>"
-                     class="btn btn-primary text-white btn-outline-primary" >
-                        Download Certifications
-                    </a>
-                </div>
-                <div class="col-md-4">
-                    <p><strong>Manufacturer’s Authorization:</strong></p>
-                    <a
-                    href="/dashboard/download/<%= productCertification.manufacturerAuthorization %>"
-                     download="<%= productCertification.manufacturerAuthorization %>"
-                     class="btn btn-primary text-white btn-outline-primary" >
-                        Download Authorization
-                    </a>
-                </div>
-                <div class="col-md-4">
-                    <p><strong>Bill of Quantities</strong></p>
-                    <a
-                    href="/dashboard/download/<%= productCertification.billOfQuantities %>"
-                     download="<%= productCertification.billOfQuantities %>"
-                     class="btn btn-primary text-white btn-outline-primary" >
-                        Download BOQ
-                    </a>
-                </div>
+                <% if (productCertification.productDatasheet) { %>
+                    <div class="col-md-4">
+                        <p><strong>Product Datasheet:</strong></p>
+                        <a
+                        href="/dashboard/download/<%= productCertification.productDatasheet %>"
+                         download="<%= productCertification.productDatasheet %>"
+                         class="btn btn-primary text-white btn-outline-primary" >
+                            Download Datasheet
+                        </a>
+                    </div>
+
+                    <% } else { %>
+                        <div class="col-md-4">
+                            <p><strong>Product Datasheet:</strong></p>
+
+                            
+                            <form method="POST" action="/dashboard/uploadProductCertificationDoc/productDatasheet" enctype="multipart/form-data">
+                                <label for="singleDoc" class="btn btn-rounded btn-outline-danger">
+                                    Upload Product Datasheet:
+                                </label>
+
+                                <input type="text" name="userId" hidden value="<%=productCertification._id %>" id="">
+                                <input type="file" id="singleDoc" name="uploadSingleDoc" style="display: none;" onchange="this.form.submit()" />
+                            </form>
+                        </div>
+                 
+                <% } %>
+                <% if (productCertification.standardCertifications ) { %>
+                    <div class="col-md-4">
+                        <p><strong>Standard Certifications:</strong></p>
+                        <a
+                        href="/dashboard/download/<%= productCertification.standardCertifications %>"
+                         download="<%= productCertification.standardCertifications %>"
+                         class="btn btn-primary text-white btn-outline-primary" >
+                            Download Certifications
+                        </a>
+                    </div>
+
+                    <% } else { %>
+                        <div class="col-md-4">
+                            <p><strong>Standard Certifications:</strong></p>
+                            
+                            <form method="POST" action="/dashboard/uploadProductCertificationDoc/standardCertifications" enctype="multipart/form-data">
+                                <label for="singleDoc" class="btn btn-rounded btn-outline-danger">
+                                    Upload Standard Certifications:
+                                </label>
+
+                                <input type="text" name="userId" hidden value="<%=productCertification._id %>" id="">
+                                <input type="file" id="singleDoc" name="uploadSingleDoc" style="display: none;" onchange="this.form.submit()" />
+                            </form>
+                        </div>
+                 
+                <% } %>
+                <% if (productCertification.manufacturerAuthorization ) { %>
+                    <div class="col-md-4">
+                        <p><strong>Manufacturer’s Authorization:</strong></p>
+                        <a
+                        href="/dashboard/download/<%= productCertification.manufacturerAuthorization %>"
+                         download="<%= productCertification.manufacturerAuthorization %>"
+                         class="btn btn-primary text-white btn-outline-primary" >
+                            Download Authorization
+                        </a>
+                    </div>
+
+                    <% } else { %>
+                        <div class="col-md-4">
+                            <p><strong>Manufacturer’s Authorization:</strong></p>
+                            
+                            <form method="POST" action="/dashboard/uploadProductCertificationDoc/manufacturerAuthorization" enctype="multipart/form-data">
+                                <label for="singleDoc" class="btn btn-rounded btn-outline-danger">
+                                    Upload Manufacturer’s Authorization:
+                                </label>
+
+                                <input type="text" name="userId" hidden value="<%=productCertification._id %>" id="">
+                                <input type="file" id="singleDoc" name="uploadSingleDoc" style="display: none;" onchange="this.form.submit()" />
+                            </form>
+                        </div>
+                 
+                <% } %>
+
+                <% if (productCertification.billOfQuantities ) { %>
+                    <div class="col-md-4">
+                        <p><strong>Bill of Quantities</strong></p>
+                        <a
+                        href="/dashboard/download/<%= productCertification.billOfQuantities %>"
+                         download="<%= productCertification.billOfQuantities %>"
+                         class="btn btn-primary text-white btn-outline-primary" >
+                            Download BOQ
+                        </a>
+                    </div>
+
+                    <% } else { %>
+                        <div class="col-md-4">
+                            <hr>
+                            <p><strong>Bill of Quantities</strong></p>
+                            
+                            <form method="POST" action="/dashboard/uploadProductCertificationDoc/billOfQuantities" enctype="multipart/form-data">
+                                <label for="singleDoc" class="btn btn-rounded btn-outline-danger">
+                                    Upload Bill of Quantities:
+                                </label>
+
+                                <input type="text" name="userId" hidden value="<%=productCertification._id %>" id="">
+                                <input type="file" id="singleDoc" name="uploadSingleDoc" style="display: none;" onchange="this.form.submit()" />
+                            </form>
+                        </div>
+                 
+                <% } %>
+                
+                
             </div>
 
             <!-- Declaration and Consent -->

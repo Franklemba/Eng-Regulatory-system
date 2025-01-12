@@ -1,3 +1,4 @@
+
 const mongoose = require("mongoose");
 
 // Clear existing model if it exists
@@ -32,11 +33,11 @@ const structuralEnvironmentalLicenceSchema = new mongoose.Schema({
   },
   structuralIntegrityEvaluationReport: {
     type: String,
-    required: true,
+    required: false,
   },
   environmentImpactMitigationPlan: {
     type: String,
-    required: true,
+    required: false,
   },
   environmentalAssessDetails: {
     type: String,
@@ -52,7 +53,7 @@ const structuralEnvironmentalLicenceSchema = new mongoose.Schema({
   },
   supportingDocument: {
     type: String,
-    required: true,
+    required: false,
   },
   createdAt: {
     type: Date,

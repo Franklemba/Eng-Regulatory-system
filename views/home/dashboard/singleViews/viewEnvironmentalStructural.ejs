@@ -31,14 +31,59 @@
                     <div class="col-md-6">
                         <p><strong>Safety Standards:</strong> <%= environmentalStructural.structuralSafetyStandards %></p>
                     </div>
+                  
+                    <% if (environmentalStructural.structuralIntegrityEvaluationReport) { %>
+                     
+                        <div class="col-md-6">
+                            <p><strong>Integrity Evaluation Report:</strong>
+                                 <a href="<%=environmentalStructural.structuralIntegrityEvaluationReport %>" 
+                                    class="btn btn-sm btn-primary" 
+                                    download="<%= environmentalStructural.structuralIntegrityEvaluationReport %>">
+                                    Download Report
+                                </a>
+                                </p>
+                        </div>
+                        <% } else { %>
+                            <div class="col-md-6">
+                                <form method="POST" action="/dashboard/uploadEnvStructuralDoc/structuralIntegrityEvaluationReport" enctype="multipart/form-data">
+                                    <label for="structuralIntegrityEvaluationReport" class="btn btn-rounded btn-outline-danger">
+                                        Upload Integrity Evaluation Report
+                                    </label>
+                                    <input type="hidden" name="userId" value="<%= environmentalStructural._id %>">
+                                    <input type="file" id="structuralIntegrityEvaluationReport" name="uploadSingleDoc" style="display: none;" onchange="this.form.submit()">
+                                </form>
+
+                            </div>
+
+                    <% } %>
+                    <% if (environmentalStructural.environmentImpactMitigationPlan) { %>
+                     
+                        <div class="col-md-6">
+                            <p><strong>Impact Mitigation Plan:</strong> 
+                                <a href="<%=environmentalStructural.environmentImpactMitigationPlan %>" 
+                                    class="btn btn-sm btn-primary" 
+                                    download="<%= environmentalStructural.environmentImpactMitigationPlan %>">
+                                    Download Plan
+                                </a>
+                            </p>
+                        </div>
+                        <% } else { %>
+                            <div class="col-md-6">
+                                <form method="POST" action="/dashboard/uploadEnvStructuralDoc/environmentImpactMitigationPlan" enctype="multipart/form-data">
+                                    <label for="environmentImpactMitigationPlan" class="btn btn-rounded btn-outline-danger">
+                                        Upload Impact Mitigation Plan
+                                    </label>
+                                    <input type="hidden" name="userId" value="<%= environmentalStructural._id %>">
+                                    <input type="file" id="environmentImpactMitigationPlan" name="uploadSingleDoc" style="display: none;" onchange="this.form.submit()">
+                                </form>
+
+                            </div>
+
+                    <% } %>
                     <div class="col-md-6">
-                        <p><strong>Integrity Evaluation Report:</strong> <%= environmentalStructural.structuralIntegrityEvaluationReport %></p>
-                    </div>
-                    <div class="col-md-6">
-                        <p><strong>Impact Mitigation Plan:</strong> <%= environmentalStructural.environmentImpactMitigationPlan %></p>
-                    </div>
-                    <div class="col-md-6">
-                        <p><strong>Emergency Response Plan:</strong> <%= environmentalStructural.emergencyResponsePlan %></p>
+                        <p><strong>Emergency Response Plan:</strong>
+                             <%= environmentalStructural.emergencyResponsePlan %>
+                            </p>
                     </div>
                 </div>
     
@@ -57,16 +102,33 @@
     
                 <!-- Uploaded Documents -->
                 <h5 class="text-muted mb-3">Uploaded Documents</h5>
-                <div class="row">
-                    <div class="col-12">
-                        <p><strong>Supporting Document:</strong></p>
-                        <a href="<%=environmentalStructural.supportingDocument %>" 
-                            class="btn btn-sm btn-primary" 
-                            download="<%= environmentalStructural.supportingDocument %>">
-                            Download Supporting Document
-                        </a>
+               
+
+                <% if (environmentalStructural.supportingDocument) { %>
+                     
+                    <div class="row">
+                        <div class="col-12">
+                            <p><strong>Supporting Document:</strong></p>
+                            <a href="<%=environmentalStructural.supportingDocument %>" 
+                                class="btn btn-sm btn-primary" 
+                                download="<%= environmentalStructural.supportingDocument %>">
+                                Download Supporting Document
+                            </a>
+                        </div>
                     </div>
-                </div>
+                    <% } else { %>
+                        <div class="col-12">
+                            <form method="POST" action="/dashboard/uploadEnvStructuralDoc/supportingDocument" enctype="multipart/form-data">
+                                <label for="supportingDocument" class="btn btn-rounded btn-outline-danger">
+                                    Upload Supporting Document
+                                </label>
+                                <input type="hidden" name="userId" value="<%= environmentalStructural._id %>">
+                                <input type="file" id="supportingDocument" name="uploadSingleDoc" style="display: none;" onchange="this.form.submit()">
+                            </form>
+
+                        </div>
+
+                <% } %>
             </div>
             <div class="card-footer text-end">
                 <a href="/dashboard/structuralEnvironmentalLicenses" class="btn btn-secondary">Back to Licenses</a>

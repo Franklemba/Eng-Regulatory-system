@@ -17,7 +17,6 @@
                             <tr>
                                 <th>Reg ID</th>
                                 <th>Lead Engineer</th>
-                                <th>Discipline</th>
                                 <th>Registration Number</th>
                                 <th>Professional Body</th>
                                 <th>Submission Date</th>
@@ -29,18 +28,13 @@
                         <tbody id="applications-table-body">
                             <% submittedApplications.forEach((application) => { %>
 
-                                <%=application._id %>
+                                
 
                                 <tr>
                                 
                                     <td><%= application.zebraClientId %></td>
                                     <td><%= application.leadEngineer %></td>
-                                    <td>
-                                        <%= application.primaryDiscipline %>
-                                        <% if (application.otherDiscipline) { %>
-                                            (<%= application.otherDiscipline %>)
-                                        <% } %>
-                                    </td>
+                                  
                                     <td><%= application.registrationNumber %></td>
                                     <td>
                                         <%= application.professionalBody %>

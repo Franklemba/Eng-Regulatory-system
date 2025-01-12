@@ -26,156 +26,55 @@
                                         <h4 class="mb-3">Documents submitted on <%= new Date(doc.submittedAt).toLocaleDateString() %></h4>
                                         
                                         <!-- Document List -->
-                                        <div class="document-list">
-                                            <% const documents = {
-                                                'ZPPA Document': doc.zppaDocument,
-                                                'PACRA Document': doc.pacraDocument,
-                                                'Tax Document': doc.taxDocument,
-                                                'Workers Compensation': doc.workersCompensation,
-                                                'Energy Regulation': doc.energyRegulation,
-                                                'NHIMA Document': doc.nhimaDocument
-                                            } %>
-
-
-                                            <% if ( doc.zppaDocument) { %>
-                                                <div class="document-item mb-3 d-flex align-items-center justify-content-between p-3 bg-light rounded">
+                                        <% const documents = [
+                                            { name: 'ZPPA Document', field: 'zppaDocument', url: doc.zppaDocument },
+                                            { name: 'PACRA Document', field: 'pacraDocument', url: doc.pacraDocument },
+                                            { name: 'Tax Document', field: 'taxDocument', url: doc.taxDocument },
+                                            { name: 'Workers Compensation', field: 'workersCompensation', url: doc.workersCompensation },
+                                            { name: 'Energy Regulation', field: 'energyRegulation', url: doc.energyRegulation },
+                                            { name: 'NHIMA Document', field: 'nhimaDocument', url: doc.nhimaDocument }
+                                        ]; %>
+        
+                                        <% documents.forEach(document => { %>
+                                            <div class="document-item mb-3 d-flex align-items-center justify-content-between p-3 bg-light rounded">
+                                                <% if (document.url) { %>
                                                     <div class="document-info">
                                                         <i class="fas fa-file-pdf text-danger me-2"></i>
-                                                        <span class="document-name">ZPPA Document</span>
+                                                        <span class="document-name"><%= document.name %></span>
                                                     </div>
-                                                    <a href="<%= doc.zppaDocument %>" class="btn btn-sm btn-primary" download>
+                                                    <a href="<%= document.url %>" class="btn btn-sm btn-primary" download>
+                                                        <i class="fas fa-download me-1"></i> Download
+                                                    </a>
+                                                <% } else { %>
+                                                    <form method="POST" action="/dashboard/uploadStatutoryComplianceDoc/<%= document.field %>" enctype="multipart/form-data">
+                                                        <label for="<%= document.field %>" class="btn btn-rounded btn-outline-danger">
+                                                            Upload <%= document.name %>
+                                                        </label>
+                                                        <input type="hidden" name="userId" value="<%= doc._id %>">
+                                                        <input type="file" id="<%= document.field %>" name="uploadSingleDoc" style="display: none;" onchange="this.form.submit()">
+                                                    </form>
+                                                <% } %>
+                                            </div>
+                                        <% }); %>
+        
+                                        <!-- Additional Documents -->
+                                        <% if (doc.otherDocuments && doc.otherDocuments.length > 0) { %>
+                                            <h5 class="mt-4 mb-3">Additional Documents</h5>
+                                            <% doc.otherDocuments.forEach((otherDoc, index) => { %>
+                                                <div class="document-item mb-3 d-flex align-items-center justify-content-between p-3 bg-light rounded">
+                                                    <div class="document-info">
+                                                        <i class="fas fa-file text-secondary me-2"></i>
+                                                        <span class="document-name">Additional Document <%= index + 1 %></span>
+                                                    </div>
+                                                    <a href="<%= otherDoc %>" class="btn btn-sm btn-primary" download>
                                                         <i class="fas fa-download me-1"></i> Download
                                                     </a>
                                                 </div>
-                                            <% } else { %>
-                                                <form method="POST" action="/dashboard/uploadStatutoryComplianceDoc/zppaDocument" enctype="multipart/form-data">
-                                                    <label for="uploadCFEdoc" class="btn btn-rounded btn-outline-danger">
-                                                        Upload ZPPA Document
-                                                    </label>
-    
-                                                    <input type="text" name="userId" hidden value="<%=doc._id %>" id="">
-                                                    <input type="file" id="uploadCFEdoc" name="uploadSingleDoc" style="display: none;" onchange="this.form.submit()" />
-                                                </form>
-                                            <% } %>
-                                            <% if ( doc.pacraDocument) { %>
-                                                <div class="document-item mb-3 d-flex align-items-center justify-content-between p-3 bg-light rounded">
-                                                    <div class="document-info">
-                                                        <i class="fas fa-file-pdf text-danger me-2"></i>
-                                                        <span class="document-name">PACRA Document</span>
-                                                    </div>
-                                                    <a href="<%= doc.pacraDocument %>" class="btn btn-sm btn-primary" download>
-                                                        <i class="fas fa-download me-1"></i> Download
-                                                    </a>
-                                                </div>
-                                            <% } else { %>
-                                                <form method="POST" action="/dashboard/uploadStatutoryComplianceDoc/pacraDocument" enctype="multipart/form-data">
-                                                    <label for="uploadCFEdoc" class="btn btn-rounded btn-outline-danger">
-                                                        Upload PACRA Document
-                                                    </label>
-    
-                                                    <input type="text" name="userId" hidden value="<%=doc._id %>" id="">
-                                                    <input type="file" id="uploadCFEdoc" name="uploadSingleDoc" style="display: none;" onchange="this.form.submit()" />
-                                                </form>
-                                            <% } %>
-                                            <% if ( doc.taxDocument) { %>
-                                                <div class="document-item mb-3 d-flex align-items-center justify-content-between p-3 bg-light rounded">
-                                                    <div class="document-info">
-                                                        <i class="fas fa-file-pdf text-danger me-2"></i>
-                                                        <span class="document-name">Tax Document</span>
-                                                    </div>
-                                                    <a href="<%= doc.taxDocument %>" class="btn btn-sm btn-primary" download>
-                                                        <i class="fas fa-download me-1"></i> Download
-                                                    </a>
-                                                </div>
-                                            <% } else { %>
-                                                <form method="POST" action="/dashboard/uploadStatutoryComplianceDoc/taxDocument" enctype="multipart/form-data">
-                                                    <label for="uploadCFEdoc" class="btn btn-rounded btn-outline-danger">
-                                                        Upload Tax Document
-                                                    </label>
-    
-                                                    <input type="text" name="userId" hidden value="<%=doc._id %>" id="">
-                                                    <input type="file" id="uploadCFEdoc" name="uploadSingleDoc" style="display: none;" onchange="this.form.submit()" />
-                                                </form>
-                                            <% } %>
-                                            <% if ( doc.workersCompensation) { %>
-                                                <div class="document-item mb-3 d-flex align-items-center justify-content-between p-3 bg-light rounded">
-                                                    <div class="document-info">
-                                                        <i class="fas fa-file-pdf text-danger me-2"></i>
-                                                        <span class="document-name">Workers Compensation</span>
-                                                    </div>
-                                                    <a href="<%= doc.workersCompensation %>" class="btn btn-sm btn-primary" download>
-                                                        <i class="fas fa-download me-1"></i> Download
-                                                    </a>
-                                                </div>
-                                            <% } else { %>
-                                                <form method="POST" action="/dashboard/uploadStatutoryComplianceDoc/workersCompensation" enctype="multipart/form-data">
-                                                    <label for="uploadCFEdoc" class="btn btn-rounded btn-outline-danger">
-                                                        Upload Workers Compensation
-                                                    </label>
-    
-                                                    <input type="text" name="userId" hidden value="<%=doc._id %>" id="">
-                                                    <input type="file" id="uploadCFEdoc" name="uploadSingleDoc" style="display: none;" onchange="this.form.submit()" />
-                                                </form>
-                                            <% } %>
-                                            <% if ( doc.energyRegulation) { %>
-                                                <div class="document-item mb-3 d-flex align-items-center justify-content-between p-3 bg-light rounded">
-                                                    <div class="document-info">
-                                                        <i class="fas fa-file-pdf text-danger me-2"></i>
-                                                        <span class="document-name">Energy Regulation</span>
-                                                    </div>
-                                                    <a href="<%= doc.energyRegulation %>" class="btn btn-sm btn-primary" download>
-                                                        <i class="fas fa-download me-1"></i> Download
-                                                    </a>
-                                                </div>
-                                            <% } else { %>
-                                                <form method="POST" action="/dashboard/uploadStatutoryComplianceDoc/energyRegulation" enctype="multipart/form-data">
-                                                    <label for="uploadCFEdoc" class="btn btn-rounded btn-outline-danger">
-                                                        Upload Energy Regulation
-                                                    </label>
-    
-                                                    <input type="text" name="userId" hidden value="<%=doc._id %>" id="">
-                                                    <input type="file" id="uploadCFEdoc" name="uploadSingleDoc" style="display: none;" onchange="this.form.submit()" />
-                                                </form>
-                                            <% } %>
-                                            <% if ( doc.nhimaDocument) { %>
-                                                <div class="document-item mb-3 d-flex align-items-center justify-content-between p-3 bg-light rounded">
-                                                    <div class="document-info">
-                                                        <i class="fas fa-file-pdf text-danger me-2"></i>
-                                                        <span class="document-name">NHIMA Document</span>
-                                                    </div>
-                                                    <a href="<%= doc.nhimaDocument %>" class="btn btn-sm btn-primary" download>
-                                                        <i class="fas fa-download me-1"></i> Download
-                                                    </a>
-                                                </div>
-                                            <% } else { %>
-                                                <form method="POST" action="/dashboard/uploadStatutoryComplianceDoc/nhimaDocument" enctype="multipart/form-data">
-                                                    <label for="uploadCFEdoc" class="btn btn-rounded btn-outline-danger">
-                                                        Upload NHIMA Document
-                                                    </label>
-    
-                                                    <input type="text" name="userId" hidden value="<%=doc._id %>" id="">
-                                                    <input type="file" id="uploadCFEdoc" name="uploadSingleDoc" style="display: none;" onchange="this.form.submit()" />
-                                                </form>
-                                            <% } %>
-
-                                            <!-- Other Documents Section -->
-                                            <% if (doc.otherDocuments && doc.otherDocuments.length > 0) { %>
-                                                <h5 class="mt-4 mb-3">Additional Documents</h5>
-                                                <% doc.otherDocuments.forEach((otherDoc, index) => { %>
-                                                    <div class="document-item mb-3 d-flex align-items-center justify-content-between p-3 bg-light rounded">
-                                                        <div class="document-info">
-                                                            <i class="fas fa-file text-secondary me-2"></i>
-                                                            <span class="document-name">Additional Document <%= index + 1 %></span>
-                                                        </div>
-                                                        <a href="<%= otherDoc %>" class="btn btn-sm btn-primary" download>
-                                                            <i class="fas fa-download me-1"></i> Download
-                                                        </a>
-                                                    </div>
-                                                <% }) %>
-                                            <% } %>
-                                        </div>
+                                            <% }); %>
+                                        <% } %>
                                     </div>
-
+        
+                                    <!-- Submission Details -->
                                     <div class="col-md-4">
                                         <div class="submission-info p-3 bg-light rounded">
                                             <h5 class="mb-3">Submission Details</h5>
@@ -194,8 +93,9 @@
                             </div>
                         </div>
                     </div>
-                <% }) %>
+                <% }); %>
             <% } else { %>
+                <!-- No Documents Found -->
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body text-center py-5">
@@ -210,6 +110,7 @@
                 </div>
             <% } %>
         </div>
+        
     </div>
 </div>
 

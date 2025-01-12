@@ -89,6 +89,9 @@ router.post("/newProductCertification", upload.fields([
   { name: 'billOfQuantities', maxCount: 1 },
 ]), dashboardPostController.submitProductCertificationApplication);
 
+router.post("/uploadProductCertificationDoc/:uploadSingleDoc",upload.single('uploadSingleDoc'),
+dashboardPostController.submitSingleDocForProductCertification);
+
 router.post('/businessClosure', upload.single('finalFinancialStatement'), (req, res, next) => {
   console.log('File Received:', req.file);
   next();
@@ -99,6 +102,9 @@ router.post("/newEnvironmentAndStructuralLicence",
        { name: 'structuralIntegrityEvaluationReport', maxCount: 1 },
       { name: 'environmentImpactMitigationPlan', maxCount: 1 }, 
       {name: 'supportingDocument', maxCount: 1}]), dashboardPostController.submitStructuralEnvironmentalLicense);
+
+      router.post("/uploadEnvStructuralDoc/:uploadSingleDoc",upload.single('uploadSingleDoc'),
+dashboardPostController.submitSingleDocForEnvStructural);
 // router.post("/orderForSupply", upload.single('supportingDocument'), dashboardPostController.submitOrderForSupply);
 // router.post("/newAwarenessAdvert",  upload.single('advertMedia'), dashboardPostController.submitAwarenessAdvert);
 router.post("/newAssessment", dashboardPostController.submitAssessment);
