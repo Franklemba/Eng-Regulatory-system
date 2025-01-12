@@ -578,6 +578,11 @@ const statutoryCompliance = async (req, res) => {
     res.status(500).json({ error: 'Error uploading statutory documents' });
   }
 };
+
+const submitSingleDocForCompliance = async (req, res) => {
+
+}
+
 const submitAssessment = async (req, res) => console.log(req.body);
 
 
@@ -594,5 +599,6 @@ module.exports = {
   submitStructuralEnvironmentalLicense,
   submitLicenseAndCertification,
   statutoryCompliance,
+  submitSingleDocForCompliance,
   submitAssessment,
 };

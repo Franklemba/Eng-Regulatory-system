@@ -112,4 +112,9 @@ router.post("/statutoryCompliance", upload.fields([
   { name: 'otherDocuments', maxCount: 5 } // Allow multiple files
 ]), dashboardPostController.statutoryCompliance);
 
+router.post("/statutoryCompliance", upload.single(), dashboardPostController.statutoryCompliance);
+
+router.post("/uploadStatutoryComplianceDoc/:uploadSingleDoc",upload.single('uploadSingleDoc'),
+dashboardPostController.submitSingleDocForCompliance);
+
 module.exports = router;

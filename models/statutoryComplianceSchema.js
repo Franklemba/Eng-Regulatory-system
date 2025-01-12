@@ -12,27 +12,27 @@ const statutoryComplianceSchema = new mongoose.Schema({
   },
   zppaDocument: {
     type: String,
-    required: true
+    required: false
   },
   pacraDocument: {
     type: String,
-    required: true
+    required: false
   },
   taxDocument: {
     type: String,
-    required: true
+    required: false
   },
   workersCompensation: {
     type: String,
-    required: true
+    required: false
   },
   energyRegulation: {
     type: String,
-    required: true
+    required: false
   },
   nhimaDocument: {
     type: String,
-    required: true
+    required: false
   },
   otherDocuments: [{
     type: String
