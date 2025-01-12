@@ -64,6 +64,10 @@ const engineeringApplicationSchema = new mongoose.Schema({
   createdAt: {
     type: Date,
     default: Date.now
+  },
+  userId:{
+    type: String,  // File path/URL
+    required: true
   }
 });
 
