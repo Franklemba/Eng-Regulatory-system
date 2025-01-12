@@ -625,7 +625,7 @@ const statutoryCompliance = async (req, res) => {
     // Create document object with required fields
     const documentData = {
       userId: req.user._id,
-      userEmail: user.email,
+      // userEmail: user.email,
       zppaDocument,
       pacraDocument,
       taxDocument,
